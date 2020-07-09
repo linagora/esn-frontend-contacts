@@ -1,0 +1,104 @@
+sub-header
+  contact-show-subheader
+
+.col-xs-12.no-padding-xs
+  .card.hidden-xs(ng-submit='accept()')
+    .card-body.contact-body
+      contact-display(ng-if='loaded && !error' contact='contact')
+      div.bs-alert.bs-alert-warning.clearfix.text-center(ng-if= 'loaded && !error && !displayShell.addressbook.canEditContact')
+        strong {{ 'This contact cannot be edited' | translate }}
+
+  .contact-content.visible-xs.fadeIn200ms(ng-if='loaded && !error')
+    .contact-avatar.p-relative
+      img(ng-src='{{displayShell.getAvatar(avatarSize)}}', alt="{{ 'Avatar' | translate }}")
+      i.mdi.i-contact-mobile(ng-class="displayShell.getOverlayIcon()")
+    .contact-error-container
+      .ellipsis.contact-fn
+        | {{contact.displayName}}
+      .contact-infos
+        .contact-items-group
+          .p-t-10
+            i.mdi(ng-class='addressbookDisplayShell.icon')
+            .contact-item-data
+              dl.addressbook-title
+                dt(title="{{ 'Address book' | translate }}", ng-click='openAddressbook()') {{::addressbookDisplayShell.displayName}}
+                dd.type {{ 'Address book' | translate }}
+        .contact-items-group(ng-if='phones && phones.length')
+          i.mdi.mdi-phone
+          div(ng-repeat='tel in phones track by $index')
+            .contact-item-data
+              p
+                a(ng-href='tel:{{tel.value}}') {{tel.value}}
+              p.type {{tel.type | esnI18n}}
+
+        .contact-items-group(ng-if='emails && emails.length')
+          i.mdi.mdi-email
+          div(ng-repeat='email in emails track by $index')
+            .contact-item-data
+              p
+                a(ng-href='mailto:{{email.value}}' op-inbox-compose, op-inbox-compose-users='[email]') {{email.value}}
+              p.type {{email.type | esnI18n}}
+
+        .contact-items-group(ng-if='contact.social && contact.social.length')
+          i.mdi.mdi-account-circle
+          div(ng-repeat='social in contact.social track by $index')
+            .contact-item-data
+              p(ng-if="['Skype', 'Twitter'].indexOf(social.type) > -1")
+                a(ng-href="{{social.value|prefixLink:social.type}}") {{social.value}}
+              p(ng-if="['Skype', 'Twitter'].indexOf(social.type) === -1") {{social.value}}
+              p.type {{social.type}}
+
+        .contact-items-group(ng-if='shouldDisplayWork()')
+          div
+            p.title {{ 'Work' | translate }}
+          .contact-item-data(ng-if='contact.orgName')
+            p {{contact.orgName}}
+            p.type {{ 'Company' | translate }}
+          .contact-item-data(ng-if='contact.orgRole')
+            p {{contact.orgRole}}
+            p.type {{ 'Job' | translate }}
+          .contact-item-data(ng-if='contact.orgUri')
+            p
+              a(ng-href='{{contact.orgUri}}' target='_blank') {{contact.orgUri}}
+            p.type {{ 'Website' | translate }}
+          .contact-item-data(ng-if="getAddress('work')" ng-model="address" ng-init="address = getAddress('work')")
+            p {{address.street}}
+            p {{address.zip}} {{address.city}}
+            p {{address.country}}
+            p.type {{ 'Address' | translate }}
+
+        .contact-items-group(ng-if='shouldDisplayHome()')
+          div
+            p.title {{ 'Home' | translate }}
+          .contact-item-data(ng-if="getAddress('home')" ng-model="address" ng-init="address = getAddress('home')")
+            p {{address.street}}
+            p {{address.zip}} {{address.city}}
+            p {{address.country}}
+            p.type {{ 'Address' | translate }}
+          .contact-item-data(ng-if='contact.nickname')
+            p {{contact.nickname}}
+            p.type {{ 'Nickname' | translate }}
+          .contact-item-data(ng-if='contact.birthday')
+            p {{ contact.birthday | esnDatetime: 'mediumDate' }}
+            p.type {{ 'Birthday' | translate }}
+
+        .contact-items-group(ng-if='shouldDisplayOthers()')
+          div
+            p.title {{ 'Others' | translate }}
+          .contact-item-data(ng-if="getAddress('other')" ng-model="address" ng-init="address = getAddress('other')")
+            p {{address.street}}
+            p {{address.zip}} {{address.city}}
+            p {{address.country}}
+            p.type {{ 'Address' | translate }}
+          .contact-item-data(ng-if="contact.urls")
+            p(ng-repeat='url in contact.urls')
+              a(ng-href='{{url.value|prefixLink:"http"}}' target='_blank') {{url.value}}
+            p.type {{ 'Websites' | translate }}
+          .contact-item-data(ng-if='contact.tags.length!=0')
+            ul.tag-list
+              li.tag-item(ng-repeat='tag in contact.tags track by $index') {{tag.text}}
+          .contact-item-data(ng-if='contact.notes')
+            p {{contact.notes}}
+            p.type {{ 'Comments' | translate }}
+    div.bs-alert.bs-alert-warning.clearfix.text-center(ng-if= '!displayShell.addressbook.canEditContact')
+      strong {{ 'This contact cannot be edited' | translate }}

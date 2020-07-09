@@ -1,0 +1,87 @@
+contact-addressbook-settings-main {
+  .form-group {
+    padding-right: 0;
+  }
+
+  .title-header {
+    .flex-row;
+    .flex-vertical-centered;
+
+    i {
+      color: @secondaryTextColor;
+      font-size: 1.5em;
+      padding-right: 10px;
+    }
+
+    h4 {
+      font-weight: 400;
+      font-size: 15px;
+      color: @secondaryTextColor;
+    }
+  }
+
+  .share-owner {
+    .share-owner-meta {
+      .flex-row;
+      .flex-start;
+      .flex-vertical-centered;
+
+      esn-avatar img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .share-owner-name {
+        color: @secondaryTextColor;
+        font-size: 15px;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .share-access {
+    .flex-vertical-centered;
+
+    margin-top: 10px;
+
+    .share-access-meta {
+      .flex-column;
+
+      .share-access-meta-label {
+        color: @secondaryTextColor;
+        font-size: 15px;
+      }
+    }
+  }
+
+  .addressbook-link {
+    .flex-column;
+    .flex-wrap;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    hr {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .settings-label {
+      .flex-vertical-centered;
+      font-size: 15px;
+
+      span {
+        padding-left: 15px;
+      }
+
+      i.mdi {
+        margin-right: 5px;
+        font-size: 1.5em;
+      }
+    }
+
+    esn-clipboard-url i.mdi {
+      font-size: 1.5em;
+    }
+  }
+}

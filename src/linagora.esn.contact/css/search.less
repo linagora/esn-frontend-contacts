@@ -1,0 +1,26 @@
+/* This class changes some classes used inside contactListItem for the template of contact search provider */
+.contact-globalsearch-item {
+
+  .contact-list-item {
+    padding: 0px;
+  }
+
+  & > span {
+    position: absolute;
+    top: 42px;
+    right: 20px;
+  }
+
+  .esn-avatar {
+    height: @searchAvatarSize;
+    width: @searchAvatarSize !important; // To override the same !important style of esn-avatar
+  }
+
+  .contact-list-item-attrs {
+    margin: 0;
+
+    .p-t-5 {
+      padding-top: 0 !important; // To override another !important of p-t-5
+    }
+  }
+}

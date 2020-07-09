@@ -1,0 +1,19 @@
+.modal.full-screen.contact-action-copy-dialog(ng-init='$ctrl.listPossbileDestinations()')
+  form(name="form", esn-submit="$hide(); $ctrl.moveContact()")
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h4.modal-title {{ 'Move contact' | translate }}
+        .modal-body
+          .text-center(ng-if='!$ctrl.availableAddressbookDisplayShells', openpaas-logo-spinner, spinner-start-active='1', spinner-size='0.3')
+          div(ng-if='$ctrl.availableAddressbookDisplayShells')
+            h5 {{ 'Select destination address book:' | translate }}
+            .select
+              select.form-control.floating-label(
+                type='text',
+                ng-model='$ctrl.selectedAddressbook',
+                ng-options='addressbookDisplayShell.shell as addressbookDisplayShell.displayName for addressbookDisplayShell in $ctrl.availableAddressbookDisplayShells'
+              )
+        .modal-footer
+          button.btn.btn-default(type='button', ng-click='$hide()') {{ 'Cancel' | translate }}
+          button.btn.btn-primary(type='submit') {{ 'Move' | translate }}

@@ -1,0 +1,73 @@
+{
+  "coreModules": [
+    {
+      "name": "linagora.esn.contact",
+      "angularModuleName": "linagora.esn.contact",
+      "shortName": "contact",
+      "frontendRoot": "frontend",
+      "cssRoot": "frontend/app/app.less",
+      "pugGlob": [
+        "**/*.pug"
+      ],
+      "pugOptions": {
+        "basedir": "./node_modules/esn-frontend-common-libs/src/frontend/views"
+      },
+      "fileRoot": "frontend/app",
+      "filesGlob": [
+        "**/*.module.js",
+        "**/!(*spec).js"
+      ]
+    },
+    {
+      "name": "linagora.esn.contact.import",
+      "angularModuleName": "linagora.esn.contact.import",
+      "shortName": "import",
+      "pugGlob": [
+        "**/*.pug"
+      ],
+      "pugOptions": {
+        "basedir": "./node_modules/esn-frontend-common-libs/src/frontend/views"
+      },
+      "fileRoot": "frontend/js",
+      "files": [
+        "app.js",
+        "constants.js",
+        "services.js"
+      ]
+    },
+    {
+      "name": "linagora.esn.davproxy",
+      "angularModuleName": "linagora.esn.davproxy",
+      "shortName": "dav",
+      "pugGlob": [
+        "**/*.pug"
+      ],
+      "pugOptions": {
+        "basedir": "./node_modules/esn-frontend-common-libs/src/frontend/views"
+      },
+      "fileRoot": "frontend/js",
+      "filesGlob": [
+        "**/*.module.js",
+        "**/!(*spec).js"
+      ]
+    }
+  ],
+  "dependenceModules": [
+    {
+      "name": "linagora.esn.dav.import",
+      "angularModuleName": "linagora.esn.dav.import",
+      "shortName": "linagora.esn.dav.import",
+      "pugGlob": [
+        "**/*.pug"
+      ],
+      "pugOptions": {
+        "basedir": "./node_modules/esn-frontend-common-libs/src/frontend/views"
+      },
+      "fileRoot": "frontend/app",
+      "filesGlob": [
+        "**/*.module.js",
+        "**/!(*spec).js"
+      ]
+    }
+  ]
+}

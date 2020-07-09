@@ -1,0 +1,15 @@
+ng-form.p-t-25(name='form')
+  .left-block
+    .form-group.option-field
+      .col-xs-4.field-name {{ 'Sharing Addressbook' | translate }}
+      .col-xs-4.flex-end
+        toggle-switch(ng-model="$ctrl.configurations.features.value.isSharingAddressbookEnabled", form="form")
+    .form-group.option-field
+      .col-xs-4.field-name {{ 'Show domain members as an addressbook' | translate }}
+      .col-xs-4.flex-end
+        toggle-switch(ng-model="$ctrl.configurations.features.value.isDomainMembersAddressbookEnabled", form="form")
+    .form-group.option-field
+      .col-xs-4.field-name {{ 'Show followed members as an addressbook' | translate }}
+      .col-xs-4.flex-end
+        toggle-switch(ng-model="$ctrl.configurations.features.value.isVirtualFollowingAddressbookEnabled", form="form")
+    contact-config-domain-addressbook(ng-if="$ctrl.mode === $ctrl.availableModes.domain")

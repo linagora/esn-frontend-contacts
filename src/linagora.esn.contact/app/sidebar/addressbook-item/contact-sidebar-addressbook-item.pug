@@ -1,0 +1,20 @@
+.addressbook-item.clickable.waves-effect.waves-classic(
+  title='{{::$ctrl.addressbookDisplayShell.displayName}}',
+  ui-sref-active="selected",
+  ui-sref='contact.addressbooks({ bookId: $ctrl.addressbookDisplayShell.shell.bookId, bookName: $ctrl.addressbookDisplayShell.shell.bookName })'
+)
+  .addressbook-icon
+    i.mdi(ng-class='::$ctrl.addressbookDisplayShell.icon')
+  .info-container
+    .title.ellipsis
+      span {{$ctrl.addressbookDisplayShell.displayName}}
+    .owner.ellipsis(ng-if='$ctrl.addressbookDisplayShell.shell.owner')
+      span {{::$ctrl.addressbookDisplayShell.shell.owner.displayName}}
+  settings-overlay(ng-if='::$ctrl.actions.length > 0')
+    md-menu-item(
+      ng-repeat='action in ::$ctrl.actions',
+      ng-click='action.execute($ctrl.addressbookDisplayShell.shell)'
+    )
+      md-button
+        md-icon(md-menu-origin, md-svg-icon='{{action.icon}}')
+        | {{ action.name | esnI18n }}

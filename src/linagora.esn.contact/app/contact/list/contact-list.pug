@@ -1,0 +1,28 @@
+sub-header
+  contact-list-subheader
+
+.contacts-list
+  fab.contact-fab(ng-if='canCreateContact', ng-click='openContactCreation()')
+
+  .contacts-body.p-t-15
+    .row
+      .col-xs-12.col-md-8
+        .contact-error-container
+    .row
+      .col-xs-12(infinite-scroll='scrollHandler()' infinite-scroll-distance='1' infinite-scroll-disabled='$ctrl.status === "loading" || loadingNextContacts || searchFailure || lastPage')
+        contact-list-displayer(ng-if='categories.getNumberOfItems() > 0')
+        .text-center(
+          openpaas-logo-spinner,
+          spinner-start-active="1",
+          spinner-size="0.5",
+          ng-if='$ctrl.status === "loading"'
+        )
+    .empty-message(ng-if='categories.getNumberOfItems() === 0 && !loadingNextContacts && $ctrl.status === "loaded"')
+      .icon-svg(ng-include="'/contact/images/contacts-icon.svg'")
+      .message
+        | {{ 'No contact' | translate }}
+    .error-message(ng-if='$ctrl.status === "error"')
+      div
+        i.mdi.mdi-alert-circle
+        span.message
+          | {{ 'Something went wrong, please try again later' | translate }}

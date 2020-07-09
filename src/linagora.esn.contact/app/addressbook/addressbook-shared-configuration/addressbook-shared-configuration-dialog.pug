@@ -1,0 +1,31 @@
+.modal.full-screen
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', ng-click='$hide()') &times;
+        h4.modal-title {{ 'Shared address book' | translate }}
+      .modal-body
+        .contact-addressbook-shared-configuration-content
+          users-autocomplete-input(
+            auto-focus-ngtagsinput,
+            mutable-users='$ctrl.selectedUsers',
+            on-adding-user="$ctrl.onAddingUser",
+            on-user-added='$ctrl.onUserAdded',
+            on-user-removed='$ctrl.onUserRemoved'
+          )
+
+          .subscribable-addressbook-list
+            .empty.text-center(ng-if='!$ctrl.addressbooksPerUser.length')
+              span {{ 'Search for users to subscribe to their address books' | translate }}
+
+            .header(ng-if='$ctrl.addressbooksPerUser.length')
+              .name
+                span {{ 'Name' | translate }}
+              .rights
+                span {{ 'Rights' | translate }}
+              .actions
+                span {{ 'Add' | translate }}
+            contact-addressbook-shared-configuration-item(ng-repeat="addressbook in $ctrl.addressbooksPerUser", addressbook='addressbook')
+      .modal-footer
+        button.btn.btn-default(type="button", ng-click="$hide()") {{ 'Cancel' | translate }}
+        button.btn.btn-primary(type='button', ng-disabled='!$ctrl.getSelectedAddressbooks().length', ng-click='$ctrl.subscribe(); $hide()') {{ 'Save' | translate }}

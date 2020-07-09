@@ -1,0 +1,63 @@
+.form.fadeIn200ms
+  .row
+    .col-xs-12.col-lg-7
+      .row
+        .col-xs-12.col-sm-4.col-sm-push-8.hidden-lg.all-centered-xs
+          div(modal-launcher, template="contact/app/contact/form/contact-avatar-modal.html", ng-click="showModal()")
+            contact-photo(contact='contact', editable='true', avatar-size='{{avatarSize}}', contact-state='{{contactState}}')
+        .col-xs-12.col-sm-8.col-sm-pull-4.col-lg-12.col-lg-pull-0
+          .contact-addressbook-selector(ng-show='contactState === "new"')
+            .col-xs-3
+              label.control-label.contact-field-label {{ 'Address book' | translate }}
+            .col-xs-9
+              .fg-line
+                .select
+                  select.form-control.floating-label(ng-model='addressbookPath')
+                    option(
+                      ng-repeat='item in availableAddressbooks',
+                      ng-selected='item.path === addressbookPath',
+                      value='{{::item.path}}'
+                    ) {{::item.displayName}}
+          .fg-line
+            input.form-control.floating-label(type='text', placeholder="{{ 'First Name' | translate }}", ng-model='contact.firstName')
+          .fg-line
+            input.form-control.floating-label(type='text', placeholder="{{ 'Last Name' | translate }}", ng-model='contact.lastName')
+          .fg-line
+            input.form-control.floating-label(type='text', placeholder="{{ 'Organization' | translate }}", ng-model='contact.orgName')
+          .fg-line
+            input.form-control.floating-label(type='text', placeholder="{{ 'Job Title' | translate }}", ng-model='contact.orgRole')
+      multi-input-group(multi-input-model='contact.emails', multi-input-types='CONTACT_ATTRIBUTES_ORDER.email', multi-input-texttype='text', multi-input-placeholder="{{ 'Email' | translate }}", multi-input-autocapitalize='off')
+      multi-input-group(multi-input-model='contact.tel', multi-input-types='CONTACT_ATTRIBUTES_ORDER.phone', multi-input-texttype='tel', multi-input-placeholder="{{ 'Phone' | translate }}")
+      multi-input-group-address( multi-input-model='contact.addresses', multi-input-types='CONTACT_ATTRIBUTES_ORDER.address')
+    .col-xs-12.col-lg-5
+      .row
+        div(modal-launcher, template="contact/app/contact/form/contact-avatar-modal.html", ng-click="showModal()")
+          contact-photo.visible-lg(contact='contact', editable='true', avatar-size='{{avatarSize}}', contact-state='{{contactState}}')
+      .row
+        label.control-label.sr-only {{ 'Tags' | translate }}
+        .col-sm-12
+          .form-group
+            .fg-line
+              tags-input.form-control(ng-model='contact.tags', placeholder="{{ 'Tags' | translate }}", display-property="text", add-on-space='true', add-on-enter='true', min-length='1')
+      .row
+        multi-input-group(multi-input-model='contact.urls', multi-input-texttype='url', multi-input-placeholder="{{ 'Website' | translate }}")
+      .row
+        multi-input-group(multi-input-model='contact.social', multi-input-types='CONTACT_ATTRIBUTES_ORDER.social', multi-input-texttype='text', multi-input-placeholder="{{ 'Social Account' | translate }}")
+      .row
+        .col-xs-3
+          label.control-label.contact-field-label(for='date') {{ 'Birthday' | translate }}
+        .col-xs-9
+          .form-group
+            .fg-line
+              input.form-control(type='text', ng-model='contact.birthday', data-autoclose="1", bs-datepicker, relaxed-date-for-bs-datepicker, data-date-format="MM/dd/yyyy" data-date-type="string")
+              inline-notify(name='date')
+      .row
+        label.control-label.sr-only {{ 'Nickname' | translate }}
+        .col-sm-12
+          .fg-line
+            input.form-control(type='text', placeholder="{{ 'Nickname' | translate }}", ng-model='contact.nickname')
+  .row
+    .col-xs-12
+      .form-group
+        .fg-line
+          textarea.form-control(rows='6', placeholder="{{ 'Comments' | translate }}", ng-model='contact.notes')

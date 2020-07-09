@@ -1,0 +1,12 @@
+.subscription-item
+  .meta.ellipsis
+    esn-avatar.attendee-avatar(user-id="$ctrl.addressbook.user._id")
+    .title.ellipsis
+      .name
+        span {{::$ctrl.addressbookDisplayName}}
+      .owner
+        span {{::$ctrl.addressbook.user.displayName}}
+  .rights
+    contact-addressbook-shared-right-display(addressbook='$ctrl.addressbook')
+  .actions
+    toggle-switch(ng-model='$ctrl.addressbook.isSelected')

@@ -1,0 +1,112 @@
+@import './addressbooks-list/contact-sidebar-addressbooks-list';
+@import './addressbook-item/contact-sidebar-addressbook-item';
+
+contact-sidebar {
+  .sidebar-title {
+    .flex;
+
+    padding: 8px 0 8px 10px;
+
+    .title {
+      .flex;
+      .flex-shorthand(1);
+
+      .text {
+        .flex-shorthand(1);
+
+        font-weight: bold;
+        font-size: 1.6em;
+        color: @primaryColor;
+      }
+    }
+
+    .media {
+      width: 100%;
+
+      .pull-right i.mdi {
+        vertical-align: sub;
+        font-size: 25px;
+        color: lighten(@secondaryTextColor, 10%);
+
+        &:hover {
+          color: darken(@secondaryTextColor, 20%);
+        }
+      }
+    }
+  }
+
+  .addressbook-item {
+    .flex-row;
+    .flex-start;
+    .flex-vertical-centered;
+
+    padding: 1px 3px 1px 22px;
+
+    .addressbook-icon {
+      color: lighten(@secondaryTextColor, 10%);
+      padding-right: 10px;
+      font-size: 24px;
+      vertical-align: bottom;
+
+      &.all-contacts {
+        color: @primaryColor;
+      }
+    }
+
+    &.selected {
+      color: @primaryColor;
+      font-weight: 500;
+      border-radius: 2px;
+    }
+
+    &:hover {
+      background-color: darken(@darkenBgColor, 2%);
+      border-radius: 2px;
+    }
+  }
+
+  hr {
+    margin: 6px 0;
+    border-top: 1px solid @black-alpha-10;
+  }
+
+  .error-message {
+    .text-danger;
+
+    text-align: center;
+    margin-top: 16px;
+
+    i.mdi {
+      font-size: 24px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    .message {
+      vertical-align: middle;
+    }
+
+    .btn-retry {
+      margin-top: 16px;
+    }
+  }
+}
+
+@media(max-width: @screen-md-min) {
+  contact-sidebar {
+    .sidebar-title .media .pull-right {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media(min-width: @screen-md-min) {
+  contact-sidebar {
+    .sidebar-title {
+      border-left: 5px solid @primaryColor;
+      margin-top: 20px;
+      max-height: 35px;
+      margin-bottom: 5px;
+    }
+  }
+}

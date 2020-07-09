@@ -1,0 +1,5 @@
+.contact-toggle-switch
+  button.list-item.btn.btn-link.btn-icon.waves-notransition(ng-if='!toggleContactDisplay', ng-click="updateDisplay(true)", title="{{ 'Grid view' | translate }}")
+    i.mdi.mdi-view-module
+  button.card-item.btn.btn-link.btn-icon.waves-notransition(ng-if='toggleContactDisplay', ng-click="updateDisplay(false)", title="{{ 'List view' | translate }}")
+    i.mdi.mdi-view-list

@@ -1,0 +1,12 @@
+extends /modules/subheader/responsive-subheader.pug
+
+block left
+  button.btn.btn-link.btn-icon.hidden-md(contextual-sidebar, data-content-template="/contact/app/contact/list/contact-right-sidebar.html")
+    i.mdi.mdi-menu
+  span.title.ellipsis {{bookTitle}}
+  span.title.visible-md(ng-if='contactsCount > 0') ({{::contactsCount}})
+
+block right
+  .contacts-list-toolbar
+    .contacts-toggle.flex-vertical-centered
+      contact-list-toggle
