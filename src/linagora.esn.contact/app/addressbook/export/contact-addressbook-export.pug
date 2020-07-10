@@ -4,7 +4,7 @@
       .modal-header
         h4.modal-title {{ 'Export contacts' | translate }}
       .modal-body
-        p {{ 'Export your contacts in "%s" to vCard format file (.vcf) that you can import to other applications.' | translate:$ctrl.addressbookDisplayShell.displayName }}
+        p {{ 'Export your contacts in "%s" to vCard format file (.vcf) that you can import to other applications.' | translate:$ctrl }}
       .modal-footer
         button.btn.btn-link(ng-click="$hide()")
           | {{ 'Cancel' | translate }}
