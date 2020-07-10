@@ -1,7 +1,9 @@
 (function(angular) {
   'use strict';
 
-  angular.module('linagora.esn.contact').run(runBlock);
+  angular.module('linagora.esn.contact')
+    .run(runBlock)
+    .run(addTemplateCache);
 
   function runBlock(
     dynamicDirectiveService,
@@ -23,5 +25,12 @@
       attendeeService.addProvider(ContactAttendeeProvider);
       ContactShellBuilder.setAddressbookCache(AddressbookCache);
     });
+  }
+
+  function addTemplateCache($templateCache) {
+    $templateCache.put('/contact/app/search/contact-search.html', require('./search/contact-search.pug'));
+    $templateCache.put('/contact/app/contact/list/contact-right-sidebar.html', require('./contact/list/contact-right-sidebar.pug'));
+    $templateCache.put('/contact/app/addressbook/create/contact-addressbook-create.html', require('./addressbook/create/contact-addressbook-create.pug'));
+    $templateCache.put('/contact/app/addressbook/import/contact-addressbook-import.html', require('./addressbook/import/contact-addressbook-import.pug'));
   }
 })(angular);
