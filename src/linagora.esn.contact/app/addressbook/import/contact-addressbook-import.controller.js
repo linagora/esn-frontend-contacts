@@ -6,7 +6,6 @@
 
   function ContactAddressbookImportController(
     asyncAction,
-    contentTypeService,
     contactAddressbookService,
     contactAddressbookDisplayService,
     contactService
