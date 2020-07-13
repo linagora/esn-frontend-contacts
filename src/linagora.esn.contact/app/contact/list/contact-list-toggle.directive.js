@@ -5,7 +5,6 @@
     .directive('contactListToggle', contactListToggle);
 
   function contactListToggle(
-    $rootScope,
     ContactListToggleDisplayService,
     ContactListToggleEventService,
     CONTACT_LIST_DISPLAY
