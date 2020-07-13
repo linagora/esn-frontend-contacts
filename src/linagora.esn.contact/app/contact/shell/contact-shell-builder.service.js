@@ -5,7 +5,6 @@
     .service('ContactShellBuilder', ContactShellBuilder);
 
   function ContactShellBuilder(
-    $log,
     $q,
     ContactShell,
     ContactShellHelper,
