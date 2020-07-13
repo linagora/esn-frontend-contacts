@@ -5,7 +5,6 @@
     .factory('ContactsHelper', ContactsHelper);
 
   function ContactsHelper(
-      $filter,
       esnDatetimeService,
       contactAddressbookDisplayService,
       CONTACT_ATTRIBUTES_ORDER
