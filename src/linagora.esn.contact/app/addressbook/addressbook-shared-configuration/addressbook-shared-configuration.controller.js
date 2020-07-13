@@ -8,7 +8,6 @@
     $log,
     _,
     asyncAction,
-    session,
     contactAddressbookService,
     CONTACT_ADDRESSBOOK_PUBLIC_RIGHT,
     CONTACT_SHARING_SHARE_ACCESS_CHOICES
