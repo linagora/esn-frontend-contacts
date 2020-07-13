@@ -4,7 +4,7 @@
       .modal-header
         h4.modal-title {{ 'Delete address book?' | translate }}
       .modal-body
-        p {{ 'Address book %s will be deleted along with its contacts.' | translate:$ctrl.addressbookDisplayShell.displayName }}
+        p {{ 'Address book %s will be deleted along with its contacts.' | translate:$ctrl }}
       .modal-footer
         button.btn.btn-link(ng-click="$hide()")
           | {{ 'Cancel' | translate }}
