@@ -78,7 +78,8 @@ module.exports = {
         '/unifiedinbox/app',
         '/unifiedinbox/api',
         '/calendar/app',
-        '/linagora.esn.resource/api'
+        '/linagora.esn.resource/api',
+        '/linagora.esn.dav.import/api'
       ],
       //target: 'http://localhost:8080',
       target: 'https://dev.open-paas.org',
