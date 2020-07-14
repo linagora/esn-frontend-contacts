@@ -5,7 +5,6 @@
     .factory('ContactListToggleDisplayService', ContactListToggleDisplayService);
 
   function ContactListToggleDisplayService(
-    $rootScope,
     $cacheFactory,
     ContactListToggleEventService,
     CONTACT_LIST_DISPLAY
