@@ -1,3 +1,6 @@
+require('../../services/contact-list-toggle-display.service.js');
+require('../../services/contact-list-toggle-event.service.js');
+
 (function(angular) {
   'use strict';
 
@@ -5,7 +8,6 @@
     .directive('contactListDisplayer', contactListDisplayer);
 
   function contactListDisplayer(
-    $rootScope,
     ContactListToggleDisplayService,
     ContactListToggleEventService
   ) {

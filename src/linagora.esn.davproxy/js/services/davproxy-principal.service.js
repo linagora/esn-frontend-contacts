@@ -1,3 +1,5 @@
+require('./davproxy-dav-client.service.js');
+
 (function(angular) {
   angular.module('linagora.esn.davproxy')
     .factory('davProxyPrincipalService', davProxyPrincipalService);

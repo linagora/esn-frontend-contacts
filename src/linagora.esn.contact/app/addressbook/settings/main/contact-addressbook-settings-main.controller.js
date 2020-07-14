@@ -1,3 +1,9 @@
+const _ = require('lodash');
+
+require('../../addressbook.service.js');
+require('../../addressbook.constants.js');
+require('../../../sharing/constants.js');
+
 (function(angular) {
   'use strict';
 
@@ -5,7 +11,6 @@
     .controller('contactAddressbookSettingsMainController', contactAddressbookSettingsMainController);
 
   function contactAddressbookSettingsMainController(
-    _,
     contactAddressbookService,
     CONTACT_ADDRESSBOOK_PUBLIC_RIGHT,
     CONTACT_SHARING_SHARE_ACCESS,

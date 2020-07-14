@@ -1,3 +1,5 @@
+require('../../display-shell/addressbook-display-shell.service.js');
+
 (function(angular) {
   'use strict';
 

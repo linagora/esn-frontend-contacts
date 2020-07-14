@@ -1,3 +1,5 @@
+require('../../services/contact-restangular.service.js');
+
 (function(angular) {
   'use strict';
 

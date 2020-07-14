@@ -1,3 +1,9 @@
+const _ = require('lodash');
+
+require('../addressbook/addressbook-display.service.js');
+require('../addressbook/addressbook.service.js');
+require('../addressbook/addressbook.constants.js');
+
 (function(angular) {
   'use strict';
 
@@ -7,7 +13,6 @@
   function ContactSidebarController(
     $scope,
     $q,
-    _,
     userAPI,
     userUtils,
     contactAddressbookDisplayService,

@@ -1,3 +1,9 @@
+const _ = require('lodash');
+
+require('../../../addressbook/addressbook-display.service.js');
+require('../../../addressbook/addressbook.service.js');
+require('../../../contact/contact.service.js');
+
 (function(angular) {
   'use strict';
 
@@ -5,7 +11,6 @@
     .controller('contactActionCopyController', contactCopyController);
 
   function contactCopyController(
-    _,
     asyncAction,
     contactAddressbookDisplayService,
     contactAddressbookService,

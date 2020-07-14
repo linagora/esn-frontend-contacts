@@ -1,3 +1,8 @@
+const _ = require('lodash');
+
+require('../services/contact-api-client.service.js');
+require('../addressbook/shell/addressbook-shell.service.js');
+
 (function(angular) {
   'use strict';
 
@@ -6,7 +11,6 @@
 
   function contactService(
       $q,
-      _,
       davImportService,
       ContactAPIClient,
       AddressbookShell

@@ -1,3 +1,9 @@
+require('../shell/shell.service.js');
+require('../shell/contact-shell-helper.service.js');
+require('../../services/contact-update-data.service.js');
+require('../../services/avatar.service.js');
+require('../../app.constant.js');
+
 (function(angular) {
   'use strict';
 
@@ -5,7 +11,6 @@
     .service('ContactShellBuilder', ContactShellBuilder);
 
   function ContactShellBuilder(
-    $log,
     $q,
     ContactShell,
     ContactShellHelper,

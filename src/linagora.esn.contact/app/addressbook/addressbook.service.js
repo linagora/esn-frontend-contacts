@@ -1,3 +1,12 @@
+const _ = require('lodash');
+
+require('../services/addressbook-parser.service.js');
+require('../services/contact-api-client.service.js');
+require('./addressbook-display.service.js');
+require('./virtual/virtual-addressbook.service.js');
+require('./addressbook.constants.js');
+require('../sharing/constants.js');
+
 (function(angular) {
   'use strict';
 
@@ -8,7 +17,6 @@
     $q,
     $window,
     $log,
-    _,
     session,
     esnUserConfigurationService,
     contactAddressbookParser,

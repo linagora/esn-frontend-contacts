@@ -1,10 +1,12 @@
+const _ = require('lodash');
+
 (function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
     .factory('ContactVirtualAddressBookRegistry', ContactVirtualAddressBookRegistry);
 
-  function ContactVirtualAddressBookRegistry(_, $q) {
+  function ContactVirtualAddressBookRegistry($q) {
     var addressbooks = {};
 
     return {

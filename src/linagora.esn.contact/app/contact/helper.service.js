@@ -1,3 +1,6 @@
+require('../addressbook/addressbook-display.service.js');
+require('../app.constant.js');
+
 (function(angular) {
   'use strict';
 
@@ -5,7 +8,6 @@
     .factory('ContactsHelper', ContactsHelper);
 
   function ContactsHelper(
-      $filter,
       esnDatetimeService,
       contactAddressbookDisplayService,
       CONTACT_ATTRIBUTES_ORDER

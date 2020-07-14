@@ -1,3 +1,13 @@
+require('../virtual-addressbook-registry.service.js');
+require('./following-virtual-addressbook.service.js');
+require('../../../contact/shell/display-shell-provider.service.js');
+require('../user/shells/user-display-shell.js');
+require('../user/shells/user-shell-helper.service.js');
+require('../../display-shell/addressbook-display-shell-registry.service.js');
+require('../user/user-virtual-addressbook-displayshell.service.js');
+require('./following-virtual-addressbook.constant.js');
+require('../../../services/contact-configuration.service.js');
+
 (function(angular) {
   'use strict';
 

@@ -1,3 +1,9 @@
+require('../../services/contact-list-scrolling.service.js');
+require('../contact.service.js');
+require('../../services/shared-contact-data.service.js');
+require('../contact.constants.js');
+require('../../app.constant.js');
+
 (function(angular) {
   'use strict';
 

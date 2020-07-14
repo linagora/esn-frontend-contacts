@@ -1,10 +1,12 @@
+require('./contact-live-update.service.js');
+
 (function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
     .factory('ContactLiveUpdateInitializer', ContactLiveUpdateInitializer);
 
-  function ContactLiveUpdateInitializer($rootScope, ContactLiveUpdate, session) {
+  function ContactLiveUpdateInitializer($rootScope, session, ContactLiveUpdate) {
     return {
       start: start
     };

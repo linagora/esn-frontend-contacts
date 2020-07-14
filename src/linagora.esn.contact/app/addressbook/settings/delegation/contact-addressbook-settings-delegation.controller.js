@@ -1,3 +1,8 @@
+const _ = require('lodash');
+
+require('../../../sharing/sharee/contact-sharee.service.js');
+require('../../../sharing/constants.js');
+
 (function(angular) {
   'use strict';
 
@@ -6,7 +11,6 @@
 
   function contactAddressbookSettingsDelegationController(
     $q,
-    _,
     ContactSharee,
     CONTACT_SHARING_SHARE_ACCESS,
     CONTACT_SHARING_SHARE_ACCESS_CHOICES

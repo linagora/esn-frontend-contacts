@@ -1,3 +1,5 @@
+require('./services/contact-configuration.service.js');
+
 (function(angular) {
   'use strict';
 

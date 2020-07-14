@@ -1,3 +1,10 @@
+const _ = require('lodash');
+
+require('./display-shell/addressbook-display-shell-registry.service.js');
+require('./display-shell/addressbook-display-shell.service.js');
+require('./group-addressbook/contact-group-addressbook.service.js');
+require('./addressbook.constants.js');
+
 (function(angular) {
   'use strict';
 
@@ -5,7 +12,6 @@
     .factory('contactAddressbookDisplayService', contactAddressbookDisplayService);
 
   function contactAddressbookDisplayService(
-    _,
     esnConfig,
     contactAddressbookDisplayShellRegistry,
     ContactAddressbookDisplayShell,

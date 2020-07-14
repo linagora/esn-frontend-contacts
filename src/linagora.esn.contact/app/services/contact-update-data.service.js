@@ -1,3 +1,5 @@
+require('../contact/contact.constants.js');
+
 (function(angular) {
   'use strict';
 

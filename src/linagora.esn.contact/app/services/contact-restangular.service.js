@@ -1,10 +1,12 @@
+const Restangular = require('restangular');
+
 (function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
     .factory('contactRestangularService', contactRestangularService);
 
-  function contactRestangularService(Restangular, httpErrorHandler) {
+  function contactRestangularService(httpErrorHandler) {
     return Restangular.withConfig(function(RestangularConfigurer) {
       RestangularConfigurer.setFullResponse(true);
       RestangularConfigurer.setBaseUrl('/contact/api');

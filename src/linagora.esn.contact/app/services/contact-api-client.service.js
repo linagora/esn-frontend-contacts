@@ -1,3 +1,11 @@
+require('../addressbook/shell/addressbook-shell.service.js');
+require('../contact/shell/shell.service.js');
+require('../contact/shell/contact-shell-builder.service.js');
+require('../services/avatar.service.js');
+require('../contact/vcard/vcard-builder.service.js');
+require('../app.constant.js');
+
+
 (function(angular) {
   'use strict';
 

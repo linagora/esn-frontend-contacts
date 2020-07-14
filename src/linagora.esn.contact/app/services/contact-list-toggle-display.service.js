@@ -1,3 +1,6 @@
+require('../services/contact-list-toggle-event.service.js');
+require('../app.constant.js');
+
 (function(angular) {
   'use strict';
 
@@ -5,7 +8,6 @@
     .factory('ContactListToggleDisplayService', ContactListToggleDisplayService);
 
   function ContactListToggleDisplayService(
-    $rootScope,
     $cacheFactory,
     ContactListToggleEventService,
     CONTACT_LIST_DISPLAY

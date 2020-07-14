@@ -1,3 +1,6 @@
+require('./addressbook-pagination.service.js');
+require('./addressbook-pagination-registry.service.js');
+
 (function(angular) {
   'use strict';
 

@@ -1,3 +1,5 @@
+require('../constants.js');
+
 (function(angular) {
   angular.module('linagora.esn.davproxy')
     .factory('davClient', davClient);

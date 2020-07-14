@@ -1,3 +1,5 @@
+require('./virtual-addressbook-registry.service.js');
+
 (function(angular) {
   'use strict';
 

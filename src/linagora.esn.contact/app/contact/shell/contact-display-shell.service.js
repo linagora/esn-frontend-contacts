@@ -1,3 +1,8 @@
+require('../helper.service.js');
+require('../../services/avatar.service.js');
+require('../../services/contact-localtion-helper.service.js');
+require('../../app.constant.js');
+
 (function(angular) {
   'use strict';
 

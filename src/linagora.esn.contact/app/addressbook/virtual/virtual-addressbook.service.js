@@ -1,9 +1,14 @@
+const _ = require('lodash');
+
+require('./virtual-addressbook-registry.service.js');
+require('./virtual-addressbook-configuration.service.js');
+
 (function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact').factory('ContactVirtualAddressBookService', ContactVirtualAddressBookService);
 
-  function ContactVirtualAddressBookService($q, _, ContactVirtualAddressBookRegistry, ContactVirtualAddressBookConfiguration) {
+  function ContactVirtualAddressBookService($q, ContactVirtualAddressBookRegistry, ContactVirtualAddressBookConfiguration) {
     return {
       get: get,
       list: list

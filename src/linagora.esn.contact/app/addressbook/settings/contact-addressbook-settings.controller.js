@@ -1,3 +1,9 @@
+const _ = require('lodash');
+
+require('../addressbook.service.js');
+require('..//addressbook-display.service.js');
+require('../addressbook.constants.js');
+
 (function(angular) {
   'use strict';
 
@@ -6,7 +12,6 @@
 
   function contactAddressbookSettingsController(
     $q,
-    _,
     $state,
     $stateParams,
     asyncAction,
