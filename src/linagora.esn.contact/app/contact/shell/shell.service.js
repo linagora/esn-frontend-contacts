@@ -1,3 +1,6 @@
+require('../vcard/helper.service.js');
+require('../../app.constant.js');
+
 (function(angular) {
   'use strict';
 

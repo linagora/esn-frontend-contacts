@@ -1,3 +1,10 @@
+require('./addressbook-pagination-registry.service.js');
+require('./addressbook-pagination-provider.service.js');
+require('./search-addressbook-pagination-provider.service.js');
+require('./multiple-addressbook-pagination-provider.service.js');
+require('../app.constant.js');
+require('../services/contact-configuration.service.js');
+
 (function(angular) {
   'use strict';
 

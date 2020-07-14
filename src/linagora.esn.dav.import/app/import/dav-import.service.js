@@ -1,3 +1,5 @@
+require('../common/dav-import-api-client.service.js');
+
 (function(angular) {
   'use strict';
 

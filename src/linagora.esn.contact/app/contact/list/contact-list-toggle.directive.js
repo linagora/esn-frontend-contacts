@@ -1,3 +1,7 @@
+require('../../services/contact-list-toggle-display.service.js');
+require('../../services/contact-list-toggle-event.service.js');
+require('../../app.constant.js');
+
 (function(angular) {
   'use strict';
 

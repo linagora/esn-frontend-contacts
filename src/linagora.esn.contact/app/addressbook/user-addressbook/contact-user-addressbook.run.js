@@ -1,3 +1,12 @@
+require('../action/addressbook-action-edit.service.js');
+require('../action/addressbook-action-delete.service.js');
+require('../action/addressbook-action-export.service.js');
+require('../action/addressbook-action-settings.service.js');
+require('../display-shell/addressbook-display-shell-registry.service.js');
+require('../user-addressbook/contact-user-addressbook.service.js');
+require('../user-addressbook/contact-user-addressbook-display-shell.service.js');
+require('../../services/contact-configuration.service.js');
+
 (function(angular) {
   'use strict';
 

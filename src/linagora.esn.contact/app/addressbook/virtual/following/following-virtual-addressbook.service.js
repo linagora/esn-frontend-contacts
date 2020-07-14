@@ -1,9 +1,19 @@
+require('../virtual-addressbook.model.js');
+require('../user/shells/user-shell.js');
+require('./following-virtual-loader.service.js');
+require('./following-virtual-addressbook.constant.js');
+
 (function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact').factory('ContactFollowingVirtualAddressBook', ContactFollowingVirtualAddressBook);
 
-  function ContactFollowingVirtualAddressBook(ContactVirtualAddressBook, ContactUserShell, ContactVirtualFollowingsLoaderService, CONTACT_FOLLOWING_VIRTUAL_ADDRESSBOOK_ID) {
+  function ContactFollowingVirtualAddressBook(
+    ContactVirtualAddressBook,
+    ContactUserShell,
+    ContactVirtualFollowingsLoaderService,
+    CONTACT_FOLLOWING_VIRTUAL_ADDRESSBOOK_ID
+  ) {
     var options = {
       configuration: {
         enabled: 'linagora.esn.contact.features.isVirtualFollowingAddressbookEnabled'

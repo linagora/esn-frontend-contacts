@@ -1,3 +1,6 @@
+require('../services/shared-contact-data.service.js');
+require('../app.constant.js');
+
 (function(angular) {
   'use strict';
 

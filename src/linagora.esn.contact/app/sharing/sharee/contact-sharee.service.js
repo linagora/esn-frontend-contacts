@@ -1,3 +1,6 @@
+require('../../services/addressbook-parser.service.js');
+require('../constants.js');
+
 (function(angular) {
   'use strict';
 

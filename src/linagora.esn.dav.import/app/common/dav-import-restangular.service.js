@@ -1,4 +1,6 @@
-(function() {
+const Restangular = require('restangular');
+
+(function(angular) {
   'use strict';
 
   var MODULE_NAME = 'linagora.esn.dav.import';
@@ -13,4 +15,4 @@
       RestangularConfigurer.setFullResponse(true);
     });
   }
-})();
+})(angular);

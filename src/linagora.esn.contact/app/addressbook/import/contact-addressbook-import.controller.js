@@ -1,3 +1,7 @@
+require('../addressbook.service.js');
+require('../addressbook-display.service.js');
+require('../../contact/contact.service.js');
+
 (function(angular) {
   'use strict';
 

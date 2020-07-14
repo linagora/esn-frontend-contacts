@@ -1,3 +1,7 @@
+require('../search/search-provider.service.js');
+require('../search/search-providers.service.js');
+require('../services/contact-configuration.service.js');
+
 (function(angular) {
   'use strict';
 

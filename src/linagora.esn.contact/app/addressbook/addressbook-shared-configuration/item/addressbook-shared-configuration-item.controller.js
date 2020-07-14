@@ -1,3 +1,6 @@
+require('../../addressbook-display.service.js');
+require('../../../sharing/constants.js');
+
 (function(angular) {
   'use strict';
 

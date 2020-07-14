@@ -1,3 +1,5 @@
+require('./contact-live-update-initializer.service.js');
+
 (function(angular) {
   'use strict';
 

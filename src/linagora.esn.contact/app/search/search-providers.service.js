@@ -1,10 +1,14 @@
+const _ = require('lodash');
+
+require('../search/search-results.service.js');
+require('../app.constant.js');
+
 (function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact').factory('contactSearchProviders', contactSearchProviders);
 
   function contactSearchProviders(
-    _,
     $q,
     Providers,
     esnSearchProvider,

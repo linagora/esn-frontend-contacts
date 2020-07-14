@@ -1,10 +1,12 @@
+require('./contact-maintenance-domain-members.service.js');
+
 (function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
     .controller('contactMaintenanceDomainMembersController', contactMaintenanceDomainMembersController);
 
-  function contactMaintenanceDomainMembersController(asyncAction, contactMaintenanceDomainMembersService, $stateParams) {
+  function contactMaintenanceDomainMembersController($stateParams, asyncAction, contactMaintenanceDomainMembersService) {
     var self = this;
     var notificationMessages = {
       progressing: 'Submitting request...',

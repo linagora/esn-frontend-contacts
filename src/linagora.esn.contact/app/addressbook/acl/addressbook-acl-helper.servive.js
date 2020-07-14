@@ -1,3 +1,9 @@
+const _ = require('lodash');
+
+require('../../services/addressbook-parser.service.js');
+require('../../app.constant.js');
+require('../addressbook.constants.js');
+
 (function(angular) {
   'use strict';
 
@@ -5,7 +11,6 @@
     .factory('contactAddressbookACLHelper', contactAddressbookACLHelper);
 
   function contactAddressbookACLHelper(
-    _,
     session,
     contactAddressbookParser,
     DEFAULT_ADDRESSBOOK_NAME,

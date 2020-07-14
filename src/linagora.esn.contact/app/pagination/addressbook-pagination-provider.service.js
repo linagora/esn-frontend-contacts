@@ -1,10 +1,12 @@
+require('../contact/contact.service.js');
+
 (function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
     .factory('AddressBookPaginationProvider', AddressBookPaginationProvider);
 
-  function AddressBookPaginationProvider(contactService, $log) {
+  function AddressBookPaginationProvider($log, contactService) {
 
     function AddressBookPaginationProvider(options) {
       this.options = options;

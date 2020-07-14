@@ -1,3 +1,6 @@
+require('../../contact/shell/contact-shell-display-builder.service.js');
+require('../../app.constant.js');
+
 (function(angular) {
   'use strict';
 

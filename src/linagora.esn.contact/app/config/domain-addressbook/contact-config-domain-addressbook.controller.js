@@ -1,3 +1,6 @@
+require('../../addressbook/addressbook.service.js');
+require('../../addressbook/addressbook.constants.js');
+
 (function(angular) {
   'use strict';
 

@@ -1,3 +1,5 @@
+require('../shell/contact-display-shell.service.js');
+
 (function(angular) {
   'use strict';
 

@@ -1,3 +1,6 @@
+require('../../app.constant.js');
+require('../helper.service.js');
+
 (function(angular) {
   'use strict';
 

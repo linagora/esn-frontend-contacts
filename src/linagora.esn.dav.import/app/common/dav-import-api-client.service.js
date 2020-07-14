@@ -1,3 +1,5 @@
+require('./dav-import-restangular.service.js');
+
 (function(angular) {
   'use strict';
 

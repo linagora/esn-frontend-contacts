@@ -1,3 +1,11 @@
+require('../action/addressbook-action-edit.service.js');
+require('../action/addressbook-action-export.service.js');
+require('../action/addressbook-action-settings.service.js');
+require('../display-shell/addressbook-display-shell-registry.service.js');
+require('../group-addressbook/contact-group-addressbook.service.js');
+require('../group-addressbook/contact-group-addressbook-display-shell.service.js');
+require('../../services/contact-configuration.service.js');
+
 (function(angular) {
   'use strict';
 
