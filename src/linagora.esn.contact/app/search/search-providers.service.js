@@ -9,7 +9,6 @@
     Providers,
     esnSearchProvider,
     contactSearchResultsProviderSubmit,
-    session,
     PageAggregatorService,
     ELEMENTS_PER_REQUEST,
     CONTACT_GLOBAL_SEARCH
