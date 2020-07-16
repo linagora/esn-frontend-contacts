@@ -10,7 +10,6 @@
     'esn.avatar',
     'esn.async-action',
     'esn.registry',
-    'esn.follow',
     'esn.configuration',
     'esn.application-menu',
     'esn.constants',
@@ -56,7 +55,6 @@ require('esn-frontend-common-libs/src/frontend/js/modules/avatar.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/alphalist.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/async-action.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/registry.js');
-require('esn-frontend-common-libs/src/frontend/js/modules/follow/follow.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/config/config.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/application-menu.js');
 require('esn-frontend-common-libs/src/frontend/js/constants.js');
@@ -123,10 +121,6 @@ require ('./addressbook/shell/addressbook-shell.service.js');
 require ('./addressbook/user-addressbook/contact-user-addressbook-display-shell.service.js');
 require ('./addressbook/user-addressbook/contact-user-addressbook.run.js');
 require ('./addressbook/user-addressbook/contact-user-addressbook.service.js');
-require ('./addressbook/virtual/following/following-virtual-addressbook.constant.js');
-require ('./addressbook/virtual/following/following-virtual-addressbook.run.js');
-require ('./addressbook/virtual/following/following-virtual-addressbook.service.js');
-require ('./addressbook/virtual/following/following-virtual-loader.service.js');
 require ('./addressbook/virtual/user/shells/user-display-shell.js');
 require ('./addressbook/virtual/user/shells/user-shell-helper.service.js');
 require ('./addressbook/virtual/user/shells/user-shell.js');
