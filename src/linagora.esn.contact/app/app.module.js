@@ -3,6 +3,7 @@
 
   angular.module('linagora.esn.contact', [
     'esn.core',
+    'esn.mailto-handler',
     'esn.router',
     'esn.session',
     'esn.notification',
