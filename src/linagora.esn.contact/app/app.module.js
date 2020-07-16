@@ -43,7 +43,9 @@
     'esn.i18n',
     'esn.user',
     'linagora.esn.dav.import',
-    'esn.user-configuration'
+    'esn.user-configuration',
+    'esn.settings-overlay',
+    'esn.previous-page'
   ]);
 })(angular);
 
@@ -79,6 +81,8 @@ require('esn-frontend-common-libs/src/frontend/js/modules/datetime/datetime.modu
 require('esn-frontend-common-libs/src/frontend/js/modules/i18n/i18n.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/user/user.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/user-configuration/user-configuration.module.js');
+require('esn-frontend-common-libs/src/frontend/js/modules/settings-overlay.js');
+require('esn-frontend-common-libs/src/frontend/js/modules/previous-page.js');
 require('../../linagora.esn.davproxy/js/app.js');
 require('../../linagora.esn.dav.import/app/app.module.js');
 
