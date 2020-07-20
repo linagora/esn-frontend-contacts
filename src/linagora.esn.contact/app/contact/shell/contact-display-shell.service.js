@@ -18,7 +18,7 @@ require('../../app.constant.js');
     CONTACT_DEFAULT_AVATAR
   ) {
 
-    function ContactDisplayShell(shell) {
+    function _ContactDisplayShell(shell) {
       if (shell) {
         this.shell = shell;
         this.overlayIcon = {iconClasses: 'ng-hide'};
@@ -60,11 +60,11 @@ require('../../app.constant.js');
       }
     }
 
-    ContactDisplayShell.prototype.isWritable = function() {
+    _ContactDisplayShell.prototype.isWritable = function() {
       return Boolean(this.addressbook && this.addressbook.editable);
     };
 
-    ContactDisplayShell.prototype.getAvatar = function(size) {
+    _ContactDisplayShell.prototype.getAvatar = function(size) {
       if (size) {
         if (contactAvatarService.isTextAvatar(this.shell.photo)) {
           return urlUtils.updateUrlParameter(this.shell.photo, 'size', size);
@@ -74,31 +74,31 @@ require('../../app.constant.js');
       return this.shell.photo || this.getDefaultAvatar();
     };
 
-    ContactDisplayShell.prototype.getDefaultAvatar = function() {
+    _ContactDisplayShell.prototype.getDefaultAvatar = function() {
       return this.fallbackAvatar;
     };
 
-    ContactDisplayShell.prototype.getDisplayName = function() {
+    _ContactDisplayShell.prototype.getDisplayName = function() {
       return this.shell.displayName;
     };
 
-    ContactDisplayShell.prototype.getOverlayIcon = function() {
+    _ContactDisplayShell.prototype.getOverlayIcon = function() {
       return this.overlayIcon.iconClasses;
     };
 
-    ContactDisplayShell.prototype.getInformationsToDisplay = function() {
+    _ContactDisplayShell.prototype.getInformationsToDisplay = function() {
       return this.informationsToDisplay;
     };
 
-    ContactDisplayShell.prototype.getDropDownMenu = function() {
+    _ContactDisplayShell.prototype.getDropDownMenu = function() {
       return this.dropDownMenuDirective;
     };
 
-    ContactDisplayShell.prototype.displayContact = function() {
+    _ContactDisplayShell.prototype.displayContact = function() {
       // use url instead of path to remove search and hash from URL
       ContactLocationHelper.contact.show(this.addressbook.bookId, this.addressbook.bookName, this.shell.id);
     };
 
-    return ContactDisplayShell;
+    return _ContactDisplayShell;
   }
 })(angular);

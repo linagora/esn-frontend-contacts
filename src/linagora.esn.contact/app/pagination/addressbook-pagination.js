@@ -12,11 +12,11 @@ require('./addressbook-pagination-registry.service.js');
     AddressBookPaginationRegistry
   ) {
 
-    function AddressBookPagination(scope) {
+    function _AddressBookPagination(scope) {
       this.scope = scope;
     }
 
-    AddressBookPagination.prototype.init = function(provider, options) {
+    _AddressBookPagination.prototype.init = function(provider, options) {
       if (this.lastPageWatcher) {
         this.lastPageWatcher.stop();
       }
@@ -55,6 +55,6 @@ require('./addressbook-pagination-registry.service.js');
       this.unbindWatch();
     };
 
-    return AddressBookPagination;
+    return _AddressBookPagination;
   }
 })(angular);
