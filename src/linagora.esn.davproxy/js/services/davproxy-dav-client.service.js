@@ -5,9 +5,9 @@ require('../constants.js');
     .factory('davClient', davClient);
 
   function davClient($http, httpConfigurer, DAV_PATH) {
-    return davClient;
+    return _davClient;
 
-    function davClient(method, path, headers, body, params) {
+    function _davClient(method, path, headers, body, params) {
       var config = {
         url: httpConfigurer.getUrl(DAV_PATH.replace(/\/$/, '') + path),
         method: method,

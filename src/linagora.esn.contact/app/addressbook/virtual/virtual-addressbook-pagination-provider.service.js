@@ -6,7 +6,7 @@
 
   function ContactVirtualAddressBookPaginationProvider($log) {
 
-    function ContactVirtualAddressBookPaginationProvider(options) {
+    function _ContactVirtualAddressBookPaginationProvider(options) {
       this.options = options;
 
       if (!this.options.addressbooks || this.options.addressbooks.length === 0) {
@@ -18,7 +18,7 @@
       this.nextPage = 1;
     }
 
-    ContactVirtualAddressBookPaginationProvider.prototype.loadNextItems = function() {
+    _ContactVirtualAddressBookPaginationProvider.prototype.loadNextItems = function() {
       var self = this;
       var page = this.nextPage || 1;
 
@@ -38,6 +38,6 @@
       });
     };
 
-    return ContactVirtualAddressBookPaginationProvider;
+    return _ContactVirtualAddressBookPaginationProvider;
   }
 })(angular);

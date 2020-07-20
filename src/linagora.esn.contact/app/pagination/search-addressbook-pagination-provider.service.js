@@ -8,7 +8,7 @@ require('../services/contact-api-client.service.js');
 
   function SearchAddressBookPaginationProvider($log, ContactAPIClient) {
 
-    function SearchAddressBookPaginationProvider(options) {
+    function _SearchAddressBookPaginationProvider(options) {
       this.options = options;
       this.user = this.options.user;
       this.bookId = this.user._id;
@@ -17,7 +17,7 @@ require('../services/contact-api-client.service.js');
       this.nextPage = 0;
     }
 
-    SearchAddressBookPaginationProvider.prototype.loadNextItems = function(options) {
+    _SearchAddressBookPaginationProvider.prototype.loadNextItems = function(options) {
       var self = this;
       var page = this.nextPage || 1;
 
@@ -45,6 +45,6 @@ require('../services/contact-api-client.service.js');
         });
     };
 
-    return SearchAddressBookPaginationProvider;
+    return _SearchAddressBookPaginationProvider;
   }
 })(angular);

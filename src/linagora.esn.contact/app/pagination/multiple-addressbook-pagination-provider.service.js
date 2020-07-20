@@ -21,7 +21,7 @@ require('../addressbook/addressbook.constants.js');
     CONTACT_ADDRESSBOOK_TYPES
   ) {
 
-    function MultipleAddressBookPaginationProvider(options) {
+    function _MultipleAddressBookPaginationProvider(options) {
       this.options = options;
       this.addressbooks = this.options.addressbooks;
       this.compare = this.options.compare || ContactShellComparator.byDisplayName;
@@ -43,12 +43,12 @@ require('../addressbook/addressbook.constants.js');
       });
     }
 
-    MultipleAddressBookPaginationProvider.prototype.loadNextItems = function() {
+    _MultipleAddressBookPaginationProvider.prototype.loadNextItems = function() {
       $log.debug('Loading next items on aggregator');
 
       return this.aggregator.loadNextItems();
     };
 
-    return MultipleAddressBookPaginationProvider;
+    return _MultipleAddressBookPaginationProvider;
   }
 })(angular);

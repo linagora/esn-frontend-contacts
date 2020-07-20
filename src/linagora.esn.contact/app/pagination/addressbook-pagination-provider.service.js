@@ -8,7 +8,7 @@ require('../contact/contact.service.js');
 
   function AddressBookPaginationProvider($log, contactService) {
 
-    function AddressBookPaginationProvider(options) {
+    function _AddressBookPaginationProvider(options) {
       this.options = options;
 
       if (!this.options.addressbooks || this.options.addressbooks.length === 0) {
@@ -20,7 +20,7 @@ require('../contact/contact.service.js');
       this.nextPage = 0;
     }
 
-    AddressBookPaginationProvider.prototype.loadNextItems = function() {
+    _AddressBookPaginationProvider.prototype.loadNextItems = function() {
       var self = this;
 
       var page = this.nextPage || 1;
@@ -40,6 +40,6 @@ require('../contact/contact.service.js');
         });
     };
 
-    return AddressBookPaginationProvider;
+    return _AddressBookPaginationProvider;
   }
 })(angular);
