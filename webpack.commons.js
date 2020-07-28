@@ -16,6 +16,7 @@ const pugLoaderOptions = {
 };
 
 const BASE_HREF = process.env.BASE_HREF || '/';
+const OPENPAAS_URL = process.env.OPENPAAS_URL || 'http://localhost:8080'
 
 module.exports = {
   mode: 'development',
@@ -61,8 +62,8 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    contentBasePublicPath: BASE_HREF,
+    contentBase: [path.join(__dirname, 'dist'), path.resolve(__dirname, 'node_modules', 'esn-frontend-login', 'dist')],
+    contentBasePublicPath: [BASE_HREF, '/login'],
     compress: true,
     port: 9900,
     proxy: [{
@@ -87,12 +88,11 @@ module.exports = {
         '/linagora.esn.resource/api',
         '/linagora.esn.dav.import/api'
       ],
-      //target: 'http://localhost:8080',
-      target: 'https://dev.open-paas.org',
+      target: OPENPAAS_URL,
       disableHostCheck: true,
       secure: false,
       changeOrigin: true,
-
+      withCredentials: true
     }]
   },
   module: {
