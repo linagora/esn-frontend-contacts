@@ -25,6 +25,7 @@
     "babel-plugin-angularjs-annotate": "^0.10.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.6.0",
+    "dotenv-webpack": "^2.0.0",
     "esn-frontend-login": "github:openpaas-suite/esn-frontend-login#main",
     "exports-loader": "^1.0.0",
     "expose-loader": "^1.0.0",
