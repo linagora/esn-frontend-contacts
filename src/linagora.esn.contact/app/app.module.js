@@ -138,6 +138,7 @@ require('./app.constant.js');
 require('./app.controllers.js');
 require('./app.module-registry.run.js');
 require('./app.routes.js');
+require('./app.config.js');
 require('./app.run.js');
 require('./config/contact-config-form.component.js');
 require('./config/domain-addressbook/contact-config-domain-addressbook.component.js');
