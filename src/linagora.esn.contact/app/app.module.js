@@ -178,7 +178,6 @@ require('./contact/vcard/helper.service.js');
 require('./contact/vcard/vcard-builder.service.js');
 require('./controllers/contact-list.controller.js');
 require('./controllers/contact-show.controller.js');
-require('./directives/application-menu-contact.directive.js');
 require('./directives/contact-category-letter.directive.js');
 require('./maintenance/contact-maintenance.component.js');
 require('./maintenance/domain-members/contact-maintenance-domain-members.component.js');
