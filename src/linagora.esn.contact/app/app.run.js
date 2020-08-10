@@ -11,7 +11,6 @@ require('./services/contact-configuration.service.js');
     .run(addTemplateCache);
 
   function runBlock(
-    dynamicDirectiveService,
     attendeeService,
     ContactAttendeeProvider,
     AddressbookCache,
@@ -22,11 +21,7 @@ require('./services/contact-configuration.service.js');
       if (!isEnabled) {
         return;
       }
-      var contact = new dynamicDirectiveService.DynamicDirective(true, 'application-menu-contact', {
-        priority: 35
-      });
 
-      dynamicDirectiveService.addInjection('esn-application-menu', contact);
       attendeeService.addProvider(ContactAttendeeProvider);
       ContactShellBuilder.setAddressbookCache(AddressbookCache);
     });
