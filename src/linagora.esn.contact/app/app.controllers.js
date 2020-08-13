@@ -69,7 +69,7 @@ angular.module('linagora.esn.contact')
         }, { location: 'replace' });
       }).then(function() {
         return gracePeriodService.askUserForCancel(
-          esnI18nService.translate('You have just created a new contact (%s).', $scope.contact.displayName),
+          esnI18nService.translate('You have just created a new contact (%s).',  { displayName: $scope.contact.displayName }),
           'Cancel it'
         ).promise.then(function(data) {
             if (data.cancelled) {

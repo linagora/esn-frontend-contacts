@@ -29,7 +29,7 @@ function deleteContact(
 
         return gracePeriodService.grace({
           id: taskId,
-          performedAction: esnI18nService.translate('You have just deleted a contact (%s)', contact.displayName),
+          performedAction: esnI18nService.translate('You have just deleted a contact (%s)', { displayName: contact.displayName }),
           cancelFailed: 'Cannot cancel contact deletion, the contact might be deleted permanently',
           cancelTooLate: 'It is too late to cancel the contact deletion, the contact might be deleted permanently'
         }).catch(function() {
