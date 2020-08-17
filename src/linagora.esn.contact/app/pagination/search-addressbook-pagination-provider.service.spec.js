@@ -44,13 +44,13 @@ describe('The SearchAddressBookPaginationProvider service', function() {
   });
 
   beforeEach(function() {
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('ContactAPIClient', ContactAPIClient);
     });
   });
 
   beforeEach(function() {
-    inject(function(SearchAddressBookPaginationProvider, $rootScope) {
+    angular.mock.inject(function(SearchAddressBookPaginationProvider, $rootScope) {
       this.$rootScope = $rootScope;
       this.SearchAddressBookPaginationProvider = SearchAddressBookPaginationProvider;
     });

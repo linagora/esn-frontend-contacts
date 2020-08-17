@@ -32,7 +32,7 @@ describe('The AddressBookPaginationService service', function() {
   });
 
   beforeEach(function() {
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('ContactAPIClient', ContactAPIClient);
     });
   });

@@ -12,10 +12,10 @@ describe('The ContactSharee service', function() {
   var CONTACT_SHARING_INVITE_STATUS;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
-  beforeEach(inject(function(
+  beforeEach(angular.mock.inject(function(
     _$q_,
     _$rootScope_,
     _$controller_,

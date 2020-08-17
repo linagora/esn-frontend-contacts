@@ -9,8 +9,8 @@ describe('The contactAvatarService service', function() {
   var ICAL;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
-    inject(function(
+    angular.mock.module('linagora.esn.contact');
+    angular.mock.inject(function(
       _contactAvatarService_,
       _ICAL_
     ) {

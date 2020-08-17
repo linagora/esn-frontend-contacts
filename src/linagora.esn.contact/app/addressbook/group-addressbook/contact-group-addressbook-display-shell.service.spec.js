@@ -9,9 +9,9 @@ describe('The ContactGroupAddressbookDisplayShell service', function() {
   var esnI18nService, ContactGroupAddressbookDisplayShell;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(_esnI18nService_, _ContactGroupAddressbookDisplayShell_) {
+    angular.mock.inject(function(_esnI18nService_, _ContactGroupAddressbookDisplayShell_) {
       ContactGroupAddressbookDisplayShell = _ContactGroupAddressbookDisplayShell_;
       esnI18nService = _esnI18nService_;
     });

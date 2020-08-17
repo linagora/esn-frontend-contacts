@@ -4,9 +4,9 @@ describe('The contactMaintenanceDomainMembersService service', function() {
   var $httpBackend, contactMaintenanceDomainMembersService;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(_$httpBackend_, _contactMaintenanceDomainMembersService_) {
+    angular.mock.inject(function(_$httpBackend_, _contactMaintenanceDomainMembersService_) {
       $httpBackend = _$httpBackend_;
       contactMaintenanceDomainMembersService = _contactMaintenanceDomainMembersService_;
     });

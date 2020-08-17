@@ -10,10 +10,10 @@ describe('The contactAddressbookACLHelper service', function() {
   var userId;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
     userId = '1234';
 
-    inject(function(
+    angular.mock.inject(function(
       _session_,
       _contactAddressbookACLHelper_,
       _DEFAULT_ADDRESSBOOK_NAME_,

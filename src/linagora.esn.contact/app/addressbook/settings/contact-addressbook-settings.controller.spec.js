@@ -11,15 +11,15 @@ describe('The contactAddressbookSettingsController', function() {
   var CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS;
 
   beforeEach(function() {
-    module('esn.async-action', function($provide) {
+    angular.mock.module('esn.async-action', function($provide) {
       $provide.value('asyncAction', function(message, action) {
         return action();
       });
     });
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
-  beforeEach(inject(function(
+  beforeEach(angular.mock.inject(function(
     _$q_,
     _$rootScope_,
     _$controller_,

@@ -10,12 +10,11 @@ describe('The contactListItem directive', function() {
   var contactAddressbookDisplayService;
 
   beforeEach(function() {
-    module('esn.core');
-    module('linagora.esn.contact');
-    module('jadeTemplates');
+    angular.mock.module('esn.core');
+    angular.mock.module('linagora.esn.contact');
   });
 
-  beforeEach(inject(function(_$compile_, _$rootScope_, _contactAddressbookDisplayService_, _CONTACT_AVATAR_SIZE_) {
+  beforeEach(angular.mock.inject(function(_$compile_, _$rootScope_, _contactAddressbookDisplayService_, _CONTACT_AVATAR_SIZE_) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;
     CONTACT_AVATAR_SIZE = _CONTACT_AVATAR_SIZE_;

@@ -10,10 +10,10 @@ describe('The ContactLiveUpdateInitializer service', function() {
   var ContactLiveUpdateMock, session, $rootScope;
 
   beforeEach(function() {
-    module('esn.core');
-    module('esn.websocket');
-    module('esn.api-notification');
-    module('linagora.esn.contact');
+    angular.mock.module('esn.core');
+    angular.mock.module('esn.websocket');
+    angular.mock.module('esn.api-notification');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
@@ -26,9 +26,7 @@ describe('The ContactLiveUpdateInitializer service', function() {
           }
         ]
       },
-      ready: {
-        then: function() {}
-      }
+      ready: $q.when({})
     };
 
     ContactLiveUpdateMock = {
@@ -37,12 +35,12 @@ describe('The ContactLiveUpdateInitializer service', function() {
       startListenDomain: function() {}
     };
 
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       $provide.value('ContactLiveUpdate', ContactLiveUpdateMock);
       $provide.value('session', session);
     });
 
-    inject(function(_$rootScope_) {
+    angular.mock.inject(function(_$rootScope_) {
       $rootScope = _$rootScope_;
     });
   });

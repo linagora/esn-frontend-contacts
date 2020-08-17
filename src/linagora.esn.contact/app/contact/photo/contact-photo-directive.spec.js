@@ -10,12 +10,11 @@ describe('The contactPhoto directive', function() {
   var DEFAULT_AVATAR;
 
   beforeEach(function() {
-    module('esn.core');
-    module('linagora.esn.contact');
-    module('jadeTemplates');
+    angular.mock.module('esn.core');
+    angular.mock.module('linagora.esn.contact');
   });
 
-  beforeEach(inject(function(_$compile_, _$rootScope_) {
+  beforeEach(angular.mock.inject(function(_$compile_, _$rootScope_) {
     $scope = _$rootScope_.$new();
     $compile = _$compile_;
     DEFAULT_AVATAR = '/contact/images/default_avatar.png';
@@ -43,7 +42,7 @@ describe('The contactPhoto directive', function() {
 
   describe('with editable attribute', function() {
 
-    beforeEach(inject(function($compile, $rootScope) {
+    beforeEach(angular.mock.inject(function($compile, $rootScope) {
       $scope = $rootScope.$new();
       $scope.contact = {};
 

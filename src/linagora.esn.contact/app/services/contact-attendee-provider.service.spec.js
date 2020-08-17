@@ -15,9 +15,7 @@ describe('The Contacts Angular Attendee Provider module', function() {
 
     session = {
       user: user,
-      ready: {
-        then: function() {}
-      }
+      ready: $q.when({})
     };
 
     ContactAPIClient = {
@@ -36,7 +34,7 @@ describe('The Contacts Angular Attendee Provider module', function() {
   describe('The ContactAttendeeProvider service', function() {
 
     beforeEach(function() {
-      module('linagora.esn.contact', function($provide) {
+      angular.mock.module('linagora.esn.contact', function($provide) {
         $provide.value('ContactAPIClient', ContactAPIClient);
         $provide.value('ContactsHelper', ContactsHelper);
         $provide.value('session', session);

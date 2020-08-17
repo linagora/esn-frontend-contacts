@@ -4,9 +4,9 @@ describe('The davImportApiClient service', function() {
   var $httpBackend;
   var davImportApiClient;
 
-  beforeEach(module('linagora.esn.dav.import'));
+  beforeEach(angular.mock.module('linagora.esn.dav.import'));
 
-  beforeEach(inject(function(_$httpBackend_, _davImportApiClient_) {
+  beforeEach(angular.mock.inject(function(_$httpBackend_, _davImportApiClient_) {
     $httpBackend = _$httpBackend_;
     davImportApiClient = _davImportApiClient_;
   }));

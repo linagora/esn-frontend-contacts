@@ -12,10 +12,10 @@ describe('The deleteContact service', function() {
   var bookName = 'bookName';
 
   beforeEach(function() {
-    module('esn.core');
-    module('esn.websocket');
-    module('esn.api-notification');
-    module('linagora.esn.contact');
+    angular.mock.module('esn.core');
+    angular.mock.module('esn.websocket');
+    angular.mock.module('esn.api-notification');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {

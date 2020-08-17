@@ -10,7 +10,7 @@ describe('The MultipleAddressBookPaginationProvider service', function() {
   beforeEach(function() {
     PageAggregatorServiceMock = function() {};
 
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('PageAggregatorService', PageAggregatorServiceMock);
     });
   });

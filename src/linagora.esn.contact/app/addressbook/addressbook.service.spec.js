@@ -12,17 +12,15 @@ describe('The contactAddressbookService service', function() {
   var CONTACT_SHARING_INVITE_STATUS;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       ContactAPIClient = {};
       session = {
         user: {
           _id: '123'
         },
-        ready: {
-          then: angular.noop
-        }
+        ready: $q.when({})
       };
       davProxyPrincipalService = {
         getGroupMembership: function() {
@@ -34,7 +32,7 @@ describe('The contactAddressbookService service', function() {
       $provide.value('session', session);
       $provide.value('davProxyPrincipalService', davProxyPrincipalService);
     });
-    inject(function(
+    angular.mock.inject(function(
       _$rootScope_,
       _$window_,
       _contactAddressbookService_,
@@ -650,7 +648,7 @@ describe('The contactAddressbookService service', function() {
     describe('subscribe to delegated (shared) address book', function() {
       var CONTACT_SHARING_SUBSCRIPTION_TYPE;
 
-      beforeEach(inject(function(_CONTACT_SHARING_SUBSCRIPTION_TYPE_) {
+      beforeEach(angular.mock.inject(function(_CONTACT_SHARING_SUBSCRIPTION_TYPE_) {
         CONTACT_SHARING_SUBSCRIPTION_TYPE = _CONTACT_SHARING_SUBSCRIPTION_TYPE_;
       }));
 

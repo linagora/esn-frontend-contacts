@@ -8,8 +8,8 @@ describe('The contactAddressbookDisplayService service', function() {
   var $rootScope, contactAddressbookDisplayService, ContactAddressbookDisplayShell, contactAddressbookDisplayShellRegistry, displayShellRegistry, esnConfigMock, CONTACT_ADDRESSBOOK_TYPES;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
-    module(function($provide) {
+    angular.mock.module('linagora.esn.contact');
+    angular.mock.module(function($provide) {
       displayShellRegistry = {};
       contactAddressbookDisplayShellRegistry = {
         getAll: function() {
@@ -25,7 +25,7 @@ describe('The contactAddressbookDisplayService service', function() {
       $provide.value('esnConfig', esnConfigMock);
       $provide.value('contactAddressbookDisplayShellRegistry', contactAddressbookDisplayShellRegistry);
     });
-    inject(function(
+    angular.mock.inject(function(
       _$rootScope_,
       _contactAddressbookDisplayService_,
       _ContactAddressbookDisplayShell_,

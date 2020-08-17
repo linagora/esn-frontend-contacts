@@ -5,18 +5,16 @@
 var expect = chai.expect;
 
 describe('The contactService service', function() {
-  var $rootScope, $q;
+  var $rootScope;
   var session, contactService, ContactAPIClient, moveFn, davImportServiceMock;
 
   beforeEach(function() {
-    module('esn.session', function($provide) {
+    angular.mock.module('esn.session', function($provide) {
       session = {
         user: {
           _id: '123'
         },
-        ready: {
-          then: angular.noop
-        }
+        ready: $q.when({})
       };
 
       $provide.value('session', session);
@@ -24,18 +22,16 @@ describe('The contactService service', function() {
 
     davImportServiceMock = {};
 
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('davImportService', davImportServiceMock);
     });
 
-    inject(function(
+    angular.mock.inject(function(
       _$rootScope_,
-      _$q_,
       _contactService_,
       _ContactAPIClient_
     ) {
       $rootScope = _$rootScope_;
-      $q = _$q_;
       ContactAPIClient = _ContactAPIClient_;
       contactService = _contactService_;
     });

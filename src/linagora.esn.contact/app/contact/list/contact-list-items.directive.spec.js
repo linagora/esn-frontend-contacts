@@ -9,9 +9,8 @@ describe('The contactListItems directive', function() {
   var ContactListScrollingServiceMock, sharedContactDataServiceMock, categoryLetter, onScroll, unregister;
 
   beforeEach(function() {
-    module('esn.core');
-    module('linagora.esn.contact');
-    module('jadeTemplates');
+    angular.mock.module('esn.core');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
@@ -26,12 +25,12 @@ describe('The contactListItems directive', function() {
       };
     };
 
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       $provide.value('ContactListScrollingService', ContactListScrollingServiceMock);
       $provide.value('sharedContactDataService', { categoryLetter: categoryLetter });
     });
 
-    inject(function(_$compile_, _$rootScope_, _CONTACT_EVENTS_, _$timeout_, _sharedContactDataService_) {
+    angular.mock.inject(function(_$compile_, _$rootScope_, _CONTACT_EVENTS_, _$timeout_, _sharedContactDataService_) {
       $compile = _$compile_;
       $rootScope = _$rootScope_;
       $scope = $rootScope.$new();

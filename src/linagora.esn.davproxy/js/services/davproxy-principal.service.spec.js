@@ -10,17 +10,17 @@ describe('The davProxyPrincipalService service', function() {
   var davClientResultMock;
 
   beforeEach(function() {
-    module('linagora.esn.davproxy');
+    angular.mock.module('linagora.esn.davproxy');
 
     davClient = sinon.spy(function() {
       return davClientResultMock;
     });
 
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       $provide.value('davClient', davClient);
     });
 
-    inject(function(
+    angular.mock.inject(function(
       _$rootScope_,
       _davProxyPrincipalService_
     ) {

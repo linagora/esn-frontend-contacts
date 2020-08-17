@@ -10,9 +10,9 @@ describe('The contactActionMoveController controller', function() {
   var addressbookShell, defaultAddressbookShell;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(
+    angular.mock.inject(function(
       _$q_,
       _$controller_,
       _$rootScope_,

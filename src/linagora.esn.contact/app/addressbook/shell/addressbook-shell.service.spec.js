@@ -13,10 +13,10 @@ describe('The Contact Angular module AddressbookShell', function() {
 
   describe('AddressbookShell', function() {
 
-    beforeEach(module('linagora.esn.contact'));
+    beforeEach(angular.mock.module('linagora.esn.contact'));
 
     beforeEach(function() {
-      inject(function(
+      angular.mock.inject(function(
         _AddressbookShell_,
         _contactAddressbookACLHelper_,
         _CONTACT_ADDRESSBOOK_AUTHENTICATED_PRINCIPAL_,

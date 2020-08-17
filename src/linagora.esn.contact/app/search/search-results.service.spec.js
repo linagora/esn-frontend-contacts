@@ -12,17 +12,17 @@ describe('The contactSearchResultsProviderSubmit service', function() {
     query;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
     query = {};
     stateParams = {};
-    inject(function(_$state_) {
+    angular.mock.inject(function(_$state_) {
       $state = _$state_;
       $state.current.name = 'contact.search';
       $state.go = sinon.spy();
     });
   });
 
-  beforeEach(inject(function(_contactSearchResultsProviderSubmit_) {
+  beforeEach(angular.mock.inject(function(_contactSearchResultsProviderSubmit_) {
     contactSearchResultsProviderSubmit = _contactSearchResultsProviderSubmit_;
   }));
 

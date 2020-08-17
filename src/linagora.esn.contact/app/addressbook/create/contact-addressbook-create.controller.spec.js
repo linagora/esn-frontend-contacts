@@ -9,9 +9,9 @@ describe('The ContactAddressbookCreateController', function() {
   var contactAddressbookService;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(
+    angular.mock.inject(function(
       _$controller_,
       _$rootScope_,
       _contactAddressbookService_

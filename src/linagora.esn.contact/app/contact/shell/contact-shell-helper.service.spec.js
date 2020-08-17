@@ -10,7 +10,7 @@ describe('The ContactShellHelper service', function() {
   var CARD_ID = 'mycardid';
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {

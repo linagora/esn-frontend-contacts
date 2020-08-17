@@ -7,9 +7,9 @@ describe('The contactGroupAddressbookService service', function() {
   var contactGroupAddressbookService;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(_contactGroupAddressbookService_) {
+    angular.mock.inject(function(_contactGroupAddressbookService_) {
       contactGroupAddressbookService = _contactGroupAddressbookService_;
     });
   });

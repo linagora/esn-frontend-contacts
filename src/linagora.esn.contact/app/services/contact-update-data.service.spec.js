@@ -10,10 +10,10 @@ describe('The contactUpdateDataService service', function() {
   var CONTACT_EVENTS;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
-  beforeEach(inject(function(
+  beforeEach(angular.mock.inject(function(
     _$rootScope_,
     _contactUpdateDataService_,
     _CONTACT_EVENTS_

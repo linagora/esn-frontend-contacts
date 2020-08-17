@@ -12,8 +12,8 @@ describe('The ContactSidebarController controller', function() {
   var CONTACT_ADDRESSBOOK_EVENTS;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
-    module(function($provide) {
+    angular.mock.module('linagora.esn.contact');
+    angular.mock.module(function($provide) {
       esnConfigMock = function() {
         return $q.when(true);
       };
@@ -21,7 +21,7 @@ describe('The ContactSidebarController controller', function() {
       $provide.value('esnConfig', esnConfigMock);
     });
 
-    inject(function(
+    angular.mock.inject(function(
       _$controller_,
       _$rootScope_,
       _contactAddressbookDisplayService_,

@@ -17,14 +17,14 @@ describe('The ContactVirtualAddressBookService service', function() {
       isEnabled: sinon.stub()
     };
 
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('esnConfig', esnConfig);
       $provide.value('ContactVirtualAddressBookRegistry', ContactVirtualAddressBookRegistry);
       $provide.value('ContactVirtualAddressBookConfiguration', ContactVirtualAddressBookConfiguration);
     });
   });
 
-  beforeEach(inject(function(_$rootScope_, _$q_, _ContactVirtualAddressBookService_) {
+  beforeEach(angular.mock.inject(function(_$rootScope_, _$q_, _ContactVirtualAddressBookService_) {
     $rootScope = _$rootScope_;
     $q = _$q_;
     ContactVirtualAddressBookService = _ContactVirtualAddressBookService_;

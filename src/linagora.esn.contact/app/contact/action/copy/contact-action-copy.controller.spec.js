@@ -9,9 +9,9 @@ describe('The contactActionCopyController controller', function() {
   var contactService, contactAddressbookService, contactAddressbookDisplayService;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(
+    angular.mock.inject(function(
       _$q_,
       _$controller_,
       _$rootScope_,

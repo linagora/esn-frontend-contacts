@@ -35,7 +35,7 @@ describe('The ContactShellBuilder service', function() {
     ContactShellHelper = {};
     contactUpdateDataService = {};
 
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('contactAvatarService', contactAvatarService);
       $provide.value('ContactShellHelper', ContactShellHelper);
       $provide.value('contactUpdateDataService', contactUpdateDataService);
