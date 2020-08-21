@@ -5,10 +5,10 @@
 var expect = chai.expect;
 
 describe('The ContactVirtualAddressBookService service', function() {
-  var $rootScope, $q, ContactVirtualAddressBookService, ContactVirtualAddressBookConfiguration, ContactVirtualAddressBookRegistry, esnConfig;
+  var $rootScope, ContactVirtualAddressBookService, ContactVirtualAddressBookConfiguration, ContactVirtualAddressBookRegistry, esnConfig;
 
   beforeEach(function() {
-    esnConfig = sinon.stub();
+    esnConfig = sinon.stub().returns($q.when());
     ContactVirtualAddressBookRegistry = {
       get: sinon.stub(),
       list: sinon.stub()
@@ -24,9 +24,8 @@ describe('The ContactVirtualAddressBookService service', function() {
     });
   });
 
-  beforeEach(angular.mock.inject(function(_$rootScope_, _$q_, _ContactVirtualAddressBookService_) {
+  beforeEach(angular.mock.inject(function(_$rootScope_, _ContactVirtualAddressBookService_) {
     $rootScope = _$rootScope_;
-    $q = _$q_;
     ContactVirtualAddressBookService = _ContactVirtualAddressBookService_;
   }));
 
