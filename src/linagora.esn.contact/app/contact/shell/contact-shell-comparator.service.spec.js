@@ -7,11 +7,11 @@ var expect = chai.expect;
 describe('The ContactShellComparator service', function() {
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
-    inject(function(ContactShellComparator, $rootScope) {
+    angular.mock.inject(function(ContactShellComparator, $rootScope) {
       this.$rootScope = $rootScope;
       this.ContactShellComparator = ContactShellComparator;
     });

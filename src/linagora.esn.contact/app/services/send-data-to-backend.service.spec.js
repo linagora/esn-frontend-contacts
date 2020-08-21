@@ -9,9 +9,9 @@ describe('The sendContactToBackend service', function() {
   var sendRequestFn;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(_$rootScope_, _sendContactToBackend_) {
+    angular.mock.inject(function(_$rootScope_, _sendContactToBackend_) {
       $rootScope = _$rootScope_;
       sendContactToBackend = _sendContactToBackend_;
     });

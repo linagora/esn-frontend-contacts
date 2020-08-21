@@ -10,11 +10,11 @@ describe('The ContactListToggleEventService service', function() {
     CONTACT_LIST_DISPLAY_EVENTS;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
-    inject(function(_$rootScope_, _ContactListToggleEventService_, _CONTACT_LIST_DISPLAY_EVENTS_) {
+    angular.mock.inject(function(_$rootScope_, _ContactListToggleEventService_, _CONTACT_LIST_DISPLAY_EVENTS_) {
       $rootScope = _$rootScope_;
       ContactListToggleEventService = _ContactListToggleEventService_;
       CONTACT_LIST_DISPLAY_EVENTS = _CONTACT_LIST_DISPLAY_EVENTS_;

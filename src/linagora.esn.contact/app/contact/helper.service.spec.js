@@ -7,7 +7,7 @@ var expect = chai.expect;
 describe('The ContactsHelper service', function() {
   var ContactsHelper, contactAddressbookDisplayService, esnDatetimeService;
 
-  beforeEach(module('linagora.esn.contact'));
+  beforeEach(angular.mock.module('linagora.esn.contact'));
 
   beforeEach(angular.mock.inject(function(
     _esnDatetimeService_,

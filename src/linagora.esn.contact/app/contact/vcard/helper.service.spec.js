@@ -6,10 +6,10 @@ var expect = chai.expect;
 describe('The contactVcardHelper service', function() {
   var ICAL, CONTACT_ATTRIBUTES_ORDER, CONTACT_FALLBACK_ATTRIBUTE_TYPE, contactVcardHelper;
 
-  beforeEach(module('linagora.esn.contact'));
+  beforeEach(angular.mock.module('linagora.esn.contact'));
 
   beforeEach(function() {
-    inject(function(_contactVcardHelper_, _ICAL_, _CONTACT_ATTRIBUTES_ORDER_, _CONTACT_FALLBACK_ATTRIBUTE_TYPE_) {
+    angular.mock.inject(function(_contactVcardHelper_, _ICAL_, _CONTACT_ATTRIBUTES_ORDER_, _CONTACT_FALLBACK_ATTRIBUTE_TYPE_) {
       contactVcardHelper = _contactVcardHelper_;
       ICAL = _ICAL_;
       CONTACT_ATTRIBUTES_ORDER = _CONTACT_ATTRIBUTES_ORDER_;

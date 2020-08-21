@@ -9,9 +9,8 @@ describe('The contactDisplay directive', function() {
   var $compile, $state, $rootScope, element, $scope, CONTACT_AVATAR_SIZE, ContactShellDisplayBuilder, esnI18nService, contactAddressbookDisplayService;
 
   beforeEach(function() {
-    module('esn.core');
-    module('linagora.esn.contact');
-    module('jadeTemplates');
+    angular.mock.module('esn.core');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
@@ -27,13 +26,13 @@ describe('The contactDisplay directive', function() {
       })
     };
 
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       $provide.value('ContactShellDisplayBuilder', ContactShellDisplayBuilder);
       $provide.value('esnI18nService', esnI18nService);
     });
   });
 
-  beforeEach(inject(function(_$q_, _$compile_, _$rootScope_, _CONTACT_AVATAR_SIZE_, _$state_, _contactAddressbookDisplayService_) {
+  beforeEach(angular.mock.inject(function(_$q_, _$compile_, _$rootScope_, _CONTACT_AVATAR_SIZE_, _$state_, _contactAddressbookDisplayService_) {
     $compile = _$compile_;
     $state = _$state_;
     $rootScope = _$rootScope_;

@@ -12,12 +12,12 @@ describe('The AddressbookCache service', function() {
 
   beforeEach(function() {
     ContactAPIClientMock = {};
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('ContactAPIClient', ContactAPIClientMock);
     });
   });
 
-  beforeEach(inject(function(AddressbookCache) {
+  beforeEach(angular.mock.inject(function(AddressbookCache) {
     this.AddressbookCache = AddressbookCache;
   }));
 

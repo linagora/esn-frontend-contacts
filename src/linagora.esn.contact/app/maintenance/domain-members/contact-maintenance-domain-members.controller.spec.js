@@ -9,7 +9,7 @@ describe('The contactMaintenanceDomainMembersController controller', function() 
   var contactMaintenanceDomainMembersService;
 
   beforeEach(function() {
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $stateParams = {
         domainId: 'platform'
       };
@@ -17,7 +17,7 @@ describe('The contactMaintenanceDomainMembersController controller', function() 
       $provide.value('$stateParams', $stateParams);
     });
 
-    inject(function(_$controller_, _$rootScope_, _contactMaintenanceDomainMembersService_) {
+    angular.mock.inject(function(_$controller_, _$rootScope_, _contactMaintenanceDomainMembersService_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       contactMaintenanceDomainMembersService = _contactMaintenanceDomainMembersService_;

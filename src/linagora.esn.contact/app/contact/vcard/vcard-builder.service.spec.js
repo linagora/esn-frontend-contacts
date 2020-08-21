@@ -8,7 +8,7 @@ describe('The VcardBuilder service', function() {
   var VcardBuilder;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(angular.mock.inject(function(_VcardBuilder_) {

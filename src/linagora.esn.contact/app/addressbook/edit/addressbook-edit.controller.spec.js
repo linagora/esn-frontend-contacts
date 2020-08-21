@@ -9,14 +9,14 @@ describe('The ContactAddressbookEditController controller', function() {
   var $rootScope, $controller, contactAddressbookService;
 
   beforeEach(function() {
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
 
       $provide.value('asyncAction', function(message, action) {
         return action();
       });
     });
 
-    inject(function(_$controller_, _$rootScope_, _contactAddressbookService_) {
+    angular.mock.inject(function(_$controller_, _$rootScope_, _contactAddressbookService_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       contactAddressbookService = _contactAddressbookService_;

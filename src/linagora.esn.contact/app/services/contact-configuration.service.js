@@ -1,16 +1,14 @@
-(function(angular) {
-  'use strict';
+'use strict';
 
-  angular.module('linagora.esn.contact').factory('contactConfiguration', contactConfiguration);
+angular.module('linagora.esn.contact').factory('contactConfiguration', contactConfiguration);
 
-  function contactConfiguration(esnConfig) {
+function contactConfiguration(esnConfig) {
 
-    return {
-      get: get
-    };
+  return {
+    get: get
+  };
 
-    function get(key, defaultValue) {
-      return esnConfig('core.modules.linagora.esn.contact.' + key, defaultValue);
-    }
+  function get(key, defaultValue) {
+    return esnConfig('core.modules.linagora.esn.contact.' + key, defaultValue);
   }
-})(angular);
+}

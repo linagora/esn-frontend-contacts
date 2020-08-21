@@ -129,7 +129,7 @@ describe('The Contacts controller module', function() {
 
     angular.mock.module('esn.core');
 
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('notificationFactory', notificationFactory);
       $provide.value('$location', $location);
       $provide.value('selectionService', selectionService);

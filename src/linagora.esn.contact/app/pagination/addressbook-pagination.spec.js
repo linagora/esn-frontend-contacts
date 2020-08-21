@@ -39,7 +39,7 @@ describe('The AddressBookPagination service', function() {
 
     AddressBookPaginationService = function() {};
 
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('AddressBookPaginationRegistry', AddressBookPaginationRegistry);
       $provide.value('AddressBookPaginationService', AddressBookPaginationService);
       $provide.value('ContactAPIClient', ContactAPIClient);
@@ -47,7 +47,7 @@ describe('The AddressBookPagination service', function() {
   });
 
   beforeEach(function() {
-    inject(function(AddressBookPagination, $rootScope) {
+    angular.mock.inject(function(AddressBookPagination, $rootScope) {
       this.$rootScope = $rootScope;
       this.AddressBookPagination = AddressBookPagination;
     });

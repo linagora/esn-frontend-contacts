@@ -41,7 +41,7 @@ describe('The ContactListScrollingService service', function() {
   };
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
@@ -54,7 +54,7 @@ describe('The ContactListScrollingService service', function() {
     };
     angular.element.find.attr = angular.noop;
 
-    inject(function(_$rootScope_, _$window_, _ContactListScrollingService_, _CONTACT_SCROLL_EVENTS_, _sharedContactDataService_) {
+    angular.mock.inject(function(_$rootScope_, _$window_, _ContactListScrollingService_, _CONTACT_SCROLL_EVENTS_, _sharedContactDataService_) {
       $rootScope = _$rootScope_;
       $scope = $rootScope.$new();
       $window = _$window_;

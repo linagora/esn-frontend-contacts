@@ -9,9 +9,9 @@ describe('The ContactConfigDomainAddressbookController controller', function() {
   var contactAddressbookService;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(
+    angular.mock.inject(function(
       _$rootScope_,
       _$controller_,
       _$stateParams_,
@@ -109,6 +109,7 @@ describe('The ContactConfigDomainAddressbookController controller', function() {
       $rootScope.$digest();
 
       contactAddressbookService.createGroupAddressbook = sinon.stub().returns($q.when());
+
       postSaveHandler().then(function() {
         expect(contactAddressbookService.createGroupAddressbook).to.have.been.calledWith({
           id: 'dab',

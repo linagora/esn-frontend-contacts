@@ -5,15 +5,14 @@
 var expect = chai.expect;
 
 describe('The contactEditionForm directive', function() {
-  var $q, $compile, $rootScope, $scope;
+  var $compile, $rootScope, $scope;
   var CONTACT_AVATAR_SIZE, DEFAULT_ADDRESSBOOK_NAME, CONTACT_COLLECTED_ADDRESSBOOK_NAME;
   var contactAddressbookService, esnConfigMock;
 
   beforeEach(function() {
-    module('esn.core');
-    module('linagora.esn.contact');
-    module('jadeTemplates');
-    module(function($provide) {
+    angular.mock.module('esn.core');
+    angular.mock.module('linagora.esn.contact');
+    angular.mock.module(function($provide) {
       esnConfigMock = function() {
         return $q.when(true);
       };
@@ -22,8 +21,7 @@ describe('The contactEditionForm directive', function() {
     });
   });
 
-  beforeEach(inject(function(
-    _$q_,
+  beforeEach(angular.mock.inject(function(
     _$compile_,
     _$rootScope_,
     _contactAddressbookService_,
@@ -32,7 +30,6 @@ describe('The contactEditionForm directive', function() {
     _CONTACT_COLLECTED_ADDRESSBOOK_NAME_
   ) {
     contactAddressbookService = _contactAddressbookService_;
-    $q = _$q_;
     $compile = _$compile_;
     $rootScope = _$rootScope_;
     CONTACT_AVATAR_SIZE = _CONTACT_AVATAR_SIZE_;

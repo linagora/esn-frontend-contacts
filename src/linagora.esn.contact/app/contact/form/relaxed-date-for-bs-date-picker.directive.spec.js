@@ -9,12 +9,11 @@ describe('The relaxedDateForBsDatepicker directive', function() {
   var $compile, $rootScope, element, $scope, CONTACT_DATE_FORMAT, $browser;
 
   beforeEach(function() {
-    module('esn.core');
-    module('linagora.esn.contact');
-    module('jadeTemplates');
+    angular.mock.module('esn.core');
+    angular.mock.module('linagora.esn.contact');
   });
 
-  beforeEach(inject(function(_$compile_, _$rootScope_, _CONTACT_DATE_FORMAT_, _$browser_) {
+  beforeEach(angular.mock.inject(function(_$compile_, _$rootScope_, _CONTACT_DATE_FORMAT_, _$browser_) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;
     CONTACT_DATE_FORMAT = _CONTACT_DATE_FORMAT_;

@@ -12,8 +12,8 @@ describe('The ContactShowController', function() {
   var bookId = '123456789', bookName = 'bookName', cardId = '987654321';
 
   beforeEach(function() {
-    module('esn.core');
-    module('linagora.esn.contact');
+    angular.mock.module('esn.core');
+    angular.mock.module('linagora.esn.contact');
 
     ContactShellDisplayBuilder = {
       build: function(shell) {return shell;}
@@ -99,7 +99,7 @@ describe('The ContactShowController', function() {
       }
     };
 
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       $provide.value('notificationFactory', notificationFactory);
       $provide.value('$location', $location);
       $provide.value('selectionService', selectionService);
@@ -121,7 +121,7 @@ describe('The ContactShowController', function() {
   });
 
   beforeEach(function() {
-    inject(function(
+    angular.mock.inject(function(
       _$window_,
       _$controller_,
       _$rootScope_,

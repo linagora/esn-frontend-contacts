@@ -7,9 +7,9 @@ describe('The contactDefaultAddressbookHelper service', function() {
   var contactDefaultAddressbookHelper;
 
   beforeEach(function() {
-    module('esn.notification');
-    module('linagora.esn.contact');
-    inject(function(_contactDefaultAddressbookHelper_) {
+    angular.mock.module('esn.notification');
+    angular.mock.module('linagora.esn.contact');
+    angular.mock.inject(function(_contactDefaultAddressbookHelper_) {
       contactDefaultAddressbookHelper = _contactDefaultAddressbookHelper_;
     });
   });

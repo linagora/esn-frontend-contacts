@@ -8,9 +8,9 @@ describe('The ContactSidebarAddressbookItemController controller', function() {
   var $rootScope, $controller;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(
+    angular.mock.inject(function(
       _$controller_,
       _$rootScope_
     ) {

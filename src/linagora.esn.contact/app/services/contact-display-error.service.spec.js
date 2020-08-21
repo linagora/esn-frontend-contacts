@@ -9,7 +9,7 @@ describe('The contactDisplayError service', function() {
   var alertMock;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {

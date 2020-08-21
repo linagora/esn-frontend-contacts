@@ -10,9 +10,9 @@ describe('The davImportService service', function() {
   var fileUploadService;
   var davImportService, davImportApiClient;
 
-  beforeEach(module('linagora.esn.dav.import'));
+  beforeEach(angular.mock.module('linagora.esn.dav.import'));
 
-  beforeEach(inject(function(_$rootScope_, _fileUploadService_, _davImportService_, _davImportApiClient_) {
+  beforeEach(angular.mock.inject(function(_$rootScope_, _fileUploadService_, _davImportService_, _davImportApiClient_) {
     $rootScope = _$rootScope_;
     fileUploadService = _fileUploadService_;
     davImportService = _davImportService_;

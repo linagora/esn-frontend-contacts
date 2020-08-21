@@ -11,10 +11,10 @@ describe('The contactAddressbookSharedConfigurationItemController', function() {
   var CONTACT_SHARING_SUBSCRIPTION_TYPE;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
-  beforeEach(inject(function(
+  beforeEach(angular.mock.inject(function(
     _$rootScope_,
     _$controller_,
     _contactAddressbookDisplayService_,

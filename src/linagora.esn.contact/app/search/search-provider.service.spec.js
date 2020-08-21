@@ -14,9 +14,7 @@ describe('The contactSearchProviderService service', function() {
 
     session = {
       user: user,
-      ready: {
-        then: function() {}
-      }
+      ready: $q.when({})
     };
 
     ContactAPIClient = {
@@ -39,7 +37,7 @@ describe('The contactSearchProviderService service', function() {
   });
 
   beforeEach(function() {
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('ContactAPIClient', ContactAPIClient);
       $provide.value('esnSearchProvider', esnSearchProvider);
       $provide.value('session', session);

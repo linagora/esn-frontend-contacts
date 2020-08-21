@@ -14,14 +14,14 @@ describe('The ContactListToggleDisplayService', function() {
   };
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       $provide.value('ContactListToggleEventService', ContactListToggleEventServiceMock);
     });
-    inject(function(_ContactListToggleDisplayService_, _CONTACT_LIST_DISPLAY_) {
+    angular.mock.inject(function(_ContactListToggleDisplayService_, _CONTACT_LIST_DISPLAY_) {
       ContactListToggleDisplayService = _ContactListToggleDisplayService_;
       CONTACT_LIST_DISPLAY = _CONTACT_LIST_DISPLAY_;
     });

@@ -8,7 +8,7 @@ var expect = chai.expect;
 describe('The closeContactForm service', function() {
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {

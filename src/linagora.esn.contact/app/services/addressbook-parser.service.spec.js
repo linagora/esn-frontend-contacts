@@ -8,9 +8,9 @@ describe('The contactAddressbookParser service', function() {
   var contactAddressbookParser;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
 
-    inject(function(_contactAddressbookParser_) {
+    angular.mock.inject(function(_contactAddressbookParser_) {
       contactAddressbookParser = _contactAddressbookParser_;
     });
   });

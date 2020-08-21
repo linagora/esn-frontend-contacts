@@ -10,13 +10,13 @@ describe('the ContactAddressbookDeleteController controller', function() {
   var contactAddressbookService, contactAddressbookDisplayService;
 
   beforeEach(function() {
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('asyncAction', function(message, action) {
         return action();
       });
     });
 
-    inject(function(
+    angular.mock.inject(function(
       _$controller_,
       _$rootScope_,
       _contactAddressbookService_,

@@ -55,7 +55,7 @@ describe('The ContactListController controller', function() {
     openContactFormMock = sinon.spy();
     angular.mock.module('esn.core');
 
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('$alert', function(options) { $alert.alert(options); });
       $provide.value('gracePeriodService', gracePeriodService);
       $provide.value('contactUpdateDataService', contactUpdateDataService);
@@ -190,7 +190,7 @@ describe('The ContactListController controller', function() {
     });
   });
 
-  it('should display contacts as list by default', inject(function(CONTACT_LIST_DISPLAY) {
+  it('should display contacts as list by default', angular.mock.inject(function(CONTACT_LIST_DISPLAY) {
     $controller('ContactListController', {
       $scope: scope,
       user: { _id: '123' }

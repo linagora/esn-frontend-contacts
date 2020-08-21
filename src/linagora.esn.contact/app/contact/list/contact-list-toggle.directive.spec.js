@@ -9,9 +9,8 @@ describe('The contactListToggle directive', function() {
   var $compile, $rootScope, element, $scope, ContactListToggleDisplayService, ContactListToggleEventService, ContactListToggleDisplayServiceMock, CONTACT_LIST_DISPLAY;
 
   beforeEach(function() {
-    module('esn.core');
-    module('linagora.esn.contact');
-    module('jadeTemplates');
+    angular.mock.module('esn.core');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
@@ -21,11 +20,11 @@ describe('The contactListToggle directive', function() {
       setCurrentDisplay: function() {}
     };
 
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       $provide.value('ContactListToggleDisplayService', ContactListToggleDisplayServiceMock);
     });
 
-    inject(function(_$compile_, _$rootScope_, _ContactListToggleDisplayService_, _ContactListToggleEventService_, _CONTACT_LIST_DISPLAY_) {
+    angular.mock.inject(function(_$compile_, _$rootScope_, _ContactListToggleDisplayService_, _ContactListToggleEventService_, _CONTACT_LIST_DISPLAY_) {
       $compile = _$compile_;
       $rootScope = _$rootScope_;
       ContactListToggleDisplayService = _ContactListToggleDisplayService_;

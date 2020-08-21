@@ -10,7 +10,7 @@ describe('The ContactShellDisplayBuilder service', function() {
   var DisplayShellProvider = {};
 
   beforeEach(function() {
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('DisplayShellProvider', DisplayShellProvider);
     });
   });

@@ -12,15 +12,15 @@ describe('The contactAddressbookSharedConfigurationController', function() {
   var CONTACT_SHARING_SHARE_ACCESS_CHOICES;
 
   beforeEach(function() {
-    module('esn.async-action', function($provide) {
+    angular.mock.module('esn.async-action', function($provide) {
       $provide.value('asyncAction', function(message, action) {
         return action();
       });
     });
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
-  beforeEach(inject(function(
+  beforeEach(angular.mock.inject(function(
     _$rootScope_,
     _$controller_,
     _asyncAction_,
@@ -260,6 +260,7 @@ describe('The contactAddressbookSharedConfigurationController', function() {
       ]);
 
       controller.onUserRemoved(user);
+
       expect(controller.addressbooksPerUser).to.deep.equal([]);
     });
   });
@@ -279,6 +280,7 @@ describe('The contactAddressbookSharedConfigurationController', function() {
       controller.addressbooksPerUser[1].isSelected = false;
 
       controller.subscribe();
+
       expect(contactAddressbookService.listSubscribableAddressbooks).to.have.been.calledWith(user._id);
       expect(contactAddressbookService.listSubscribedAddressbooks).to.have.been.called;
       expect(contactAddressbookService.subscribeAddressbooks).to.have.been.calledWith([controller.addressbooksPerUser[0]]);

@@ -12,18 +12,16 @@ describe('The ContactLiveUpdate service', function() {
   var bookId = 'A bookId';
 
   beforeEach(function() {
-    module('esn.core');
-    module('esn.websocket');
-    module('esn.api-notification');
-    module('linagora.esn.contact');
+    angular.mock.module('esn.core');
+    angular.mock.module('esn.websocket');
+    angular.mock.module('esn.api-notification');
+    angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
     getMock = function() {};
     session = {
-      ready: {
-        then: function() {}
-      },
+      ready: $q.when({}),
       user: {
         _id: '1',
         domains: [
@@ -71,14 +69,14 @@ describe('The ContactLiveUpdate service', function() {
       }
     };
 
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       $provide.value('livenotification', liveNotificationMock);
       $provide.value('ContactShellBuilder', ContactShellBuilderMock);
       $provide.value('ContactAPIClient', ContactAPIClientMock);
       $provide.value('session', session);
     });
 
-    inject(function(
+    angular.mock.inject(function(
       _$rootScope_,
       _ContactLiveUpdate_,
       _contactService_,

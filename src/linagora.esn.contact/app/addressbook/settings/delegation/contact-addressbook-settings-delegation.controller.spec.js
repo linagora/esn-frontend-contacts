@@ -11,10 +11,10 @@ describe('The contactAddressbookSettingsDelegationController', function() {
   var CONTACT_SHARING_SHARE_ACCESS;
 
   beforeEach(function() {
-    module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact');
   });
 
-  beforeEach(inject(function(
+  beforeEach(angular.mock.inject(function(
     _$q_,
     _$rootScope_,
     _$controller_,

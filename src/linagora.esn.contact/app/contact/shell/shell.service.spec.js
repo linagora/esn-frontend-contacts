@@ -10,7 +10,7 @@ describe('ContactShell services', function() {
 
     notificationFactory = {};
 
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('notificationFactory', notificationFactory);
     });
   });

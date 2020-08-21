@@ -14,14 +14,14 @@ describe('The contactSearchProviders provider', function() {
   });
 
   beforeEach(function() {
-    module('linagora.esn.contact', function($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('esnSearchProvider', esnSearchProvider);
     });
   });
 
   beforeEach(function() {
-    module('linagora.esn.contact');
-    inject(function(_contactSearchProviders_) {
+    angular.mock.module('linagora.esn.contact');
+    angular.mock.inject(function(_contactSearchProviders_) {
       contactSearchProviders = _contactSearchProviders_;
     });
   });
