@@ -35,6 +35,9 @@ describe('The contactPhoto directive', function() {
     $scope.contact = {
       photo: 'data:image/png,base64;abcd='
     };
+
+    // Re-run this so that element can have the correct value
+    element = $compile('<contact-photo contact="contact"></contact-photo>')($scope);
     $scope.$digest();
 
     expect(element.find('img').attr('src')).to.equal('data:image/png,base64;abcd=');
