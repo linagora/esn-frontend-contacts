@@ -2,6 +2,7 @@
   'use strict';
 
   angular.module('linagora.esn.contact', [
+    'ngTagsInput',
     'esn.core',
     'esn.mailto-handler',
     'esn.router',
