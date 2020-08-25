@@ -5,7 +5,6 @@ const _ = require('lodash');
 require('../services/contact-api-client.service.js');
 require('../addressbook/shell/addressbook-shell.service.js');
 
-
 angular.module('linagora.esn.contact')
   .factory('contactService', contactService);
 
@@ -16,20 +15,20 @@ function contactService(
   AddressbookShell
 ) {
   return {
-    listContacts: listContacts,
-    getContact: getContact,
-    setContactMainEmail: setContactMainEmail,
-    createContact: createContact,
-    copyContact: copyContact,
-    moveContact: moveContact,
-    removeContact: removeContact,
-    updateContact: updateContact,
-    importContactsFromFile: importContactsFromFile
+    listContacts,
+    getContact,
+    setContactMainEmail,
+    createContact,
+    copyContact,
+    moveContact,
+    removeContact,
+    updateContact,
+    importContactsFromFile
   };
 
   function listContacts(addressbook, options) {
     return _getAddressbookShell(addressbook).then(function(addressbookShell) {
-      var sourceMetadata = _getSouceMetadata(addressbookShell);
+      const sourceMetadata = _getSouceMetadata(addressbookShell);
 
       return ContactAPIClient
         .addressbookHome(sourceMetadata.bookId)
@@ -48,7 +47,7 @@ function contactService(
 
   function getContact(addressbook, cardId) {
     return _getAddressbookShell(addressbook).then(function(addressbookShell) {
-      var sourceMetadata = _getSouceMetadata(addressbookShell);
+      const sourceMetadata = _getSouceMetadata(addressbookShell);
 
       return ContactAPIClient
         .addressbookHome(sourceMetadata.bookId)
@@ -72,7 +71,7 @@ function contactService(
 
   function createContact(addressbook, contact) {
     return _getAddressbookShell(addressbook).then(function(addressbookShell) {
-      var sourceMetadata = _getSouceMetadata(addressbookShell);
+      const sourceMetadata = _getSouceMetadata(addressbookShell);
 
       return ContactAPIClient
         .addressbookHome(sourceMetadata.bookId)
@@ -84,7 +83,7 @@ function contactService(
 
   function updateContact(addressbook, contact) {
     return _getAddressbookShell(addressbook).then(function(addressbookShell) {
-      var sourceMetadata = _getSouceMetadata(addressbookShell);
+      const sourceMetadata = _getSouceMetadata(addressbookShell);
 
       return ContactAPIClient
         .addressbookHome(sourceMetadata.bookId)
@@ -96,7 +95,7 @@ function contactService(
 
   function removeContact(addressbook, contact, options) {
     return _getAddressbookShell(addressbook).then(function(addressbookShell) {
-      var sourceMetadata = _getSouceMetadata(addressbookShell);
+      const sourceMetadata = _getSouceMetadata(addressbookShell);
 
       return ContactAPIClient
         .addressbookHome(sourceMetadata.bookId)
@@ -108,8 +107,8 @@ function contactService(
 
   function copyContact(toAddressbook, contact) {
     return _getAddressbookShell(toAddressbook).then(function(addressbookShell) {
-      var sourceMetadata = _getSouceMetadata(addressbookShell);
-      var copyingContact = _.cloneDeep(contact);
+      const sourceMetadata = _getSouceMetadata(addressbookShell);
+      const copyingContact = _.cloneDeep(contact);
 
       delete copyingContact.id; // To generate new id for new contact, check out contactAPIClient
 
@@ -122,7 +121,7 @@ function contactService(
   }
 
   function moveContact(fromAddressbook, toAddressbook, contact) {
-    var fromMetadata, toMetadata;
+    let fromMetadata, toMetadata;
 
     return $q.all([
       _getAddressbookShell(fromAddressbook),
@@ -144,22 +143,22 @@ function contactService(
 
   function importContactsFromFile(addressbook, file) {
     return _getAddressbookShell(addressbook).then(function(addressbookShell) {
-      var sourceMetadata = _getSouceMetadata(addressbookShell);
-      var target = '/addressbooks/' + sourceMetadata.bookId + '/' + sourceMetadata.bookName + '.json';
+      const sourceMetadata = _getSouceMetadata(addressbookShell);
+      const target = '/addressbooks/' + sourceMetadata.bookId + '/' + sourceMetadata.bookName + '.json';
 
       return davImportService.importFromFile(file, target);
     });
   }
 
   function _getSouceMetadata(addressbookShell) {
-    var bookName, bookId;
+    let bookName, bookId;
 
     bookName = addressbookShell.isSubscription ? addressbookShell.source.bookName : addressbookShell.bookName;
     bookId = addressbookShell.isSubscription ? addressbookShell.source.bookId : addressbookShell.bookId;
 
     return {
-      bookId: bookId,
-      bookName: bookName
+      bookId,
+      bookName
     };
   }
 
