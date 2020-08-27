@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+const { ESNDavImportClient } = require('esn-dav-import-client');
 
 require('../services/contact-api-client.service.js');
 require('../addressbook/shell/addressbook-shell.service.js');
@@ -10,7 +11,7 @@ angular.module('linagora.esn.contact')
 
 function contactService(
   $q,
-  davImportService,
+  fileUploadService,
   ContactAPIClient,
   AddressbookShell
 ) {
@@ -145,8 +146,10 @@ function contactService(
     return _getAddressbookShell(addressbook).then(function(addressbookShell) {
       const sourceMetadata = _getSouceMetadata(addressbookShell);
       const target = '/addressbooks/' + sourceMetadata.bookId + '/' + sourceMetadata.bookName + '.json';
+      const OPENPAAS_URL = process.env.OPENPAAS_URL || 'http://localhost:8080';
+      const esnDavImportClient = new ESNDavImportClient(fileUploadService.uploadFile, OPENPAAS_URL);
 
-      return davImportService.importFromFile(file, target);
+      return esnDavImportClient.importFromFile(file, target);
     });
   }
 

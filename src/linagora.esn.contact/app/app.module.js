@@ -16,6 +16,7 @@ angular.module('linagora.esn.contact', [
   'esn.infinite-list',
   'esn.websocket',
   'esn.http',
+  'esn.file',
   'restangular',
   'esn.alphalist',
   'mgcrea.ngStrap.datepicker',
@@ -61,6 +62,7 @@ require('esn-frontend-common-libs/src/frontend/js/constants.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/infinite-list/infinite-list.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/websocket.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/http.js');
+require('esn-frontend-common-libs/src/frontend/js/modules/file.js');
 require('esn-frontend-common-libs/src/modules/linagora.esn.graceperiod/frontend/js/app.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/search/search.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/scroll.js');
