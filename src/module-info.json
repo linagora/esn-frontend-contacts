@@ -52,22 +52,5 @@
       ]
     }
   ],
-  "dependenceModules": [
-    {
-      "name": "linagora.esn.dav.import",
-      "angularModuleName": "linagora.esn.dav.import",
-      "shortName": "linagora.esn.dav.import",
-      "pugGlob": [
-        "**/*.pug"
-      ],
-      "pugOptions": {
-        "basedir": "./node_modules/esn-frontend-common-libs/src/frontend/views"
-      },
-      "fileRoot": "frontend/app",
-      "filesGlob": [
-        "**/*.module.js",
-        "**/!(*spec).js"
-      ]
-    }
-  ]
+  "dependenceModules": []
 }

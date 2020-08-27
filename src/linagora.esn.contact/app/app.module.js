@@ -16,6 +16,7 @@ angular.module('linagora.esn.contact', [
   'esn.infinite-list',
   'esn.websocket',
   'esn.http',
+  'esn.file',
   'restangular',
   'esn.alphalist',
   'mgcrea.ngStrap.datepicker',
@@ -42,7 +43,6 @@ angular.module('linagora.esn.contact', [
   'esn.datetime',
   'esn.i18n',
   'esn.user',
-  'linagora.esn.dav.import',
   'esn.user-configuration',
   'esn.settings-overlay',
   'esn.previous-page'
@@ -62,6 +62,7 @@ require('esn-frontend-common-libs/src/frontend/js/constants.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/infinite-list/infinite-list.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/websocket.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/http.js');
+require('esn-frontend-common-libs/src/frontend/js/modules/file.js');
 require('esn-frontend-common-libs/src/modules/linagora.esn.graceperiod/frontend/js/app.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/search/search.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/scroll.js');
@@ -83,7 +84,6 @@ require('esn-frontend-common-libs/src/frontend/js/modules/user-configuration/use
 require('esn-frontend-common-libs/src/frontend/js/modules/settings-overlay.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/previous-page.js');
 require('../../linagora.esn.davproxy/js/app.js');
-require('../../linagora.esn.dav.import/app/app.module.js');
 
 require('./addressbook/acl/addressbook-acl-helper.servive.js');
 require('./addressbook/action/addressbook-action-delete.service.js');
