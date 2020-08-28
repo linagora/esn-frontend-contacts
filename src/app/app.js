@@ -1,6 +1,7 @@
 angular.module('esnApp', [
   'ui.router',
   'esn.session',
+  'esn.login',
   'esn.websocket',
   'linagora.esn.contact',
   'linagora.esn.contact.import',
@@ -9,6 +10,7 @@ angular.module('esnApp', [
 
 require('esn-frontend-common-libs/src/frontend/js/modules/session');
 require('esn-frontend-common-libs/src/frontend/js/modules/websocket');
+require('esn-frontend-common-libs/src/frontend/js/modules/login');
 
 require('./app.config');
 require('./app.run');
