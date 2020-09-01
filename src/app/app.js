@@ -3,6 +3,7 @@ angular.module('esnApp', [
   'esn.session',
   'esn.login',
   'esn.websocket',
+  'esn.material',
   'linagora.esn.contact',
   'linagora.esn.contact.import',
   'linagora.esn.davproxy'
@@ -11,6 +12,7 @@ angular.module('esnApp', [
 require('esn-frontend-common-libs/src/frontend/js/modules/session');
 require('esn-frontend-common-libs/src/frontend/js/modules/websocket');
 require('esn-frontend-common-libs/src/frontend/js/modules/login');
+require('esn-frontend-common-libs/src/frontend/js/modules/material/material.module');
 
 require('./app.config');
 require('./app.run');
