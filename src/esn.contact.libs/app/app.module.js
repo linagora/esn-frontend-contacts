@@ -99,7 +99,6 @@ require('./addressBook/constants.js');
 require('./addressBook/contact-api-client.service');
 require('./addressBook/contact-shell-builder.service');
 require('./addressBook/contact-update-data.service');
-require('./addressBook/virtual-addressbook.service');
 require('./contact/contact.constants.js');
 require('./contact/helper.service.js');
 require('./display-shell/addressbook-display-shell.service.js');

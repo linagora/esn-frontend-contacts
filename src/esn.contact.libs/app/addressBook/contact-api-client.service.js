@@ -596,7 +596,6 @@ require('../app.constant.js');
       }
 
       var params = {};
-
       if (options.graceperiod) {
         params.graceperiod = options.graceperiod;
       }
