@@ -65,12 +65,15 @@ describe('The SearchAddressBookPaginationProvider service', function() {
       var search = 'SearchMe';
 
       searchMock = function(query) {
-        expect(query).to.deep.equal({userId: user._id, page: 1, data: search});
-        return $q.when({current_page: currentPage, data: hitlist, next_page: nextPage, total_hits: totalHits});
+        expect(query).to.deep.equal({ userId: user._id, page: 1, data: search });
+
+        return $q.when({
+          current_page: currentPage, data: hitlist, next_page: nextPage, total_hits: totalHits
+        });
       };
       var provider = new this.SearchAddressBookPaginationProvider(options);
 
-      provider.loadNextItems({searchInput: search}).then(function() {
+      provider.loadNextItems({ searchInput: search }).then(function() {
         expect(provider.currentPage).to.equal(currentPage);
         expect(provider.totalHits).to.equal(hitlist.length);
         expect(provider.nextPage).to.equal(nextPage);
@@ -88,12 +91,15 @@ describe('The SearchAddressBookPaginationProvider service', function() {
       var search = 'SearchMe';
 
       searchMock = function(query) {
-        expect(query).to.deep.equal({userId: user._id, page: 1, data: search});
-        return $q.when({current_page: currentPage, data: hitlist, next_page: nextPage, total_hits: totalHits});
+        expect(query).to.deep.equal({ userId: user._id, page: 1, data: search });
+
+        return $q.when({
+          current_page: currentPage, data: hitlist, next_page: nextPage, total_hits: totalHits
+        });
       };
       var provider = new this.SearchAddressBookPaginationProvider(options);
 
-      provider.loadNextItems({searchInput: search}).then(function() {
+      provider.loadNextItems({ searchInput: search }).then(function() {
         expect(provider.lastPage).to.be.true;
         done();
       }, done);

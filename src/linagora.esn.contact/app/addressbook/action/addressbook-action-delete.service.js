@@ -18,7 +18,7 @@
 
     function _openDeleteModal(addressbook) {
       $modal({
-        template: require("../delete/addressbook-delete.pug"),
+        template: require('../delete/addressbook-delete.pug'),
         backdrop: 'static',
         placement: 'center',
         controller: 'ContactAddressbookDeleteController',

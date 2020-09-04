@@ -161,33 +161,33 @@ describe('The ContactLiveUpdate service', function() {
       beforeEach(function() {
         onFn = function(event, handler) {
           switch (event) {
-            case CONTACT_WS.events.CREATED:
-              createFn = handler;
-              break;
-            case CONTACT_WS.events.UPDATED:
-              updateFn = handler;
-              break;
-            case CONTACT_WS.events.DELETED:
-              deleteFn = handler;
-              break;
-            case CONTACT_WS.events.ADDRESSBOOK_CREATED:
-              onAddressbookCreateFn = handler;
-              break;
-            case CONTACT_WS.events.ADDRESSBOOK_DELETED:
-              onAddressbookDeleteFn = handler;
-              break;
-            case CONTACT_WS.events.ADDRESSBOOK_UPDATED:
-              onAddressbookUpdateFn = handler;
-              break;
-            case CONTACT_WS.events.ADDRESSBOOK_SUBSCRIPTION_DELETED:
-              onAddressbookSubscriptionDeleteFn = handler;
-              break;
-            case CONTACT_WS.events.ADDRESSBOOK_SUBSCRIPTION_UPDATED:
-              onAddressbookSubscriptionUpdateFn = handler;
-              break;
-            case CONTACT_WS.events.ADDRESSBOOK_SUBSCRIPTION_CREATED:
-              onAddressbookSubscriptionCreateFn = handler;
-              break;
+          case CONTACT_WS.events.CREATED:
+            createFn = handler;
+            break;
+          case CONTACT_WS.events.UPDATED:
+            updateFn = handler;
+            break;
+          case CONTACT_WS.events.DELETED:
+            deleteFn = handler;
+            break;
+          case CONTACT_WS.events.ADDRESSBOOK_CREATED:
+            onAddressbookCreateFn = handler;
+            break;
+          case CONTACT_WS.events.ADDRESSBOOK_DELETED:
+            onAddressbookDeleteFn = handler;
+            break;
+          case CONTACT_WS.events.ADDRESSBOOK_UPDATED:
+            onAddressbookUpdateFn = handler;
+            break;
+          case CONTACT_WS.events.ADDRESSBOOK_SUBSCRIPTION_DELETED:
+            onAddressbookSubscriptionDeleteFn = handler;
+            break;
+          case CONTACT_WS.events.ADDRESSBOOK_SUBSCRIPTION_UPDATED:
+            onAddressbookSubscriptionUpdateFn = handler;
+            break;
+          case CONTACT_WS.events.ADDRESSBOOK_SUBSCRIPTION_CREATED:
+            onAddressbookSubscriptionCreateFn = handler;
+            break;
           }
         };
       });
@@ -246,7 +246,7 @@ describe('The ContactLiveUpdate service', function() {
         });
 
         it('should not broadcast anything to the scope when shell can not be built', function(done) {
-          var data = {id: '1'};
+          var data = { id: '1' };
 
           $rootScope.$on(CONTACT_EVENTS.CREATED, function() {
             done(new Error('Should not be called'));
@@ -266,10 +266,10 @@ describe('The ContactLiveUpdate service', function() {
 
       describe('On CONTACT_WS.events.DELETED event', function() {
         it('should broadcast the delete contact id in CONTACT_EVENTS.DELETED', function(done) {
-          var data = {contactId: '1'};
+          var data = { contactId: '1' };
 
           $rootScope.$on(CONTACT_EVENTS.DELETED, function(event, _data) {
-            expect(_data).to.deep.equal({id: data.contactId});
+            expect(_data).to.deep.equal({ id: data.contactId });
             done();
           });
 
@@ -284,8 +284,8 @@ describe('The ContactLiveUpdate service', function() {
       describe('On CONTACT_WS.events.UPDATED event', function() {
 
         it('should load the updated contact from API', function(done) {
-          var data = {bookId: '1', bookName: '2', contactId: '3'};
-          var contact = {id: '3'};
+          var data = { bookId: '1', bookName: '2', contactId: '3' };
+          var contact = { id: '3' };
 
           contactService.getContact = sinon.stub().returns($q.when(contact));
 
@@ -302,7 +302,7 @@ describe('The ContactLiveUpdate service', function() {
         });
 
         it('should not broadcast anything when updated contact can not be loaded from API', function(done) {
-          var data = {bookId: '1', bookName: '2', contactId: '3'};
+          var data = { bookId: '1', bookName: '2', contactId: '3' };
 
           contactService.getContact = sinon.stub().returns($q.reject(new Error('Failed')));
 
@@ -452,6 +452,7 @@ describe('The ContactLiveUpdate service', function() {
 
     it('should make sio to remove CONTACT_WS.events.CREATED event listener', function() {
       var bookId = 'some book id';
+
       ContactLiveUpdate.startListen(bookId);
 
       ContactLiveUpdate.stopListen();
@@ -460,6 +461,7 @@ describe('The ContactLiveUpdate service', function() {
 
     it('should make sio to remove CONTACT_WS.events.DELETED event listener', function() {
       var bookId = 'some book id';
+
       ContactLiveUpdate.startListen(bookId);
 
       ContactLiveUpdate.stopListen();
@@ -468,6 +470,7 @@ describe('The ContactLiveUpdate service', function() {
 
     it('should make sio to remove CONTACT_WS.events.UPDATED event listener', function() {
       var bookId = 'some book id';
+
       ContactLiveUpdate.startListen(bookId);
 
       ContactLiveUpdate.stopListen();

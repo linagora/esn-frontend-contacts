@@ -35,7 +35,7 @@ require('../addressbook/addressbook.constants.js');
       this.providers = this.addressbooks.map(function(addressbook) {
         var PaginationProvider = addressbook.type && addressbook.type === CONTACT_ADDRESSBOOK_TYPES.virtual ? ContactVirtualAddressBookPaginationProvider : AddressBookPaginationProvider;
 
-        return new PaginationProvider({addressbooks: [addressbook], user: self.options.user});
+        return new PaginationProvider({ addressbooks: [addressbook], user: self.options.user });
       });
       this.aggregator = new PageAggregatorService(this.id, this.providers, {
         compare: this.compare,

@@ -154,10 +154,8 @@ function contactService(
   }
 
   function _getSouceMetadata(addressbookShell) {
-    let bookName, bookId;
-
-    bookName = addressbookShell.isSubscription ? addressbookShell.source.bookName : addressbookShell.bookName;
-    bookId = addressbookShell.isSubscription ? addressbookShell.source.bookId : addressbookShell.bookId;
+    const bookName = addressbookShell.isSubscription ? addressbookShell.source.bookName : addressbookShell.bookName;
+    const bookId = addressbookShell.isSubscription ? addressbookShell.source.bookId : addressbookShell.bookId;
 
     return {
       bookId,

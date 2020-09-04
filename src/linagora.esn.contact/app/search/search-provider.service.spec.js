@@ -26,8 +26,8 @@ describe('The contactSearchProviderService service', function() {
     };
 
     contacts = [
-      {_id: 1, firstname: 'Nicolas', lastname: 'Cage'},
-      {_id: 2, firstname: 'Bruce', lastname: 'Willis'}
+      { _id: 1, firstname: 'Nicolas', lastname: 'Cage' },
+      { _id: 2, firstname: 'Bruce', lastname: 'Willis' }
     ];
 
     esnSearchProvider = function(options) {
@@ -115,8 +115,12 @@ describe('The contactSearchProviderService service', function() {
 
       it('should override existing contact.date with current date', function(done) {
         var contacts = [
-          {_id: 1, firstname: 'Nicolas', lastname: 'Cage', date: 'Mon Feb 10 2016 15:16:41 GMT+0100 (CET)'},
-          {_id: 2, firstname: 'Bruce', lastname: 'Willis', date: 'Mon Feb 10 2016 15:16:41 GMT+0100 (CET)'}
+          {
+            _id: 1, firstname: 'Nicolas', lastname: 'Cage', date: 'Mon Feb 10 2016 15:16:41 GMT+0100 (CET)'
+          },
+          {
+            _id: 2, firstname: 'Bruce', lastname: 'Willis', date: 'Mon Feb 10 2016 15:16:41 GMT+0100 (CET)'
+          }
         ];
 
         setMockResult({

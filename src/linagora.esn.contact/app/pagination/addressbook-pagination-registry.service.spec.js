@@ -46,6 +46,7 @@ describe('The AddressBookPaginationRegistry service', function() {
   it('should send back the stored provider', function() {
     var type = 'foo';
     var value = 'bar';
+
     this.AddressBookPaginationRegistry.put(type, value);
     expect(this.AddressBookPaginationRegistry.get(type)).to.equal(value);
   });

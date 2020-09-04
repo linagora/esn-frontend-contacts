@@ -2,7 +2,7 @@
   angular.module('linagora.esn.contact')
 
     .component('contactActionMove', {
-      template: require("./contact-action-move.pug"),
+      template: require('./contact-action-move.pug'),
       bindings: {
         contact: '<'
       },

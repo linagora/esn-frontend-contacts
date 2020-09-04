@@ -49,7 +49,7 @@ describe('The ContactSidebarController controller', function() {
 
   function initController() {
     var $scope = $rootScope.$new();
-    var controller = $controller('ContactSidebarController', {$scope: $scope});
+    var controller = $controller('ContactSidebarController', { $scope: $scope });
 
     controller.$onInit();
     $rootScope.$digest();

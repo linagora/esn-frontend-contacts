@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.contact')
     .component('contactAddressbookSettingsMain', {
-      template: require("./contact-addressbook-settings-main.pug"),
+      template: require('./contact-addressbook-settings-main.pug'),
       controller: 'contactAddressbookSettingsMainController',
       bindings: {
         addressbook: '<',

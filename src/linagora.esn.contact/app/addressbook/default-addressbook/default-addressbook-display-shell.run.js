@@ -1,6 +1,6 @@
 require('../display-shell/addressbook-display-shell-registry.service.js');
-require('../default-addressbook/default-addressbook-display-shell.service.js');
-require('../default-addressbook/default-addressbook-helper.service.js');
+require('./default-addressbook-display-shell.service.js');
+require('./default-addressbook-helper.service.js');
 require('../action/addressbook-action-edit.service.js');
 require('../action/addressbook-action-delete.service.js');
 require('../action/addressbook-action-settings.service.js');

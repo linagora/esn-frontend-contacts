@@ -6,7 +6,7 @@
       return {
         restrict: 'E',
         replace: true,
-        template: require("./contact-edit-action-item.pug")
+        template: require('./contact-edit-action-item.pug')
       };
     });
 })(angular);

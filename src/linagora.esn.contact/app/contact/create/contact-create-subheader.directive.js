@@ -5,7 +5,7 @@
     .directive('contactCreateSubheader', function() {
       return {
         restrict: 'E',
-        template: require("./contact-create-subheader.pug")
+        template: require('./contact-create-subheader.pug')
       };
     });
 })(angular);

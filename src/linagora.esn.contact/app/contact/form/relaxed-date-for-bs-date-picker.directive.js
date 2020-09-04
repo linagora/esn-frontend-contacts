@@ -4,7 +4,7 @@ require('../../app.constant.js');
   'use strict';
 
   angular.module('linagora.esn.contact')
-  .directive('relaxedDateForBsDatepicker', relaxedDateForBsDatepicker);
+    .directive('relaxedDateForBsDatepicker', relaxedDateForBsDatepicker);
 
   function relaxedDateForBsDatepicker(
     $dateFormatter,

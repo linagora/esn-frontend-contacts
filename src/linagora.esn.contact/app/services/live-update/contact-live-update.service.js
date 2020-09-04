@@ -1,6 +1,6 @@
 require('../../contact/contact.service.js');
 require('../../contact/shell/contact-shell-builder.service.js');
-require('../../services/avatar.service.js');
+require('../avatar.service.js');
 require('../../addressbook/addressbook.service.js');
 require('../../contact/contact.constants.js');
 require('../../addressbook/addressbook.constants.js');

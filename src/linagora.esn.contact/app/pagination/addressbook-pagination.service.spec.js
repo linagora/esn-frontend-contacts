@@ -53,11 +53,13 @@ describe('The AddressBookPaginationService service', function() {
       var paginable = {
         loadNextItems: function(_options) {
           expect(_options).to.deep.equal(options);
-          return $q.when({lastPage: lastPage});
+
+          return $q.when({ lastPage: lastPage });
         }
       };
 
       var service = new this.AddressBookPaginationService(paginable);
+
       service.loadNextItems(options).then(function() {
         expect(service.lastPage).to.deep.equal(lastPage);
         done();

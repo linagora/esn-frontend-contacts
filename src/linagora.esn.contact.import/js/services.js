@@ -19,7 +19,7 @@ require('./constants.js');
     .factory('ContactImporterService', function(contactImportAPI) {
 
       function importContacts(type, account) {
-        return contactImportAPI.all(type).post({account_id: account.data.id});
+        return contactImportAPI.all(type).post({ account_id: account.data.id });
       }
 
       return {
@@ -50,8 +50,10 @@ require('./constants.js');
       function importContacts(type, account) {
 
         var importer = ContactImportRegistry.get(type);
+
         if (!importer) {
           $log.error('Can not find importer ' + type);
+
           return;
         }
 
@@ -63,8 +65,8 @@ require('./constants.js');
                 '',
                 'Importing ' + account.provider + ' contacts for @' + account.data.username,
                 3000,
-                {from: 'bottom', align: 'center'}
-                );
+                { from: 'bottom', align: 'center' }
+              );
             } else {
               $log.debug('Unknown status code (%s) while importing contacts', response.status);
             }
@@ -74,8 +76,8 @@ require('./constants.js');
               '',
               'Error while importing' + account.provider + ' contacts for @ ' + account.data.username + ':' + err,
               3000,
-              {from: 'bottom', align: 'center'}
-              );
+              { from: 'bottom', align: 'center' }
+            );
           });
       }
 
@@ -94,6 +96,7 @@ require('./constants.js');
       function get(provider, type) {
         if (cache.hasOwnProperty(provider)) {
           var messages = cache[provider];
+
           return messages[type] ? messages[type] : CONTACT_IMPORT_DEFAULT_MESSAGES[type] || CONTACT_IMPORT_UNKNOWN_MESSAGE;
         }
 
@@ -122,13 +125,14 @@ require('./constants.js');
         var msg = $interpolate(ContactImportMessageRegistry.get(data.provider, type))(
           { account: data.account }
         );
+
         notificationFactory.notify(
           'danger',
           '',
           msg,
           3000,
           { from: 'bottom', align: 'center' }
-          );
+        );
       }
 
       function accountErrorHandler(data) {

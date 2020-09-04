@@ -85,9 +85,9 @@ describe('The AddressBookPaginationProvider service', function() {
       contactService.listContacts = function(addressbook, query) {
         expect(addressbook.bookId).to.equal(options.bookId);
         expect(addressbook.bookName).to.equal(options.bookName);
-        expect(query).to.deep.equal({userId: user._id, page: 1, paginate: true});
+        expect(query).to.deep.equal({ userId: user._id, page: 1, paginate: true });
 
-        return $q.when({next_page: nextPage, last_page: lastPage, data: data});
+        return $q.when({ next_page: nextPage, last_page: lastPage, data: data });
       };
 
       var provider = new this.AddressBookPaginationProvider(options);

@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.contact')
     .component('contactSidebarAddressbooksList', {
-      template: require("./contact-sidebar-addressbooks-list.pug"),
+      template: require('./contact-sidebar-addressbooks-list.pug'),
       bindings: {
         addressbooks: '=',
         section: '<'

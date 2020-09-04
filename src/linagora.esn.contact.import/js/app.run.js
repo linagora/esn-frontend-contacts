@@ -6,9 +6,9 @@ require('./services.js');
   angular.module('linagora.esn.contact.import')
     .run(runBlock);
 
-    function runBlock(session, ContactImportNotificationService) {
-      session.ready.then(function(session) {
-        ContactImportNotificationService.startListen(session.user._id);
-      });
-    }
+  function runBlock(session, ContactImportNotificationService) {
+    session.ready.then(function(session) {
+      ContactImportNotificationService.startListen(session.user._id);
+    });
+  }
 })(angular);

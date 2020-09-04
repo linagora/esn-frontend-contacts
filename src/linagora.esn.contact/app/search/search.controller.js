@@ -1,10 +1,10 @@
-require('../search/search-providers.service.js');
+require('./search-providers.service.js');
 
 (function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact').controller('ContactSearchController', ContactSearchController);
-  
+
   function ContactSearchController(
     $stateParams,
     $q,

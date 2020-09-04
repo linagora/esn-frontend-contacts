@@ -7,7 +7,7 @@
   function contactListCards() {
     return {
       restrict: 'E',
-      template: require("./contact-list-cards.pug")
+      template: require('./contact-list-cards.pug')
     };
   }
 })(angular);

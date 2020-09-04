@@ -49,6 +49,7 @@ require('./addressbook.constants.js');
           var actions = _.filter(match.actions, function(action) {
             return action.name === 'Settings' ? options.isSharingAddressbookEnabled : true;
           });
+
           addressbookDisplayShell.actions = actions || [];
         }
 

@@ -21,7 +21,7 @@ require('../../app.constant.js');
     function _ContactDisplayShell(shell) {
       if (shell) {
         this.shell = shell;
-        this.overlayIcon = {iconClasses: 'ng-hide'};
+        this.overlayIcon = { iconClasses: 'ng-hide' };
         this.informationsToDisplay = [];
 
         if (this.shell.emails && this.shell.emails.length) {

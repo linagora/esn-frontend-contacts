@@ -20,6 +20,7 @@ describe('The deleteContact service', function() {
 
   beforeEach(function() {
     var self = this;
+
     this.notificationFactory = {};
     this.gracePeriodService = {};
 
@@ -137,6 +138,7 @@ describe('The deleteContact service', function() {
     contactService.removeContact = sinon.stub().returns($q.when());
 
     var spy = sinon.spy();
+
     this.$rootScope.$on(CONTACT_EVENTS.DELETED, spy);
 
     this.deleteContact(bookId, bookName, contact);
@@ -151,6 +153,7 @@ describe('The deleteContact service', function() {
     contactService.removeContact = sinon.stub().returns($q.when());
 
     var spy = sinon.spy();
+
     this.$rootScope.$on(CONTACT_EVENTS.CANCEL_DELETE, spy);
 
     this.deleteContact(bookId, bookName, contact);

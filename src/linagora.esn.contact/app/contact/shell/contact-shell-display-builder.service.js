@@ -1,4 +1,4 @@
-require('../shell/display-shell-provider.service.js');
+require('./display-shell-provider.service.js');
 
 (function(angular) {
   'use strict';

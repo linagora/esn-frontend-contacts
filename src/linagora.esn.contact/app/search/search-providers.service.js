@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-require('../search/search-results.service.js');
+require('./search-results.service.js');
 require('../app.constant.js');
 
 'use strict';

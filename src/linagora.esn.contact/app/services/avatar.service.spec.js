@@ -54,9 +54,9 @@ describe('The contactAvatarService service', function() {
 
     it('should update the photo value in vcard', function() {
       var vcard = new ICAL.Component(['vcard', [
-          ['version', {}, 'text', '4.0'],
-          ['uid', {}, 'text', 'myuid'],
-          ['photo', {}, 'uri', 'http://abc.com/contact/api/contacts/123/456/avatar']
+        ['version', {}, 'text', '4.0'],
+        ['uid', {}, 'text', 'myuid'],
+        ['photo', {}, 'uri', 'http://abc.com/contact/api/contacts/123/456/avatar']
       ]]);
       var contact = { photo: 'http://abc.com/contact/api/contacts/123/456/avatar', vcard: vcard };
 
@@ -88,8 +88,8 @@ describe('The contactAvatarService service', function() {
 
     beforeEach(function() {
       var vcard = new ICAL.Component(['vcard', [
-          ['version', {}, 'text', '4.0'],
-          ['uid', {}, 'text', 'myuid']
+        ['version', {}, 'text', '4.0'],
+        ['uid', {}, 'text', 'myuid']
       ]]);
 
       contact = {

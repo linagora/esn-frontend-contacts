@@ -32,7 +32,9 @@ describe('The contactListItem directive', function() {
 
   function initDirective() {
     var element = $compile('<contact-list-item contact="contact" book-id="bookId"></contact-list-item>')($scope);
+
     $scope.$digest();
+
     return element;
   }
 
@@ -42,34 +44,43 @@ describe('The contactListItem directive', function() {
 
   it('should set the displayShell in scope', function() {
     var element = initDirective();
+
     expect(element.isolateScope().displayShell).to.be.defined;
   });
 
   it('should display phone', function() {
     var phone = '+33333333';
-    $scope.contact.tel = [{type: 'work', value: phone}];
+
+    $scope.contact.tel = [{ type: 'work', value: phone }];
     var element = initDirective();
+
     expect(element[0].outerHTML).to.contain(phone);
   });
 
   it('should display work phone if N phones are set', function() {
     var phone = '+33333333';
-    $scope.contact.tel = [{type: 'home', value: 'homephone'}, {type: 'work', value: phone}];
+
+    $scope.contact.tel = [{ type: 'home', value: 'homephone' }, { type: 'work', value: phone }];
     var element = initDirective();
+
     expect(element[0].outerHTML).to.contain(phone);
   });
 
   it('should display email', function() {
     var email = 'me@work.com';
-    $scope.contact.emails = [{type: 'work', value: email}];
+
+    $scope.contact.emails = [{ type: 'work', value: email }];
     var element = initDirective();
+
     expect(element[0].outerHTML).to.contain(email);
   });
 
   it('should display work email if N emails are set', function() {
     var email = 'me@work.com';
-    $scope.contact.emails = [{type: 'home', value: 'm@home.com'}, {type: 'work', value: email}];
+
+    $scope.contact.emails = [{ type: 'home', value: 'm@home.com' }, { type: 'work', value: email }];
     var element = initDirective();
+
     expect(element[0].outerHTML).to.contain(email);
   });
 
@@ -77,6 +88,7 @@ describe('The contactListItem directive', function() {
     var element = initDirective();
 
     var isoScope = element.isolateScope();
+
     isoScope.displayContact = sinon.spy();
 
     element.find('.contact-list-item').first().click();
@@ -91,6 +103,7 @@ describe('The contactListItem directive', function() {
     var element = initDirective();
 
     var isoScope = element.isolateScope();
+
     isoScope.displayContact = sinon.spy();
 
     element.find('a[ng-href="mailto:me@home"]').click();
@@ -102,6 +115,7 @@ describe('The contactListItem directive', function() {
     var element = initDirective();
 
     var isoScope = element.isolateScope();
+
     isoScope.displayContact = sinon.spy();
 
     element.find('a[ng-href="tel:123"]').click();
@@ -111,6 +125,7 @@ describe('The contactListItem directive', function() {
   it('should translate the contactShell to displayShell', function() {
     var element = initDirective();
     var isoScope = element.isolateScope();
+
     expect(isoScope.displayShell.shell).to.deep.equal($scope.contact);
   });
 });

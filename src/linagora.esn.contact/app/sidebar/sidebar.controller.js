@@ -76,11 +76,11 @@ require('../addressbook/addressbook.constants.js');
 
       var getOwnersPromises = _.unique(userIds).map(function(userId) {
         return userAPI.user(userId).then(function(response) {
-            return {
-              id: userId,
-              displayName: userUtils.displayNameOf(response.data)
-            };
-          });
+          return {
+            id: userId,
+            displayName: userUtils.displayNameOf(response.data)
+          };
+        });
       });
 
       return $q.all(getOwnersPromises).then(function(owners) {

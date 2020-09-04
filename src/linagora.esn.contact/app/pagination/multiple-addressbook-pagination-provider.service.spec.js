@@ -48,6 +48,7 @@ describe('The MultipleAddressBookPaginationProvider service', function() {
     };
 
     var provider = new this.MultipleAddressBookPaginationProvider(options);
+
     expect(provider.providers.length).to.equal(options.addressbooks.length);
     expect(provider.aggregator).to.be.defined;
   });
@@ -59,6 +60,7 @@ describe('The MultipleAddressBookPaginationProvider service', function() {
     };
 
     var provider = new this.MultipleAddressBookPaginationProvider(options);
+
     expect(provider.compare).to.equal(options.compare);
   });
 
@@ -70,6 +72,7 @@ describe('The MultipleAddressBookPaginationProvider service', function() {
 
       PageAggregatorServiceMock.prototype.loadNextItems = done;
       var provider = new this.MultipleAddressBookPaginationProvider(options);
+
       provider.loadNextItems();
       done(new Error());
     });

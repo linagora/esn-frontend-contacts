@@ -16,13 +16,13 @@ describe('The ContactShellBuilder service', function() {
     ['uid', {}, 'text', CARD_ID],
     ['fn', {}, 'text', 'first last'],
     ['n', {}, 'text', ['last', 'first']],
-    ['email', {type: 'Work'}, 'text', 'mailto:foo@example.com'],
-    ['tel', {type: 'Work'}, 'uri', 'tel:123123'],
-    ['adr', {type: 'Home'}, 'text', ['', '', 's', 'c', '', 'z', 'co']],
+    ['email', { type: 'Work' }, 'text', 'mailto:foo@example.com'],
+    ['tel', { type: 'Work' }, 'uri', 'tel:123123'],
+    ['adr', { type: 'Home' }, 'text', ['', '', 's', 'c', '', 'z', 'co']],
     ['org', {}, 'text', 'org'],
     ['url', {}, 'uri', 'http://linagora.com'],
     ['role', {}, 'text', 'role'],
-    ['socialprofile', {type: 'Twitter'}, 'text', '@AwesomePaaS'],
+    ['socialprofile', { type: 'Twitter' }, 'text', '@AwesomePaaS'],
     ['categories', {}, 'text', 'starred', 'asdf'],
     ['bday', {}, 'date', '2015-01-01'],
     ['nickname', {}, 'text', 'nick'],
@@ -51,7 +51,8 @@ describe('The ContactShellBuilder service', function() {
 
   describe('The setAddressbookCache function', function() {
     it('should save the given cache', function() {
-      var cache = {foo: 'bar'};
+      var cache = { foo: 'bar' };
+
       this.ContactShellBuilder.setAddressbookCache(cache);
       expect(this.ContactShellBuilder.addressbookCache).to.equal(cache);
     });
@@ -77,17 +78,17 @@ describe('The ContactShellBuilder service', function() {
     });
 
     it('should resolve with empty array when input.data._embedded is undefined', function(done) {
-      this.ContactShellBuilder.fromCardListResponse({data: {}}).then(expectEmpty(done));
+      this.ContactShellBuilder.fromCardListResponse({ data: {} }).then(expectEmpty(done));
       this.$rootScope.$apply();
     });
 
     it('should resolve with empty array when input.data._embedded["dav:item"]', function(done) {
-      this.ContactShellBuilder.fromCardListResponse({data: {_embedded: {}}}).then(expectEmpty(done));
+      this.ContactShellBuilder.fromCardListResponse({ data: { _embedded: {} } }).then(expectEmpty(done));
       this.$rootScope.$apply();
     });
 
     it('should resolve with empty array when input.data._embedded["dav:item"] is empty', function(done) {
-      this.ContactShellBuilder.fromCardListResponse({data: {_embedded: {'dav:item': []}}}).then(expectEmpty(done));
+      this.ContactShellBuilder.fromCardListResponse({ data: { _embedded: { 'dav:item': [] } } }).then(expectEmpty(done));
       this.$rootScope.$apply();
     });
 
@@ -128,7 +129,7 @@ describe('The ContactShellBuilder service', function() {
       });
       self.ContactShellBuilder.populateAddressbook = sinon.spy();
 
-      self.ContactShellBuilder.fromCardListResponse({data: {_embedded: {'dav:item': items}}}).then(function(result) {
+      self.ContactShellBuilder.fromCardListResponse({ data: { _embedded: { 'dav:item': items } } }).then(function(result) {
         expect(result.length).to.equal(items.length);
         expect(ContactShellHelper.getMetadata).to.have.been.calledTwice;
         expect(self.ContactShellBuilder.populateAddressbook).to.have.been.calledTwice;
@@ -158,17 +159,17 @@ describe('The ContactShellBuilder service', function() {
     });
 
     it('should resolve with empty array when input.data._embedded is undefined', function(done) {
-      this.ContactShellBuilder.fromCardSearchResponse({data: {}}).then(expectEmpty(done));
+      this.ContactShellBuilder.fromCardSearchResponse({ data: {} }).then(expectEmpty(done));
       this.$rootScope.$apply();
     });
 
     it('should resolve with empty array when input.data._embedded["dav:item"]', function(done) {
-      this.ContactShellBuilder.fromCardSearchResponse({data: {_embedded: {}}}).then(expectEmpty(done));
+      this.ContactShellBuilder.fromCardSearchResponse({ data: { _embedded: {} } }).then(expectEmpty(done));
       this.$rootScope.$apply();
     });
 
     it('should resolve with empty array when input.data._embedded["dav:item"] is empty', function(done) {
-      this.ContactShellBuilder.fromCardSearchResponse({data: {_embedded: {'dav:item': []}}}).then(expectEmpty(done));
+      this.ContactShellBuilder.fromCardSearchResponse({ data: { _embedded: { 'dav:item': [] } } }).then(expectEmpty(done));
       this.$rootScope.$apply();
     });
 
@@ -246,7 +247,7 @@ describe('The ContactShellBuilder service', function() {
       });
       ContactShellHelper.getMetadata = sinon.spy();
 
-      self.ContactShellBuilder.fromCardSearchResponse({data: {_embedded: {'dav:item': items}}}).then(function(result) {
+      self.ContactShellBuilder.fromCardSearchResponse({ data: { _embedded: { 'dav:item': items } } }).then(function(result) {
         expect(result.length).to.equal(1);
         expect(ContactShellHelper.getMetadata).to.have.been.calledOnce;
         done();
@@ -300,7 +301,7 @@ describe('The ContactShellBuilder service', function() {
         return contactShell;
       });
 
-      self.ContactShellBuilder.fromCardSearchResponse({data: {_embedded: {'dav:item': items}}}).then(function(result) {
+      self.ContactShellBuilder.fromCardSearchResponse({ data: { _embedded: { 'dav:item': items } } }).then(function(result) {
         expect(result.length).to.equal(items.length);
         expect(ContactShellHelper.getMetadata).to.have.been.calledOnce;
         expect(self.ContactShellBuilder.populateAddressbook).to.have.been.calledTwice;
@@ -312,14 +313,16 @@ describe('The ContactShellBuilder service', function() {
 
   describe('The populateAddressbook function', function() {
     it('should set the cache response as shell addressbook', function(done) {
-      var shell = {id: CARD_ID};
-      var addressbook = {id: 1};
+      var shell = { id: CARD_ID };
+      var addressbook = { id: 1 };
+
       this.ContactShellBuilder.addressbookCache = {
         get: function(options) {
           expect(options).to.deep.equal({
             bookId: BOOK_ID,
             bookName: BOOK_NAME
           });
+
           return $q.when(addressbook);
         }
       };
@@ -333,13 +336,15 @@ describe('The ContactShellBuilder service', function() {
     });
 
     it('should return the shell as is when cache fails', function(done) {
-      var shell = {id: CARD_ID};
+      var shell = { id: CARD_ID };
+
       this.ContactShellBuilder.addressbookCache = {
         get: function(options) {
           expect(options).to.deep.equal({
             bookId: BOOK_ID,
             bookName: BOOK_NAME
           });
+
           return $q.reject(new Error());
         }
       };
@@ -358,6 +363,7 @@ describe('The ContactShellBuilder service', function() {
 
     it('should force to reload the default avatar when contact is defined in update service', function() {
       var spy = sinon.spy();
+
       contactUpdateDataService.contactUpdatedIds = [CARD_ID];
       contactAvatarService.forceReloadDefaultAvatar = spy;
       this.ContactShellBuilder.fromVcard(vcard);
@@ -366,9 +372,11 @@ describe('The ContactShellBuilder service', function() {
 
     it('should return a ContactShell', function() {
       var spy = sinon.spy();
+
       contactUpdateDataService.contactUpdatedIds = [];
       contactAvatarService.forceReloadDefaultAvatar = spy;
       var contact = this.ContactShellBuilder.fromVcard(vcard);
+
       expect(spy).to.not.have.been.called;
       expect(contact).to.be.defined;
     });
@@ -384,9 +392,11 @@ describe('The ContactShellBuilder service', function() {
         bookName: BOOK_NAME
       };
       var result = 'foo';
+
       this.ContactShellBuilder.fromVcard = function(_vcard) {
         expect(_vcard).to.deep.equal(vcard);
         fromVcardSpy();
+
         return result;
       };
       this.ContactShellBuilder.populateAddressbook = populateAddressbookSpy;

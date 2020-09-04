@@ -1,4 +1,4 @@
-require('../../contact/shell/contact-shell-display-builder.service.js');
+require('../shell/contact-shell-display-builder.service.js');
 require('../../app.constant.js');
 
 (function(angular) {
@@ -13,7 +13,7 @@ require('../../app.constant.js');
   ) {
     return {
       restrict: 'E',
-      template: require("./contact-list-item.pug"),
+      template: require('./contact-list-item.pug'),
       scope: {
         contact: '=',
         avatarSize: '@',

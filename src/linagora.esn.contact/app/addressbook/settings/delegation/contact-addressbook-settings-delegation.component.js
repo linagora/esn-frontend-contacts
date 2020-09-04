@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.contact')
     .component('contactAddressbookSettingsDelegation', {
-      template: require("./contact-addressbook-settings-delegation.pug"),
+      template: require('./contact-addressbook-settings-delegation.pug'),
       controller: 'contactAddressbookSettingsDelegationController',
       bindings: {
         sharees: '=',

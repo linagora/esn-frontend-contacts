@@ -72,12 +72,12 @@ require('../../../sharing/constants.js');
       $q.all(sharees.map(function(sharee) {
         return sharee.getUser();
       }))
-      .then(function() {
-        self.status = 'loaded';
-      })
-      .catch(function() {
-        self.status = 'error';
-      });
+        .then(function() {
+          self.status = 'loaded';
+        })
+        .catch(function() {
+          self.status = 'error';
+        });
     }
 
     function _isShareOwner(sharee) {

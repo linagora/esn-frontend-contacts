@@ -1,5 +1,5 @@
-require('../services/shared-contact-data.service.js');
-require('../services/contact-localtion-helper.service.js');
+require('./shared-contact-data.service.js');
+require('./contact-localtion-helper.service.js');
 
 (function(angular) {
   'use strict';

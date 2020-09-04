@@ -75,22 +75,21 @@ require('../../sharing/constants.js');
 
     function _filterDuplicates(addressbooks) {
       return addressbooks.reduce(function(uniqueAddressbooksList, currentAddressbook) {
-          var duplicateIndex = _.findIndex(uniqueAddressbooksList, function(addresssBookListItem) {
-            return _isSharedFromSameAddressBook(addresssBookListItem, currentAddressbook);
-          });
+        var duplicateIndex = _.findIndex(uniqueAddressbooksList, function(addresssBookListItem) {
+          return _isSharedFromSameAddressBook(addresssBookListItem, currentAddressbook);
+        });
 
-          if (duplicateIndex >= 0) {
-            if (_comparePermission(currentAddressbook, uniqueAddressbooksList[duplicateIndex])) {
-              uniqueAddressbooksList.splice(duplicateIndex, 1, currentAddressbook);
-            }
-          } else {
-            uniqueAddressbooksList.push(currentAddressbook);
+        if (duplicateIndex >= 0) {
+          if (_comparePermission(currentAddressbook, uniqueAddressbooksList[duplicateIndex])) {
+            uniqueAddressbooksList.splice(duplicateIndex, 1, currentAddressbook);
           }
+        } else {
+          uniqueAddressbooksList.push(currentAddressbook);
+        }
 
-          return uniqueAddressbooksList;
-        },
-        []
-      );
+        return uniqueAddressbooksList;
+      },
+      []);
     }
 
     function _comparePermission(addressbook1, addressbook2) {

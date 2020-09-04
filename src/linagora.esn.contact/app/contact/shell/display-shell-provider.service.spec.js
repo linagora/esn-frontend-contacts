@@ -24,6 +24,7 @@ describe('DisplayShellProvider', function() {
 
   it('should provide a default display shell for openpaas', function() {
     var displayShellDefault = this.DisplayShellProvider.toDisplayShell({});
+
     expect(displayShellDefault.getDropDownMenu()).to.equal('default-menu-items');
   });
 
@@ -40,16 +41,18 @@ describe('DisplayShellProvider', function() {
     };
 
     var fnTwitter = function(shell) {
-      if (shell.test === 'Twit') {
-        return true;
-      }
-      return false;
-    }, fnFacebook = function(shell) {
-      if (shell.test === 'Face') {
-        return true;
-      }
-      return false;
-    };
+        if (shell.test === 'Twit') {
+          return true;
+        }
+
+        return false;
+      }, fnFacebook = function(shell) {
+        if (shell.test === 'Face') {
+          return true;
+        }
+
+        return false;
+      };
 
     this.DisplayShellProvider.addDisplayShell(displayShellTwitter, fnTwitter);
     this.DisplayShellProvider.addDisplayShell(displayShellFacebook, fnFacebook);

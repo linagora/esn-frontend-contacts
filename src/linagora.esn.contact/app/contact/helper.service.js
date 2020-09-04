@@ -8,9 +8,9 @@ require('../app.constant.js');
     .factory('ContactsHelper', ContactsHelper);
 
   function ContactsHelper(
-      esnDatetimeService,
-      contactAddressbookDisplayService,
-      CONTACT_ATTRIBUTES_ORDER
+    esnDatetimeService,
+    contactAddressbookDisplayService,
+    CONTACT_ATTRIBUTES_ORDER
   ) {
     return {
       getFormattedName: getFormattedName,
@@ -51,7 +51,7 @@ require('../app.constant.js');
           var v = getValue(element);
 
           if (v) {
-            result.push({type: priority, value: v});
+            result.push({ type: priority, value: v });
           }
         });
       });

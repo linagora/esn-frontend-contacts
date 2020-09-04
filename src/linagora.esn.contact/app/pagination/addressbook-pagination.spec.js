@@ -55,16 +55,18 @@ describe('The AddressBookPagination service', function() {
 
   describe('When instanciating', function() {
     it('should save the scope', function() {
-      var scope = {foo: 'bar'};
+      var scope = { foo: 'bar' };
       var pagination = new this.AddressBookPagination(scope);
+
       expect(pagination.scope).to.deep.equal(scope);
     });
   });
 
   describe('The init function', function() {
     it('should stop the watcher is defined', function(done) {
-      var scope = {foo: 'bar'};
+      var scope = { foo: 'bar' };
       var pagination = new this.AddressBookPagination(scope);
+
       pagination.lastPageWatcher = {
         stop: done
       };
@@ -74,12 +76,14 @@ describe('The AddressBookPagination service', function() {
     });
 
     it('should throw error when pagination provider does not exists', function() {
-      var scope = {foo: 'bar'};
+      var scope = { foo: 'bar' };
       var provider = 'list';
+
       AddressBookPaginationRegistry.get = function(type) {
         expect(type).to.equal(provider);
       };
       var pagination = new this.AddressBookPagination(scope);
+
       expect(pagination.init.bind(pagination, provider)).to.throw(/Unknown provider/);
     });
 
@@ -90,7 +94,7 @@ describe('The AddressBookPagination service', function() {
         }
       };
       var provider = 'list';
-      var options = {addressbooks: []};
+      var options = { addressbooks: [] };
 
       function Mock(_options) {
         expect(_options).to.deep.equal(options);
@@ -98,6 +102,7 @@ describe('The AddressBookPagination service', function() {
 
       AddressBookPaginationRegistry.get = function(type) {
         expect(type).to.equal(provider);
+
         return Mock;
       };
       AddressBookPaginationService = function(provider) {
@@ -106,6 +111,7 @@ describe('The AddressBookPagination service', function() {
       };
 
       var pagination = new this.AddressBookPagination(scope);
+
       pagination.init(provider, options);
 
       expect(pagination.provider).to.be.a.function;
