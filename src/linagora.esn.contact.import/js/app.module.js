@@ -15,6 +15,6 @@ require('esn-frontend-common-libs/src/frontend/js/modules/notification.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/websocket.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/http.js');
 
-require ('./app.run.js');
-require ('./constants.js');
-require ('./services.js');
+require('./app.run.js');
+require('./constants.js');
+require('./services.js');

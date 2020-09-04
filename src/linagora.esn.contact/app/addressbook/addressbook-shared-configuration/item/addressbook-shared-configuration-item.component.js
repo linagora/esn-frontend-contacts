@@ -6,7 +6,7 @@
       bindings: {
         addressbook: '='
       },
-      template: require("./addressbook-shared-configuration-item.pug"),
+      template: require('./addressbook-shared-configuration-item.pug'),
       controller: 'contactAddressbookSharedConfigurationItemController'
     });
 })(angular);

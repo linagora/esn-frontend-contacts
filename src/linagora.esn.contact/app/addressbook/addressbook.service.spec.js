@@ -53,8 +53,8 @@ describe('The contactAddressbookService service', function() {
 
   describe('The listAddressbooks function', function() {
     it('should returns virtual addressbook along with dav addressbooks', function(done) {
-      var davABs = [{id: 'dav1'}, {id: 'dav2'}];
-      var virtualABs = [{id: 'virtual1'}, {id: 'virtual2'}];
+      var davABs = [{ id: 'dav1' }, { id: 'dav2' }];
+      var virtualABs = [{ id: 'virtual1' }, { id: 'virtual2' }];
       var list = sinon.stub().returns($q.when(davABs));
       var virtualListStub = sinon.stub(ContactVirtualAddressBookService, 'list').returns($q.when(virtualABs));
 
@@ -150,8 +150,8 @@ describe('The contactAddressbookService service', function() {
 
   describe('The listAggregatedAddressbooks function', function() {
     it('should return addressbooks which are not excluded from aggregation', function(done) {
-      var davABs = [{id: 'dav1', excludeFromAggregate: true}, {id: 'dav2'}];
-      var virtualABs = [{id: 'virtual1'}, {id: 'virtual2', excludeFromAggregate: true}];
+      var davABs = [{ id: 'dav1', excludeFromAggregate: true }, { id: 'dav2' }];
+      var virtualABs = [{ id: 'virtual1' }, { id: 'virtual2', excludeFromAggregate: true }];
       var list = sinon.stub().returns($q.when(davABs));
       var virtualListStub = sinon.stub(ContactVirtualAddressBookService, 'list').returns($q.when(virtualABs));
 
@@ -178,7 +178,7 @@ describe('The contactAddressbookService service', function() {
 
   describe('The getAddressbookByBookName function', function() {
     it('should return the virtual addressbook if it exists', function(done) {
-      var addressbook = {id: 'contacts'};
+      var addressbook = { id: 'contacts' };
 
       ContactAPIClient.addressbookHome = sinon.spy();
       sinon.stub(ContactVirtualAddressBookService, 'get').returns($q.when(addressbook));

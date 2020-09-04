@@ -1,5 +1,5 @@
-require('../search/search-provider.service.js');
-require('../search/search-providers.service.js');
+require('./search-provider.service.js');
+require('./search-providers.service.js');
 require('../services/contact-configuration.service.js');
 
 'use strict';

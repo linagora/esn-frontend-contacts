@@ -50,8 +50,9 @@ describe('ContactDisplayShell', function() {
     beforeEach(injectServices);
 
     it('should set the addressbook when defined', function() {
-      var ab = {foo: 'bar'};
-      expect(new ContactDisplayShell({addressbook: ab}).addressbook).to.deep.equal(ab);
+      var ab = { foo: 'bar' };
+
+      expect(new ContactDisplayShell({ addressbook: ab }).addressbook).to.deep.equal(ab);
     });
 
     it('should provide contact default contact informations for the template to display', function() {
@@ -187,6 +188,7 @@ describe('ContactDisplayShell', function() {
       injectServices();
 
       var displayShell = new ContactDisplayShell(shell);
+
       displayShell.getAvatar(256);
     });
 
@@ -207,12 +209,14 @@ describe('ContactDisplayShell', function() {
       injectServices();
 
       var displayShell = new ContactDisplayShell(shell);
+
       expect(displayShell.getAvatar(256)).to.equal(shell.photo);
       done();
     });
 
     it('should return default avatar if contact has no avatar', function() {
       var CONTACT_DEFAULT_AVATAR = 'http://linagora.com/user/default_avatar.png';
+
       contactAvatarService.isTextAvatar = function() {
         return false;
       };
@@ -227,6 +231,7 @@ describe('ContactDisplayShell', function() {
       injectServices();
 
       var displayShell = new ContactDisplayShell(shell);
+
       expect(displayShell.getAvatar(256)).to.equal(CONTACT_DEFAULT_AVATAR);
     });
 
@@ -245,16 +250,19 @@ describe('ContactDisplayShell', function() {
 
     it('should return false when addressbook is not defined', function() {
       var displayShell = new ContactDisplayShell({});
+
       expect(displayShell.isWritable()).to.be.false;
     });
 
     it('should return false when addressbook is not editable', function() {
-      var displayShell = new ContactDisplayShell({addressbook: {editable: false}});
+      var displayShell = new ContactDisplayShell({ addressbook: { editable: false } });
+
       expect(displayShell.isWritable()).to.be.false;
     });
 
     it('should return false when addressbook is editable', function() {
-      var displayShell = new ContactDisplayShell({addressbook: {editable: true}});
+      var displayShell = new ContactDisplayShell({ addressbook: { editable: true } });
+
       expect(displayShell.isWritable()).to.be.true;
     });
   });

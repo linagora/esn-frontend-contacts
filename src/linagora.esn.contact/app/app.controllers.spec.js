@@ -50,7 +50,7 @@ describe('The Contacts controller module', function() {
     };
     gracePeriodService = {
       askUserForCancel: function() {
-        return {promise: $q.when({})};
+        return { promise: $q.when({}) };
       },
       grace: function() {
         return {
@@ -95,7 +95,7 @@ describe('The Contacts controller module', function() {
         return this.pagination.loadNextItems(options);
       }
 
-      return $q.when({data: []});
+      return $q.when({ data: [] });
     };
 
     VcardBuilder = {
@@ -171,11 +171,13 @@ describe('The Contacts controller module', function() {
       if (bookId) {
         expect(id).to.equal(bookId);
       }
+
       return {
         addressbook: function(name) {
           if (bookName) {
             expect(name).to.equal(bookName);
           }
+
           return {
             vcard: vcardFn,
             get: function() { return $q.when({ bookId: bookId, bookName: bookName, name: 'My Contacts' }); }
@@ -195,9 +197,9 @@ describe('The Contacts controller module', function() {
 
     it('should initialize $scope.contact to an already existing one when defined', function() {
       var scope = {
-        $on: function() {}
-      },
-      contact = {lastName: 'Last'};
+          $on: function() {}
+        },
+        contact = { lastName: 'Last' };
 
       $controller('newContactController', {
         $scope: scope,
@@ -211,12 +213,12 @@ describe('The Contacts controller module', function() {
 
     it('should clear sharedContactDataService.contact after initialization', function() {
       var scope = {
-        $on: function() {}
-      },
-      contact = {lastName: 'Last'},
-      sharedContactDataService = {
-        contact: contact
-      };
+          $on: function() {}
+        },
+        contact = { lastName: 'Last' },
+        sharedContactDataService = {
+          contact: contact
+        };
 
       $controller('newContactController', {
         $scope: scope,
@@ -278,7 +280,7 @@ describe('The Contacts controller module', function() {
       });
 
       it('should change page on contact create success', function(done) {
-        scope.contact = {id: 1, firstName: 'Foo', lastName: 'Bar'};
+        scope.contact = { id: 1, firstName: 'Foo', lastName: 'Bar' };
         $state.go = function(to, params, options) {
           expect(to).to.equal('contact.addressbooks.show');
           expect(params.bookId).to.equal(bookId);
@@ -312,7 +314,7 @@ describe('The Contacts controller module', function() {
       });
 
       it('should notify user on contact create failure', function(done) {
-        scope.contact = {_id: 1, firstName: 'Foo', lastName: 'Bar'};
+        scope.contact = { _id: 1, firstName: 'Foo', lastName: 'Bar' };
 
         $location.path = function() {
           done(new Error('This test should not change the location'));
@@ -335,7 +337,7 @@ describe('The Contacts controller module', function() {
       });
 
       it('should set back the calling flag to false when complete', function(done) {
-        scope.contact = {_id: 1, firstName: 'Foo', lastName: 'Bar'};
+        scope.contact = { _id: 1, firstName: 'Foo', lastName: 'Bar' };
         $location.path = function() {};
 
         createVcardMock(function() {
@@ -355,7 +357,7 @@ describe('The Contacts controller module', function() {
       });
 
       it('should grace the request using the default delay on success', function(done) {
-        scope.contact = {firstName: 'Foo', lastName: 'Bar'};
+        scope.contact = { firstName: 'Foo', lastName: 'Bar' };
 
         gracePeriodService.askUserForCancel = function(taskId, text, linkText, delay) {
           expect(delay).to.not.exist;
@@ -375,13 +377,13 @@ describe('The Contacts controller module', function() {
       });
 
       it('should display correct title and link during the grace period', function() {
-        scope.contact = {firstName: 'Foo', lastName: 'Bar', id: 'myTaskId'};
+        scope.contact = { firstName: 'Foo', lastName: 'Bar', id: 'myTaskId' };
 
         gracePeriodService.askUserForCancel = sinon.spy(function(message, linkText) {
           expect(message.text).to.equal('You have just created a new contact (%s).');
           expect(linkText).to.equal('Cancel it');
 
-          return {promise: $q.when({})};
+          return { promise: $q.when({}) };
         });
 
         createVcardMock(function() {
@@ -397,7 +399,7 @@ describe('The Contacts controller module', function() {
       });
 
       it('should not grace the request on contact create failure', function(done) {
-        scope.contact = {firstName: 'Foo', lastName: 'Bar'};
+        scope.contact = { firstName: 'Foo', lastName: 'Bar' };
 
         gracePeriodService.clientGrace = done;
 
@@ -416,7 +418,7 @@ describe('The Contacts controller module', function() {
       });
 
       it('should delete the contact if the user cancels during the grace period', function() {
-        scope.contact = {firstName: 'Foo', lastName: 'Bar'};
+        scope.contact = { firstName: 'Foo', lastName: 'Bar' };
 
         gracePeriodService.askUserForCancel = function() {
           var promise = $q.when({
@@ -425,7 +427,7 @@ describe('The Contacts controller module', function() {
             error: angular.noop
           });
 
-          return {promise: promise};
+          return { promise: promise };
         };
 
         var removeSpy = sinon.spy($q.when.bind());
@@ -445,7 +447,7 @@ describe('The Contacts controller module', function() {
       });
 
       it('should notice the user that the contact creation can\'t be cancelled', function() {
-        scope.contact = {firstName: 'Foo', lastName: 'Bar'};
+        scope.contact = { firstName: 'Foo', lastName: 'Bar' };
 
         var errorSpy = sinon.spy();
 
@@ -456,7 +458,7 @@ describe('The Contacts controller module', function() {
             error: errorSpy
           });
 
-          return {promise: promise};
+          return { promise: promise };
         };
 
         createVcardMock(function() {
@@ -476,7 +478,7 @@ describe('The Contacts controller module', function() {
       });
 
       it('should go back to the editing form if the user cancels during the grace period, saving the contact', function() {
-        scope.contact = {firstName: 'Foo', lastName: 'Bar', title: 'PDG'};
+        scope.contact = { firstName: 'Foo', lastName: 'Bar', title: 'PDG' };
 
         openContactFormMock = sinon.spy();
 
@@ -487,7 +489,7 @@ describe('The Contacts controller module', function() {
             error: angular.noop
           });
 
-          return {promise: promise};
+          return { promise: promise };
         };
 
         createVcardMock(function() {
@@ -517,7 +519,7 @@ describe('The Contacts controller module', function() {
   describe('the contactAvatarModalController', function() {
 
     beforeEach(function() {
-      $controller('contactAvatarModalController', {$scope: scope});
+      $controller('contactAvatarModalController', { $scope: scope });
     });
 
     describe('the saveContactAvatar method', function() {
@@ -572,6 +574,7 @@ describe('The Contacts controller module', function() {
 
   describe('The editContactController controller', function() {
     var contactFromDAV;
+
     beforeEach(function() {
       contactFromDAV = {
         addressbook: { editable: true },
@@ -587,14 +590,16 @@ describe('The Contacts controller module', function() {
           },
           get: function() {
             return $q.when(contactFromDAV);
-          }};
+          }
+        };
       });
       this.initController = $controller.bind(null, 'editContactController', { $scope: scope });
     });
 
     it('should update the $scope.contact etag when the contact has been modified from a CONTACT_EVENTS.UPDATED event', function() {
-      contactUpdateDataService.contact = {id: 1, etag: 2};
-      var event = {id: 1, etag: 3};
+      contactUpdateDataService.contact = { id: 1, etag: 2 };
+      var event = { id: 1, etag: 3 };
+
       this.initController();
       $rootScope.$broadcast(CONTACT_EVENTS.UPDATED, event);
       $rootScope.$digest();
@@ -603,8 +608,10 @@ describe('The Contacts controller module', function() {
 
     it('should not update the $scope.contact etag when CONTACT_EVENTS.UPDATED event data is not the same contact', function() {
       var etag = 2;
-      contactUpdateDataService.contact = {id: 1, etag: etag};
-      var event = {id: 2, etag: 3};
+
+      contactUpdateDataService.contact = { id: 1, etag: etag };
+      var event = { id: 2, etag: 3 };
+
       this.initController();
       $rootScope.$broadcast(CONTACT_EVENTS.UPDATED, event);
       $rootScope.$digest();
@@ -613,8 +620,10 @@ describe('The Contacts controller module', function() {
 
     it('should not update the $scope.contact etag when CONTACT_EVENTS.UPDATED event data does not contains etag', function() {
       var etag = 2;
-      contactUpdateDataService.contact = {id: 1, etag: etag};
-      var event = {id: 1};
+
+      contactUpdateDataService.contact = { id: 1, etag: etag };
+      var event = { id: 1 };
+
       this.initController();
       $rootScope.$broadcast(CONTACT_EVENTS.UPDATED, event);
       $rootScope.$digest();
@@ -624,6 +633,7 @@ describe('The Contacts controller module', function() {
     it('should take contact from contactUpdateDataService if there was a graceperiod', function() {
       contactUpdateDataService.contact = { id: 'myId' };
       var getFnSpy = sinon.spy();
+
       createVcardMock(function() {
         return { get: getFnSpy };
       });
@@ -644,7 +654,7 @@ describe('The Contacts controller module', function() {
           get: function() {
             return {
               then: function(resolve) {
-                return resolve({addressbook: {editable: false} });
+                return resolve({ addressbook: { editable: false } });
               }
             };
           }
@@ -662,9 +672,11 @@ describe('The Contacts controller module', function() {
         done();
       };
       createVcardMock(function() {
-        return { get: function() {
-          return $q.reject();
-        }};
+        return {
+          get: function() {
+            return $q.reject();
+          }
+        };
       });
       this.initController();
       $rootScope.$digest();
@@ -686,6 +698,7 @@ describe('The Contacts controller module', function() {
           firstName: 'Foo',
           lastName: 'Bar'
         };
+
         contactService.getContact = sinon.stub().returns($q.when(originalContact));
         contactService.updateContact = sinon.stub().returns($q.when());
 
@@ -740,7 +753,7 @@ describe('The Contacts controller module', function() {
 
         scope.save();
         scope.$digest();
-        expect(gracePeriodService.grace).to.have.been.calledWith(sinon.match({id: 'a taskId'}));
+        expect(gracePeriodService.grace).to.have.been.calledWith(sinon.match({ id: 'a taskId' }));
       });
 
       it('should save updated contact, contactUpdatedIds and taskId contactUpdateDataService', function() {
@@ -818,6 +831,7 @@ describe('The Contacts controller module', function() {
         };
 
         var spy = sinon.spy();
+
         $rootScope.$on(CONTACT_EVENTS.CANCEL_UPDATE, spy);
         scope.save();
         scope.$digest();
@@ -825,9 +839,9 @@ describe('The Contacts controller module', function() {
       });
 
       it('should not change page if the contact is invalid', function(done) {
-          $location.path = function() {
-            done('This test should not change the location');
-          };
+        $location.path = function() {
+          done('This test should not change the location');
+        };
         scope.contact = {
           id: 1,
           firstName: 'FooX',
@@ -837,19 +851,19 @@ describe('The Contacts controller module', function() {
             bookName: 'abc'
           }
         };
-          this.initController();
-          scope.contact = {
-            id: 1,
-            firstName: 'FooX',
-            lastName: 'BarX',
-            addressbook: {
-              bookId: '123',
-              bookName: 'abc'
-            }
-          };
-          scope.save();
-          done();
-        });
+        this.initController();
+        scope.contact = {
+          id: 1,
+          firstName: 'FooX',
+          lastName: 'BarX',
+          addressbook: {
+            bookId: '123',
+            bookName: 'abc'
+          }
+        };
+        scope.save();
+        done();
+      });
 
       it('should show the contact without calling ContactAPIClient update fn when the contact is not modified', function() {
         var updateSpy = sinon.spy();
@@ -883,21 +897,21 @@ describe('The Contacts controller module', function() {
     describe('The deleteContact function', function() {
 
       it('should call deleteContact service with the right bookId, bookName and cardId', function(done) {
-          scope.bookName = 'bookName';
-          scope.contact = { id: 1, firstName: 'Foo', lastName: 'Bar' };
-          $controller.bind(null, 'editContactController', {
-            $scope: scope,
-            deleteContact: function(id, bookName, contact) {
-              expect(id).to.deep.equal(bookId);
-              expect(bookName).to.equal(scope.bookName);
-              expect(contact).to.deep.equal(scope.contact);
-              done();
-            }
-          })();
+        scope.bookName = 'bookName';
+        scope.contact = { id: 1, firstName: 'Foo', lastName: 'Bar' };
+        $controller.bind(null, 'editContactController', {
+          $scope: scope,
+          deleteContact: function(id, bookName, contact) {
+            expect(id).to.deep.equal(bookId);
+            expect(bookName).to.equal(scope.bookName);
+            expect(contact).to.deep.equal(scope.contact);
+            done();
+          }
+        })();
 
-          scope.deleteContact();
-          $timeout.flush();
-        });
+        scope.deleteContact();
+        $timeout.flush();
+      });
     });
 
   });
@@ -954,7 +968,8 @@ describe('The Contacts controller module', function() {
 
       it('should call deleteContact service with the correct bookId, bookName and contact', function() {
         var self = this;
-        var addressbook = {bookName: bookName, bookId: bookId};
+        var addressbook = { bookName: bookName, bookId: bookId };
+
         self.scope.contact = {
           foo: 'bar',
           addressbook: addressbook
@@ -976,8 +991,8 @@ describe('The Contacts controller module', function() {
 
     describe('The displayContact fn', function() {
       it('should show the contact page', function() {
-        var addressbook = {bookId: '2', bookName: '3'};
-        var contact = {id: '1', addressbook: addressbook};
+        var addressbook = { bookId: '2', bookName: '3' };
+        var contact = { id: '1', addressbook: addressbook };
 
         this.initController();
         this.scope.contact = contact;
@@ -992,35 +1007,41 @@ describe('The Contacts controller module', function() {
     describe('The actionClick fn', function() {
       it('should call $window.open if action is a site web', function() {
         var location = 'http://twitter.com';
+
         this.initController();
         this.$window.open = sinon.spy();
         var event = {
           preventDefault: angular.noop,
           stopPropagation: angular.noop
         };
+
         this.scope.actionClick(event, location);
         expect(this.$window.open).to.have.been.calledOnce;
       });
 
       it('should not call $window.open if action is not a site web', function() {
         var location = 'mailto:someone';
+
         this.initController();
         this.$window.open = sinon.spy();
         var event = {
           preventDefault: angular.noop,
           stopPropagation: angular.noop
         };
+
         this.scope.actionClick(event, location);
         expect(this.$window.open).to.have.not.been.called;
       });
 
       it('should call preventDefault and stopPropagation if action is a site web', function() {
         var location = 'http://open-paas.org';
+
         this.initController();
         var event = {
           preventDefault: sinon.spy(),
           stopPropagation: sinon.spy()
         };
+
         this.scope.actionClick(event, location);
         expect(event.preventDefault).to.have.been.calledOnce;
         expect(event.stopPropagation).to.have.been.calledOnce;
@@ -1028,11 +1049,13 @@ describe('The Contacts controller module', function() {
 
       it('should call stopPropagation if action is not a site web', function() {
         var location = 'mailto:someone';
+
         this.initController();
         var event = {
           preventDefault: sinon.spy(),
           stopPropagation: sinon.spy()
         };
+
         this.scope.actionClick(event, location);
         expect(event.preventDefault).to.have.not.been.called;
         expect(event.stopPropagation).to.have.been.calledOnce;
@@ -1041,8 +1064,9 @@ describe('The Contacts controller module', function() {
 
     describe('The editContact fn', function() {
       it('should show the contact edition page', function() {
-        var addressbook = {bookId: '2', bookName: '3'};
-        var contact = {id: '1', addressbook: addressbook};
+        var addressbook = { bookId: '2', bookName: '3' };
+        var contact = { id: '1', addressbook: addressbook };
+
         this.initController();
         this.scope.contact = contact;
         ContactLocationHelper.contact.edit = sinon.spy();
@@ -1054,7 +1078,10 @@ describe('The Contacts controller module', function() {
       it('should return falsy value if there is no underneath contact of contact informations', function() {
         this.initController();
         this.scope.keySearch = 'q';
-        var contact = {nickname: '', notes: '', orgName: '', orgRole: '', addresses: [], social: [], birthday: '', tags: [], urls: []};
+        var contact = {
+          nickname: '', notes: '', orgName: '', orgRole: '', addresses: [], social: [], birthday: '', tags: [], urls: []
+        };
+
         this.scope.contact = contact;
         expect(this.scope.hasContactInformationMatchQuery()).to.be.not.ok;
       });
@@ -1062,7 +1089,10 @@ describe('The Contacts controller module', function() {
       it('should return falsy value if there are some underneath contact of contact informations but no matching', function() {
         this.initController();
         this.scope.keySearch = 'Q';
-        var contactInfo = {nickname: '', notes: '', orgName: '', orgRole: '', addresses: [], social: [], birthday: '', tags: [], urls: []};
+        var contactInfo = {
+          nickname: '', notes: '', orgName: '', orgRole: '', addresses: [], social: [], birthday: '', tags: [], urls: []
+        };
+
         this.scope.contact = contactInfo;
 
         this.scope.contact.nickname = 'nick';
@@ -1077,27 +1107,32 @@ describe('The Contacts controller module', function() {
         this.scope.contact.orgRole = 'Jobs';
         expect(this.scope.hasContactInformationMatchQuery()).to.be.not.ok;
 
-        this.scope.contact.addresses = [{type: 'Home', street: 's', city: 'c', zip: '02', country: 'co'}];
+        this.scope.contact.addresses = [{
+          type: 'Home', street: 's', city: 'c', zip: '02', country: 'co'
+        }];
         expect(this.scope.hasContactInformationMatchQuery()).to.be.not.ok;
 
-        this.scope.contact.social = [{type: 'twitter', value: '@some social'}];
+        this.scope.contact.social = [{ type: 'twitter', value: '@some social' }];
         expect(this.scope.hasContactInformationMatchQuery()).to.be.not.ok;
 
         this.scope.contact.birthday = 'Sat Apr 02 2016 00:00:00 GMT+0700 (ICT)';
         this.scope.formattedBirthday;
         expect(this.scope.hasContactInformationMatchQuery()).to.be.not.ok;
 
-        this.scope.contact.tags = [{text: 'tags'}];
+        this.scope.contact.tags = [{ text: 'tags' }];
         expect(this.scope.hasContactInformationMatchQuery()).to.be.not.ok;
 
-        this.scope.contact.urls = [{value: 'some websites'}];
+        this.scope.contact.urls = [{ value: 'some websites' }];
         expect(this.scope.hasContactInformationMatchQuery()).to.be.not.ok;
       });
 
       it('should return truthy value if there are some matching underneath contact of contact informations', function() {
         this.initController();
         this.scope.keySearch = '02';
-        var contact = {nickname: '', notes: '', orgName: '', orgRole: '', addresses: [], social: [], birthday: '', tags: [], urls: []};
+        var contact = {
+          nickname: '', notes: '', orgName: '', orgRole: '', addresses: [], social: [], birthday: '', tags: [], urls: []
+        };
+
         this.scope.contact = contact;
 
         this.scope.contact.nickname = '02nick';
@@ -1112,20 +1147,22 @@ describe('The Contacts controller module', function() {
         this.scope.contact.orgRole = '02 Jobs';
         expect(this.scope.hasContactInformationMatchQuery()).to.be.ok;
 
-        this.scope.contact.addresses = [{type: 'Home', street: 's', city: 'c', zip: '02', country: 'co'}];
+        this.scope.contact.addresses = [{
+          type: 'Home', street: 's', city: 'c', zip: '02', country: 'co'
+        }];
         expect(this.scope.hasContactInformationMatchQuery()).to.be.ok;
 
-        this.scope.contact.social = [{type: 'Skype', value: '02some social'}];
+        this.scope.contact.social = [{ type: 'Skype', value: '02some social' }];
         expect(this.scope.hasContactInformationMatchQuery()).to.be.ok;
 
         this.scope.contact.birthday = 'Sat Apr 02 2016 00:00:00 GMT+0700 (ICT)';
         this.scope.formattedBirthday;
         expect(this.scope.hasContactInformationMatchQuery()).to.be.ok;
 
-        this.scope.contact.tags = [{text: '02'}];
+        this.scope.contact.tags = [{ text: '02' }];
         expect(this.scope.hasContactInformationMatchQuery()).to.be.ok;
 
-        this.scope.contact.urls = [{value: 'http://02.com'}];
+        this.scope.contact.urls = [{ value: 'http://02.com' }];
         expect(this.scope.hasContactInformationMatchQuery()).to.be.ok;
       });
 
@@ -1172,7 +1209,7 @@ describe('The Contacts controller module', function() {
         });
 
         function testGetContactTitleDisplayCondition(headerDisplayLetterExists, displayAs, searchInput, returnValue) {
-          scope.headerDisplay = {letterExists: headerDisplayLetterExists};
+          scope.headerDisplay = { letterExists: headerDisplayLetterExists };
           scope.displayAs = displayAs;
           scope.contactSearch = { searchInput: searchInput };
           expect(scope.getContactTitleDisplayCondition()).to.equal(returnValue);

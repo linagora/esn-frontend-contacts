@@ -13,6 +13,7 @@ describe('The closeContactForm service', function() {
 
   beforeEach(function() {
     var self = this;
+
     self.state = {};
 
     angular.mock.module(function($provide) {

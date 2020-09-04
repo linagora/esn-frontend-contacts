@@ -1,4 +1,4 @@
-require('../shell/contact-display-shell.service.js');
+require('./contact-display-shell.service.js');
 
 (function(angular) {
   'use strict';

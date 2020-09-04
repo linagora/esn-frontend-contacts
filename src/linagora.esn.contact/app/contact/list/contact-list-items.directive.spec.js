@@ -47,7 +47,9 @@ describe('The contactListItems directive', function() {
 
   function initDirective() {
     var element = $compile('<contact-list-items></contact-list-items>')($scope);
+
     $scope.$digest();
+
     return element;
   }
 

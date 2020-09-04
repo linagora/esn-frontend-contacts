@@ -20,7 +20,7 @@ require('../../app.constant.js');
   ) {
     return {
       restrict: 'E',
-      template: require("./contact-list-items.pug"),
+      template: require('./contact-list-items.pug'),
       link: function(scope, element) {
         var timeoutPromise;
 

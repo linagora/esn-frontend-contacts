@@ -35,10 +35,10 @@ describe('The AddressbookCache service', function() {
         }
       };
     };
-    this.AddressbookCache.loader({bookId: BOOK_ID, bookName: BOOK_NAME});
+    this.AddressbookCache.loader({ bookId: BOOK_ID, bookName: BOOK_NAME });
   });
 
   it('cache keyBuilder should build key from bookId and bookName', function() {
-    expect(this.AddressbookCache.getKey({bookId: BOOK_ID, bookName: BOOK_NAME})).to.equal(BOOK_ID + '-' + BOOK_NAME);
+    expect(this.AddressbookCache.getKey({ bookId: BOOK_ID, bookName: BOOK_NAME })).to.equal(BOOK_ID + '-' + BOOK_NAME);
   });
 });

@@ -18,7 +18,7 @@
 
     function _openEditModal(addressbook) {
       $modal({
-        template: require("../edit/addressbook-edit.pug"),
+        template: require('../edit/addressbook-edit.pug'),
         backdrop: 'static',
         placement: 'center',
         controller: 'ContactAddressbookEditController',

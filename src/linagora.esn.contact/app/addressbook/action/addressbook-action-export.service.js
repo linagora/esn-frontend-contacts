@@ -18,7 +18,7 @@
 
     function _exportAddressbook(addressbook) {
       $modal({
-        template: require("../export/contact-addressbook-export.pug"),
+        template: require('../export/contact-addressbook-export.pug'),
         backdrop: 'static',
         placement: 'center',
         controller: 'ContactAddressbookExportController',

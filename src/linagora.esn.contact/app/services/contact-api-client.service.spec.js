@@ -13,6 +13,7 @@ describe('The contact Angular module contactapis', function() {
 
     beforeEach(function() {
       var self = this;
+
       this.uuid4 = {
         // This is a valid uuid4. Change this if you need other uuids generated.
         _uuid: '00000000-0000-4000-a000-000000000000',
@@ -37,7 +38,7 @@ describe('The contact Angular module contactapis', function() {
         }
       };
 
-      contact = { id: '00000000-0000-4000-a000-000000000000', lastName: 'Last'};
+      contact = { id: '00000000-0000-4000-a000-000000000000', lastName: 'Last' };
 
       angular.mock.module(function($provide) {
         $provide.value('notificationFactory', self.notificationFactory);
@@ -80,6 +81,7 @@ describe('The contact Angular module contactapis', function() {
 
           it('should return list of addressbooks', function(done) {
             var bookId = '123';
+
             this.$httpBackend.expectGET(this.getBookHomeUrl(bookId)).respond({
               _links: {
                 self: {
@@ -132,6 +134,7 @@ describe('The contact Angular module contactapis', function() {
           it('should return an AddressbookShell instance if success', function(done) {
             var bookId = '123';
             var bookName = '1614422648';
+
             this.$httpBackend.when('PROPFIND', this.getBookUrl(bookId, bookName)).respond({
               _links: {
                 self: {
@@ -144,6 +147,7 @@ describe('The contact Angular module contactapis', function() {
             });
 
             var AddressbookShell = this.AddressbookShell;
+
             this.ContactAPIClient
               .addressbookHome(bookId)
               .addressbook(bookName)
@@ -173,13 +177,13 @@ describe('The contact Angular module contactapis', function() {
               ['uid', {}, 'text', 'myuid'],
               ['fn', {}, 'text', 'first last'],
               ['n', {}, 'text', ['last', 'first']],
-              ['email', {type: 'Work'}, 'text', 'mailto:foo@example.com'],
-              ['tel', {type: 'Work'}, 'uri', 'tel:123123'],
-              ['adr', {type: 'Home'}, 'text', ['', '', 's', 'c', '', 'z', 'co']],
+              ['email', { type: 'Work' }, 'text', 'mailto:foo@example.com'],
+              ['tel', { type: 'Work' }, 'uri', 'tel:123123'],
+              ['adr', { type: 'Home' }, 'text', ['', '', 's', 'c', '', 'z', 'co']],
               ['org', {}, 'text', 'org'],
               ['url', {}, 'uri', 'http://linagora.com'],
               ['role', {}, 'text', 'role'],
-              ['socialprofile', {type: 'Twitter'}, 'text', '@AwesomePaaS'],
+              ['socialprofile', { type: 'Twitter' }, 'text', '@AwesomePaaS'],
               ['categories', {}, 'text', 'starred', 'asdf'],
               ['bday', {}, 'date', '2015-01-01'],
               ['nickname', {}, 'text', 'nick'],
@@ -192,9 +196,10 @@ describe('The contact Angular module contactapis', function() {
               var bookName = 'bookName';
               var cardId = '456';
               var expectPath = this.getVCardUrl(bookId, bookName, cardId);
+
               this.$httpBackend.expectGET(expectPath).respond(
                 defaultResponse,
-                {ETag: 'testing-tag'}
+                { ETag: 'testing-tag' }
               );
 
               this.ContactAPIClient
@@ -212,15 +217,15 @@ describe('The contact Angular module contactapis', function() {
                   expect(contact.firstName).to.equal('first');
                   expect(contact.lastName).to.equal('last');
                   expect(contact.displayName).to.equal('first last');
-                  expect(contact.emails).to.deep.equal([{type: 'Work', value: 'foo@example.com'}]);
+                  expect(contact.emails).to.deep.equal([{ type: 'Work', value: 'foo@example.com' }]);
                   expect(contact.addresses).to.deep.equal([{
                     type: 'Home', street: 's', city: 'c', zip: 'z', country: 'co'
                   }]);
                   expect(contact.org).to.equal('org');
-                  expect(contact.urls).to.eql([{value: 'http://linagora.com'}]);
+                  expect(contact.urls).to.eql([{ value: 'http://linagora.com' }]);
                   expect(contact.orgRole).to.equal('role');
-                  expect(contact.social).to.deep.equal([{type: 'Twitter', value: '@AwesomePaaS'}]);
-                  expect(contact.tags).to.deep.equal([{text: 'asdf'}]);
+                  expect(contact.social).to.deep.equal([{ type: 'Twitter', value: '@AwesomePaaS' }]);
+                  expect(contact.tags).to.deep.equal([{ text: 'asdf' }]);
                   expect(contact.starred).to.be.true;
                   expect(contact.birthday).to.equalDate(new Date(2015, 0, 1));
                   expect(contact.nickname).to.equal('nick');
@@ -237,6 +242,7 @@ describe('The contact Angular module contactapis', function() {
               var bookName = 'bookName';
               var cardId = '456';
               var expectPath = this.getVCardUrl(bookId, bookName, cardId);
+
               this.$httpBackend.expectGET(expectPath).respond(
                 ['vcard', [
                   ['version', {}, 'text', '4.0'],
@@ -261,6 +267,7 @@ describe('The contact Angular module contactapis', function() {
               var bookName = 'bookName';
               var cardId = '456';
               var expectPath = this.getVCardUrl(bookId, bookName, cardId);
+
               this.$httpBackend.expectGET(expectPath).respond(
                 ['vcard', [
                   ['version', {}, 'text', '4.0'],
@@ -288,11 +295,12 @@ describe('The contact Angular module contactapis', function() {
               var bookName = 'bookName';
               var cardId = '456';
               var expectPath = this.getVCardUrl(bookId, bookName, cardId);
+
               this.$httpBackend.expectGET(expectPath).respond(
                 ['vcard', [
                   ['bday', {}, 'text', 'a text birthday']
                 ], []],
-                {ETag: 'testing-tag'}
+                { ETag: 'testing-tag' }
               );
 
               this.ContactAPIClient
@@ -350,7 +358,7 @@ describe('The contact Angular module contactapis', function() {
             });
 
             it('should list cards', function(done) {
-              var shells = [{shell: 1}, {shell: 2}];
+              var shells = [{ shell: 1 }, { shell: 2 }];
 
               this.$httpBackend.expectGET(contactsURL + '?sort=fn').respond(result);
 
@@ -377,6 +385,7 @@ describe('The contact Angular module contactapis', function() {
               options.limit = 10;
               options.userId = userId;
               var url = contactsURL + '?limit=10&offset=0&sort=fn&userId=' + userId;
+
               this.$httpBackend.expectGET(url).respond(result);
               this.ContactAPIClient
                 .addressbookHome(bookId)
@@ -397,6 +406,7 @@ describe('The contact Angular module contactapis', function() {
               options.limit = 10;
               options.userId = userId;
               var url = contactsURL + '?limit=10&offset=0&sort=fn&userId=' + userId;
+
               this.$httpBackend.expectGET(url).respond(result);
 
               this.ContactAPIClient
@@ -418,6 +428,7 @@ describe('The contact Angular module contactapis', function() {
               options.limit = 10;
               options.userId = userId;
               var url = contactsURL + '?limit=10&offset=0&sort=fn&userId=' + userId;
+
               this.$httpBackend.expectGET(url).respond(result);
 
               this.ContactAPIClient
@@ -442,12 +453,14 @@ describe('The contact Angular module contactapis', function() {
 
             it('should call sent HTTP request to backend with the right parameters', function() {
               var expectPath = this.getBookHomeUrl(bookId) + '/contacts?limit=20&page=5&search=linagora';
-              this.$httpBackend.expectGET(expectPath).respond(200, { _links: { self: { href: '' }}});
+
+              this.$httpBackend.expectGET(expectPath).respond(200, { _links: { self: { href: '' } } });
 
               var searchOptions = {
                 data: 'linagora',
                 page: 5
               };
+
               this.ContactAPIClient
                 .addressbookHome(bookId)
                 .addressbook(bookName)
@@ -488,6 +501,7 @@ describe('The contact Angular module contactapis', function() {
                   ]
                 }
               };
+
               this.$httpBackend.expectGET(expectPath).respond(response);
               this.ContactShellBuilder.fromCardSearchResponse = function() {
                 return $q.when(shells);
@@ -497,6 +511,7 @@ describe('The contact Angular module contactapis', function() {
                 data: 'linagora',
                 page: 5
               };
+
               this.ContactAPIClient
                 .addressbookHome(bookId)
                 .addressbook(bookName)
@@ -546,6 +561,7 @@ describe('The contact Angular module contactapis', function() {
                   ]
                 }
               };
+
               this.$httpBackend.expectGET(expectPath).respond(response);
               this.ContactShellBuilder.fromCardSearchResponse = function() {
                 return $q.when(shells);
@@ -555,6 +571,7 @@ describe('The contact Angular module contactapis', function() {
                 data: 'linagora',
                 page: 1
               };
+
               this.ContactAPIClient
                 .addressbookHome(bookId)
                 .addressbook(bookName)
@@ -598,6 +615,7 @@ describe('The contact Angular module contactapis', function() {
                   ]
                 }
               };
+
               this.$httpBackend.expectGET(expectPath).respond(response);
               this.ContactShellBuilder.fromCardSearchResponse = function() {
                 return $q.when(shells);
@@ -607,6 +625,7 @@ describe('The contact Angular module contactapis', function() {
                 data: 'linagora',
                 page: 1
               };
+
               this.ContactAPIClient
                 .addressbookHome(bookId)
                 .addressbook(bookName)
@@ -629,10 +648,12 @@ describe('The contact Angular module contactapis', function() {
 
             it('should generate ID by uuid4 if contact.id is not exist', function(done) {
               var cardId = '123';
+
               this.uuid4.generate = function() {
                 return cardId;
               };
-              var contact = {firstName: 'Alice'};
+              var contact = { firstName: 'Alice' };
+
               this.$httpBackend.expectPUT(this.getVCardUrl(bookId, bookName, cardId)).respond(201);
               this.ContactAPIClient
                 .addressbookHome(bookId)
@@ -672,9 +693,9 @@ describe('The contact Angular module contactapis', function() {
                 .addressbook(bookName)
                 .vcard()
                 .create(contact).then(null, function(response) {
-                expect(response.status).to.equal(200);
-                done();
-              });
+                  expect(response.status).to.equal(200);
+                  done();
+                });
 
               this.$rootScope.$apply();
               this.$httpBackend.flush();
@@ -686,8 +707,7 @@ describe('The contact Angular module contactapis', function() {
                 ['vcard', [
                   ['version', {}, 'text', '4.0'],
                   ['uid', {}, 'text', 'myuid']
-                ], []]
-              );
+                ], []]);
 
               this.ContactAPIClient
                 .addressbookHome(bookId)
@@ -717,6 +737,7 @@ describe('The contact Angular module contactapis', function() {
 
             beforeEach(function() {
               var vcard = new ICAL.Component('vcard');
+
               vcard.addPropertyWithValue('version', '4.0');
               vcard.addPropertyWithValue('uid', '00000000-0000-4000-a000-000000000000');
               vcard.addPropertyWithValue('fn', 'test card');
@@ -741,7 +762,7 @@ describe('The contact Angular module contactapis', function() {
             });
 
             it('should succeed on 202', function(done) {
-              this.$httpBackend.expectPUT(vcardUrl + '?graceperiod=8000').respond(202, '', {'X-ESN-TASK-ID': 'taskId'});
+              this.$httpBackend.expectPUT(vcardUrl + '?graceperiod=8000').respond(202, '', { 'X-ESN-TASK-ID': 'taskId' });
 
               this.ContactAPIClient
                 .addressbookHome(bookId)
@@ -758,7 +779,7 @@ describe('The contact Angular module contactapis', function() {
             });
 
             it('should succeed on 204', function(done) {
-              this.$httpBackend.expectPUT(vcardUrl + '?graceperiod=8000').respond(204, '', {'X-ESN-TASK-ID': 'taskId'});
+              this.$httpBackend.expectPUT(vcardUrl + '?graceperiod=8000').respond(204, '', { 'X-ESN-TASK-ID': 'taskId' });
 
               this.ContactAPIClient
                 .addressbookHome(bookId)
@@ -819,7 +840,7 @@ describe('The contact Angular module contactapis', function() {
                 .addressbookHome(bookId)
                 .addressbook(bookName)
                 .vcard(contact.id)
-                .remove({graceperiod: 1234})
+                .remove({ graceperiod: 1234 })
                 .then(function() {
                   done();
                 });
@@ -890,7 +911,7 @@ describe('The contact Angular module contactapis', function() {
                 .addressbookHome(bookId)
                 .addressbook(bookName)
                 .vcard(contact.id)
-                .remove({etag: 'etag'})
+                .remove({ etag: 'etag' })
                 .then(function() {
                   done();
                 });
@@ -900,7 +921,7 @@ describe('The contact Angular module contactapis', function() {
             });
 
             it('should resolve to the pending task identifier', function(done) {
-              this.$httpBackend.expectDELETE(vcardUrl).respond(202, null, {'X-ESN-Task-Id': '1234'});
+              this.$httpBackend.expectDELETE(vcardUrl).respond(202, null, { 'X-ESN-Task-Id': '1234' });
 
               this.ContactAPIClient
                 .addressbookHome(bookId)
@@ -1200,12 +1221,14 @@ describe('The contact Angular module contactapis', function() {
 
         it('should call sent HTTP request to backend with the right parameters', function() {
           var expectPath = this.getBookHomeUrl(bookId) + '/contacts?limit=20&page=5&search=linagora';
-          this.$httpBackend.expectGET(expectPath).respond(200, { _links: { self: { href: '' }}});
+
+          this.$httpBackend.expectGET(expectPath).respond(200, { _links: { self: { href: '' } } });
 
           var searchOptions = {
             data: 'linagora',
             page: 5
           };
+
           this.ContactAPIClient
             .addressbookHome(bookId)
             .search(searchOptions);
@@ -1218,7 +1241,7 @@ describe('The contact Angular module contactapis', function() {
           var shells = [1, 2, 3];
           var expectPath = this.getBookHomeUrl(bookId) + '/contacts?limit=20&page=5&search=linagora';
           var response = {
-            _links: { self: { href: '' }},
+            _links: { self: { href: '' } },
             _current_page: 1,
             _total_hits: 200,
             _embedded: {
@@ -1240,6 +1263,7 @@ describe('The contact Angular module contactapis', function() {
               ]
             }
           };
+
           this.$httpBackend.expectGET(expectPath).respond(response);
           this.ContactShellBuilder.fromCardSearchResponse = function() {
             return $q.when(shells);
@@ -1249,6 +1273,7 @@ describe('The contact Angular module contactapis', function() {
             data: 'linagora',
             page: 5
           };
+
           this.ContactAPIClient
             .addressbookHome(bookId)
             .search(searchOptions)

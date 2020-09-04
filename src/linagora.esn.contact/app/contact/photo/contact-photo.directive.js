@@ -15,7 +15,7 @@ require('../../app.constant.js');
   ) {
     return {
       restrict: 'E',
-      template: require("./contact-photo.pug"),
+      template: require('./contact-photo.pug'),
       scope: {
         contact: '=',
         editable: '@',

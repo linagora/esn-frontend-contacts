@@ -61,7 +61,8 @@ describe('The contactDisplay directive', function() {
   });
 
   it('should set the displayShell in the scope', function() {
-    var display = {foo: 'bar'};
+    var display = { foo: 'bar' };
+
     ContactShellDisplayBuilder.build = function() {
       return display;
     };
@@ -75,6 +76,7 @@ describe('The contactDisplay directive', function() {
 
     it('should return falsy value if there is no contact contact informations', function() {
       var scope = element.isolateScope();
+
       expect(scope.hasContactInformation()).to.not.be.ok;
     });
 
@@ -105,6 +107,7 @@ describe('The contactDisplay directive', function() {
 
     it('should return falsy value if there is no contact profile informations', function() {
       var scope = element.isolateScope();
+
       expect(scope.hasProfileInformation()).to.not.be.ok;
     });
 
@@ -131,6 +134,7 @@ describe('The contactDisplay directive', function() {
 
     it('should return falsy value if there is no work information', function() {
       var scope = element.isolateScope();
+
       expect(scope.shouldDisplayWork()).to.not.be.ok;
     });
 

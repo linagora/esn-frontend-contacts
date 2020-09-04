@@ -1,4 +1,4 @@
-require('../services/contact-list-toggle-event.service.js');
+require('./contact-list-toggle-event.service.js');
 require('../app.constant.js');
 
 (function(angular) {

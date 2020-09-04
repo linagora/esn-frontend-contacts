@@ -19,7 +19,7 @@ require('../../app.constant.js');
       scope: {
         contact: '='
       },
-      template: require("./contact-display.pug"),
+      template: require('./contact-display.pug'),
       link: function($scope) {
 
         $scope.displayShell = ContactShellDisplayBuilder.build($scope.contact);

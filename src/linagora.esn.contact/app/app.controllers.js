@@ -69,26 +69,26 @@ angular.module('linagora.esn.contact')
         }, { location: 'replace' });
       }).then(function() {
         return gracePeriodService.askUserForCancel(
-          esnI18nService.translate('You have just created a new contact (%s).',  { displayName: $scope.contact.displayName }),
+          esnI18nService.translate('You have just created a new contact (%s).', { displayName: $scope.contact.displayName }),
           'Cancel it'
         ).promise.then(function(data) {
-            if (data.cancelled) {
-              contactService.removeContact({ bookId: parsedAddressbookPath.bookId, bookName: parsedAddressbookPath.bookName }, $scope.contact, { etag: $scope.contact.etag })
-                .then(function() {
-                  data.success();
-                  openContactForm({
-                    bookId: parsedAddressbookPath.bookId,
-                    bookName: parsedAddressbookPath.bookName,
-                    contact: $scope.contact,
-                    shouldReplaceState: true
-                  });
-                }, function(err) {
-                  data.error('Cannot cancel contact creation, the contact is created');
-
-                  return $q.reject(err);
+          if (data.cancelled) {
+            contactService.removeContact({ bookId: parsedAddressbookPath.bookId, bookName: parsedAddressbookPath.bookName }, $scope.contact, { etag: $scope.contact.etag })
+              .then(function() {
+                data.success();
+                openContactForm({
+                  bookId: parsedAddressbookPath.bookId,
+                  bookName: parsedAddressbookPath.bookName,
+                  contact: $scope.contact,
+                  shouldReplaceState: true
                 });
-            }
-          });
+              }, function(err) {
+                data.error('Cannot cancel contact creation, the contact is created');
+
+                return $q.reject(err);
+              });
+          }
+        });
       });
     };
 
@@ -284,22 +284,22 @@ angular.module('linagora.esn.contact')
 
       function escapeHTML(str) {
         return angular.isUndefined(str) || str === null ? '' : str.toString().toLowerCase().trim()
-              .replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;');
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
       }
       var contactHighLightHelper = new ContactHighLightHelper();
       var keySearch = escapeHTML($scope.keySearch);
 
       var isMatchAddress = (contactHighLightHelper.checkArrAddressMatching($scope.contact.addresses, keySearch, 'mdi-map-marker') > -1),
-          isMatchSocial = (contactHighLightHelper.checkArrMatching($scope.contact.social, keySearch, 'mdi-earth') > -1),
-          isMatchUrl = (contactHighLightHelper.checkArrMatching($scope.contact.urls, keySearch, 'mdi-web') > -1),
-          isMatchOrganization = (contactHighLightHelper.checkStringMatch($scope.contact.orgName, keySearch, 'mdi-factory') > -1),
-          isMatchJobTitle = (contactHighLightHelper.checkStringMatch($scope.contact.orgRole, keySearch, 'mdi-email') > -1),
-          isMatchNick = (contactHighLightHelper.checkStringMatch($scope.contact.nickname, keySearch, 'mdi-comment-account-outline') > -1),
-          isMatchNote = (contactHighLightHelper.checkStringMatch($scope.contact.notes, keySearch, 'mdi-comment-account') > -1),
-          isMatchTags = (contactHighLightHelper.checkArrMatching($scope.contact.tags, keySearch, 'mdi-tag-multiple') > -1),
-          isMatchBirthDay = (contactHighLightHelper.checkStringMatch($scope.formattedBirthday, keySearch, 'mdi-cake-variant') > -1);
+        isMatchSocial = (contactHighLightHelper.checkArrMatching($scope.contact.social, keySearch, 'mdi-earth') > -1),
+        isMatchUrl = (contactHighLightHelper.checkArrMatching($scope.contact.urls, keySearch, 'mdi-web') > -1),
+        isMatchOrganization = (contactHighLightHelper.checkStringMatch($scope.contact.orgName, keySearch, 'mdi-factory') > -1),
+        isMatchJobTitle = (contactHighLightHelper.checkStringMatch($scope.contact.orgRole, keySearch, 'mdi-email') > -1),
+        isMatchNick = (contactHighLightHelper.checkStringMatch($scope.contact.nickname, keySearch, 'mdi-comment-account-outline') > -1),
+        isMatchNote = (contactHighLightHelper.checkStringMatch($scope.contact.notes, keySearch, 'mdi-comment-account') > -1),
+        isMatchTags = (contactHighLightHelper.checkArrMatching($scope.contact.tags, keySearch, 'mdi-tag-multiple') > -1),
+        isMatchBirthDay = (contactHighLightHelper.checkStringMatch($scope.formattedBirthday, keySearch, 'mdi-cake-variant') > -1);
 
       $scope.datas = contactHighLightHelper.dataHighlight;
 

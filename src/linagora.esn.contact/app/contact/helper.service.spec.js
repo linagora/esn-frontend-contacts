@@ -35,7 +35,7 @@ describe('The ContactsHelper service', function() {
 
     it('should fill the scope with the contact', function() {
       var scope = {};
-      var contact = {emails: [{type: 'work', value: 'me@work.com'}, {type: 'home', value: 'me@home.com'}]};
+      var contact = { emails: [{ type: 'work', value: 'me@work.com' }, { type: 'home', value: 'me@home.com' }] };
 
       ContactsHelper.fillScopeContactData(scope, contact);
       expect(scope.contact).to.deep.equal(contact);
@@ -43,7 +43,7 @@ describe('The ContactsHelper service', function() {
 
     it('should fill the scope with the contact emails', function() {
       var scope = {};
-      var contact = {emails: [{type: 'work', value: 'me@work.com'}, {type: 'home', value: 'me@home.com'}]};
+      var contact = { emails: [{ type: 'work', value: 'me@work.com' }, { type: 'home', value: 'me@home.com' }] };
 
       ContactsHelper.fillScopeContactData(scope, contact);
       expect(scope.emails.length).to.equal(2);
@@ -51,7 +51,7 @@ describe('The ContactsHelper service', function() {
 
     it('should fill the scope with the contact phones', function() {
       var scope = {};
-      var contact = {tel: [{type: 'work', value: '+33333333'}, {type: 'home', value: '+33444444'}]};
+      var contact = { tel: [{ type: 'work', value: '+33333333' }, { type: 'home', value: '+33444444' }] };
 
       ContactsHelper.fillScopeContactData(scope, contact);
       expect(scope.phones.length).to.equal(2);
@@ -59,7 +59,7 @@ describe('The ContactsHelper service', function() {
 
     it('should fill the scope with the contact formattedBirthday', function() {
       var scope = {};
-      var contact = {birthday: '123', tel: [{type: 'work', value: '+33333333'}, {type: 'home', value: '+33444444'}]};
+      var contact = { birthday: '123', tel: [{ type: 'work', value: '+33333333' }, { type: 'home', value: '+33444444' }] };
 
       ContactsHelper.fillScopeContactData(scope, contact);
       expect(scope.formattedBirthday).to.be.defined;
@@ -73,11 +73,11 @@ describe('The ContactsHelper service', function() {
     });
 
     it('should order emails and tel of the given contact', function() {
-      var homeEmail = {type: 'Home', value: 'me@home'};
-      var workEmail = {type: 'Work', value: 'me@work'};
-      var homePhone = {type: 'Home', value: '+123'};
-      var workPhone = {type: 'Work', value: '+456'};
-      var otherPhone = {type: 'Other', value: '+789'};
+      var homeEmail = { type: 'Home', value: 'me@home' };
+      var workEmail = { type: 'Work', value: 'me@work' };
+      var homePhone = { type: 'Home', value: '+123' };
+      var workPhone = { type: 'Work', value: '+456' };
+      var otherPhone = { type: 'Other', value: '+789' };
 
       var contact = {
         emails: [homeEmail, workEmail],
@@ -102,47 +102,47 @@ describe('The ContactsHelper service', function() {
     });
 
     it('should return ordered elements based on given priority', function() {
-      var a = {type: 'a', value: 1};
-      var b = {type: 'b', value: 2};
-      var c = {type: 'c', value: 3};
+      var a = { type: 'a', value: 1 };
+      var b = { type: 'b', value: 2 };
+      var c = { type: 'c', value: 3 };
 
       expect(ContactsHelper.getOrderedValues([a, b, c], ['b', 'c', 'a'])).to.deep.equal([b, c, a]);
     });
 
     it('should return input when priorities are not defined', function() {
-      var a = {type: 'a', value: 1};
-      var b = {type: 'b', value: 2};
-      var c = {type: 'c', value: 3};
+      var a = { type: 'a', value: 1 };
+      var b = { type: 'b', value: 2 };
+      var c = { type: 'c', value: 3 };
 
       expect(ContactsHelper.getOrderedValues([a, b, c])).to.deep.equal([a, b, c]);
     });
 
     it('should return input when priorities are empty', function() {
-      var a = {type: 'a', value: 1};
-      var b = {type: 'b', value: 2};
-      var c = {type: 'c', value: 3};
+      var a = { type: 'a', value: 1 };
+      var b = { type: 'b', value: 2 };
+      var c = { type: 'c', value: 3 };
 
       expect(ContactsHelper.getOrderedValues([a, b, c], [])).to.deep.equal([a, b, c]);
     });
 
     it('should return only element with given priorities', function() {
-      var a = {type: 'a', value: 1};
-      var b = {type: 'b', value: 2};
-      var c = {type: 'c', value: 3};
-      var d = {type: 'd', value: 4};
-      var e = {type: 'e', value: 5};
+      var a = { type: 'a', value: 1 };
+      var b = { type: 'b', value: 2 };
+      var c = { type: 'c', value: 3 };
+      var d = { type: 'd', value: 4 };
+      var e = { type: 'e', value: 5 };
 
       expect(ContactsHelper.getOrderedValues([a, b, c, d, e], ['c', 'b', 'a'])).to.deep.equal([c, b, a]);
     });
 
     it('should return ordered elements based on given priority even when same types appears several times', function() {
-      var a = {type: 'a', value: 1};
-      var b = {type: 'b', value: 2};
-      var c = {type: 'c', value: 3};
-      var d = {type: 'd', value: 4};
-      var e = {type: 'e', value: 6};
-      var aa = {type: 'a', value: 5};
-      var bb = {type: 'b', value: 7};
+      var a = { type: 'a', value: 1 };
+      var b = { type: 'b', value: 2 };
+      var c = { type: 'c', value: 3 };
+      var d = { type: 'd', value: 4 };
+      var e = { type: 'e', value: 6 };
+      var aa = { type: 'a', value: 5 };
+      var bb = { type: 'b', value: 7 };
 
       expect(ContactsHelper.getOrderedValues([a, b, c, d, e, aa, bb], ['a', 'b'])).to.deep.equal([a, aa, b, bb]);
     });
@@ -164,28 +164,28 @@ describe('The ContactsHelper service', function() {
     it('should return street when address.street is only defined', function() {
       var street = 'My street';
 
-      this.address = {street: street};
+      this.address = { street: street };
       this.expectEqual(street);
     });
 
     it('should return city when address.city is only defined', function() {
       var city = 'My city';
 
-      this.address = {city: city};
+      this.address = { city: city };
       this.expectEqual(city);
     });
 
     it('should return zip when address.zip is only defined', function() {
       var zip = 'My zip';
 
-      this.address = {zip: zip};
+      this.address = { zip: zip };
       this.expectEqual(zip);
     });
 
     it('should return country when address.country is only defined', function() {
       var country = 'My country';
 
-      this.address = {country: country};
+      this.address = { country: country };
       this.expectEqual(country);
     });
 
@@ -195,7 +195,9 @@ describe('The ContactsHelper service', function() {
       var zip = 'My zip';
       var country = 'My country';
 
-      this.address = {street: street, city: city, zip: zip, country: country};
+      this.address = {
+        street: street, city: city, zip: zip, country: country
+      };
       this.expectEqual(street + ' ' + city + ' ' + zip + ' ' + country);
     });
 
@@ -270,16 +272,19 @@ describe('The ContactsHelper service', function() {
         urls: [this.url],
         tel: [this.workTel, this.mobileTel, this.homeTel, this.otherTel],
         notes: 'This is a note',
-        tags: [{text: 'A'}, {text: 'B'}],
+        tags: [{ text: 'A' }, { text: 'B' }],
         birthday: birthday,
-        addresses: [{street: 'My street', zip: 'My zip', city: 'My city', country: 'My country'}],
+        addresses: [{
+          street: 'My street', zip: 'My zip', city: 'My city', country: 'My country'
+        }],
         starred: true,
         photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAA'
       };
 
       this.expectEqual(this.shell.firstName + ' ' + this.shell.lastName);
 
-      this.shell.firstName = this.shell.lastName = '';
+      this.shell.firstName = '';
+      this.shell.lastName = '';
       this.expectEqual('MyOrg');
 
       this.shell.orgName = '';

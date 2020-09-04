@@ -13,7 +13,7 @@ require('../../services/contact-list-toggle-event.service.js');
   ) {
     return {
       restrict: 'E',
-      template: require("./contact-list-displayer.pug"),
+      template: require('./contact-list-displayer.pug'),
       link: function($scope) {
 
         $scope.displayAs = ContactListToggleDisplayService.getCurrentDisplay();

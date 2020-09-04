@@ -21,7 +21,7 @@ require('../../app.constant.js');
         addressbookPath: '=',
         contactState: '@'
       },
-      template: require("./contact-edition-form.pug"),
+      template: require('./contact-edition-form.pug'),
       link: function($scope) {
         $scope.CONTACT_ATTRIBUTES_ORDER = CONTACT_ATTRIBUTES_ORDER;
         $scope.avatarSize = CONTACT_AVATAR_SIZE.bigger;
@@ -29,15 +29,15 @@ require('../../app.constant.js');
         contactAddressbookService.listAddressbooksUserCanCreateContact().then(function(addressbooks) {
           return contactAddressbookDisplayService.convertShellsToDisplayShells(addressbooks, { includePriority: true });
         })
-        .then(function(addressbookDisplayShells) {
-          $scope.availableAddressbooks = contactAddressbookDisplayService.sortAddressbookDisplayShells(addressbookDisplayShells)
-            .map(function(addressbookDisplayShell) {
-              return {
-                path: addressbookDisplayShell.shell.href,
-                displayName: addressbookDisplayShell.displayName
-              };
-            });
-        });
+          .then(function(addressbookDisplayShells) {
+            $scope.availableAddressbooks = contactAddressbookDisplayService.sortAddressbookDisplayShells(addressbookDisplayShells)
+              .map(function(addressbookDisplayShell) {
+                return {
+                  path: addressbookDisplayShell.shell.href,
+                  displayName: addressbookDisplayShell.displayName
+                };
+              });
+          });
       }
     };
   }

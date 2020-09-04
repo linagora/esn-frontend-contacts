@@ -68,7 +68,8 @@ require('../../../sharing/constants.js');
       self.shareAccess = _.find(
         CONTACT_SHARING_SHARE_ACCESS_CHOICES, {
           value: self.addressbook.shareAccess
-        });
+        }
+      );
     }
 
     function _getShareOwner(sharees) {

@@ -1,4 +1,4 @@
-require('../services/shared-contact-data.service.js');
+require('./shared-contact-data.service.js');
 require('../app.constant.js');
 
 (function(angular) {
@@ -24,8 +24,6 @@ require('../app.constant.js');
 
           if (letterPosition < offset) {
             letter = element.textContent;
-          } else {
-            return;
           }
         });
 

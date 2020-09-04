@@ -3,6 +3,6 @@
 
   angular.module('linagora.esn.contact')
     .component('contactMaintenance', {
-      template: require("./contact-maintenance.pug")
+      template: require('./contact-maintenance.pug')
     });
 })(angular);

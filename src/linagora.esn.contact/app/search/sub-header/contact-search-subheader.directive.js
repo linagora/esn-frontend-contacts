@@ -4,7 +4,7 @@
   angular.module('linagora.esn.contact').directive('contactSearchSubheader', function() {
     return {
       restrict: 'E',
-      template: require("./contact-search-subheader.pug")
+      template: require('./contact-search-subheader.pug')
     };
   });
 })(angular);

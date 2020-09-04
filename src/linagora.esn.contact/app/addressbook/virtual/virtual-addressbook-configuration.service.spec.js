@@ -44,7 +44,7 @@ describe('The ContactVirtualAddressBookConfiguration service', function() {
     it('should resolve with the module configuration value', function(done) {
       var id = 'exists';
       var value = 'the config value';
-      var addressbook = {id: id, options: {configuration: {enabled: 'the enabled property'}}};
+      var addressbook = { id: id, options: { configuration: { enabled: 'the enabled property' } } };
 
       ContactVirtualAddressBookRegistry.get.returns($q.when(addressbook));
       esnConfig.returns($q.when(value));

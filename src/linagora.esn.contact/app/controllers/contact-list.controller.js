@@ -53,7 +53,9 @@ function ContactListController(
   $scope.keys = ALPHA_ITEMS;
   $scope.sortBy = requiredKey;
   $scope.prefix = 'contact-index';
-  $scope.categories = new AlphaCategoryService({keys: $scope.keys, sortBy: $scope.sortBy, keepAll: true, keepAllKey: '#'});
+  $scope.categories = new AlphaCategoryService({
+    keys: $scope.keys, sortBy: $scope.sortBy, keepAll: true, keepAllKey: '#'
+  });
   $scope.displayAs = CONTACT_LIST_DISPLAY.list;
   $scope.addressbooks = [];
 

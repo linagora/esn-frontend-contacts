@@ -114,7 +114,7 @@ describe('ContactShell services', function() {
         expect(shell.social[i].type).to.equal(socials[i]);
       }
 
-      expect(shell.urls).to.deep.equal([{value: 'http://www.nulpart.com'}]);
+      expect(shell.urls).to.deep.equal([{ value: 'http://www.nulpart.com' }]);
       expect(shell.birthday).to.deep.equal(new ICAL.Time({
         year: 2012,
         month: 10,

@@ -28,16 +28,16 @@ require('../contact/contact.service.js');
       $log.debug('Load contacts page %s on ab', page, this.addressbook);
 
       return contactService.listContacts(this.addressbook, {
-          userId: this.options.user._id,
-          page: page,
-          paginate: true
-        }).then(function(result) {
-          self.lastPage = result.last_page;
-          result.lastPage = result.last_page;
-          self.nextPage = result.next_page;
+        userId: this.options.user._id,
+        page: page,
+        paginate: true
+      }).then(function(result) {
+        self.lastPage = result.last_page;
+        result.lastPage = result.last_page;
+        self.nextPage = result.next_page;
 
-          return result;
-        });
+        return result;
+      });
     };
 
     return _AddressBookPaginationProvider;

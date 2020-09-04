@@ -48,7 +48,7 @@ describe('The ContactShowController', function() {
     };
     gracePeriodService = {
       askUserForCancel: function() {
-        return {promise: $q.when({})};
+        return { promise: $q.when({}) };
       },
       grace: function() {
         return {
@@ -242,7 +242,7 @@ describe('The ContactShowController', function() {
     it('should fill the scope with the contact', function() {
       contactUpdateDataService.contact = {};
       initController();
-      var contact = { emails: [{ type: 'work', value: 'me@work.com' }, {type: 'home', value: 'me@home.com' }] };
+      var contact = { emails: [{ type: 'work', value: 'me@work.com' }, { type: 'home', value: 'me@home.com' }] };
 
       scope.fillContactData(contact);
       contactUpdateDataService.contact = contact;
@@ -252,7 +252,7 @@ describe('The ContactShowController', function() {
     it('should fill the scope with the contact emails', function() {
       contactUpdateDataService.contact = {};
       initController();
-      var contact = { emails: [{ type: 'work', value: 'me@work.com' }, {type: 'home', value: 'me@home.com' }] };
+      var contact = { emails: [{ type: 'work', value: 'me@work.com' }, { type: 'home', value: 'me@home.com' }] };
 
       scope.fillContactData(contact);
       expect(scope.emails.length).to.equal(2);
@@ -277,7 +277,7 @@ describe('The ContactShowController', function() {
     });
 
     it('should build the display shell', function() {
-      var display = {foo: 'bar'};
+      var display = { foo: 'bar' };
 
       ContactShellDisplayBuilder.build = function() {
         return display;
@@ -555,7 +555,9 @@ describe('The ContactShowController', function() {
 
     it('should call deleteContact service with the right bookId, bookName and cardId', function() {
       scope.bookName = 'bookName';
-      scope.contact = { id: 1, firstName: 'Foo', lastName: 'Bar', addressbook: {} };
+      scope.contact = {
+        id: 1, firstName: 'Foo', lastName: 'Bar', addressbook: {}
+      };
       var spy = sinon.spy();
 
       $controller.bind(null, 'ContactShowController', {

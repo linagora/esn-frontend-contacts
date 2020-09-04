@@ -8,7 +8,7 @@ require('./services/contact-configuration.service.js');
       $stateProvider
         .state('contact', {
           url: '/contact',
-          template: require("./app.pug"),
+          template: require('./app.pug'),
           deepStateRedirect: {
             default: {
               state: 'contact.addressbooks',
@@ -35,7 +35,7 @@ require('./services/contact-configuration.service.js');
           },
           views: {
             'main@contact': {
-              template: require("./search/contact-search-result.pug"),
+              template: require('./search/contact-search-result.pug'),
               controller: 'ContactSearchController',
               controllerAs: 'ctrl',
               resolve: {
@@ -49,7 +49,7 @@ require('./services/contact-configuration.service.js');
           url: '/addressbooks/:bookId/:bookName',
           views: {
             'main@contact': {
-              template: require("./contact/list/contact-list.pug"),
+              template: require('./contact/list/contact-list.pug'),
               controller: 'ContactListController',
               controllerAs: '$ctrl',
               resolve: {
@@ -71,7 +71,7 @@ require('./services/contact-configuration.service.js');
           url: '^/contact/new/:bookId/:bookName',
           views: {
             'main@contact': {
-              template: require("./contact/create/contact-create.pug"),
+              template: require('./contact/create/contact-create.pug'),
               controller: 'newContactController',
               resolve: {
                 domain: routeResolver.session('domain'),
@@ -84,7 +84,7 @@ require('./services/contact-configuration.service.js');
           url: '^/contact/show/:bookId/:bookName/:cardId',
           views: {
             'main@contact': {
-              template: require("./contact/show/contact-show.pug"),
+              template: require('./contact/show/contact-show.pug'),
               controller: 'ContactShowController',
               resolve: {
                 domain: routeResolver.session('domain'),
@@ -97,7 +97,7 @@ require('./services/contact-configuration.service.js');
           url: '^/contact/edit/:bookId/:bookName/:cardId',
           views: {
             'main@contact': {
-              template: require("./contact/edit/contact-edit.pug"),
+              template: require('./contact/edit/contact-edit.pug'),
               controller: 'editContactController',
               resolve: {
                 domain: routeResolver.session('domain'),
@@ -107,14 +107,14 @@ require('./services/contact-configuration.service.js');
           }
         });
 
-        function isModuleActive($location, contactConfiguration) {
-          return contactConfiguration.get('enabled', true).then(function(isEnabled) {
-            if (!isEnabled) {
-              $location.path('/');
-            }
-          }).catch(function() {
+      function isModuleActive($location, contactConfiguration) {
+        return contactConfiguration.get('enabled', true).then(function(isEnabled) {
+          if (!isEnabled) {
             $location.path('/');
-          });
-        }
+          }
+        }).catch(function() {
+          $location.path('/');
+        });
+      }
     });
 })(angular);

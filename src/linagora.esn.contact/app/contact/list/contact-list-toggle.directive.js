@@ -15,7 +15,7 @@ require('../../app.constant.js');
   ) {
     return {
       restrict: 'E',
-      template: require("./contact-list-toggle.pug"),
+      template: require('./contact-list-toggle.pug'),
       link: function(scope) {
 
         function isToggleOn(value) {

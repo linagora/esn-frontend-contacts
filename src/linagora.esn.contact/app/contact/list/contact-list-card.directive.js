@@ -15,7 +15,7 @@ require('../../app.constant.js');
   ) {
     return {
       restrict: 'E',
-      template: require("./contact-list-card.pug"),
+      template: require('./contact-list-card.pug'),
       scope: {
         contact: '='
       },

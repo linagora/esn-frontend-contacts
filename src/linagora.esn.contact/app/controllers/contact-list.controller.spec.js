@@ -19,7 +19,7 @@ describe('The ContactListController controller', function() {
     };
     gracePeriodService = {
       askUserForCancel: function() {
-        return {promise: $q.when({})};
+        return { promise: $q.when({}) };
       },
       grace: function() {
         return {
@@ -41,7 +41,7 @@ describe('The ContactListController controller', function() {
         return this.pagination.loadNextItems(options);
       }
 
-      return $q.when({data: []});
+      return $q.when({ data: [] });
     };
 
     AddressBookPaginationRegistryMock = {
@@ -477,7 +477,7 @@ describe('The ContactListController controller', function() {
   it('should add no item to the categories when pagination returns an empty list', function(done) {
 
     createPaginationMocks(function() {
-      return $q.when({data: []});
+      return $q.when({ data: [] });
     }, function() {
       done(new Error('Should not be called'));
     });
@@ -496,11 +496,11 @@ describe('The ContactListController controller', function() {
   });
 
   it('should sort contacts by FN', function(done) {
-    var contactWithA = { displayName: 'A B'},
-        contactWithC = { displayName: 'C D' };
+    var contactWithA = { displayName: 'A B' },
+      contactWithC = { displayName: 'C D' };
 
     createPaginationMocks(function() {
-      return $q.when({data: [contactWithA, contactWithC]});
+      return $q.when({ data: [contactWithA, contactWithC] });
     }, function() {
       done(new Error('Should not be called'));
     });
@@ -525,11 +525,11 @@ describe('The ContactListController controller', function() {
   });
 
   it('should correctly sort contacts when multiple contacts have the same FN', function(done) {
-    var contact1 = { id: 1, displayName: 'A B'},
-        contact2 = { id: 2, displayName: 'A B' };
+    var contact1 = { id: 1, displayName: 'A B' },
+      contact2 = { id: 2, displayName: 'A B' };
 
     createPaginationMocks(function() {
-      return $q.when({data: [contact1, contact2]});
+      return $q.when({ data: [contact1, contact2] });
     }, function() {
       done(new Error('Should not be called'));
     });
@@ -553,11 +553,11 @@ describe('The ContactListController controller', function() {
   });
 
   it('should correctly sort contacts when multiple contacts have the same beginning of FN', function(done) {
-    var contact1 = { displayName: 'A B'},
-        contact2 = { displayName: 'A C' };
+    var contact1 = { displayName: 'A B' },
+      contact2 = { displayName: 'A C' };
 
     createPaginationMocks(function() {
-      return $q.when({data: [contact1, contact2]});
+      return $q.when({ data: [contact1, contact2] });
     }, function() {
       done(new Error('Should not be called'));
     });
@@ -581,12 +581,12 @@ describe('The ContactListController controller', function() {
   });
 
   it('should correctly sort contacts when some contacts does not have FN', function(done) {
-    var contact1 = { firstName: 'A'},
-        contact2 = { displayName: 'A C'},
-        contact3 = { id: '123' };
+    var contact1 = { firstName: 'A' },
+      contact2 = { displayName: 'A C' },
+      contact3 = { id: '123' };
 
     createPaginationMocks(function() {
-      return $q.when({data: [contact1, contact2, contact3]});
+      return $q.when({ data: [contact1, contact2, contact3] });
     }, function() {
       done(new Error('Should not be called'));
     });
@@ -598,8 +598,8 @@ describe('The ContactListController controller', function() {
       }
     });
 
-    sortedContacts.A = [{displayName: contact1.firstName, firstName: contact1.firstName}, contact2];
-    sortedContacts['#'] = [{displayName: contact3.id, id: contact3.id}];
+    sortedContacts.A = [{ displayName: contact1.firstName, firstName: contact1.firstName }, contact2];
+    sortedContacts['#'] = [{ displayName: contact3.id, id: contact3.id }];
 
     $rootScope.$digest();
 
@@ -626,13 +626,14 @@ describe('The ContactListController controller', function() {
         user: user
       });
       var mode = CONTACT_LIST_DISPLAY_MODES.single;
+
       scope.createPagination(mode);
       expect(scope.mode).to.equal(mode);
     });
 
     it('should call pagination#init', function(done) {
-      addressbooks.push({id: 1, name: 'foo'});
-      addressbooks.push({id: 2, name: 'bar'});
+      addressbooks.push({ id: 1, name: 'foo' });
+      addressbooks.push({ id: 2, name: 'bar' });
       var mode = CONTACT_LIST_DISPLAY_MODES.list;
 
       initController();
@@ -651,7 +652,7 @@ describe('The ContactListController controller', function() {
   describe('The loadContacts function', function() {
 
     it('should call the addressBookPaginationService vcard list fn', function(done) {
-      var user = {_id: 123};
+      var user = { _id: 123 };
 
       createPaginationMocks(function() {
         done();
@@ -695,7 +696,7 @@ describe('The ContactListController controller', function() {
     });
 
     it('should display error when pagination fails', function(done) {
-      var user = {_id: 123};
+      var user = { _id: 123 };
 
       createPaginationMocks(function() {
         return $q.reject('WTF');
@@ -890,10 +891,10 @@ describe('The ContactListController controller', function() {
 
       var categories = {
         A: [
-          {id: 'contactId1', addressbook: { bookId: 'bookId1', bookName: 'bookName1'}},
-          {id: 'contactId2', addressbook: {bookId: 'bookId2', bookName: 'bookName2'}}
+          { id: 'contactId1', addressbook: { bookId: 'bookId1', bookName: 'bookName1' } },
+          { id: 'contactId2', addressbook: { bookId: 'bookId2', bookName: 'bookName2' } }
         ],
-        B: [{id: 'contactId3', addressbook: {bookId: 'bookId2', bookName: 'bookName2'}}]
+        B: [{ id: 'contactId3', addressbook: { bookId: 'bookId2', bookName: 'bookName2' } }]
       };
 
       var getMock = sinon.stub().returns(categories);

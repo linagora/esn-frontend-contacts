@@ -16,7 +16,7 @@ describe('The openContactForm service', function() {
   beforeEach(function() {
     bookId = '123';
     bookName = 'contacts';
-    contact = {_id: '456'};
+    contact = { _id: '456' };
     var self = this;
 
     self.sharedContactDataService = {};

@@ -7,7 +7,7 @@
   function ContactAttendeeProvider() {
     return {
       objectType: 'contact',
-      template: require("../contact/auto-complete/contact-auto-complete.pug")
+      template: require('../contact/auto-complete/contact-auto-complete.pug')
     };
   }
 

@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.contact')
     .component('contactConfigForm', {
-      template: require("./contact-config-form.pug"),
+      template: require('./contact-config-form.pug'),
       bindings: {
         configurations: '=',
         mode: '@',
