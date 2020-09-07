@@ -146,7 +146,7 @@ function contactService(
     return _getAddressbookShell(addressbook).then(function(addressbookShell) {
       const sourceMetadata = _getSouceMetadata(addressbookShell);
       const target = '/addressbooks/' + sourceMetadata.bookId + '/' + sourceMetadata.bookName + '.json';
-      const OPENPAAS_URL = process.env.OPENPAAS_URL || 'http://localhost:8080';
+      const OPENPAAS_URL = window.location.origin;
       const esnDavImportClient = new ESNDavImportClient(fileUploadService.uploadFile, OPENPAAS_URL);
 
       return esnDavImportClient.importFromFile(file, target);
