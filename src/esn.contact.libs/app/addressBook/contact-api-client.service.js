@@ -1,9 +1,5 @@
 require('../shell/shell.service.js');
-<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 require('./contact-shell-builder.service.js');
-=======
-require('./contact-shell-builder.service.js')
->>>>>>> #50 delete files from linagora.esn.contacts and their require
 require('../vcard/vcard-builder.service.js');
 require('../app.constant.js');
 
@@ -600,6 +596,7 @@ require('../app.constant.js');
       }
 
       var params = {};
+
       if (options.graceperiod) {
         params.graceperiod = options.graceperiod;
       }

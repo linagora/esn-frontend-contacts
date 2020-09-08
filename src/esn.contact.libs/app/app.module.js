@@ -99,10 +99,6 @@ require('./addressBook/constants.js');
 require('./addressBook/contact-api-client.service');
 require('./addressBook/contact-shell-builder.service');
 require('./addressBook/contact-update-data.service');
-<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
-=======
-require('./addressBook/virtual-addressbook.service');
->>>>>>> #50 delete files from linagora.esn.contacts and their require
 require('./contact/contact.constants.js');
 require('./contact/helper.service.js');
 require('./display-shell/addressbook-display-shell.service.js');
