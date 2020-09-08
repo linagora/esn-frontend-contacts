@@ -1,4 +1,3 @@
-require('../display-shell/addressbook-display-shell-registry.service.js');
 require('./default-addressbook-display-shell.service.js');
 require('./default-addressbook-helper.service.js');
 require('../action/addressbook-action-edit.service.js');

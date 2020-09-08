@@ -1,14 +1,10 @@
 'use strict';
 
 require('../pagination/addressbook-pagination.js');
-require('../contact/helper.service.js');
-require('../services/contact-update-data.service.js');
-require('../addressbook/addressbook.service.js');
 require('../services/contact-display-error.service.js');
 require('../services/open-contact-form.service.js');
 require('../contact/contact.constants.js');
 require('../app.constant.js');
-require('../addressbook/addressbook.constants.js');
 
 angular.module('linagora.esn.contact')
   .controller('ContactListController', ContactListController);

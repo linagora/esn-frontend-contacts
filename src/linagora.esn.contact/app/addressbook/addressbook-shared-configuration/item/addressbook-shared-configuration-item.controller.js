@@ -1,7 +1,5 @@
-require('../../addressbook-display.service.js');
 require('../../../sharing/constants.js');
 
-(function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
@@ -23,4 +21,3 @@ require('../../../sharing/constants.js');
       }
     }
   }
-})(angular);

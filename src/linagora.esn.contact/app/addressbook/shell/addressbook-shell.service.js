@@ -1,10 +1,7 @@
-require('../../services/addressbook-parser.service.js');
 require('../acl/addressbook-acl-helper.servive.js');
 require('../../sharing/sharee/contact-sharee.service.js');
-require('../addressbook.constants.js');
 require('../../sharing/constants.js');
 
-(function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
@@ -106,4 +103,4 @@ require('../../sharing/constants.js');
 
     return AddressbookShell;
   }
-})(angular);
+  

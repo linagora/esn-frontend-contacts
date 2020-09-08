@@ -1,7 +1,5 @@
-require('../display-shell/addressbook-display-shell-registry.service.js')
 require('../shell/shell.service.js');
 require('./contact-shell-builder.service.js')
-require('../addressBook/avatar.service.js');
 require('../vcard/vcard-builder.service.js');
 require('../app.constant.js');
 

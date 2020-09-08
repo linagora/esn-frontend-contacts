@@ -1,10 +1,7 @@
 const _ = require('lodash');
 
-require('../../addressbook.service.js');
-require('../../addressbook.constants.js');
 require('../../../sharing/constants.js');
 
-(function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
@@ -76,4 +73,4 @@ require('../../../sharing/constants.js');
       return _.find(sharees, { access: CONTACT_SHARING_SHARE_ACCESS.SHAREDOWNER });
     }
   }
-})(angular);
+  

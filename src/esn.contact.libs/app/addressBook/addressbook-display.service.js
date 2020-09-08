@@ -3,7 +3,7 @@ const _ = require('lodash');
 require('../display-shell/addressbook-display-shell-registry.service');
 require('../display-shell/addressbook-display-shell.service.js');
 require('../group-addressbook/contact-group-addressbook.service.js');
-require('../addressBook/addressbook.constants.js');
+require('./addressbook.constants.js');
 
 (function(angular) {
   'use strict';
@@ -49,6 +49,7 @@ require('../addressBook/addressbook.constants.js');
           var actions = _.filter(match.actions, function(action) {
             return action.name === 'Settings' ? options.isSharingAddressbookEnabled : true;
           });
+
           addressbookDisplayShell.actions = actions || [];
         }
 

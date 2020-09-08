@@ -1,7 +1,5 @@
 require('../shell/shell.service.js');
 require('../shell/contact-shell-helper.service.js');
-require('../addressBook/contact-update-data.service.js');
-require('../addressBook/avatar.service.js');
 require('../app.constant.js');
 
 (function(angular) {

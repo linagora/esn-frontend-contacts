@@ -1,7 +1,6 @@
-require('../addressbook.service.js');
-require('../addressbook-display.service.js');
 
-(function(angular) {
+require('../../../../esn.contact.libs/app/addressBook/addressbook-display.service.js');
+
   'use strict';
 
   angular.module('linagora.esn.contact')
@@ -31,4 +30,3 @@ require('../addressbook-display.service.js');
       return contactAddressbookService.removeAddressbook(addressbook);
     }
   }
-})(angular);

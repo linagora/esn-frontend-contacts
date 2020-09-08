@@ -1,6 +1,5 @@
-require('../contact/helper.service.js');
-require('../services/contact-update-data.service.js');
-require('../contact/shell/contact-shell-builder.service.js');
+'use strict';
+
 require('../services/contact-delete.service.js');
 require('../services/shared-contact-data.service.js');
 require('../services/contact-display-error.service.js');
@@ -8,8 +7,6 @@ require('../contact/contact.service.js');
 require('../app.constant.js');
 require('../contact/contact.constants.js');
 
-(function(angular) {
-  'use strict';
 
   angular.module('linagora.esn.contact')
     .controller('ContactShowController', ContactShowController);
@@ -156,4 +153,3 @@ require('../contact/contact.constants.js');
 
     sharedContactDataService.contact = {};
   }
-})(angular);

@@ -1,6 +1,4 @@
-require('../display-shell/addressbook-display-shell.service.js');
 
-(function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
@@ -17,4 +15,4 @@ require('../display-shell/addressbook-display-shell.service.js');
 
     return UserAddressbookDisplayShell;
   }
-})(angular);
+  

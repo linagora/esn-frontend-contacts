@@ -1,11 +1,10 @@
+'use strict';
+
 require('./addressbook-pagination-provider.service.js');
 require('../addressbook/virtual/virtual-addressbook-pagination-provider.service.js');
 require('../contact/shell/contact-shell-comparator.service.js');
 require('../app.constant.js');
-require('../addressbook/addressbook.constants.js');
 
-(function(angular) {
-  'use strict';
 
   angular.module('linagora.esn.contact')
     .factory('MultipleAddressBookPaginationProvider', MultipleAddressBookPaginationProvider);
@@ -51,4 +50,3 @@ require('../addressbook/addressbook.constants.js');
 
     return _MultipleAddressBookPaginationProvider;
   }
-})(angular);

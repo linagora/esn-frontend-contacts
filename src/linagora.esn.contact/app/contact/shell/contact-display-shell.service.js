@@ -1,10 +1,8 @@
-require('../helper.service.js');
-require('../../services/avatar.service.js');
+'use strict';
+
 require('../../services/contact-localtion-helper.service.js');
 require('../../app.constant.js');
 
-(function(angular) {
-  'use strict';
 
   angular.module('linagora.esn.contact')
     .factory('ContactDisplayShell', ContactDisplayShell);
@@ -101,4 +99,3 @@ require('../../app.constant.js');
 
     return _ContactDisplayShell;
   }
-})(angular);

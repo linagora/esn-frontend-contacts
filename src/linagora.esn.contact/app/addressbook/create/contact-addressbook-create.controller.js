@@ -1,6 +1,4 @@
-require('../addressbook.service.js');
 
-(function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
@@ -22,4 +20,3 @@ require('../addressbook.service.js');
       });
     }
   }
-})(angular);

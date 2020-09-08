@@ -3,7 +3,6 @@
 const _ = require('lodash');
 const { ESNDavImportClient } = require('esn-dav-import-client');
 
-require('../services/contact-api-client.service.js');
 require('../addressbook/shell/addressbook-shell.service.js');
 
 angular.module('linagora.esn.contact')

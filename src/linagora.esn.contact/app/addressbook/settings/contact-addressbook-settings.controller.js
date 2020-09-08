@@ -1,10 +1,5 @@
 const _ = require('lodash');
 
-require('../addressbook.service.js');
-require('../addressbook-display.service.js');
-require('../addressbook.constants.js');
-
-(function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
@@ -96,4 +91,4 @@ require('../addressbook.constants.js');
       return membersRight && membersRight.label;
     }
   }
-})(angular);
+  

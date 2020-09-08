@@ -1,7 +1,6 @@
 const _ = require('lodash');
 
-require('../addressbook.service.js');
-require('../addressbook.constants.js');
+require('../../../../esn.contact.libs/app/addressBook/addressbook.service.js');
 require('../../sharing/constants.js');
 
 (function(angular) {

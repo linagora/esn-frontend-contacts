@@ -1,6 +1,4 @@
-require('../addressbook-display.service.js');
 
-(function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
@@ -26,4 +24,4 @@ require('../addressbook-display.service.js');
       return '/dav/api/addressbooks/' + bookId + '/' + bookName + '?export';
     }
   }
-})(angular);
+  

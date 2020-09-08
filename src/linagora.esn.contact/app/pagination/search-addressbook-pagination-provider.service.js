@@ -1,6 +1,4 @@
-require('../services/contact-api-client.service.js');
 
-(function(angular) {
   'use strict';
 
   angular.module('linagora.esn.contact')
@@ -47,4 +45,4 @@ require('../services/contact-api-client.service.js');
 
     return _SearchAddressBookPaginationProvider;
   }
-})(angular);
+  

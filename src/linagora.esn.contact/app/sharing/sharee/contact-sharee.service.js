@@ -1,8 +1,7 @@
-require('../../services/addressbook-parser.service.js');
+'use strict';
+
 require('../constants.js');
 
-(function(angular) {
-  'use strict';
 
   angular.module('linagora.esn.contact')
     .factory('ContactSharee', ContactShareeFactory);
@@ -86,4 +85,4 @@ require('../constants.js');
 
     return ContactSharee;
   }
-})(angular);
+  

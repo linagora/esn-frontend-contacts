@@ -1,10 +1,10 @@
-require('../addressbook/addressbook-display.service.js');
+require('../addressBook/addressbook-display.service.js');
 require('../app.constant.js');
 
 (function(angular) {
   'use strict';
 
-  angular.module('linagora.esn.contact')
+  angular.module('esn.contact.libs')
     .factory('ContactsHelper', ContactsHelper);
 
   function ContactsHelper(
