@@ -32,7 +32,7 @@ require('../app.constant.js');
     };
 
     this.populateAddressbook = function(shell, bookId, bookName) {
-      return this.addressbookCache.get({bookId: bookId, bookName: bookName}).then(function(ab) {
+      return this.addressbookCache.get({ bookId: bookId, bookName: bookName }).then(function(ab) {
         shell.addressbook = ab;
 
         return shell;

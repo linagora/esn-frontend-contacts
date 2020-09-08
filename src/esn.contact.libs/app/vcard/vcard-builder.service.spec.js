@@ -77,14 +77,16 @@ describe('The VcardBuilder service', function() {
         lastName: 'last',
         firstName: 'first',
         starred: true,
-        tags: [{text: 'a'}, {text: 'b'}],
-        emails: [{type: 'Home', value: 'email@example.com'}],
-        tel: [{type: 'Home', value: '123123'}],
-        addresses: [{type: 'Home', street: 's', city: 'c', zip: 'z', country: 'co'}],
-        social: [{type: 'Twitter', value: '@AwesomePaaS'}],
+        tags: [{ text: 'a' }, { text: 'b' }],
+        emails: [{ type: 'Home', value: 'email@example.com' }],
+        tel: [{ type: 'Home', value: '123123' }],
+        addresses: [{
+          type: 'Home', street: 's', city: 'c', zip: 'z', country: 'co'
+        }],
+        social: [{ type: 'Twitter', value: '@AwesomePaaS' }],
         orgName: 'org',
         orgRole: 'role',
-        urls: [{value: 'http://mywebsite.com'}],
+        urls: [{ value: 'http://mywebsite.com' }],
         birthday: new Date(2015, 0, 1),
         nickname: 'nick',
         notes: 'notes',
@@ -128,7 +130,7 @@ describe('The VcardBuilder service', function() {
     it('should not add email in vcard when it does not have value', function() {
       var shell = {
         id: '00000000-0000-4000-a000-000000000000',
-        emails: [{ type: 'Home'}]
+        emails: [{ type: 'Home' }]
       };
 
       var vcard = VcardBuilder.toVcard(shell);
@@ -140,7 +142,7 @@ describe('The VcardBuilder service', function() {
     it('should not add telephone in vcard when it does not have value', function() {
       var shell = {
         id: '00000000-0000-4000-a000-000000000000',
-        tel: [{ type: 'Home'}]
+        tel: [{ type: 'Home' }]
       };
 
       var vcard = VcardBuilder.toVcard(shell);
@@ -152,7 +154,7 @@ describe('The VcardBuilder service', function() {
     it('should not add addresse in vcard when it does not have value', function() {
       var shell = {
         id: '00000000-0000-4000-a000-000000000000',
-        addresses: [{ type: 'Home'}]
+        addresses: [{ type: 'Home' }]
       };
 
       var vcard = VcardBuilder.toVcard(shell);
@@ -164,7 +166,7 @@ describe('The VcardBuilder service', function() {
     it('should not add socialprofile in vcard when it does not have value', function() {
       var shell = {
         id: '00000000-0000-4000-a000-000000000000',
-        social: [{ type: 'Home'}]
+        social: [{ type: 'Home' }]
       };
 
       var vcard = VcardBuilder.toVcard(shell);
@@ -188,7 +190,7 @@ describe('The VcardBuilder service', function() {
 
   describe('The toJSON function', function() {
     it('should build the vcard then call toJSON', function(done) {
-      var shell = {foo: 'bar'};
+      var shell = { foo: 'bar' };
 
       VcardBuilder.toVcard = function(_shell) {
         expect(_shell).to.deep.equal(shell);

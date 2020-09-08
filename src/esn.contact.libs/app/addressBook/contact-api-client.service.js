@@ -1,8 +1,7 @@
 require('../shell/shell.service.js');
-require('./contact-shell-builder.service.js')
+require('./contact-shell-builder.service.js');
 require('../vcard/vcard-builder.service.js');
 require('../app.constant.js');
-
 
 (function(angular) {
   'use strict';
@@ -289,7 +288,7 @@ require('../app.constant.js');
       var headers = { Accept: CONTACT_ACCEPT_HEADER };
       var data = {
         'dav:share-resource': {
-        'dav:sharee': sharees.map(function(sharee) {
+          'dav:sharee': sharees.map(function(sharee) {
             return {
               'dav:href': sharee.href,
               'dav:share-access': sharee.access
@@ -316,7 +315,7 @@ require('../app.constant.js');
       return davClient('POST', getBookUrl(bookId, bookName), headers, data);
     }
 
-   /**
+    /**
     * Update addressbook public right
     * @param {String} bookId      The addressbook home ID
     * @param {String} bookName    The addressbook name
@@ -346,16 +345,16 @@ require('../app.constant.js');
     * @param {String} bookName    The address book name
     * @param {Array}  membersRight The new members right to update
     */
-   function setMembersRight(bookId, bookName, membersRight) {
-    var headers = { 'Content-Type': CONTACT_CONTENT_TYPE_HEADER };
-    var data = {
-      'dav:group-addressbook': {
-        privileges: membersRight
-      }
-    };
+    function setMembersRight(bookId, bookName, membersRight) {
+      var headers = { 'Content-Type': CONTACT_CONTENT_TYPE_HEADER };
+      var data = {
+        'dav:group-addressbook': {
+          privileges: membersRight
+        }
+      };
 
-    return davClient('POST', getBookUrl(bookId, bookName), headers, data);
-  }
+      return davClient('POST', getBookUrl(bookId, bookName), headers, data);
+    }
 
     /**
      * Get specified card
@@ -372,7 +371,8 @@ require('../app.constant.js');
       return davClient('GET', href, headers)
         .then(function(response) {
           var contact = new ContactShell(
-            new ICAL.Component(response.data), response.headers('ETag'));
+            new ICAL.Component(response.data), response.headers('ETag')
+          );
 
           contactAvatarService.forceReloadDefaultAvatar(contact);
 
@@ -499,16 +499,17 @@ require('../app.constant.js');
       }
 
       return davClient(
-          'PUT',
-          getVCardUrl(bookId, bookName, contact.id),
-          headers,
-          VcardBuilder.toJSON(contact)
-        ).then(function(response) {
-          if (response.status !== 201) {
-            return $q.reject(response);
-          }
-          return response;
-        });
+        'PUT',
+        getVCardUrl(bookId, bookName, contact.id),
+        headers,
+        VcardBuilder.toJSON(contact)
+      ).then(function(response) {
+        if (response.status !== 201) {
+          return $q.reject(response);
+        }
+
+        return response;
+      });
     }
 
     /**
@@ -556,17 +557,17 @@ require('../app.constant.js');
       var params = { graceperiod: GRACE_DELAY };
 
       return davClient('PUT',
-          getVCardUrl(bookId, bookName, cardId),
-          headers,
-          VcardBuilder.toJSON(contact),
-          params
-        ).then(function(response) {
-          if (response.status === 202 || response.status === 204) {
-            return response.headers('X-ESN-TASK-ID');
-          } else {
-            return $q.reject(response);
-          }
-        });
+        getVCardUrl(bookId, bookName, cardId),
+        headers,
+        VcardBuilder.toJSON(contact),
+        params).then(function(response) {
+        if (response.status === 202 || response.status === 204) {
+          return response.headers('X-ESN-TASK-ID');
+        }
+
+        return $q.reject(response);
+
+      });
     }
 
     /**
@@ -595,22 +596,22 @@ require('../app.constant.js');
       }
 
       var params = {};
+
       if (options.graceperiod) {
         params.graceperiod = options.graceperiod;
       }
 
       return davClient('DELETE',
-          getVCardUrl(bookId, bookName, cardId),
-          headers,
-          null,
-          params
-        ).then(function(response) {
-          if (response.status !== 204 && response.status !== 202) {
-            return $q.reject(response);
-          }
+        getVCardUrl(bookId, bookName, cardId),
+        headers,
+        null,
+        params).then(function(response) {
+        if (response.status !== 204 && response.status !== 202) {
+          return $q.reject(response);
+        }
 
-          return response.headers('X-ESN-TASK-ID');
-        });
+        return response.headers('X-ESN-TASK-ID');
+      });
     }
   }
 })(angular);

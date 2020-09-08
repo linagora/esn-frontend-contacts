@@ -1,7 +1,6 @@
 'use strict';
 
 require('../display-shell/addressbook-display-shell.service.js');
-  
 
 angular.module('esn.contact.libs')
   .factory('ContactGroupAddressbookDisplayShell', ContactGroupAddressbookDisplayShell);

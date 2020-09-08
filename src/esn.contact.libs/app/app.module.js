@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('esn.contact.libs', [
   'ngTagsInput',
   'esn.core',

@@ -32,19 +32,19 @@ function ContactSidebarController(
     self.status = LOADING_STATUS.loading;
 
     contactAddressbookService.listAddressbooks()
-      .then(function (addressbooks) {
+      .then(function(addressbooks) {
         self.status = LOADING_STATUS.loaded;
 
         return _injectOwnerToSubscription(addressbooks);
       })
-      .then(function (addressbooks) {
-        contactAddressbookDisplayService.convertShellsToDisplayShells(addressbooks, DISPLAY_SHELL_CONVERT_OPTIONS).then(function (displayShells) {
+      .then(function(addressbooks) {
+        contactAddressbookDisplayService.convertShellsToDisplayShells(addressbooks, DISPLAY_SHELL_CONVERT_OPTIONS).then(function(displayShells) {
           self.displayShells = displayShells;
           _refreshAddressbooksList();
           _listenAddressbookEvents();
         });
       })
-      .catch(function () {
+      .catch(function() {
         self.status = LOADING_STATUS.error;
       });
   }
@@ -63,14 +63,14 @@ function ContactSidebarController(
   function _injectOwnerToSubscription(addressbooks) {
     var userIds = [];
 
-    addressbooks.forEach(function (addressbook) {
+    addressbooks.forEach(function(addressbook) {
       if (addressbook.isSubscription && !addressbook.group) {
         userIds.push(addressbook.source.bookId);
       }
     });
 
-    var getOwnersPromises = _.unique(userIds).map(function (userId) {
-      return userAPI.user(userId).then(function (response) {
+    var getOwnersPromises = _.unique(userIds).map(function(userId) {
+      return userAPI.user(userId).then(function(response) {
         return {
           id: userId,
           displayName: userUtils.displayNameOf(response.data)
@@ -78,10 +78,10 @@ function ContactSidebarController(
       });
     });
 
-    return $q.all(getOwnersPromises).then(function (owners) {
-      addressbooks.forEach(function (addressbook) {
+    return $q.all(getOwnersPromises).then(function(owners) {
+      addressbooks.forEach(function(addressbook) {
         if (addressbook.isSubscription) {
-          var target = _.find(owners, function (owner) {
+          var target = _.find(owners, function(owner) {
             return addressbook.source.bookId === owner.id;
           });
 
@@ -98,7 +98,7 @@ function ContactSidebarController(
   function _onAddressbookCreatedEvent(event, createdAddressbook) {
     if (createdAddressbook.isSubscription) {
       return _injectOwnerToSubscription([createdAddressbook])
-        .then(function () {
+        .then(function() {
           self.displayShells.push(contactAddressbookDisplayService.convertShellToDisplayShell(createdAddressbook, DISPLAY_SHELL_CONVERT_OPTIONS));
         })
         .then(_refreshAddressbooksList);
@@ -111,7 +111,7 @@ function ContactSidebarController(
   function _onUpdatedAddressbookEvent(event, updatedAddressbook) {
     if (updatedAddressbook.isSubscription) {
       return _injectOwnerToSubscription([updatedAddressbook])
-        .then(function (injectedOwnerAddressbooks) {
+        .then(function(injectedOwnerAddressbooks) {
           _updateAddressbookInList(injectedOwnerAddressbooks[0]);
           _refreshAddressbooksList();
         });
@@ -122,7 +122,7 @@ function ContactSidebarController(
   }
 
   function _updateAddressbookInList(addressbookToUpdate) {
-    var index = _.findIndex(self.displayShells, function (addressbook) {
+    var index = _.findIndex(self.displayShells, function(addressbook) {
       return addressbook.shell.bookName === addressbookToUpdate.bookName;
     });
 
@@ -133,7 +133,7 @@ function ContactSidebarController(
   }
 
   function _onRemovedAddressbookEvent(event, removedAddressbook) {
-    _.remove(self.displayShells, function (addressbook) {
+    _.remove(self.displayShells, function(addressbook) {
       return addressbook.shell.bookName === removedAddressbook.bookName;
     });
 

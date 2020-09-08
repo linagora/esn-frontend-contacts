@@ -1,22 +1,22 @@
 
-  'use strict';
+'use strict';
 
-  angular.module('linagora.esn.contact')
-    .controller('ContactAddressbookCreateController', ContactAddressbookCreateController);
+angular.module('linagora.esn.contact')
+  .controller('ContactAddressbookCreateController', ContactAddressbookCreateController);
 
-  function ContactAddressbookCreateController(asyncAction, contactAddressbookService) {
-    var self = this;
-    var notificationMessages = {
-      progressing: 'Creating address book...',
-      success: 'Address book created',
-      failure: 'Failed to create address book'
-    };
+function ContactAddressbookCreateController(asyncAction, contactAddressbookService) {
+  var self = this;
+  var notificationMessages = {
+    progressing: 'Creating address book...',
+    success: 'Address book created',
+    failure: 'Failed to create address book'
+  };
 
-    self.onCreateBtnClick = onCreateBtnClick;
+  self.onCreateBtnClick = onCreateBtnClick;
 
-    function onCreateBtnClick() {
-      return asyncAction(notificationMessages, function() {
-        return contactAddressbookService.createAddressbook(self.addressbook);
-      });
-    }
+  function onCreateBtnClick() {
+    return asyncAction(notificationMessages, function() {
+      return contactAddressbookService.createAddressbook(self.addressbook);
+    });
   }
+}

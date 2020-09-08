@@ -75,7 +75,7 @@ require('./constants.js');
         _listGroupAddressbooks(),
         _listVirtualAddressbooks()
       ]).then(function(results) {
-        return [].concat.apply([], results);
+        return [].concat(...results);
       });
     }
 
@@ -104,7 +104,7 @@ require('./constants.js');
 
           return $q.all(promises)
             .then(function(results) {
-              return [].concat.apply([], results);
+              return [].concat(...results);
             });
         });
     }
@@ -179,9 +179,9 @@ require('./constants.js');
           shared: true, shareOwner: userId
         })
       ])
-      .then(function(data) {
-        return data[0].concat(data[1]);
-      });
+        .then(function(data) {
+          return data[0].concat(data[1]);
+        });
     }
 
     function listSubscribedAddressbooks() {

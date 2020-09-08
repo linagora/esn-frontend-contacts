@@ -4,7 +4,6 @@ const _ = require('lodash');
 
 require('../../contact.service.js');
 
-
 angular.module('linagora.esn.contact')
   .controller('contactActionCopyController', contactCopyController);
 
@@ -28,20 +27,20 @@ function contactCopyController(
     contactAddressbookService.listAddressbooksUserCanCreateContact()
       .then(_excludeCurrentAddressbook)
       .then(contactAddressbookDisplayService.convertShellsToDisplayShells)
-      .then(function (availableAddressbookDisplayShells) {
+      .then(function(availableAddressbookDisplayShells) {
         self.availableAddressbookDisplayShells = availableAddressbookDisplayShells;
         self.selectedAddressbook = self.availableAddressbookDisplayShells[0].shell;
       });
   }
 
   function copyContact() {
-    return asyncAction(NOTIFICATION_MESSAGES, function () {
+    return asyncAction(NOTIFICATION_MESSAGES, function() {
       return contactService.copyContact(self.selectedAddressbook, self.contact);
     });
   }
 
   function _excludeCurrentAddressbook(addressbooks) {
-    _.remove(addressbooks, function (addressbook) {
+    _.remove(addressbooks, function(addressbook) {
       return self.contact.addressbook.bookName === addressbook.bookName;
     });
 
