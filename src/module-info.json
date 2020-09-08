@@ -19,6 +19,22 @@
       ]
     },
     {
+      "name": "linagora.esn.contact.collect",
+      "angularModuleName": "linagora.esn.contact.collect",
+      "shortName": "collect",
+      "pugGlob": [
+        "**/*.pug"
+      ],
+      "pugOptions": {
+        "basedir": "./node_modules/esn-frontend-common-libs/src/frontend/views"
+      },
+      "fileRoot": "frontend/app",
+      "filesGlob": [
+        "**/*.module.js",
+        "**/!(*spec).js"
+      ]
+    },
+    {
       "name": "linagora.esn.contact.import",
       "angularModuleName": "linagora.esn.contact.import",
       "shortName": "import",
