@@ -3,7 +3,11 @@
 const _ = require('lodash');
 const { ESNDavImportClient } = require('esn-dav-import-client');
 
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 //require('../addressbook/shell/addressbook-shell.service.js');
+=======
+require('../addressbook/shell/addressbook-shell.service.js');
+>>>>>>> #50 delete files from linagora.esn.contacts and their require
 
 angular.module('linagora.esn.contact')
   .factory('contactService', contactService);

@@ -4,8 +4,15 @@ const _ = require('lodash');
 
 require('../../../sharing/constants.js');
 
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 angular.module('linagora.esn.contact')
   .controller('contactAddressbookSharedRightDisplayController', addressbookSharedRightDisplayController);
+=======
+  'use strict';
+
+  angular.module('linagora.esn.contact')
+    .controller('contactAddressbookSharedRightDisplayController', addressbookSharedRightDisplayController);
+>>>>>>> #50 delete files from linagora.esn.contacts and their require
 
 function addressbookSharedRightDisplayController(
   CONTACT_ADDRESSBOOK_PUBLIC_RIGHT,
@@ -23,4 +30,8 @@ function addressbookSharedRightDisplayController(
       self.displayRight = _.find(CONTACT_ADDRESSBOOK_PUBLIC_RIGHT, { value: self.addressbook.rights.public }).label;
     }
   }
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 }
+=======
+  
+>>>>>>> #50 delete files from linagora.esn.contacts and their require

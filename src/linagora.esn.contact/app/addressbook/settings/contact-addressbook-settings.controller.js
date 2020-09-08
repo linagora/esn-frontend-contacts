@@ -1,6 +1,48 @@
 'use strict';
 
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 const _ = require('lodash');
+=======
+  'use strict';
+
+  angular.module('linagora.esn.contact')
+    .controller('contactAddressbookSettingsController', contactAddressbookSettingsController);
+
+  function contactAddressbookSettingsController(
+    $q,
+    $state,
+    $stateParams,
+    asyncAction,
+    contactAddressbookService,
+    contactAddressbookDisplayService,
+    CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS
+  ) {
+    var self = this;
+    var originalAddressbook;
+    var NOTIFICATION_MESSAGES = {
+      progressing: 'Updating address book settings...',
+      success: 'Address book settings are updated',
+      failure: 'Failed to update address book settings'
+    };
+
+    self.$onInit = $onInit;
+    self.onSave = onSave;
+    self.onCancel = onCancel;
+
+    function $onInit() {
+      contactAddressbookService.getAddressbookByBookName($stateParams.bookName, $stateParams.bookId)
+        .then(function(addressbook) {
+          self.addressbook = addressbook;
+          self.addressbookDisplayName = contactAddressbookDisplayService.buildDisplayName(addressbook);
+
+          originalAddressbook = angular.copy(self.addressbook);
+
+          self.publicRight = _getShareConcernedAddressbook(self.addressbook).rights.public;
+          self.sharees = _getShareConcernedAddressbook(self.addressbook).sharees;
+          self.membersRight = _getMembersRight(_getShareConcernedAddressbook(self.addressbook));
+        });
+    }
+>>>>>>> #50 delete files from linagora.esn.contacts and their require
 
 angular.module('linagora.esn.contact')
   .controller('contactAddressbookSettingsController', contactAddressbookSettingsController);
@@ -90,4 +132,8 @@ function contactAddressbookSettingsController(
 
     return membersRight && membersRight.label;
   }
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 }
+=======
+  
+>>>>>>> #50 delete files from linagora.esn.contacts and their require

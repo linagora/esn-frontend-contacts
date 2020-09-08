@@ -7,6 +7,7 @@ require('../contact/contact.service.js');
 require('../app.constant.js');
 require('../contact/contact.constants.js');
 
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 angular.module('linagora.esn.contact')
   .controller('ContactShowController', ContactShowController);
 
@@ -42,6 +43,64 @@ function ContactShowController(
         bookName: data.addressbook.bookName,
         cardId: data.id
       }, { location: 'replace' });
+=======
+
+  angular.module('linagora.esn.contact')
+    .controller('ContactShowController', ContactShowController);
+
+  function ContactShowController(
+    $log,
+    $scope,
+    $state,
+    $timeout,
+    $stateParams,
+    $window,
+    ContactsHelper,
+    contactUpdateDataService,
+    ContactShellDisplayBuilder,
+    deleteContact,
+    sharedContactDataService,
+    contactDisplayError,
+    gracePeriodService,
+    contactService,
+    CONTACT_AVATAR_SIZE,
+    CONTACT_EVENTS
+  ) {
+    $scope.avatarSize = CONTACT_AVATAR_SIZE.bigger;
+    $scope.bookId = $stateParams.bookId;
+    $scope.bookName = $stateParams.bookName;
+    $scope.cardId = $stateParams.cardId;
+    $scope.contact = {};
+    $scope.loaded = false;
+
+    $scope.$on(CONTACT_EVENTS.UPDATED, function(e, data) {
+      if (data.id === $scope.cardId && data.addressbook && data.addressbook.bookName !== $scope.bookName) {
+        $state.go('contact.addressbooks.show', {
+          bookId: $scope.bookId,
+          bookName: data.addressbook.bookName,
+          cardId: data.id
+        }, { location: 'replace' });
+      }
+    });
+
+    $scope.$on(CONTACT_EVENTS.DELETED, function(event, data) {
+      if (data.id === $scope.cardId) {
+        $state.go('contact.addressbooks', {
+          bookId: $scope.bookId,
+          bookName: data.addressbook.bookName
+        }, { location: 'replace' });
+      }
+    });
+
+    function isAddressFilled(type) {
+      if (!$scope.contact.addresses || !$scope.contact.addresses.length) {
+        return false;
+      }
+
+      return $scope.contact.addresses.filter(function(address) {
+        return address.type && typeof address.type.toLowerCase === 'function' && address.type.toLowerCase() === type.toLowerCase();
+      }).length;
+>>>>>>> #50 delete files from linagora.esn.contacts and their require
     }
   });
 
@@ -149,6 +208,9 @@ function ContactShowController(
         $scope.loaded = true;
       });
   }
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 
   sharedContactDataService.contact = {};
 }
+=======
+>>>>>>> #50 delete files from linagora.esn.contacts and their require

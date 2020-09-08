@@ -48,7 +48,10 @@ angular.module('linagora.esn.contact', [
   'esn.previous-page',
   'esn.clipboard',
   'esn.api-client',
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
   'esn.widget.helper',
+=======
+>>>>>>> #50 delete files from linagora.esn.contacts and their require
   'esn.contact.libs'
 ]);
 

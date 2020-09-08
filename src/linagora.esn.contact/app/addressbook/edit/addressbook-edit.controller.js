@@ -1,5 +1,9 @@
 
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 'use strict';
+=======
+  'use strict';
+>>>>>>> #50 delete files from linagora.esn.contacts and their require
 
 angular.module('linagora.esn.contact')
   .controller('ContactAddressbookEditController', ContactAddressbookEditController);
@@ -26,4 +30,8 @@ function ContactAddressbookEditController(
   function _updateAddressbook() {
     return contactAddressbookService.updateAddressbook(self.addressbook);
   }
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 }
+=======
+  
+>>>>>>> #50 delete files from linagora.esn.contacts and their require

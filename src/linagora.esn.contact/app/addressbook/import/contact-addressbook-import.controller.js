@@ -1,9 +1,15 @@
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 'use strict';
 
 require('../../contact/contact.service.js');
 
 angular.module('linagora.esn.contact')
   .controller('ContactAddressbookImportController', ContactAddressbookImportController);
+=======
+require('../../contact/contact.service.js');
+
+  'use strict';
+>>>>>>> #50 delete files from linagora.esn.contacts and their require
 
 function ContactAddressbookImportController(
   asyncAction,
@@ -66,4 +72,8 @@ function ContactAddressbookImportController(
       return contactService.importContactsFromFile(self.selectedAddressbookShell, self.file);
     });
   }
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 }
+=======
+  
+>>>>>>> #50 delete files from linagora.esn.contacts and their require

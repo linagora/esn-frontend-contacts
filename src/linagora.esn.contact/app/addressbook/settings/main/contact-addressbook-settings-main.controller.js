@@ -4,8 +4,15 @@ const _ = require('lodash');
 
 require('../../../sharing/constants.js');
 
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 angular.module('linagora.esn.contact')
   .controller('contactAddressbookSettingsMainController', contactAddressbookSettingsMainController);
+=======
+  'use strict';
+
+  angular.module('linagora.esn.contact')
+    .controller('contactAddressbookSettingsMainController', contactAddressbookSettingsMainController);
+>>>>>>> #50 delete files from linagora.esn.contacts and their require
 
 function contactAddressbookSettingsMainController(
   contactAddressbookService,
@@ -72,4 +79,8 @@ function contactAddressbookSettingsMainController(
   function _getShareOwner(sharees) {
     return _.find(sharees, { access: CONTACT_SHARING_SHARE_ACCESS.SHAREDOWNER });
   }
+<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
 }
+=======
+  
+>>>>>>> #50 delete files from linagora.esn.contacts and their require
