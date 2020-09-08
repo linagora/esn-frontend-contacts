@@ -45,7 +45,8 @@ angular.module('linagora.esn.contact', [
   'esn.user',
   'esn.user-configuration',
   'esn.settings-overlay',
-  'esn.previous-page'
+  'esn.previous-page',
+  'esn.clipboard'
 ]);
 
 require('esn-frontend-common-libs/src/frontend/js/modules/core.js');
@@ -83,6 +84,7 @@ require('esn-frontend-common-libs/src/frontend/js/modules/user/user.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/user-configuration/user-configuration.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/settings-overlay.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/previous-page.js');
+require('esn-frontend-common-libs/src/frontend/js/modules/clipboard/clipboard.module.js');
 require('../../linagora.esn.davproxy/js/app.js');
 
 require('./addressbook/acl/addressbook-acl-helper.servive.js');
