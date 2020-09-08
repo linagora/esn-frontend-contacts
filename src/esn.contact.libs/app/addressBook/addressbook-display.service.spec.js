@@ -8,7 +8,7 @@ describe('The contactAddressbookDisplayService service', function() {
   var $rootScope, contactAddressbookDisplayService, ContactAddressbookDisplayShell, contactAddressbookDisplayShellRegistry, displayShellRegistry, esnConfigMock, CONTACT_ADDRESSBOOK_TYPES;
 
   beforeEach(function() {
-    angular.mock.module('linagora.esn.contact');
+    angular.mock.module('esn.contact.libs');
     angular.mock.module(function($provide) {
       displayShellRegistry = {};
       contactAddressbookDisplayShellRegistry = {
