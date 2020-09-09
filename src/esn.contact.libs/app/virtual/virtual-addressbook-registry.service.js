@@ -1,30 +1,28 @@
+'use strict';
+
 const _ = require('lodash');
 
-(function(angular) {
-  'use strict';
+angular.module('esn.contact.libs')
+  .factory('ContactVirtualAddressBookRegistry', ContactVirtualAddressBookRegistry);
 
-  angular.module('esn.contact.libs')
-    .factory('ContactVirtualAddressBookRegistry', ContactVirtualAddressBookRegistry);
+function ContactVirtualAddressBookRegistry($q) {
+  var addressbooks = {};
 
-  function ContactVirtualAddressBookRegistry($q) {
-    var addressbooks = {};
+  return {
+    put,
+    get,
+    list
+  };
 
-    return {
-      put: put,
-      get: get,
-      list: list
-    };
-
-    function put(addressbook) {
-      addressbooks[addressbook.id] = addressbook;
-    }
-
-    function get(id) {
-      return $q.when(addressbooks[id]);
-    }
-
-    function list() {
-      return $q.when(_.values(addressbooks));
-    }
+  function put(addressbook) {
+    addressbooks[addressbook.id] = addressbook;
   }
-})(angular);
+
+  function get(id) {
+    return $q.when(addressbooks[id]);
+  }
+
+  function list() {
+    return $q.when(_.values(addressbooks));
+  }
+}

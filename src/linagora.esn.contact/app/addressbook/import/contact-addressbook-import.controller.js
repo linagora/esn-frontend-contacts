@@ -1,6 +1,6 @@
-require('../../contact/contact.service.js');
-
 'use strict';
+
+require('../../contact/contact.service.js');
 
 angular.module('linagora.esn.contact')
   .controller('ContactAddressbookImportController', ContactAddressbookImportController);

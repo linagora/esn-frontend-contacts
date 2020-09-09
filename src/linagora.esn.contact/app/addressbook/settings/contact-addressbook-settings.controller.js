@@ -1,6 +1,6 @@
-const _ = require('lodash');
-
 'use strict';
+
+const _ = require('lodash');
 
 angular.module('linagora.esn.contact')
   .controller('contactAddressbookSettingsController', contactAddressbookSettingsController);

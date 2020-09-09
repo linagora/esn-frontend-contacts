@@ -1,8 +1,8 @@
+'use strict';
+
 const _ = require('lodash');
 
 require('../../../sharing/constants.js');
-
-'use strict';
 
 angular.module('linagora.esn.contact')
   .controller('contactAddressbookSettingsMainController', contactAddressbookSettingsMainController);

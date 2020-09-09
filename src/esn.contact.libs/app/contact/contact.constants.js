@@ -1,10 +1,6 @@
-(function(angular) {
-  'use strict';
+'use strict';
 
-  angular.module('esn.contact.libs')
-    .constant('CONTACT_EVENTS', {
-
-      UPDATED: 'contact:updated'
-
-    });
-})(angular);
+angular.module('esn.contact.libs')
+  .constant('CONTACT_EVENTS', {
+    UPDATED: 'contact:updated'
+  });

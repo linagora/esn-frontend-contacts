@@ -13,7 +13,7 @@ describe('The ContactVirtualAddressBookConfiguration service', function() {
       get: sinon.stub()
     };
 
-    angular.mock.module('linagora.esn.contact', function($provide) {
+    angular.mock.module('esn.contact.libs', function($provide) {
       $provide.value('esnConfig', esnConfig);
       $provide.value('ContactVirtualAddressBookRegistry', ContactVirtualAddressBookRegistry);
     });

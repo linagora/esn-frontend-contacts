@@ -1,8 +1,8 @@
+'use strict';
+
 require('../acl/addressbook-acl-helper.servive.js');
 require('../../sharing/sharee/contact-sharee.service.js');
 require('../../sharing/constants.js');
-
-'use strict';
 
 angular.module('linagora.esn.contact')
   .factory('AddressbookShell', addressbookShellFactory);

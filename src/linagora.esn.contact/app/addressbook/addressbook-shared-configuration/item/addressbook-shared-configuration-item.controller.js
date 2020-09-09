@@ -1,6 +1,6 @@
-require('../../../sharing/constants.js');
-
 'use strict';
+
+require('../../../sharing/constants.js');
 
 angular.module('linagora.esn.contact')
   .controller('contactAddressbookSharedConfigurationItemController', contactAddressbookSharedConfigurationItemController);
