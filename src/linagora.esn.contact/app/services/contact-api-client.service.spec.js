@@ -821,6 +821,58 @@ describe('The contact Angular module contactapis', function() {
               this.$httpBackend.flush();
             });
 
+            it('should strip W/ from etag in If-Match header', function(done) {
+              var requestHeaders = {
+                'Content-Type': 'application/vcard+json',
+                Prefer: 'return=representation',
+                'If-Match': 'etag',
+                Accept: 'application/json, text/plain, */*'
+              };
+
+              this.$httpBackend.expectPUT(vcardUrl + '?graceperiod=8000', function() {
+                return true;
+              }, requestHeaders).respond(202);
+
+              contact.etag = 'W/etag';
+              this.ContactAPIClient
+                .addressbookHome(bookId)
+                .addressbook(bookName)
+                .vcard(contact.id)
+                .update(contact)
+                .then(function() {
+                  done();
+                });
+
+              this.$rootScope.$apply();
+              this.$httpBackend.flush();
+            });
+
+            it('should not strip W/ from etag in If-Match header when not at the beginning', function(done) {
+              var requestHeaders = {
+                'Content-Type': 'application/vcard+json',
+                Prefer: 'return=representation',
+                'If-Match': 'etaW/g',
+                Accept: 'application/json, text/plain, */*'
+              };
+
+              this.$httpBackend.expectPUT(vcardUrl + '?graceperiod=8000', function() {
+                return true;
+              }, requestHeaders).respond(202);
+
+              contact.etag = 'etaW/g';
+              this.ContactAPIClient
+                .addressbookHome(bookId)
+                .addressbook(bookName)
+                .vcard(contact.id)
+                .update(contact)
+                .then(function() {
+                  done();
+                });
+
+              this.$rootScope.$apply();
+              this.$httpBackend.flush();
+            });
+
           });
 
           describe('The remove fn', function() {
@@ -912,6 +964,50 @@ describe('The contact Angular module contactapis', function() {
                 .addressbook(bookName)
                 .vcard(contact.id)
                 .remove({ etag: 'etag' })
+                .then(function() {
+                  done();
+                });
+
+              this.$rootScope.$apply();
+              this.$httpBackend.flush();
+            });
+
+            it('should strip W/ from etag in If-Match header', function(done) {
+              var requestHeaders = {
+                'If-Match': 'etag',
+                Accept: 'application/json, text/plain, */*'
+              };
+
+              this.$httpBackend.expectDELETE(vcardUrl, requestHeaders).respond(204);
+
+              contact.etag = 'etag';
+              this.ContactAPIClient
+                .addressbookHome(bookId)
+                .addressbook(bookName)
+                .vcard(contact.id)
+                .remove({ etag: 'W/etag' })
+                .then(function() {
+                  done();
+                });
+
+              this.$rootScope.$apply();
+              this.$httpBackend.flush();
+            });
+
+            it('should not strip W/ from etag in If-Match header when not at the beginning', function(done) {
+              var requestHeaders = {
+                'If-Match': 'etaW/g',
+                Accept: 'application/json, text/plain, */*'
+              };
+
+              this.$httpBackend.expectDELETE(vcardUrl, requestHeaders).respond(204);
+
+              contact.etag = 'etaW/g';
+              this.ContactAPIClient
+                .addressbookHome(bookId)
+                .addressbook(bookName)
+                .vcard(contact.id)
+                .remove({ etag: 'etaW/g' })
                 .then(function() {
                   done();
                 });
