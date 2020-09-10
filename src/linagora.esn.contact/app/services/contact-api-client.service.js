@@ -553,7 +553,7 @@ require('../app.constant.js');
       };
 
       if (contact.etag) {
-        headers['If-Match'] = contact.etag;
+        headers['If-Match'] = contact.etag.replace(/^W\//, '');
       }
 
       var params = { graceperiod: GRACE_DELAY };
@@ -594,7 +594,7 @@ require('../app.constant.js');
       var headers = {};
 
       if (options.etag) {
-        headers['If-Match'] = options.etag;
+        headers['If-Match'] = options.etag.replace(/^W\//, '');
       }
 
       var params = {};
