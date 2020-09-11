@@ -43,7 +43,8 @@ angular.module('esn.contact.libs', [
   'esn.user',
   'esn.user-configuration',
   'esn.settings-overlay',
-  'esn.previous-page'
+  'esn.previous-page',
+  'linagora.esn.davproxy'
 ]);
 
 require('esn-frontend-common-libs/src/frontend/js/modules/core.js');
@@ -81,6 +82,7 @@ require('esn-frontend-common-libs/src/frontend/js/modules/user/user.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/user-configuration/user-configuration.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/settings-overlay.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/previous-page.js');
+require('../../linagora.esn.davproxy/js/app.js');
 
 require('./shell/contact-shell-helper.service.js');
 require('./shell/shell.service.js');
@@ -91,6 +93,7 @@ require('./virtual/virtual-addressbook-configuration.service.js');
 require('./virtual/virtual-addressbook-registry.service.js');
 require('./addressBook/contact-update-data.service.js');
 require('./addressBook/virtual-addressbook.service.js');
+require('./addressBook/addressbook.service.js');
 require('./addressBook/addressbook-display.service.js');
 require('./addressBook/addressbook-parser.service.js');
 require('./addressBook/addressbook.constants.js');

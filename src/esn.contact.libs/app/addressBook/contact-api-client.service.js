@@ -191,6 +191,7 @@ require('../app.constant.js');
      * @return {String}
      */
     function getVCardUrl(bookId, bookName, cardId) {
+
       return [ADDRESSBOOK_PATH, bookId, bookName, cardId + '.vcf'].join('/');
     }
 
@@ -551,7 +552,7 @@ require('../app.constant.js');
       };
 
       if (contact.etag) {
-        headers['If-Match'] = contact.etag;
+        headers['If-Match'] = contact.etag.replace(/^W\//, '');
       }
 
       var params = { graceperiod: GRACE_DELAY };
@@ -561,6 +562,7 @@ require('../app.constant.js');
         headers,
         VcardBuilder.toJSON(contact),
         params).then(function(response) {
+
         if (response.status === 202 || response.status === 204) {
           return response.headers('X-ESN-TASK-ID');
         }
@@ -592,7 +594,7 @@ require('../app.constant.js');
       var headers = {};
 
       if (options.etag) {
-        headers['If-Match'] = options.etag;
+        headers['If-Match'] = options.etag.replace(/^W\//, '');
       }
 
       var params = {};

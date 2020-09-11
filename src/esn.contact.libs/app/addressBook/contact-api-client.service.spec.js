@@ -5,7 +5,7 @@
 var expect = chai.expect;
 
 describe('The contact Angular module contactapis', function() {
-  beforeEach(angular.mock.module('linagora.esn.contact'));
+  beforeEach(angular.mock.module('esn.contact.libs'));
 
   describe('The ContactAPIClient service', function() {
     var ICAL, contact;

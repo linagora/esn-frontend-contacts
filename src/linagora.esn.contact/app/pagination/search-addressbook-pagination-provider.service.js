@@ -1,4 +1,3 @@
-
 'use strict';
 
 angular.module('linagora.esn.contact')
@@ -7,6 +6,7 @@ angular.module('linagora.esn.contact')
 function SearchAddressBookPaginationProvider($log, ContactAPIClient) {
 
   function _SearchAddressBookPaginationProvider(options) {
+
     this.options = options;
     this.user = this.options.user;
     this.bookId = this.user._id;
@@ -42,4 +42,6 @@ function SearchAddressBookPaginationProvider($log, ContactAPIClient) {
         return result;
       });
   };
+
+  return _SearchAddressBookPaginationProvider;
 }

@@ -48,10 +48,7 @@ angular.module('linagora.esn.contact', [
   'esn.previous-page',
   'esn.clipboard',
   'esn.api-client',
-<<<<<<< 3ddb5c9639f826226e2e248d4cb9ebe27866a5ec
   'esn.widget.helper',
-=======
->>>>>>> #50 delete files from linagora.esn.contacts and their require
   'esn.contact.libs'
 ]);
 
@@ -101,7 +98,6 @@ require('./addressbook/action/addressbook-action-delete.service.js');
 require('./addressbook/action/addressbook-action-edit.service.js');
 require('./addressbook/action/addressbook-action-export.service.js');
 require('./addressbook/action/addressbook-action-settings.service.js');
-require('./addressbook/addressbook-cache.service.js');
 require('./addressbook/addressbook-shared-configuration/addressbook-shared-configuration.component.js');
 require('./addressbook/addressbook-shared-configuration/addressbook-shared-configuration.controller.js');
 require('./addressbook/addressbook-shared-configuration/item/addressbook-shared-configuration-item.component.js');
