@@ -11,6 +11,9 @@ angular.module('esn.contact.libs')
 
   .constant('ICAL', ICAL)
   .constant('DEFAULT_ADDRESSBOOK_NAME', 'contacts')
+  .constant('CONTACT_COLLECTED_ADDRESSBOOK_NAME', 'collected')
+  .constant('CONTACT_FALLBACK_ATTRIBUTE_TYPE', 'Other')
+  .constant('GRACE_DELAY', 8000)
 
   .constant('CONTACT_ATTRIBUTES_ORDER', {
     email: ['Work', 'Home', 'Other'],

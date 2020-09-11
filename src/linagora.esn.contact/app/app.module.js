@@ -121,7 +121,6 @@ require('./addressbook/settings/delegation/contact-addressbook-settings-delegati
 require('./addressbook/settings/main/contact-addressbook-settings-main.component.js');
 require('./addressbook/settings/main/contact-addressbook-settings-main.controller.js');
 require('./addressbook/settings/subheader/contact-addressbook-settings-subheader.component.js');
-require('./addressbook/shell/addressbook-shell.service.js');
 require('./addressbook/user-addressbook/contact-user-addressbook-display-shell.service.js');
 require('./addressbook/user-addressbook/contact-user-addressbook.run.js');
 require('./addressbook/user-addressbook/contact-user-addressbook.service.js');
@@ -199,7 +198,6 @@ require('./services/open-contact-form.service.js');
 require('./services/send-data-to-backend.service.js');
 require('./services/shared-contact-data.service.js');
 require('./sharing/constants.js');
-require('./sharing/sharee/contact-sharee.service.js');
 require('./sidebar/addressbook-item/contact-sidebar-addressbook-item.component.js');
 require('./sidebar/addressbook-item/contact-sidebar-addressbook-item.controller.js');
 require('./sidebar/addressbooks-list/contact-sidebar-addressbooks-list.component.js');

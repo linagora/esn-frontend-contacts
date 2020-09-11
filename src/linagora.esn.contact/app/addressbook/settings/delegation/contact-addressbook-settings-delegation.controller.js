@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
-require('../../../sharing/sharee/contact-sharee.service.js');
-require('../../../sharing/constants.js');
+//require('../../../sharing/sharee/contact-sharee.service.js');
+//require('../../../sharing/constants.js');
 
 (function(angular) {
   'use strict';

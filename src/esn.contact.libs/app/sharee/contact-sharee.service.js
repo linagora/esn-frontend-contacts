@@ -1,8 +1,8 @@
 'use strict';
 
-require('../constants.js');
+require('../addressBook/constants.js');
 
-angular.module('linagora.esn.contact')
+angular.module('esn.contact.libs')
   .factory('ContactSharee', ContactShareeFactory);
 
 function ContactShareeFactory(

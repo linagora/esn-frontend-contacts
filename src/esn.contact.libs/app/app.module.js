@@ -84,6 +84,7 @@ require('esn-frontend-common-libs/src/frontend/js/modules/previous-page.js');
 
 require('./shell/contact-shell-helper.service.js');
 require('./shell/shell.service.js');
+require('./shell/addressbook-shell.service.js');
 require('./vcard/helper.service.js');
 require('./vcard/vcard-builder.service');
 require('./virtual/virtual-addressbook-configuration.service.js');

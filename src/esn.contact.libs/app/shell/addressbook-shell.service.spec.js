@@ -13,7 +13,7 @@ describe('The Contact Angular module AddressbookShell', function() {
 
   describe('AddressbookShell', function() {
 
-    beforeEach(angular.mock.module('linagora.esn.contact'));
+    beforeEach(angular.mock.module('esn.contact.libs'));
 
     beforeEach(function() {
       angular.mock.inject(function(
