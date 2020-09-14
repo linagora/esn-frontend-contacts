@@ -13,7 +13,8 @@ function contactService(
   $q,
   fileUploadService,
   ContactAPIClient,
-  AddressbookShell
+  AddressbookShell,
+  esnApiClient
 ) {
   return {
     listContacts,
@@ -146,8 +147,7 @@ function contactService(
     return _getAddressbookShell(addressbook).then(function(addressbookShell) {
       const sourceMetadata = _getSouceMetadata(addressbookShell);
       const target = '/addressbooks/' + sourceMetadata.bookId + '/' + sourceMetadata.bookName + '.json';
-      const OPENPAAS_URL = window.location.origin;
-      const esnDavImportClient = new ESNDavImportClient(fileUploadService.uploadFile, OPENPAAS_URL);
+      const esnDavImportClient = new ESNDavImportClient({ esnApiClient, uploadFile: fileUploadService.uploadFile });
 
       return esnDavImportClient.importFromFile(file, target);
     });
