@@ -3,7 +3,7 @@
     .col-xs-12.col-lg-7
       .row
         .col-xs-12.col-sm-4.col-sm-push-8.hidden-lg.all-centered-xs
-          div(modal-launcher, template="contact/app/contact/form/contact-avatar-modal.html", ng-click="showModal()")
+          div(modal-launcher, template="/contact/app/contact/form/contact-avatar-modal.html", ng-click="showModal()")
             contact-photo(contact='contact', editable='true', avatar-size='{{avatarSize}}', contact-state='{{contactState}}')
         .col-xs-12.col-sm-8.col-sm-pull-4.col-lg-12.col-lg-pull-0
           .contact-addressbook-selector(ng-show='contactState === "new"')
@@ -31,7 +31,7 @@
       multi-input-group-address( multi-input-model='contact.addresses', multi-input-types='CONTACT_ATTRIBUTES_ORDER.address')
     .col-xs-12.col-lg-5
       .row
-        div(modal-launcher, template="contact/app/contact/form/contact-avatar-modal.html", ng-click="showModal()")
+        div(modal-launcher, template="/contact/app/contact/form/contact-avatar-modal.html", ng-click="showModal()")
           contact-photo.visible-lg(contact='contact', editable='true', avatar-size='{{avatarSize}}', contact-state='{{contactState}}')
       .row
         label.control-label.sr-only {{ 'Tags' | translate }}
