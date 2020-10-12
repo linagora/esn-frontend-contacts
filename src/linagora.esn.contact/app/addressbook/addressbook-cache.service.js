@@ -1,4 +1,3 @@
-require('../services/contact-api-client.service.js');
 require('../app.constant.js');
 
 (function(angular) {

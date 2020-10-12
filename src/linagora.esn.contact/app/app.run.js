@@ -1,6 +1,5 @@
 require('./services/contact-attendee-provider.service.js');
 require('./addressbook/addressbook-cache.service.js');
-require('./contact/shell/contact-shell-builder.service.js');
 require('./services/contact-configuration.service.js');
 
 'use strict';

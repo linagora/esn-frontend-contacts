@@ -10,7 +10,7 @@ describe('The ContactListController controller', function() {
   var AddressBookPaginationService, AddressBookPaginationRegistryMock, contactAddressbookService, contactAddressbookDisplayService,
     contactUpdateDataService, gracePeriodService;
   var CONTACT_ADDRESSBOOK_EVENTS, CONTACT_EVENTS, CONTACT_LIST_DISPLAY_MODES, DEFAULT_ADDRESSBOOK_NAME;
-  var addressbooks, scope, sortedContacts, openContactFormMock;
+  var addressbooks, scope, sortedContacts, openContactFormMock, esnI18nService;
 
   beforeEach(function() {
     addressbooks = [];
@@ -55,6 +55,14 @@ describe('The ContactListController controller', function() {
     openContactFormMock = sinon.spy();
     angular.mock.module('esn.core');
 
+    esnI18nService = {
+      translate: sinon.spy(function(input) {
+        return {
+          toString: function() { return input; }
+        };
+      })
+    };
+
     angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('$alert', function(options) { $alert.alert(options); });
       $provide.value('gracePeriodService', gracePeriodService);
@@ -62,6 +70,7 @@ describe('The ContactListController controller', function() {
       $provide.value('AddressBookPaginationService', AddressBookPaginationService);
       $provide.value('AddressBookPaginationRegistry', AddressBookPaginationRegistryMock);
       $provide.value('openContactForm', openContactFormMock);
+      $provide.value('esnI18nService', esnI18nService);
     });
   });
 
