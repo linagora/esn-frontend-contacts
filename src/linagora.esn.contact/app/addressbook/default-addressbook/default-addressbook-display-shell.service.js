@@ -1,7 +1,5 @@
 'use strict';
 
-require('../display-shell/addressbook-display-shell.service.js');
-
 angular.module('linagora.esn.contact')
   .factory('ContactDefaultAddressbookDisplayShell', function(
     esnI18nService,

@@ -1,7 +1,6 @@
-require('../services/contact-api-client.service.js');
-require('../app.constant.js');
-
 'use strict';
+
+require('../app.constant.js');
 
 angular.module('linagora.esn.contact').factory('contactSearchProviderService', contactSearchProviderService);
 

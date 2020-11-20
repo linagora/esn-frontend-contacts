@@ -1,8 +1,6 @@
 const _ = require('lodash');
 
-require('../../services/addressbook-parser.service.js');
 require('../../app.constant.js');
-require('../addressbook.constants.js');
 
 (function(angular) {
   'use strict';

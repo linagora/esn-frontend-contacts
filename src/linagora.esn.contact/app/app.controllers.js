@@ -4,15 +4,10 @@ require('./services/send-data-to-backend.service.js');
 require('./services/open-contact-form.service.js');
 require('./services/shared-contact-data.service.js');
 require('./contact/contact.service.js');
-require('./contact/helper.service.js');
-require('./services/addressbook-parser.service.js');
 require('./app.constant.js');
 require('./services/contact-display-error.service.js');
 require('./services/contact-delete.service.js');
-require('./contact/shell/shell.service.js');
 require('./contact/contact.constants.js');
-require('./services/contact-update-data.service.js');
-require('./contact/vcard/vcard-builder.service.js');
 require('./services/contact-localtion-helper.service.js');
 require('./services/contact-highlight-helpers.service.js');
 

@@ -1,34 +1,31 @@
-require('../addressbook.service.js');
-require('../addressbook-display.service.js');
+'use strict';
 
-(function(angular) {
-  'use strict';
+require('../../../../esn.contact.libs/app/addressBook/addressbook-display.service.js');
 
-  angular.module('linagora.esn.contact')
-    .controller('ContactAddressbookDeleteController', ContactAddressbookDeleteController);
+angular.module('linagora.esn.contact')
+  .controller('ContactAddressbookDeleteController', ContactAddressbookDeleteController);
 
-  function ContactAddressbookDeleteController(
-    addressbook,
-    asyncAction,
-    contactAddressbookService,
-    contactAddressbookDisplayService
-  ) {
-    var self = this;
-    var NOTFICATION_MESSAGES = {
-      progressing: 'Deleting address book...',
-      success: 'Address book deleted',
-      failure: 'Failed to delete address book'
-    };
+function ContactAddressbookDeleteController(
+  addressbook,
+  asyncAction,
+  contactAddressbookService,
+  contactAddressbookDisplayService
+) {
+  var self = this;
+  var NOTFICATION_MESSAGES = {
+    progressing: 'Deleting address book...',
+    success: 'Address book deleted',
+    failure: 'Failed to delete address book'
+  };
 
-    self.onDeleteBtnClick = onDeleteBtnClick;
-    self.addressbookDisplayShell = contactAddressbookDisplayService.convertShellToDisplayShell(addressbook);
+  self.onDeleteBtnClick = onDeleteBtnClick;
+  self.addressbookDisplayShell = contactAddressbookDisplayService.convertShellToDisplayShell(addressbook);
 
-    function onDeleteBtnClick() {
-      return asyncAction(NOTFICATION_MESSAGES, _removeAddressbook);
-    }
-
-    function _removeAddressbook() {
-      return contactAddressbookService.removeAddressbook(addressbook);
-    }
+  function onDeleteBtnClick() {
+    return asyncAction(NOTFICATION_MESSAGES, _removeAddressbook);
   }
-})(angular);
+
+  function _removeAddressbook() {
+    return contactAddressbookService.removeAddressbook(addressbook);
+  }
+}
