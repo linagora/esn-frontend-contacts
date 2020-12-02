@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // default: we are building an SPA
 const commonLibsPath = path.resolve(__dirname, 'node_modules', 'esn-frontend-common-libs');
@@ -61,6 +62,18 @@ module.exports = {
     new FaviconsWebpackPlugin({
       logo: './src/linagora.esn.contact/images/contacts-icon.svg',
       prefix: 'contacts-assets/'
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'node_modules', 'openpaas-auth-client', 'src', 'assets'),
+          to: 'auth'
+        },
+        {
+          from: path.resolve(__dirname, 'node_modules', 'oidc-client', 'dist', 'oidc-client.min.js'),
+          to: 'auth'
+        }
+      ]
     })
   ],
   devServer: {
