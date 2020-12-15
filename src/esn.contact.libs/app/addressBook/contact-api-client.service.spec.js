@@ -1,6 +1,6 @@
 'use strict';
 
-/* global chai: false */
+/* global chai, sinon: false */
 
 var expect = chai.expect;
 
@@ -10,9 +10,17 @@ describe('The contact Angular module contactapis', function() {
   describe('The ContactAPIClient service', function() {
     var ICAL, contact;
     var ADDRESSBOOK_PATH = 'addressbooks';
+    let httpConfigurer;
 
     beforeEach(function() {
       var self = this;
+
+      httpConfigurer = {
+        getHeaders: sinon.spy(),
+        getUrl: sinon.stub().returnsArg(0),
+        setBaseUrl: sinon.spy(),
+        manageRestangular: sinon.spy()
+      };
 
       this.uuid4 = {
         // This is a valid uuid4. Change this if you need other uuids generated.
@@ -45,6 +53,7 @@ describe('The contact Angular module contactapis', function() {
         $provide.value('uuid4', self.uuid4);
         $provide.value('contactUpdateDataService', self.contactUpdateDataService);
         $provide.value('ContactShellBuilder', self.ContactShellBuilder);
+        $provide.value('httpConfigurer', httpConfigurer);
       });
     });
 
