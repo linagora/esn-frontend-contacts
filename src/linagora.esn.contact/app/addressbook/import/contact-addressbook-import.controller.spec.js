@@ -8,8 +8,16 @@ var expect = chai.expect;
 describe('The ContactAddressbookImportController controller', function() {
   var $rootScope, $controller;
   var contactAddressbookService, contactService, esnConfigMock;
+  let httpConfigurer;
 
   beforeEach(function() {
+    httpConfigurer = {
+      getHeaders: sinon.spy(),
+      getUrl: sinon.spy(),
+      setBaseUrl: sinon.spy(),
+      manageRestangular: sinon.spy()
+    };
+
     angular.mock.module('linagora.esn.contact');
     angular.mock.module(function($provide) {
       esnConfigMock = function() {
@@ -17,6 +25,7 @@ describe('The ContactAddressbookImportController controller', function() {
       };
 
       $provide.value('esnConfig', esnConfigMock);
+      $provide.value('httpConfigurer', httpConfigurer);
     });
 
     angular.mock.inject(function(
