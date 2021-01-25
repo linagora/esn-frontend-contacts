@@ -3,7 +3,7 @@ ng-include(src="'/contact/app/contact/list/contact-list-action-drop-menu.html'")
   .pull-left.touch-zone
     contact-photo.media-object(contact='contact', list-view='true', avatar-size='{{::avatarSize}}')
   .media-body.touch-zone
-    .lv-title.col-xs-11(bs-tooltip, title="{{::displayShell.getDisplayName()}}")
+    .lv-title.col-xs-11
       h4.media-heading.m-b-0(
         ng-bind-html="::displayShell.getDisplayName() | esnHighlight: keySearch"
       )
