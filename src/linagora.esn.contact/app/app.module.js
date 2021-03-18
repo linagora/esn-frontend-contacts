@@ -48,6 +48,7 @@ angular.module('linagora.esn.contact', [
   'esn.previous-page',
   'esn.clipboard',
   'esn.api-client',
+  'openpaas-logo',
   'esn.widget.helper',
   'esn.contact.libs'
 ]);
@@ -91,6 +92,7 @@ require('esn-frontend-common-libs/src/frontend/js/modules/previous-page.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/clipboard/clipboard.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/esn.api-client.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/widget-helper');
+require('esn-frontend-common-libs/src/frontend/components/openpaas-logo/openpaas-logo.js');
 require('../../linagora.esn.davproxy/js/app.js');
 
 require('./addressbook/acl/addressbook-acl-helper.servive.js');
