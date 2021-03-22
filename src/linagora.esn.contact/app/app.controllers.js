@@ -114,6 +114,7 @@ angular.module('linagora.esn.contact')
     $scope.bookId = $stateParams.bookId;
     $scope.bookName = $stateParams.bookName;
     $scope.cardId = $stateParams.cardId;
+    $scope.previousState = $stateParams.previousState || 'contact.addressbooks';
 
     $scope.$on(CONTACT_EVENTS.UPDATED, function(e, data) {
       if ($scope.contact.id === data.id && data.etag) {
