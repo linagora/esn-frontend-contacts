@@ -103,15 +103,22 @@ require('./services/contact-configuration.service.js');
         })
         .state('contact.addressbooks.edit', {
           url: '^/contact/edit/:bookId/:bookName/:cardId',
-          views: {
-            'main@contact': {
-              template: require('./contact/edit/contact-edit.pug'),
-              controller: 'editContactController',
-              resolve: {
-                domain: routeResolver.session('domain'),
-                user: routeResolver.session('user')
-              }
+          params: {
+            previousState: 'contact.addressbooks'
+          },
+          resolve: {
+            modalInstance: function($modal) {
+              return $modal({
+                template: '<contact-edit />',
+                resolve: {
+                  domain: routeResolver.session('domain'),
+                  user: routeResolver.session('user')
+                }
+              });
             }
+          },
+          onExit: function(modalInstance) {
+            modalInstance.hide();
           }
         });
 
