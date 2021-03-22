@@ -82,15 +82,22 @@ require('./services/contact-configuration.service.js');
         })
         .state('contact.addressbooks.show', {
           url: '^/contact/show/:bookId/:bookName/:cardId',
-          views: {
-            'main@contact': {
-              template: require('./contact/show/contact-show.pug'),
-              controller: 'ContactShowController',
-              resolve: {
-                domain: routeResolver.session('domain'),
-                user: routeResolver.session('user')
-              }
+          params: {
+            previousState: 'contact.addressbooks'
+          },
+          resolve: {
+            modalInstance: function($modal) {
+              return $modal({
+                template: '<contact-show />',
+                resolve: {
+                  domain: routeResolver.session('domain'),
+                  user: routeResolver.session('user')
+                }
+              });
             }
+          },
+          onExit: function(modalInstance) {
+            modalInstance.hide();
           }
         })
         .state('contact.addressbooks.edit', {

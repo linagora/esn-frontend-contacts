@@ -34,6 +34,7 @@ function ContactShowController(
   $scope.cardId = $stateParams.cardId;
   $scope.contact = {};
   $scope.loaded = false;
+  $scope.previousState = $stateParams.previousState || 'contact.addressbooks';
 
   $scope.$on(CONTACT_EVENTS.UPDATED, function(e, data) {
     if (data.id === $scope.cardId && data.addressbook && data.addressbook.bookName !== $scope.bookName) {
