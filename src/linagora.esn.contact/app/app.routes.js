@@ -61,10 +61,18 @@ require('./services/contact-configuration.service.js');
         })
         .state('contact.addressbooks.settings', {
           url: '/settings',
-          views: {
-            'main@contact': {
-              template: '<contact-addressbook-settings />'
+          params: {
+            previousState: 'contact.addressbooks'
+          },
+          resolve: {
+            modalInstance: function($modal) {
+              return $modal({
+                template: '<contact-addressbook-settings />'
+              });
             }
+          },
+          onExit: function(modalInstance) {
+            modalInstance.hide();
           }
         })
         .state('contact.addressbooks.new', {
