@@ -145,6 +145,7 @@ require('./contact/action/move/contact-action-move.controller.js');
 require('./contact/contact.constants.js');
 require('./contact/contact.service.js');
 require('./contact/create/contact-create-subheader.directive.js');
+require('./contact/edit/contact-edit.component.js');
 require('./contact/edit/contact-edit-subheader.directive.js');
 require('./contact/form/contact-edition-form.directive.js');
 require('./contact/form/relaxed-date-for-bs-date-picker.directive.js');
