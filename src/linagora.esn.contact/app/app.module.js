@@ -200,6 +200,7 @@ require('./services/live-update/initialize-contact-live-update.js');
 require('./services/open-contact-form.service.js');
 require('./services/send-data-to-backend.service.js');
 require('./services/shared-contact-data.service.js');
+require('./services/contact-delete-confirmation-dialog.service');
 require('./sharing/constants.js');
 require('./sidebar/addressbook-item/contact-sidebar-addressbook-item.component.js');
 require('./sidebar/addressbook-item/contact-sidebar-addressbook-item.controller.js');

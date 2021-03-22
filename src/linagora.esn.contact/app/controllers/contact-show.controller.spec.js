@@ -5,11 +5,12 @@
 var expect = chai.expect;
 
 describe('The ContactShowController', function() {
-  var $window, $controller, $state, $rootScope, $alert, $timeout, $stateParams, $location;
+  var $window, $controller, $state, $rootScope, $alert, $stateParams, $location;
   var scope, contactUpdateDataService, ContactShellDisplayBuilder, gracePeriodService, ContactAPIClient, contactAddressbookDisplayService;
   var ContactShell, notificationFactory, selectionService, VcardBuilder, ContactLocationHelper;
   var CONTACT_AVATAR_SIZE, CONTACT_EVENTS;
   var bookId = '123456789', bookName = 'bookName', cardId = '987654321';
+  let contactDeleteConfirmationDialogServiceMock;
 
   beforeEach(function() {
     angular.mock.module('esn.core');
@@ -99,6 +100,8 @@ describe('The ContactShowController', function() {
       }
     };
 
+    contactDeleteConfirmationDialogServiceMock = sinon.spy();
+
     angular.mock.module(function($provide) {
       $provide.value('notificationFactory', notificationFactory);
       $provide.value('$location', $location);
@@ -117,6 +120,7 @@ describe('The ContactShowController', function() {
       $provide.value('VcardBuilder', VcardBuilder);
       $provide.value('ContactLocationHelper', ContactLocationHelper);
       $provide.value('ContactShellDisplayBuilder', ContactShellDisplayBuilder);
+      $provide.value('contactDeleteConfirmationDialogService', contactDeleteConfirmationDialogServiceMock);
     });
   });
 
@@ -134,7 +138,6 @@ describe('The ContactShowController', function() {
       $window = _$window_;
       $controller = _$controller_;
       $rootScope = _$rootScope_;
-      $timeout = _$timeout_;
       $state = _$state_;
       contactAddressbookDisplayService = _contactAddressbookDisplayService_;
       CONTACT_AVATAR_SIZE = _CONTACT_AVATAR_SIZE_;
@@ -224,7 +227,7 @@ describe('The ContactShowController', function() {
 
   it('should have bigger size for contact avatar', function() {
     initController();
-    expect(scope.avatarSize).to.equal(CONTACT_AVATAR_SIZE.bigger);
+    expect(scope.avatarSize).to.equal(CONTACT_AVATAR_SIZE.list);
   });
 
   it('should display an error if the contact cannot be loaded initially', function(done) {
@@ -552,21 +555,17 @@ describe('The ContactShowController', function() {
   });
 
   describe('The deleteContact function', function() {
-
-    it('should call deleteContact service with the right bookId, bookName and cardId', function() {
+    it('should show the confirmation dialog before deleting the contact', function() {
       scope.bookName = 'bookName';
       scope.contact = {
         id: 1, firstName: 'Foo', lastName: 'Bar', addressbook: {}
       };
-      var spy = sinon.spy();
 
       $controller.bind(null, 'ContactShowController', {
-        $scope: scope,
-        deleteContact: spy
+        $scope: scope
       })();
       scope.deleteContact();
-      $timeout.flush();
-      expect(spy).to.have.been.calledWith(bookId, scope.bookName, scope.contact);
+      expect(contactDeleteConfirmationDialogServiceMock).to.have.been.called;
     });
   });
 });
