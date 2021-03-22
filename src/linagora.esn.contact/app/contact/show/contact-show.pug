@@ -1,104 +1,110 @@
-sub-header
-  contact-show-subheader
-
-.col-xs-12.no-padding-xs
-  .card.hidden-xs(ng-submit='accept()')
-    .card-body.contact-body
-      contact-display(ng-if='loaded && !error' contact='contact')
-      div.bs-alert.bs-alert-warning.clearfix.text-center(ng-if= 'loaded && !error && !displayShell.addressbook.canEditContact')
-        strong {{ 'This contact cannot be edited' | translate }}
-
-  .contact-content.visible-xs.fadeIn200ms(ng-if='loaded && !error')
-    .contact-avatar.p-relative
-      img(ng-src='{{displayShell.getAvatar(avatarSize)}}', alt="{{ 'Avatar' | translate }}")
-      i.mdi.i-contact-mobile(ng-class="displayShell.getOverlayIcon()")
-    .contact-error-container
-      .ellipsis.contact-fn
-        | {{contact.displayName}}
-      .contact-infos
-        .contact-items-group
-          .p-t-10
-            i.mdi(ng-class='addressbookDisplayShell.icon')
-            .contact-item-data
-              dl.addressbook-title
-                dt(title="{{ 'Address book' | translate }}", ng-click='openAddressbook()') {{::addressbookDisplayShell.displayName}}
-                dd.type {{ 'Address book' | translate }}
-        .contact-items-group(ng-if='phones && phones.length')
-          i.mdi.mdi-phone
-          div(ng-repeat='tel in phones track by $index')
-            .contact-item-data
-              p
-                a(ng-href='tel:{{tel.value}}') {{tel.value}}
-              p.type {{tel.type | esnI18n}}
-
-        .contact-items-group(ng-if='emails && emails.length')
-          i.mdi.mdi-email
-          div(ng-repeat='email in emails track by $index')
-            .contact-item-data
-              p
-                a(ng-href='mailto:{{email.value}}' op-inbox-compose, op-inbox-compose-users='[email]') {{email.value}}
-              p.type {{email.type | esnI18n}}
-
-        .contact-items-group(ng-if='contact.social && contact.social.length')
-          i.mdi.mdi-account-circle
-          div(ng-repeat='social in contact.social track by $index')
-            .contact-item-data
-              p(ng-if="['Skype', 'Twitter'].indexOf(social.type) > -1")
-                a(ng-href="{{social.value|prefixLink:social.type}}") {{social.value}}
-              p(ng-if="['Skype', 'Twitter'].indexOf(social.type) === -1") {{social.value}}
-              p.type {{social.type}}
-
-        .contact-items-group(ng-if='shouldDisplayWork()')
-          div
-            p.title {{ 'Work' | translate }}
-          .contact-item-data(ng-if='contact.orgName')
-            p {{contact.orgName}}
-            p.type {{ 'Company' | translate }}
-          .contact-item-data(ng-if='contact.orgRole')
-            p {{contact.orgRole}}
-            p.type {{ 'Job' | translate }}
-          .contact-item-data(ng-if='contact.orgUri')
-            p
-              a(ng-href='{{contact.orgUri}}' target='_blank') {{contact.orgUri}}
-            p.type {{ 'Website' | translate }}
-          .contact-item-data(ng-if="getAddress('work')" ng-model="address" ng-init="address = getAddress('work')")
-            p {{address.street}}
-            p {{address.zip}} {{address.city}}
-            p {{address.country}}
-            p.type {{ 'Address' | translate }}
-
-        .contact-items-group(ng-if='shouldDisplayHome()')
-          div
-            p.title {{ 'Home' | translate }}
-          .contact-item-data(ng-if="getAddress('home')" ng-model="address" ng-init="address = getAddress('home')")
-            p {{address.street}}
-            p {{address.zip}} {{address.city}}
-            p {{address.country}}
-            p.type {{ 'Address' | translate }}
-          .contact-item-data(ng-if='contact.nickname')
-            p {{contact.nickname}}
-            p.type {{ 'Nickname' | translate }}
-          .contact-item-data(ng-if='contact.birthday')
-            p {{ contact.birthday | esnDatetime: 'mediumDate' }}
-            p.type {{ 'Birthday' | translate }}
-
-        .contact-items-group(ng-if='shouldDisplayOthers()')
-          div
-            p.title {{ 'Others' | translate }}
-          .contact-item-data(ng-if="getAddress('other')" ng-model="address" ng-init="address = getAddress('other')")
-            p {{address.street}}
-            p {{address.zip}} {{address.city}}
-            p {{address.country}}
-            p.type {{ 'Address' | translate }}
-          .contact-item-data(ng-if="contact.urls")
-            p(ng-repeat='url in contact.urls')
-              a(ng-href='{{url.value|prefixLink:"http"}}' target='_blank') {{url.value}}
-            p.type {{ 'Websites' | translate }}
-          .contact-item-data(ng-if='contact.tags.length!=0')
-            ul.tag-list
-              li.tag-item(ng-repeat='tag in contact.tags track by $index') {{tag.text}}
-          .contact-item-data(ng-if='contact.notes')
-            p {{contact.notes}}
-            p.type {{ 'Comments' | translate }}
-    div.bs-alert.bs-alert-warning.clearfix.text-center(ng-if= '!displayShell.addressbook.canEditContact')
-      strong {{ 'This contact cannot be edited' | translate }}
+.modal.center(role="dialog")
+  .modal-dialog
+    .text-center(
+      openpaas-logo-spinner,
+      spinner-start-active="1",
+      spinner-size="0.5",
+      ng-if='!loaded'
+    )
+    .modal-content(ng-if="loaded")
+      .modal-header.contact-display-toolbar-container
+        .card-image
+          img.esn-avatar(ng-src='{{::displayShell.getAvatar(avatarSize)}}', alt="{{ 'Avatar' | translate }}", fallback-src="{{::displayShell.getDefaultAvatar()}}")
+        h4.toolbar-title.ellipsis {{ contact.displayName }}
+        .actions
+          button.btn.btn-link.btn-icon.waves-notransition.waves-effect.waves-light.waves-circle(
+            ng-if="displayShell.addressbook.canEditContact",
+            ng-click="edit()",
+            title="{{ 'Edit contact' | translate }}",
+            bs-tooltip
+          )
+            i.mdi.mdi-pencil
+          button.btn.btn-link.btn-icon.waves-notransition.waves-effect.waves-light.waves-circle(ng-click="deleteContact()", title="{{ 'Delete contact' | translate }}", bs-tooltip)
+            i.mdi.mdi-delete
+          md-menu(md-offset="10 40", ng-blur="$mdMenu.close()")
+            button.btn.btn-link.btn-icon.waves-notransition.waves-effect.waves-light.waves-circle(
+              ng-click="$mdMenu.open($event)",
+              title="{{ 'More options' | translate }}",
+              bs-tooltip
+            )
+              i.mdi.mdi-dots-vertical
+            md-menu-content(ng-click="$mdMenu.close()")
+              md-menu-item.other-action-menu-item
+                contact-action-copy(contact="contact")
+              md-menu-item.other-action-menu-item
+                contact-action-move(contact="contact")
+          button.btn.btn-link.btn-icon.waves-notransition.waves-effect.waves-light.waves-circle(ui-sref="{{ previousState }}", title="{{ 'Close' | translate }}", bs-tooltip)
+            i.mdi.mdi-close
+      .modal-body.contact-display-body-container
+        h4 {{ 'Contact information' | translate }}
+        .info-row
+          i.mdi.mdi-folder-account
+          a.row-title.title.ellipsis(href='', title="{{ 'Address book' | translate }}", ng-click='openAddressbook()') {{::addressbookDisplayShell.displayName}}
+        .info-row
+          i.mdi.mdi-account-outline
+          span.row-title.information-entry {{ 'First Name' | translate }}
+          span {{ contact.firstName }}
+        .info-row
+          i.mdi.mdi-account
+          span.row-title.information-entry {{ 'Last name' | translate }}
+          span {{ contact.lastName }}
+        .info-row(ng-if="contact.nickname")
+          i.mdi.mdi-comment-account
+          span.row-title.information-entry {{ 'Nickname' | translate }}
+          span {{ contact.nickname }}
+        .info-row(ng-if="contact.birthday")
+          i.mdi.mdi-cake
+          span.row-title.information-entry {{ 'Birthday' | translate }}
+          span {{ contact.birthday | esnDatetime: 'mediumDate' }}
+        .work(ng-if='shouldDisplayWork()')
+          h4 {{ 'Work' | translate }}
+          .info-row(ng-if="contact.orgName")
+            i.mdi.mdi-factory
+            span.row-title.information-entry {{ 'Organization' | translate }}
+            span {{ contact.orgName }}
+          .info-row(ng-if="contact.orgRole")
+            i.mdi.mdi-briefcase
+            span.row-title.information-entry {{ 'Job' | translate }}
+            span {{ contact.orgRole }}
+        .emails(ng-if='emails && emails.length')
+          h4 {{ 'Emails' | translate }}
+          .info-row(ng-repeat='email in emails track by $index')
+            i.mdi.mdi-email
+            span.row-title.information-entry {{ email.type | translate }}
+            a(ng-href='mailto:{{email.value}}' op-inbox-compose, op-inbox-compose-users='[email]') {{ email.value }}
+        .numbers(ng-if='phones && phones.length')
+          h4 {{ 'Phone numbers' | translate }}
+          .info-row(ng-repeat='phone in phones track by $index')
+            i.mdi.mdi-phone
+            span.row-title.information-entry {{ phone.type | translate }}
+            a(ng-href='tel:{{phone.value}}') {{ phone.value }}
+        .socials(ng-if='contact.social && contact.social.length')
+          h4 {{ 'Social Networks' | translate }}
+          .info-row(ng-repeat='social in contact.social track by $index')
+            i.mdi.mdi-skype(ng-if="social.type === 'Skype'")
+            i.mdi.mdi-twitter(ng-if="social.type === 'Twitter'")
+            span.row-title.information-entry {{ social.type | translate }}
+            a(ng-href="{{social.value|prefixLink:social.type}}") {{social.value}}
+        .websites(ng-if='contact.urls && contact.urls.length')
+          h4 {{ 'Websites' | translate }}
+          .info-row(ng-repeat='url in contact.urls track by $index')
+            i.mdi.mdi-web
+            a(ng-href='{{url.value|prefixLink:"http"}}' target='_blank') {{url.value}}
+        .adresses(ng-if='(shouldDisplayWork() || shouldDisplayHome()) || shouldDisplayOthers()')
+          h4 {{ 'Addresses' | translate }}
+          .info-row(ng-if="getAddress('home')", ng-init="homeAddress = getAddress('home')")
+            i.mdi.mdi-home
+            span.row-title.information-entry {{ 'Home' | translate }}
+            span.ellipsis {{ homeAddress.street }} {{ homeAddress.zip }} {{homeAddress.city }} {{ homeAddress.country }}
+          .info-row(ng-if="getAddress('work')", ng-init="workAddress = getAddress('work')")
+            i.mdi.mdi-briefcase
+            span.row-title.information-entry {{ 'Work' | translate }}
+            span.ellipsis {{ workAddress.street }} {{ workAddress.zip }} {{ workAddress.city }} {{ workAddress.country }}
+          .info-row(ng-if="getAddress('other')", ng-init="otherAddress = getAddress('other')")
+            i.mdi.mdi-map-marker
+            span.row-title.information-entry {{ 'Other' | translate }}
+            span.ellipsis {{ otherAddress.street }} {{ otherAddress.zip }} {{ otherAddress.city }} {{ otherAddress.country }}
+        .tags(ng-if="contact.tags.length")
+          hr
+          .info-row
+            span.badge.badge-pill.badge-secondary(ng-repeat="tag in contact.tags track by $index") {{ tag.text }}

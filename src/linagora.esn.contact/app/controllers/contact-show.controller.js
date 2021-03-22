@@ -25,10 +25,11 @@ function ContactShowController(
   contactDisplayError,
   gracePeriodService,
   contactService,
+  contactDeleteConfirmationDialogService,
   CONTACT_AVATAR_SIZE,
   CONTACT_EVENTS
 ) {
-  $scope.avatarSize = CONTACT_AVATAR_SIZE.bigger;
+  $scope.avatarSize = CONTACT_AVATAR_SIZE.list;
   $scope.bookId = $stateParams.bookId;
   $scope.bookName = $stateParams.bookName;
   $scope.cardId = $stateParams.cardId;
@@ -86,9 +87,9 @@ function ContactShowController(
   };
 
   $scope.deleteContact = function() {
-    $timeout(function() {
+    contactDeleteConfirmationDialogService(() => {
       deleteContact($scope.bookId, $scope.bookName, $scope.contact);
-    }, 200);
+    });
   };
 
   $scope.shouldDisplayWork = function() {
