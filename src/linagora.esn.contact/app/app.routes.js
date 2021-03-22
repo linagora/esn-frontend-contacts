@@ -69,15 +69,21 @@ require('./services/contact-configuration.service.js');
         })
         .state('contact.addressbooks.new', {
           url: '^/contact/new/:bookId/:bookName',
-          views: {
-            'main@contact': {
-              template: require('./contact/create/contact-create.pug'),
-              controller: 'newContactController',
-              resolve: {
+          params: {
+            previousState: 'contact.addressbooks'
+          },
+          resolve: {
+            modalInstance: function($modal) {
+              return $modal({
+                template: require('./contact/create/contact-create.pug'),
+                controller: 'newContactController',
                 domain: routeResolver.session('domain'),
                 user: routeResolver.session('user')
-              }
+              });
             }
+          },
+          onExit: function(modalInstance) {
+            modalInstance.hide();
           }
         })
         .state('contact.addressbooks.show', {
