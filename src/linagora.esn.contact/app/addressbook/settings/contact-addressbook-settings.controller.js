@@ -6,6 +6,7 @@ angular.module('linagora.esn.contact')
   .controller('contactAddressbookSettingsController', contactAddressbookSettingsController);
 
 function contactAddressbookSettingsController(
+  $rootScope,
   $q,
   $state,
   $stateParams,
@@ -27,17 +28,25 @@ function contactAddressbookSettingsController(
   self.onCancel = onCancel;
 
   function $onInit() {
-    contactAddressbookService.getAddressbookByBookName($stateParams.bookName, $stateParams.bookId)
-      .then(function(addressbook) {
-        self.addressbook = addressbook;
-        self.addressbookDisplayName = contactAddressbookDisplayService.buildDisplayName(addressbook);
+    if ($stateParams && $stateParams.bookName && $stateParams.bookId) return _fetchAddresBook();
 
-        originalAddressbook = angular.copy(self.addressbook);
+    $rootScope.$on('$stateChangeSuccess', () => {
+      _fetchAddresBook();
+    });
 
-        self.publicRight = _getShareConcernedAddressbook(self.addressbook).rights.public;
-        self.sharees = _getShareConcernedAddressbook(self.addressbook).sharees;
-        self.membersRight = _getMembersRight(_getShareConcernedAddressbook(self.addressbook));
-      });
+    function _fetchAddresBook() {
+      contactAddressbookService.getAddressbookByBookName($stateParams.bookName, $stateParams.bookId)
+        .then(function(addressbook) {
+          self.addressbook = addressbook;
+          self.addressbookDisplayName = contactAddressbookDisplayService.buildDisplayName(addressbook);
+
+          originalAddressbook = angular.copy(self.addressbook);
+
+          self.publicRight = _getShareConcernedAddressbook(self.addressbook).rights.public;
+          self.sharees = _getShareConcernedAddressbook(self.addressbook).sharees;
+          self.membersRight = _getMembersRight(_getShareConcernedAddressbook(self.addressbook));
+        });
+    }
   }
 
   function onSave() {

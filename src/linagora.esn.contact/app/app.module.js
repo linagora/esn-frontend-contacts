@@ -119,7 +119,6 @@ require('./addressbook/settings/delegation/contact-addressbook-settings-delegati
 require('./addressbook/settings/delegation/contact-addressbook-settings-delegation.controller.js');
 require('./addressbook/settings/main/contact-addressbook-settings-main.component.js');
 require('./addressbook/settings/main/contact-addressbook-settings-main.controller.js');
-require('./addressbook/settings/subheader/contact-addressbook-settings-subheader.component.js');
 require('./addressbook/user-addressbook/contact-user-addressbook-display-shell.service.js');
 require('./addressbook/user-addressbook/contact-user-addressbook.run.js');
 require('./addressbook/user-addressbook/contact-user-addressbook.service.js');
