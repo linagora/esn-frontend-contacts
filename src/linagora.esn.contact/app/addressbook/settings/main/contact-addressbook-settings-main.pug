@@ -6,7 +6,8 @@
     md-select(
       ng-model='$ctrl.publicRight',
       ng-disabled='!$ctrl.canUpdatePublicRight()',
-      md-container-class="addressbook-settings-dropdown"
+      md-container-class="addressbook-settings-dropdown",
+      md-menu-backdrop-fix
     )
       md-option(
         ng-repeat="right in $ctrl.publicRights"
@@ -24,6 +25,7 @@
       ng-model='$ctrl.membersRight',
       ng-disabled='!$ctrl.canUpdateMembersRight()'
       md-container-class="addressbook-settings-dropdown"
+      md-menu-backdrop-fix
     )
       md-option(
         ng-repeat="right in $ctrl.membersRights"

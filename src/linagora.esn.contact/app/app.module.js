@@ -49,7 +49,8 @@ angular.module('linagora.esn.contact', [
   'esn.api-client',
   'openpaas-logo',
   'esn.widget.helper',
-  'esn.contact.libs'
+  'esn.contact.libs',
+  'esn.md-menu.backdrop'
 ]);
 
 require('../../esn.contact.libs/app/app.module.js');
@@ -72,6 +73,7 @@ require('esn-frontend-common-libs/src/modules/linagora.esn.graceperiod/frontend/
 require('esn-frontend-common-libs/src/frontend/js/modules/search/search.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/scroll.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/multi-input.js');
+require('esn-frontend-common-libs/src/frontend/js/modules/esn.md-menu.backdrop');
 require('esn-frontend-common-libs/src/frontend/js/modules/attendee/attendee.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/header/header.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/form-helper/form-helper.module.js');
