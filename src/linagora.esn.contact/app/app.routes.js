@@ -61,9 +61,6 @@ require('./services/contact-configuration.service.js');
         })
         .state('contact.addressbooks.settings', {
           url: '/settings',
-          params: {
-            previousState: 'contact.addressbooks'
-          },
           resolve: {
             modalInstance: function($modal) {
               return $modal({
