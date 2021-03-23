@@ -11,7 +11,8 @@ ng-form(name="form")
     .select-delegation
       md-select(
         ng-model='$ctrl.selectedAccess',
-        md-container-class="addressbook-settings-dropdown"
+        md-container-class="addressbook-settings-dropdown",
+        md-menu-backdrop-fix
       )
         md-option(
           ng-repeat="access in $ctrl.CONTACT_SHARING_SHARE_ACCESS_CHOICES"
@@ -46,7 +47,8 @@ ng-form(name="form")
     .select-delegation
       md-select(
         ng-model='sharee.access',
-        md-container-class="addressbook-settings-dropdown"
+        md-container-class="addressbook-settings-dropdown",
+        md-menu-backdrop-fix
       )
         md-option(
             ng-repeat="access in $ctrl.CONTACT_SHARING_SHARE_ACCESS_CHOICES"
