@@ -133,5 +133,9 @@
   "Please fill at least a field": "请填写至少一个字段",
   "Search results": "搜索结果",
   "No contacts are matching your search": "没有联系人匹配您的搜索",
-  "Domain members": "域成员"
+  "Domain members": "域成员",
+  "Are you sure you want to delete this contact?": "您确定要删除此联系人吗？",
+  "Delete contact": "删除联络人",
+  "Delete contact?": "删除联络人?",
+  "More options": "更多的选择"
 }
