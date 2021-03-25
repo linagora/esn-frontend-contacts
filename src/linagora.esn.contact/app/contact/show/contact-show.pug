@@ -25,7 +25,8 @@
             button.btn.btn-link.btn-icon.waves-notransition.waves-effect.waves-light.waves-circle(
               ng-click="$mdMenu.open($event)",
               title="{{ 'More options' | translate }}",
-              bs-tooltip
+              bs-tooltip,
+              md-menu-backdrop-fix="1054"
             )
               i.mdi.mdi-dots-vertical
             md-menu-content(ng-click="$mdMenu.close()")
