@@ -50,7 +50,8 @@ angular.module('linagora.esn.contact', [
   'esn.api-client',
   'openpaas-logo',
   'esn.widget.helper',
-  'esn.contact.libs'
+  'esn.contact.libs',
+  'esn.md-menu.backdrop'
 ]);
 
 require('../../esn.contact.libs/app/app.module.js');
@@ -73,6 +74,7 @@ require('esn-frontend-common-libs/src/modules/linagora.esn.graceperiod/frontend/
 require('esn-frontend-common-libs/src/frontend/js/modules/search/search.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/scroll.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/multi-input.js');
+require('esn-frontend-common-libs/src/frontend/js/modules/esn.md-menu.backdrop');
 require('esn-frontend-common-libs/src/frontend/js/modules/attendee/attendee.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/header/header.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/form-helper/form-helper.module.js');
@@ -121,7 +123,6 @@ require('./addressbook/settings/delegation/contact-addressbook-settings-delegati
 require('./addressbook/settings/delegation/contact-addressbook-settings-delegation.controller.js');
 require('./addressbook/settings/main/contact-addressbook-settings-main.component.js');
 require('./addressbook/settings/main/contact-addressbook-settings-main.controller.js');
-require('./addressbook/settings/subheader/contact-addressbook-settings-subheader.component.js');
 require('./addressbook/user-addressbook/contact-user-addressbook-display-shell.service.js');
 require('./addressbook/user-addressbook/contact-user-addressbook.run.js');
 require('./addressbook/user-addressbook/contact-user-addressbook.service.js');
