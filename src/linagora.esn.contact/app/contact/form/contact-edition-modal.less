@@ -1,0 +1,139 @@
+body {
+  .modal.center {
+    .contact-form {
+      .modal-dialog {
+        .modal-body {
+          overflow-x: hidden;
+        }
+      }
+    }
+  }
+}
+.icon-multi-input {
+  padding-left: 11px;
+  padding-top: 16px;
+  float: left;
+}
+.multi-input-button .mdi {
+  font-size: 1.9em;
+}
+.contact-form .form-group {
+  .action-button {
+    padding-top: 15px;
+  }
+  .select {
+    position: static;
+  }
+}
+
+.contact-form {
+  .fg-line {
+    padding-left: 8px !important;
+  }
+
+  .input-group-addon .mdi {
+    font-size: 1.9em;
+    vertical-align: bottom;
+  }
+
+  @media (max-width: @screen-sm-min) {
+    .modal-dialog.ui-draggable {
+      position: fixed !important;
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    padding: 14px 26px;
+
+    .modal-title {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+    }
+  }
+
+  .modal-header,
+  .modal-footer {
+    cursor: grabbing;
+  }
+
+  .modal-footer {
+    background: inherit;
+  }
+
+  .modal-body {
+    .input-group-addon {
+      padding-bottom: 8px;
+      vertical-align: bottom !important;
+    }
+  }
+
+  @media (max-width: @screen-md-min) {
+    .modal-dialog {
+      .modal-content {
+        .modal-header:not(.overflow-none).contact-form-modal-header {
+          padding: 12px 20px;
+        }
+
+        .modal-body:not(.overflow-none).contact-form-modal-body {
+          position: unset;
+          top: unset;
+          bottom: unset;
+          max-height: calc(100vh - 109px);
+        }
+      }
+    }
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .contact-form {
+    .modal-footer {
+      .form-group {
+        .fg-line {
+          .col-xs-3:first-child {
+            text-align: left;
+          }
+          .col-xs-3:nth-child(2) {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: @screen-xs-max) {
+  .contact-form {
+    .btn-default {
+      .PrimaryColor();
+    }
+
+    .modal-dialog {
+      margin: 0;
+    }
+
+    .modal-header {
+      .form-group {
+        margin-bottom: 0;
+      }
+    }
+
+    .modal-body {
+      padding-top: 10px;
+    }
+
+    .modal-footer {
+      padding: 5px;
+    }
+    .input-group .fg-line {
+      padding: 0 20px;
+    }
+  }
+}
