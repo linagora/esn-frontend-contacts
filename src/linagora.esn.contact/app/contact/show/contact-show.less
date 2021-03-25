@@ -8,7 +8,7 @@
   .flex-vertical-centered;
   background: #fff !important;
   border-bottom: 1px solid #f0eeee;
-  padding: 15px !important; // overrides .modal .modal-header
+  padding: 16px 16px 16px 24px !important; // overrides .modal .modal-header
 
   .actions {
     .flex-vertical-centered;
@@ -16,7 +16,7 @@
     justify-content: flex-end;
 
     font-size: 20px;
-    color: #555555;
+    color: lighten(@secondaryTextColor, 10%);
     padding: 4px;
 
     .btn.btn-link {
@@ -37,7 +37,7 @@
 .contact-display-body-container {
   max-height: calc(80vh - 80px);
   overflow-y: auto;
-  padding: 10px 26px 26px !important;
+  padding: 8px 24px 24px !important;
 
   h4 {
     font-weight: normal;
@@ -52,7 +52,7 @@
 
     > i.mdi {
       font-size: 20px;
-      color: #555555;
+      color: lighten(@secondaryTextColor, 10%);
       margin-right: 12px;
     }
 
@@ -63,7 +63,7 @@
     }
 
     .information-entry {
-      color: #3c4043;
+      color: @secondaryTextColor;
     }
 
     .badge {
@@ -78,13 +78,11 @@
     display: flex;
     align-items: center;
     text-transform: unset;
-    color: #3c4043;
-    font-weight: 400;
     font-size: 13px;
 
     i.mdi {
-      color: #555555;
-      margin-right: 4px;
+      color: lighten(@secondaryTextColor, 10%);
+      margin-right: 12px;
     }
   }
 }

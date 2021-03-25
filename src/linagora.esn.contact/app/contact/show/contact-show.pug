@@ -25,7 +25,8 @@
             button.btn.btn-link.btn-icon.waves-notransition.waves-effect.waves-light.waves-circle(
               ng-click="$mdMenu.open($event)",
               title="{{ 'More options' | translate }}",
-              bs-tooltip
+              bs-tooltip,
+              md-menu-backdrop-fix="1054"
             )
               i.mdi.mdi-dots-vertical
             md-menu-content(ng-click="$mdMenu.close()")
@@ -42,7 +43,7 @@
           a.row-title.title.ellipsis(href='', title="{{ 'Address book' | translate }}", ng-click='openAddressbook()') {{::addressbookDisplayShell.displayName}}
         .info-row
           i.mdi.mdi-account-outline
-          span.row-title.information-entry {{ 'First Name' | translate }}
+          span.row-title.information-entry {{ 'First name' | translate }}
           span {{ contact.firstName }}
         .info-row
           i.mdi.mdi-account
