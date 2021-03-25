@@ -40,6 +40,7 @@ describe('The contactAddressbookSettingsController', function() {
     CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS = _CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS_;
 
     $stateParams.bookName = 'collected';
+    $stateParams.bookId = 'bookId';
     addressbook = {
       bookId: 'bookId',
       bookName: 'contacts',
