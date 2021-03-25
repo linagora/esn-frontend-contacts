@@ -33,4 +33,6 @@ function addTemplateCache($templateCache) {
   $templateCache.put('/contact/app/contact/photo/contact-photo-child.html', require('./contact/photo/contact-photo-child.pug'));
   $templateCache.put('/contact/app/contact/list/contact-list-action-drop-menu.html', require('./contact/list/contact-list-action-drop-menu.pug'));
   $templateCache.put('/contact/app/contact/form/contact-avatar-modal.html', require('./contact/form/contact-avatar-modal.pug'));
+  $templateCache.put('/contact/app/contact/action/copy/contact-action-copy-dialog.html', require('./contact/action/copy/contact-action-copy-dialog.pug'));
+  $templateCache.put('/contact/app/contact/action/move/contact-action-move-dialog.html', require('./contact/action/move/contact-action-move-dialog.pug'));
 }
