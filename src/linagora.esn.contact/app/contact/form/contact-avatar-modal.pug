@@ -7,5 +7,5 @@
       .modal-body
         avatar-picker(avatar-placeholder="{{contact.photo || '/contact/images/default_avatar.png'}}")
       .modal-footer
-        button.btn.btn-default(type="button", ng-click="saveContactAvatar()", ng-disabled="loading || !imageSelected()") {{ 'Save' | translate }}
-        button.btn.btn-default(type="button", ng-click="$toggle()", ng-disabled="loading") {{ 'Cancel' | translate }}
+        button.btn.btn-link(type="button", ng-click="saveContactAvatar()", ng-disabled="loading || !imageSelected()") {{ 'Save' | translate }}
+        button.btn.btn-primary(type="button", ng-click="$toggle()", ng-disabled="loading") {{ 'Cancel' | translate }}
