@@ -71,6 +71,10 @@ function contactAddressbookSettingsController(
       updateActions.push(contactAddressbookService.updateGroupAddressbookMembersRight(shareConcernedAddressbook, membersRightToUpdate.value));
     }
 
+    if (self.addressbook.name !== originalAddressbook.name) {
+      updateActions.push(contactAddressbookService.updateAddressbook(self.addressbook));
+    }
+
     return asyncAction(NOTIFICATION_MESSAGES, function() {
       return $q.all(updateActions).then(function() {
         $state.go('contact.addressbooks', {

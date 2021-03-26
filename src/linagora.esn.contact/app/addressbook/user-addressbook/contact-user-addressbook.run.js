@@ -1,4 +1,3 @@
-require('../action/addressbook-action-edit.service.js');
 require('../action/addressbook-action-delete.service.js');
 require('../action/addressbook-action-export.service.js');
 require('../action/addressbook-action-settings.service.js');
@@ -10,7 +9,6 @@ require('../../services/contact-configuration.service.js');
 
 angular.module('linagora.esn.contact')
   .run(function(
-    contactAddressbookActionEdit,
     contactAddressbookActionDelete,
     contactAddressbookActionExport,
     contactAddressbookActionSettings,
@@ -29,7 +27,6 @@ angular.module('linagora.esn.contact')
         actions: [
           contactAddressbookActionExport,
           contactAddressbookActionSettings,
-          contactAddressbookActionEdit,
           contactAddressbookActionDelete
         ],
         displayShell: ContactUserAddressbookDisplayShell,

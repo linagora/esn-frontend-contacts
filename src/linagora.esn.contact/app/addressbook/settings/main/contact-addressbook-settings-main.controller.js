@@ -20,6 +20,10 @@ function contactAddressbookSettingsMainController(
   self.$onInit = $onInit;
   self.canUpdatePublicRight = canUpdatePublicRight;
   self.canUpdateMembersRight = canUpdateMembersRight;
+  self.uneditableAddressbookNameMapping = {
+    contacts: 'My contacts',
+    collected: 'Collected contacts'
+  };
 
   function $onInit() {
     contactAddressbookService.getAddressbookUrl(self.addressbook).then(function(url) {
