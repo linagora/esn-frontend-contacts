@@ -57,7 +57,7 @@ function contactAddressbookSettingsMainController(
   }
 
   function _initShareOwner() {
-    var shareOwner = _getShareOwner(self.addressbook.source.sharees);
+    var shareOwner = _getShareOwner(angular.copy(self.addressbook.source.sharees));
 
     shareOwner && shareOwner.getUser()
       .then(function(user) {
