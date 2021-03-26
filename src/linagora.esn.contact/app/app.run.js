@@ -36,4 +36,5 @@ function addTemplateCache($templateCache) {
   $templateCache.put('/contact/app/addressbook/addressbook-shared-configuration/addressbook-shared-configuration-dialog.html', require('./addressbook/addressbook-shared-configuration/addressbook-shared-configuration-dialog.pug'));
   $templateCache.put('/contact/app/contact/action/copy/contact-action-copy-dialog.html', require('./contact/action/copy/contact-action-copy-dialog.pug'));
   $templateCache.put('/contact/app/contact/action/move/contact-action-move-dialog.html', require('./contact/action/move/contact-action-move-dialog.pug'));
+  $templateCache.put('/contact/app/addressbook/addressbook-shared-configuration/addressbook-shared-configuration-dialog.html', require('./addressbook/addressbook-shared-configuration/addressbook-shared-configuration-dialog.pug'));
 }

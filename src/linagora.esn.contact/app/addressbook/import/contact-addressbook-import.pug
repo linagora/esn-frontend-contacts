@@ -30,5 +30,5 @@
             span.message
               | {{ 'Something went wrong, please try again later' | translate }}
       .modal-footer
-        button.btn.btn-default(type="button", ng-click="$hide()") {{ 'Cancel' | translate }}
+        button.btn.btn-link(type="button", ng-click="$hide()") {{ 'Cancel' | translate }}
         button.btn.btn-primary(type='button', ng-disabled='!$ctrl.isValid', ng-click='$ctrl.doImport(); $hide()') {{ 'Import' | translate }}
