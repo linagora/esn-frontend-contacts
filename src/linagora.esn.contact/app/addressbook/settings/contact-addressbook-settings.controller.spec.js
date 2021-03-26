@@ -1,22 +1,27 @@
 'use strict';
 
-/* global chai: false */
-/* global sinon: false */
+/* global chai, sinon */
 
-var expect = chai.expect;
+const { expect } = chai;
 
 describe('The contactAddressbookSettingsController', function() {
-  var $q, $rootScope, $controller, $state, $stateParams;
-  var contactAddressbookDisplayService, contactAddressbookService, addressbook;
-  var CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS;
+  let $q, $rootScope, $controller, $state, $stateParams;
+  let contactAddressbookDisplayService, contactAddressbookService, addressbook;
+  let CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS;
+  let $modalMock;
 
   beforeEach(function() {
+    $modalMock = sinon.stub();
+
     angular.mock.module('esn.async-action', function($provide) {
       $provide.value('asyncAction', function(message, action) {
         return action();
       });
     });
     angular.mock.module('linagora.esn.contact');
+    angular.mock.module(function($provide) {
+      $provide.value('$modal', $modalMock);
+    });
   });
 
   beforeEach(angular.mock.inject(function(
@@ -318,6 +323,27 @@ describe('The contactAddressbookSettingsController', function() {
       }, {
         location: 'replace'
       });
+    });
+  });
+
+  describe('The onDelete function', function() {
+    it('should open a confirmation modal that allows deleting the address book', function() {
+      const controller = initController();
+
+      controller.$onInit();
+      $rootScope.$digest();
+
+      controller.onDelete();
+
+      expect($modalMock).to.have.been.calledWith(sinon.match({
+        backdrop: 'static',
+        placement: 'center',
+        controller: 'ContactAddressbookDeleteController',
+        controllerAs: '$ctrl',
+        locals: {
+          addressbook: controller.addressbook
+        }
+      }));
     });
   });
 });

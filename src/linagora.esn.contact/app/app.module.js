@@ -96,7 +96,6 @@ require('esn-frontend-common-libs/src/frontend/js/modules/widget-helper');
 require('esn-frontend-common-libs/src/frontend/components/openpaas-logo/openpaas-logo.js');
 
 require('./addressbook/acl/addressbook-acl-helper.servive.js');
-require('./addressbook/action/addressbook-action-delete.service.js');
 require('./addressbook/action/addressbook-action-export.service.js');
 require('./addressbook/action/addressbook-action-settings.service.js');
 require('./addressbook/addressbook-shared-configuration/addressbook-shared-configuration.component.js');

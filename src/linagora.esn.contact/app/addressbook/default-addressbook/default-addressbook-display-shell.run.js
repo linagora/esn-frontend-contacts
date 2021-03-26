@@ -1,6 +1,5 @@
 require('./default-addressbook-display-shell.service.js');
 require('./default-addressbook-helper.service.js');
-require('../action/addressbook-action-delete.service.js');
 require('../action/addressbook-action-settings.service.js');
 require('../action/addressbook-action-export.service.js');
 require('../../services/contact-configuration.service.js');
@@ -14,7 +13,6 @@ function registerDefaultAddressbookDisplayShell(
   contactAddressbookDisplayShellRegistry,
   ContactDefaultAddressbookDisplayShell,
   contactDefaultAddressbookHelper,
-  contactAddressbookActionDelete,
   contactAddressbookActionSettings,
   contactAddressbookActionExport,
   contactConfiguration
@@ -28,8 +26,7 @@ function registerDefaultAddressbookDisplayShell(
       priority: 1,
       actions: [
         contactAddressbookActionExport,
-        contactAddressbookActionSettings,
-        contactAddressbookActionDelete
+        contactAddressbookActionSettings
       ],
       displayShell: ContactDefaultAddressbookDisplayShell,
       matchingFunction: contactDefaultAddressbookHelper.isDefaultAddressbook

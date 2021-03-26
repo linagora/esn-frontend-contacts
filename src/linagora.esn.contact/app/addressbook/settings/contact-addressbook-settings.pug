@@ -35,6 +35,9 @@
                 share-managers='$ctrl.addressbook.shareManagers'
               )
       .modal-footer.flex
+        .flex-vertical-centered.flex-start(ng-if="$ctrl.addressbook.canDeleteAddressbook")
+          button.btn.btn-link.btn-icon.color-danger.waves-effect.waves-circle(ng-click="$ctrl.onDelete()")
+            i.mdi.mdi-delete
         .flex-vertical-centered.flex-end
           button.btn.btn-link.color-default.close-button(type='button', ng-click="$ctrl.onCancel()") {{ 'Close' | translate }}
           button.btn.btn-primary.save.save-button(ng-click='$ctrl.onSave()')
