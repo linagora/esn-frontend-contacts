@@ -10,6 +10,7 @@ function contactAddressbookSettingsController(
   $q,
   $state,
   $stateParams,
+  $modal,
   asyncAction,
   contactAddressbookService,
   contactAddressbookDisplayService,
@@ -26,6 +27,7 @@ function contactAddressbookSettingsController(
   self.$onInit = $onInit;
   self.onSave = onSave;
   self.onCancel = onCancel;
+  self.onDelete = onDelete;
 
   function $onInit() {
     if ($stateParams && $stateParams.bookName && $stateParams.bookId) return _fetchAddresBook();
@@ -71,6 +73,10 @@ function contactAddressbookSettingsController(
       updateActions.push(contactAddressbookService.updateGroupAddressbookMembersRight(shareConcernedAddressbook, membersRightToUpdate.value));
     }
 
+    if (self.addressbook.name !== originalAddressbook.name) {
+      updateActions.push(contactAddressbookService.updateAddressbook(self.addressbook));
+    }
+
     return asyncAction(NOTIFICATION_MESSAGES, function() {
       return $q.all(updateActions).then(function() {
         $state.go('contact.addressbooks', {
@@ -86,6 +92,19 @@ function contactAddressbookSettingsController(
       bookId: self.addressbook.bookId,
       bookName: self.addressbook.bookName
     }, { location: 'replace' });
+  }
+
+  function onDelete() {
+    $modal({
+      template: require('../delete/addressbook-delete.pug'),
+      backdrop: 'static',
+      placement: 'center',
+      controller: 'ContactAddressbookDeleteController',
+      controllerAs: '$ctrl',
+      locals: {
+        addressbook: self.addressbook
+      }
+    });
   }
 
   function _getShareConcernedAddressbook(addressbook) {

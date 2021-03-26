@@ -1,22 +1,27 @@
 'use strict';
 
-/* global chai: false */
-/* global sinon: false */
+/* global chai, sinon */
 
-var expect = chai.expect;
+const { expect } = chai;
 
 describe('The contactAddressbookSettingsController', function() {
-  var $q, $rootScope, $controller, $state, $stateParams;
-  var contactAddressbookDisplayService, contactAddressbookService, addressbook;
-  var CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS;
+  let $q, $rootScope, $controller, $state, $stateParams;
+  let contactAddressbookDisplayService, contactAddressbookService, addressbook;
+  let CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS;
+  let $modalMock;
 
   beforeEach(function() {
+    $modalMock = sinon.stub();
+
     angular.mock.module('esn.async-action', function($provide) {
       $provide.value('asyncAction', function(message, action) {
         return action();
       });
     });
     angular.mock.module('linagora.esn.contact');
+    angular.mock.module(function($provide) {
+      $provide.value('$modal', $modalMock);
+    });
   });
 
   beforeEach(angular.mock.inject(function(
@@ -196,6 +201,40 @@ describe('The contactAddressbookSettingsController', function() {
       }), controller.sharees);
     });
 
+    it('should update the name of the address book when it has been changed', function() {
+      contactAddressbookService.updateAddressbook = sinon.stub().returns($q.when());
+
+      addressbook.name = 'Old name';
+
+      const controller = initController();
+
+      controller.$onInit();
+      $rootScope.$digest();
+
+      controller.addressbook.name = 'New name';
+
+      controller.onSave();
+
+      expect(contactAddressbookService.updateAddressbook).to.have.been.calledWith(sinon.match({
+        name: 'New name'
+      }));
+    });
+
+    it('should not update the name of the address book when it has not been changed', function() {
+      contactAddressbookService.updateAddressbook = sinon.stub().returns($q.when());
+
+      addressbook.name = 'Some name';
+
+      const controller = initController();
+
+      controller.$onInit();
+      $rootScope.$digest();
+
+      controller.onSave();
+
+      expect(contactAddressbookService.updateAddressbook).to.have.not.been.called;
+    });
+
     describe('when address book is subscription', function() {
       beforeEach(function() {
         addressbook.isSubscription = true;
@@ -284,6 +323,27 @@ describe('The contactAddressbookSettingsController', function() {
       }, {
         location: 'replace'
       });
+    });
+  });
+
+  describe('The onDelete function', function() {
+    it('should open a confirmation modal that allows deleting the address book', function() {
+      const controller = initController();
+
+      controller.$onInit();
+      $rootScope.$digest();
+
+      controller.onDelete();
+
+      expect($modalMock).to.have.been.calledWith(sinon.match({
+        backdrop: 'static',
+        placement: 'center',
+        controller: 'ContactAddressbookDeleteController',
+        controllerAs: '$ctrl',
+        locals: {
+          addressbook: controller.addressbook
+        }
+      }));
     });
   });
 });

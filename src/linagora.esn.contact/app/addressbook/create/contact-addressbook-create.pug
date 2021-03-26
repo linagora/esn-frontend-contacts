@@ -9,5 +9,5 @@
           esn-form-group(label="{{ 'Name' | translate }}")
             input.form-control(type="text", ng-model="$ctrl.addressbook.name", name="addressbookName", autofocus, required)
         .modal-footer
-          button.btn.btn-default(type="button", ng-click="$hide()") {{ 'Cancel' | translate }}
+          button.btn.btn-link(type="button", ng-click="$hide()") {{ 'Cancel' | translate }}
           button.btn.btn-primary(type="submit", ng-disabled="form.$invalid") {{ 'Create' | translate }}

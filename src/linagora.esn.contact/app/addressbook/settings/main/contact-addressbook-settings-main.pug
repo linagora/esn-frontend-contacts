@@ -1,3 +1,12 @@
+.row.addressbook-name(ng-if="$ctrl.addressbook.canEditAddressbook")
+  .title-header
+    h4 {{ 'Name' | translate }}
+  .fg-line
+    input.form-control(ng-model="$ctrl.addressbook.name", autofocus, required)
+
+.row.addressbook-name(ng-if="!$ctrl.addressbook.canEditAddressbook")
+  h4 {{ $ctrl.uneditableAddressbookNameMapping[$ctrl.addressbook.bookName] | translate }}
+
 .row(ng-if="!$ctrl.addressbook.group", feature-flag="linagora.esn.contact.features.isSharingAddressbookEnabled")
   .col-md-4.col-xs-6.title-header
     i.mdi.mdi-account-multiple
