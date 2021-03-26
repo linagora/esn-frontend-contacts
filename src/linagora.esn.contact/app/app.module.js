@@ -97,7 +97,6 @@ require('esn-frontend-common-libs/src/frontend/components/openpaas-logo/openpaas
 
 require('./addressbook/acl/addressbook-acl-helper.servive.js');
 require('./addressbook/action/addressbook-action-delete.service.js');
-require('./addressbook/action/addressbook-action-edit.service.js');
 require('./addressbook/action/addressbook-action-export.service.js');
 require('./addressbook/action/addressbook-action-settings.service.js');
 require('./addressbook/addressbook-shared-configuration/addressbook-shared-configuration.component.js');
@@ -111,7 +110,6 @@ require('./addressbook/default-addressbook/default-addressbook-display-shell.run
 require('./addressbook/default-addressbook/default-addressbook-display-shell.service.js');
 require('./addressbook/default-addressbook/default-addressbook-helper.service.js');
 require('./addressbook/delete/addressbook-delete.controller.js');
-require('./addressbook/edit/addressbook-edit.controller.js');
 require('./addressbook/export/contact-addressbook-export.controller.js');
 require('./addressbook/group-addressbook/contact-group-addressbook.run.js');
 require('./addressbook/import/contact-addressbook-import.controller.js');

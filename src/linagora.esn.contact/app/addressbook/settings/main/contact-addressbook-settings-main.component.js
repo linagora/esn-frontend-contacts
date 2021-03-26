@@ -6,7 +6,7 @@
       template: require('./contact-addressbook-settings-main.pug'),
       controller: 'contactAddressbookSettingsMainController',
       bindings: {
-        addressbook: '<',
+        addressbook: '=',
         publicRight: '=',
         membersRight: '='
       }

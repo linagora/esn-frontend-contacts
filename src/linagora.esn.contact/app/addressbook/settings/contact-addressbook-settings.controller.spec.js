@@ -196,6 +196,40 @@ describe('The contactAddressbookSettingsController', function() {
       }), controller.sharees);
     });
 
+    it('should update the name of the address book when it has been changed', function() {
+      contactAddressbookService.updateAddressbook = sinon.stub().returns($q.when());
+
+      addressbook.name = 'Old name';
+
+      const controller = initController();
+
+      controller.$onInit();
+      $rootScope.$digest();
+
+      controller.addressbook.name = 'New name';
+
+      controller.onSave();
+
+      expect(contactAddressbookService.updateAddressbook).to.have.been.calledWith(sinon.match({
+        name: 'New name'
+      }));
+    });
+
+    it('should not update the name of the address book when it has not been changed', function() {
+      contactAddressbookService.updateAddressbook = sinon.stub().returns($q.when());
+
+      addressbook.name = 'Some name';
+
+      const controller = initController();
+
+      controller.$onInit();
+      $rootScope.$digest();
+
+      controller.onSave();
+
+      expect(contactAddressbookService.updateAddressbook).to.have.not.been.called;
+    });
+
     describe('when address book is subscription', function() {
       beforeEach(function() {
         addressbook.isSubscription = true;
