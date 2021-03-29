@@ -49,10 +49,10 @@ function ContactShowController(
   });
 
   $scope.$on(CONTACT_EVENTS.DELETED, function(event, data) {
-    if (data.id === $scope.cardId) {
+    if (data.contactId === $scope.cardId) {
       $state.go('contact.addressbooks', {
         bookId: $scope.bookId,
-        bookName: data.addressbook.bookName
+        bookName: data.bookName
       }, { location: 'replace' });
     }
   });
