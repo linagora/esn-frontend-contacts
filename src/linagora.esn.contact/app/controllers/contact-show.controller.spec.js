@@ -209,10 +209,8 @@ describe('The ContactShowController', function() {
     initController();
 
     var contact = {
-      id: scope.cardId,
-      addressbook: {
-        bookName: 'new-addressbook'
-      }
+      contactId: scope.cardId,
+      bookName: 'new-addressbook'
     };
 
     $rootScope.$broadcast(CONTACT_EVENTS.DELETED, contact);

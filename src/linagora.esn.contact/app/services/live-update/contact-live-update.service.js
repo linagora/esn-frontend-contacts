@@ -112,7 +112,7 @@ require('../../contact/contact.constants.js');
     }
 
     function onDelete(data) {
-      $rootScope.$broadcast(CONTACT_EVENTS.DELETED, { id: data.contactId });
+      $rootScope.$broadcast(CONTACT_EVENTS.DELETED, data);
     }
 
     function onUpdate(data) {
