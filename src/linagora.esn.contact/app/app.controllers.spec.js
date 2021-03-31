@@ -867,7 +867,7 @@ describe('The Contacts controller module', function() {
 
       it('should show the contact without calling ContactAPIClient update fn when the contact is not modified', function() {
         var updateSpy = sinon.spy();
-        var state = 'contact.addressbooks.show';
+        var state = 'contact.addressbooks';
         var stateOption = { location: 'replace' };
 
         $stateParams = {
