@@ -9,7 +9,7 @@ describe('The Contacts controller module', function() {
 
   var $rootScope, $controller, $timeout, scope, ContactShell, AddressBookPaginationService,
     notificationFactory, $location, $state, $stateParams, selectionService, $alert, gracePeriodService,
-    contactUpdateDataService, CONTACT_EVENTS,
+    contactUpdateDataService, CONTACT_EVENTS, session,
     ContactAPIClient, VcardBuilder, ContactLocationHelper, openContactForm, openContactFormMock,
     ContactShellDisplayBuilder, esnI18nServiceMock, contactAddressbookDisplayService, contactService;
 
@@ -152,11 +152,12 @@ describe('The Contacts controller module', function() {
     });
   });
 
-  beforeEach(angular.mock.inject(function(_$rootScope_, _$controller_, _$timeout_, _$state_, _contactAddressbookDisplayService_, _CONTACT_EVENTS_, _contactService_) {
+  beforeEach(angular.mock.inject(function(_$rootScope_, _$controller_, _$timeout_, _$state_, _session_, _contactAddressbookDisplayService_, _CONTACT_EVENTS_, _contactService_) {
     $rootScope = _$rootScope_;
     $controller = _$controller_;
     $timeout = _$timeout_;
     $state = _$state_;
+    session = _session_;
     contactAddressbookDisplayService = _contactAddressbookDisplayService_;
     contactService = _contactService_;
 
@@ -190,6 +191,8 @@ describe('The Contacts controller module', function() {
   describe('the newContactController', function() {
 
     beforeEach(function() {
+      session.user = { _id: 'userId' };
+
       $controller('newContactController', {
         $scope: scope
       });
