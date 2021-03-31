@@ -5,7 +5,7 @@
 var expect = chai.expect;
 
 describe('The contactEditionForm directive', function() {
-  var $compile, $rootScope, $scope;
+  var $compile, $rootScope, $scope, session;
   var CONTACT_AVATAR_SIZE, DEFAULT_ADDRESSBOOK_NAME, CONTACT_COLLECTED_ADDRESSBOOK_NAME;
   var contactAddressbookService, esnConfigMock;
 
@@ -24,6 +24,7 @@ describe('The contactEditionForm directive', function() {
   beforeEach(angular.mock.inject(function(
     _$compile_,
     _$rootScope_,
+    _session_,
     _contactAddressbookService_,
     _CONTACT_AVATAR_SIZE_,
     _DEFAULT_ADDRESSBOOK_NAME_,
@@ -32,6 +33,7 @@ describe('The contactEditionForm directive', function() {
     contactAddressbookService = _contactAddressbookService_;
     $compile = _$compile_;
     $rootScope = _$rootScope_;
+    session = _session_;
     CONTACT_AVATAR_SIZE = _CONTACT_AVATAR_SIZE_;
     DEFAULT_ADDRESSBOOK_NAME = _DEFAULT_ADDRESSBOOK_NAME_;
     CONTACT_COLLECTED_ADDRESSBOOK_NAME = _CONTACT_COLLECTED_ADDRESSBOOK_NAME_;
@@ -53,6 +55,10 @@ describe('The contactEditionForm directive', function() {
       }]);
     };
   }));
+
+  beforeEach(function() {
+    session.user = { _id: 'userId' };
+  });
 
   function initDirective(scope) {
     var element = $compile('<contact-edition-form contact="contact" addressbook-path="addressbookPath" contact-state="new"></contact-edition-form>')(scope);

@@ -14,6 +14,7 @@ require('./services/contact-highlight-helpers.service.js');
 angular.module('linagora.esn.contact')
 
   .controller('newContactController', function(
+    $rootScope,
     $scope,
     $stateParams,
     $state,
@@ -30,10 +31,20 @@ angular.module('linagora.esn.contact')
     contactAddressbookParser,
     DEFAULT_ADDRESSBOOK_NAME
   ) {
-    $scope.bookId = $stateParams.bookId !== 'all' ? $stateParams.bookId : session.user._id;
-    $scope.bookName = $stateParams.bookName || DEFAULT_ADDRESSBOOK_NAME;
-    $scope.contact = sharedContactDataService.contact;
-    $scope.addressbookPath = '/addressbooks/' + $scope.bookId + '/' + $scope.bookName + '.json';
+    if (session.user._id) {
+      _initScopeValues();
+    } else {
+      $rootScope.$on('$stateChangeSuccess', () => {
+        _initScopeValues();
+      });
+    }
+
+    function _initScopeValues() {
+      $scope.bookId = $stateParams.bookId !== 'all' ? $stateParams.bookId : session.user._id;
+      $scope.bookName = $stateParams.bookName || DEFAULT_ADDRESSBOOK_NAME;
+      $scope.contact = sharedContactDataService.contact;
+      $scope.addressbookPath = '/addressbooks/' + $scope.bookId + '/' + $scope.bookName + '.json';
+    }
 
     $scope.accept = function() {
       var parsedAddressbookPath = contactAddressbookParser.parseAddressbookPath($scope.addressbookPath);
