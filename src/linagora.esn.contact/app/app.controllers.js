@@ -87,6 +87,14 @@ angular.module('linagora.esn.contact')
       });
     };
 
+    $scope.close = function() {
+      $state.go('contact.addressbooks', {
+        bookId: $scope.bookId,
+        bookName: $scope.bookName,
+        cardId: $scope.cardId
+      }, { location: 'replace' });
+    };
+
     sharedContactDataService.contact = {};
   })
 
@@ -158,7 +166,7 @@ angular.module('linagora.esn.contact')
     }
 
     $scope.close = function() {
-      $state.go('contact.addressbooks.show', {
+      $state.go('contact.addressbooks', {
         bookId: $scope.bookId,
         bookName: $scope.bookName,
         cardId: $scope.cardId

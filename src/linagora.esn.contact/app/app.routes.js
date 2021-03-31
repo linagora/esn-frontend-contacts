@@ -119,11 +119,10 @@ require('./services/contact-configuration.service.js');
           resolve: {
             modalInstance: function($modal) {
               return $modal({
-                template: '<contact-edit />',
-                resolve: {
-                  domain: routeResolver.session('domain'),
-                  user: routeResolver.session('user')
-                }
+                template: require('./contact/edit/contact-edit.pug'),
+                controller: 'editContactController',
+                domain: routeResolver.session('domain'),
+                user: routeResolver.session('user')
               });
             }
           },
