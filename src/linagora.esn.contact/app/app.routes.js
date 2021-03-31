@@ -113,9 +113,6 @@ require('./services/contact-configuration.service.js');
         })
         .state('contact.addressbooks.edit', {
           url: '^/contact/edit/:bookId/:bookName/:cardId',
-          params: {
-            previousState: 'contact.addressbooks'
-          },
           resolve: {
             modalInstance: function($modal) {
               return $modal({

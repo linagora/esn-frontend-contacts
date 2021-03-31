@@ -2,10 +2,10 @@ form.contact-form(role="form", name="form", aria-hidden="true", ng-class="{ 'rea
   .modal-dialog
     .modal-content  
         .modal-header.contact-form-modal-header
-          h4.modal-title(ng-show='contactState === "new"') {{ 'Create a new contact' | translate }} 
+          h4.modal-title(ng-show='contactState === "new"') {{ 'Create a new contact' | translate }}
           h4.modal-title(ng-show='contactState === "edit"') {{ 'Edit contact' | translate}}
-          button.btn.btn-link.btn-icon(type='button', data-dismiss="modal", aria-label="Close", ng-click="close()")
-           i.mdi.mdi-close(aria-hidden="true")
+          button.btn.btn-link.btn-icon(type='button', data-dismiss="modal", aria-label="Close", ui-sref="contact.addressbooks")
+            i.mdi.mdi-close(aria-hidden="true")
         .modal-body.contact-form-modal-body
           .row
             .col-xs-12
