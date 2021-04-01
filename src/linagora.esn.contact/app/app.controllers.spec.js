@@ -576,9 +576,15 @@ describe('The Contacts controller module', function() {
   });
 
   describe('The editContactController controller', function() {
-    var contactFromDAV;
+    var contactFromDAV, stateParams;
 
     beforeEach(function() {
+      stateParams = {
+        bookId,
+        bookName,
+        cardId
+      };
+
       contactFromDAV = {
         addressbook: { editable: true },
         id: 1,
@@ -596,7 +602,7 @@ describe('The Contacts controller module', function() {
           }
         };
       });
-      this.initController = $controller.bind(null, 'editContactController', { $scope: scope });
+      this.initController = $controller.bind(null, 'editContactController', { $scope: scope, $stateParams: stateParams });
     });
 
     it('should update the $scope.contact etag when the contact has been modified from a CONTACT_EVENTS.UPDATED event', function() {
@@ -873,12 +879,6 @@ describe('The Contacts controller module', function() {
         var state = 'contact.addressbooks';
         var stateOption = { location: 'replace' };
 
-        $stateParams = {
-          bookId: bookId,
-          bookName: bookName,
-          cardId: cardId
-        };
-
         $state.go = sinon.spy();
 
         createVcardMock(function() {
@@ -889,21 +889,25 @@ describe('The Contacts controller module', function() {
 
         scope.contact = { id: 1, firstName: 'Foo', lastName: 'Bar' };
         contactUpdateDataService.contact = {};
-        $controller.bind(null, 'editContactController', { $scope: scope, $stateParams: $stateParams })();
+
+        this.initController();
 
         scope.save();
-        expect($state.go).to.have.been.calledWith(state, $stateParams, stateOption);
+        expect($state.go).to.have.been.calledOnce;
+        expect($state.go.getCall(0).args[0]).to.equal(state);
+        expect($state.go.getCall(0).args[1]).to.deep.equal({});
+        expect($state.go.getCall(0).args[2]).to.deep.equal(stateOption);
         expect(updateSpy).to.not.have.been.called;
       });
     });
 
     describe('The deleteContact function', function() {
-
       it('should call deleteContact service with the right bookId, bookName and cardId', function(done) {
         scope.bookName = 'bookName';
         scope.contact = { id: 1, firstName: 'Foo', lastName: 'Bar' };
         $controller.bind(null, 'editContactController', {
           $scope: scope,
+          $stateParams: stateParams,
           deleteContact: function(id, bookName, contact) {
             expect(id).to.deep.equal(bookId);
             expect(bookName).to.equal(scope.bookName);
