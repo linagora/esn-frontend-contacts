@@ -81,9 +81,7 @@ require('./services/contact-configuration.service.js');
             modalInstance: function($modal) {
               return $modal({
                 template: require('./contact/create/contact-create.pug'),
-                controller: 'newContactController',
-                domain: routeResolver.session('domain'),
-                user: routeResolver.session('user')
+                controller: 'newContactController'
               });
             }
           },
@@ -116,8 +114,8 @@ require('./services/contact-configuration.service.js');
           resolve: {
             modalInstance: function($modal) {
               return $modal({
-                controller: 'editContactController',
-                template: '<contact-edit />'
+                template: require('./contact/edit/contact-edit.pug'),
+                controller: 'editContactController'
               });
             }
           },
