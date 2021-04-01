@@ -81,9 +81,7 @@ require('./services/contact-configuration.service.js');
             modalInstance: function($modal) {
               return $modal({
                 template: require('./contact/create/contact-create.pug'),
-                controller: 'newContactController',
-                domain: routeResolver.session('domain'),
-                user: routeResolver.session('user')
+                controller: 'newContactController'
               });
             }
           },
@@ -113,16 +111,11 @@ require('./services/contact-configuration.service.js');
         })
         .state('contact.addressbooks.edit', {
           url: '^/contact/edit/:bookId/:bookName/:cardId',
-          params: {
-            previousState: 'contact.addressbooks'
-          },
           resolve: {
             modalInstance: function($modal) {
               return $modal({
                 template: require('./contact/edit/contact-edit.pug'),
-                controller: 'editContactController',
-                domain: routeResolver.session('domain'),
-                user: routeResolver.session('user')
+                controller: 'editContactController'
               });
             }
           },

@@ -61,7 +61,7 @@ contact-photo img {
     }
   }
 
-  .modal-header {
+  .modal-header.contact-form-modal-header {
     display: flex;
     padding: 14px 26px;
 
@@ -70,11 +70,14 @@ contact-photo img {
       align-items: center;
       flex-grow: 1;
     }
-  }
 
-  .modal-header,
-  .modal-footer {
-    cursor: grabbing;
+    .btn {
+      .all-centered;
+
+      i.mdi {
+        font-size: 20px;
+      }
+    }
   }
 
   .modal-footer {
