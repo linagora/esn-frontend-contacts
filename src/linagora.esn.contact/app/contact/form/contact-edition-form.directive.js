@@ -16,7 +16,8 @@ function contactEditionForm(
       contact: '=',
       addressbookPath: '=',
       contactState: '@',
-      accept: '&'
+      accept: '&',
+      close: '&'
     },
     template: require('./contact-edition-form.pug'),
     link: function($scope) {
