@@ -73,28 +73,4 @@ describe('The contactEditionForm directive', function() {
 
     expect(element.isolateScope().avatarSize).to.equal(CONTACT_AVATAR_SIZE.bigger);
   });
-
-  it('should only show address book select box when create new contact', function() {
-    var createElement = $compile('<contact-edition-form contact="contact" addressbook-path" contact-state="new"></contact-edition-form>')($scope);
-
-    $scope.$digest();
-
-    expect(createElement.find('.contact-addressbook-selector').hasClass('ng-hide')).to.be.false;
-
-    var editElement = $compile('<contact-edition-form contact="contact" addressbook-path"></contact-edition-form>')($scope);
-
-    $scope.$digest();
-
-    expect(editElement.find('.contact-addressbook-selector').hasClass('ng-hide')).to.be.true;
-  });
-
-  it('should preselect Address Book according to current address book', function() {
-    $scope.addressbookPath = '/addressbooks/userId/' + CONTACT_COLLECTED_ADDRESSBOOK_NAME + '.json';
-
-    var element = initDirective($scope);
-
-    $scope.$digest();
-
-    expect(element.find('[ng-model="addressbookPath"]').val()).to.equal('/addressbooks/userId/' + CONTACT_COLLECTED_ADDRESSBOOK_NAME + '.json');
-  });
 });
