@@ -23,16 +23,18 @@ form.contact-form(role="form", name="form", aria-hidden="true", ng-class="{ 'rea
                               value='{{::item.path}}'
                             ) {{::item.displayName}}
             .col-xs-12
-                .col-xs-6
-                  .form-group
-                      .input-group
-                        span.input-group-addon
-                          i.mdi.mdi-account-circle
-                        .fg-line
-                          input.form-control.floating-label(type='text', placeholder="{{ 'First Name' | translate }}", ng-model='contact.firstName')
-                .col-xs-6
-                  .fg-line
-                    input.form-control.floating-label(type='text', placeholder="{{ 'Last Name' | translate }}", ng-model='contact.lastName')
+                .display-profile
+                  .touch-zone
+                    div(modal-launcher, template="/contact/app/contact/form/contact-avatar-modal.html", ng-click="showModal()")
+                      contact-photo.media-object(contact='contact', editable='true', avatar-size='{{avatarSize}}', contact-state='{{contactState}}')
+                  .contact-name-display.media-body.touch-zone
+                    .col-xs-6
+                      .fg-line                
+                        input.form-control.floating-label(type='text', placeholder="{{ 'First Name' | translate }}", ng-model='contact.firstName')
+                    .col-xs-6
+                      .fg-line
+                          input.form-control.floating-label(type='text', placeholder="{{ 'Last Name' | translate }}", ng-model='contact.lastName')
+
             .col-xs-12 
                 .col-xs-6
                   .form-group
