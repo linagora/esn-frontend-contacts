@@ -1,122 +1,93 @@
-form.contact-form(role="form", name="form", aria-hidden="true", ng-class="{ 'readonly': !canModifyEvent}", ng-submit='submit()')
+form.contact-form(role="form", name="form", aria-hidden="true", ng-class="{ 'readonly': !canModifyEvent}", ng-submit='submit()', ng-if="contact")
   .modal-dialog
     .modal-content  
         .modal-header.contact-form-modal-header
-          h4.modal-title(ng-show='contactState === "new"') {{ 'Create a new contact' | translate }}
-          h4.modal-title(ng-show='contactState === "edit"') {{ 'Edit contact' | translate}}
-          button.btn.btn-link.btn-icon(type='button', data-dismiss="modal", aria-label="Close", ui-sref="contact.addressbooks")
+          h4.modal-title(ng-if='contactState === "new"') {{ 'Create a new contact' | translate }}
+          h4.modal-title(ng-if='contactState === "edit"') {{ 'Edit contact' | translate}}
+          button.btn.btn-link.btn-icon(type='button', data-dismiss="modal", aria-label="Close", ng-click="close()")
             i.mdi.mdi-close(aria-hidden="true")
         .modal-body.contact-form-modal-body
-          .row
-            .col-xs-12
-              .col-xs-6
-                .contact-addressbook-selector(ng-show='contactState === "new"')
-                  .form-group
-                    .input-group
-                      span.input-group-addon
-                          i.mdi.mdi-folder-account
-                      .fg-line
-                        .select
-                          select.form-control.floating-label(ng-model='addressbookPath')
-                            option(
-                              ng-repeat='item in availableAddressbooks',
-                              ng-selected='item.path === addressbookPath',
-                              value='{{::item.path}}'
-                            ) {{::item.displayName}}
-            .col-xs-12
+          .col-xs-12(ng-if='contactState === "new"')
+            .contact-addressbook-selector
+              .input-group
+                .input-group-icon
+                  i.mdi.mdi-folder-account
+                .col-xs-6
+                  md-select(ng-model='addressbookPath', md-container-class="md-select-on-dialog", md-menu-backdrop-fix)
+                    md-option(
+                      ng-repeat='item in availableAddressbooks',
+                      ng-selected='item.path === addressbookPath',
+                      ng-value='item.path'
+                    ) {{ ::item.displayName }}
+          .col-xs-12
+            .input-group
               .display-profile
                 .touch-zone
                   div(modal-launcher, template="/contact/app/contact/form/contact-avatar-modal.html", ng-click="showModal()")
                     contact-photo.media-object(contact='contact', editable='true', avatar-size='{{avatarSize}}', contact-state='{{contactState}}')
-                .contact-name-display.media-body.touch-zone
-                  .col-xs-6
-                    .fg-line                
-                      input.form-control.floating-label(type='text', placeholder="{{ 'First Name' | translate }}", ng-model='contact.firstName')
-                  .col-xs-6
-                    .fg-line
-                        input.form-control.floating-label(type='text', placeholder="{{ 'Last Name' | translate }}", ng-model='contact.lastName')
-
-            .col-xs-12 
+              .col-md-6
+                .fg-line
+                  input.form-control.floating-label(type='text', placeholder="{{ 'First Name' | translate }}", ng-model='contact.firstName')
+              .col-md-6
+                .fg-line
+                  input.form-control.floating-label(type='text', placeholder="{{ 'Last Name' | translate }}", ng-model='contact.lastName')
+          .col-xs-12 
+            .input-group
+              .input-group-icon
+                i.mdi.mdi-domain
               .col-xs-6
-                .form-group
-                  .input-group
-                    span.input-group-addon
-                      i.mdi.mdi-domain
-                    .fg-line
-                      input.form-control.floating-label(type='text', placeholder="{{ 'Organization' | translate }}", ng-model='contact.orgName')
+                .fg-line
+                  input.form-control.floating-label(type='text', placeholder="{{ 'Organization' | translate }}", ng-model='contact.orgName')
               .col-xs-6
                 .fg-line
                   input.form-control.floating-label(type='text', placeholder="{{ 'Job Title' | translate }}", ng-model='contact.orgRole')
-              .col-xs-12
-                .form-group
-                  .input-group
-                    span.input-group-addon
-                      .icon-multi-input
-                        i.mdi.mdi-email
-                      .fg-line
-                        multi-input-group( multi-input-texttype='text', multi-input-placeholder="{{ 'Email' | translate }}", multi-input-autocapitalize='off',multi-input-model='contact.emails', multi-input-types='CONTACT_ATTRIBUTES_ORDER.email')
-              .col-xs-12
-                .form-group
-                  .input-group
-                    span.input-group-addon
-                      .icon-multi-input
-                        i.mdi.mdi-phone
-                      .fg-line            
-                        multi-input-group(multi-input-texttype='tel', multi-input-placeholder="{{ 'Phone' | translate }}",multi-input-model='contact.tel', multi-input-types='CONTACT_ATTRIBUTES_ORDER.phone')
-              .col-xs-12
-                .form-group
-                  .input-group
-                    span.input-group-addon
-                      .icon-multi-input
-                        i.mdi.mdi-map-marker
-                      .fg-line 
-                        multi-input-group-address( multi-input-model='contact.addresses', multi-input-types='CONTACT_ATTRIBUTES_ORDER.address')
-              .col-xs-12
-                .form-group
-                  .input-group
-                    span.input-group-addon
-                      .icon-multi-input  
-                        i.mdi.mdi-label
-                      .fg-line
-                        label.control-label.sr-only {{ 'Tags' | translate }}
-                        .form-group
-                          .fg-line
-                            tags-input.form-control(ng-model='contact.tags', placeholder="{{ 'Tags' | translate }}", display-property="text", add-on-space='true', add-on-enter='true', min-length='1')
+          .col-xs-12
+            .input-group
+              .input-group-icon
+                i.mdi.mdi-email
+              multi-input-group( multi-input-texttype='text', multi-input-placeholder="{{ 'Email' | translate }}", multi-input-autocapitalize='off',multi-input-model='contact.emails', multi-input-types='CONTACT_ATTRIBUTES_ORDER.email')
+          .col-xs-12
+            .input-group
+              .input-group-icon
+                i.mdi.mdi-phone
+              multi-input-group(multi-input-texttype='tel', multi-input-placeholder="{{ 'Phone' | translate }}",multi-input-model='contact.tel', multi-input-types='CONTACT_ATTRIBUTES_ORDER.phone')
+          .col-xs-12
+            .input-group
+              .input-group-icon
+                i.mdi.mdi-map-marker
+              multi-input-group-address( multi-input-model='contact.addresses', multi-input-types='CONTACT_ATTRIBUTES_ORDER.address')
+          .col-xs-12
+            .input-group
+              .input-group-icon
+                i.mdi.mdi-label
+              label.control-label.sr-only {{ 'Tags' | translate }}
+              .fg-line
+                tags-input.form-control(ng-model='contact.tags', placeholder="{{ 'Tags' | translate }}", display-property="text", add-on-space='true', add-on-enter='true', min-length='1')
               
-            div(ng-if="shouldShowMoreOptions")
-              .col-xs-12
-                .form-group
-                  .input-group
-                    span.input-group-addon
-                      .icon-multi-input  
-                        i.mdi.mdi-web
-                      .fg-line
-                        multi-input-group(multi-input-model='contact.urls', multi-input-texttype='url', multi-input-placeholder="{{ 'Website' | translate }}")
-              .col-xs-12
-                .form-group
-                  .input-group
-                    span.input-group-addon
-                      .icon-multi-input  
-                        i.mdi.mdi-google-circles-extended
-                      .fg-line
-                        multi-input-group(multi-input-model='contact.social', multi-input-types='CONTACT_ATTRIBUTES_ORDER.social', multi-input-texttype='text', multi-input-placeholder="{{ 'Social Account' | translate }}")
-              .col-xs-12
-                .form-group
-                  .input-group
-                    span.input-group-addon
-                      .icon-multi-input  
-                        i.mdi.mdi-cake
-                      .fg-line
-                        input.form-control(type='text', ng-model='contact.birthday', data-autoclose="1", bs-datepicker, relaxed-date-for-bs-datepicker, data-date-format="MM/dd/yyyy" data-date-type="string")
-                        inline-notify(name='date')
-              .col-xs-12
-                .form-group
-                  .input-group
-                    span.input-group-addon
-                      .icon-multi-input
-                        i.mdi.mdi-account
-                      .fg-line
-                        input.form-control(type='text', placeholder="{{ 'Nickname' | translate }}", ng-model='contact.nickname')
+          div(ng-if="shouldShowMoreOptions")
+            .col-xs-12
+              .input-group
+                .input-group-icon
+                  i.mdi.mdi-web
+                multi-input-group(multi-input-model='contact.urls', multi-input-texttype='url', multi-input-placeholder="{{ 'Website' | translate }}")
+            .col-xs-12
+              .input-group
+                .input-group-icon
+                  i.mdi.mdi-google-circles-extended
+                multi-input-group(multi-input-model='contact.social', multi-input-types='CONTACT_ATTRIBUTES_ORDER.social', multi-input-texttype='text', multi-input-placeholder="{{ 'Social Account' | translate }}")
+            .col-xs-12
+              .input-group
+                .input-group-icon
+                  i.mdi.mdi-cake
+                .fg-line
+                  input.form-control(type='text', ng-model='contact.birthday', data-autoclose="1", bs-datepicker, relaxed-date-for-bs-datepicker="{{ 'Birthday' | translate}}", data-date-format="MM/dd/yyyy" data-date-type="string")
+                  inline-notify(name='date')
+            .col-xs-12
+              .input-group
+                .input-group-icon
+                  i.mdi.mdi-account
+                .fg-line
+                  input.form-control(type='text', placeholder="{{ 'Nickname' | translate }}", ng-model='contact.nickname')
 
         .modal-footer.flex
           .flex-vertical-centered.flex-end
