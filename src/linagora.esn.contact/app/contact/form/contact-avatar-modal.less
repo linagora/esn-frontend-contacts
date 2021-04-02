@@ -31,8 +31,10 @@
     }
 
     .avatar-picker-preview {
-      img[alt="Avatar"] {
-        border-radius: 50%;
+      div[ng-show="!image.selected"] {
+        img {
+          border-radius: 50%;
+        }
       }
 
       .img-preview {
