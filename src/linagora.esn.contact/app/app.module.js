@@ -160,7 +160,6 @@ require('./contact/shell/contact-shell-display-builder.service.js');
 require('./contact/shell/display-shell-provider.service.js');
 require('./contact/show/contact-display.directive.js');
 require('./contact/show/contact-show.component.js');
-require('./contact/show/contact-show-subheader.directive.js');
 require('./controllers/contact-list.controller.js');
 require('./controllers/contact-show.controller.js');
 require('./directives/contact-category-letter.directive.js');
