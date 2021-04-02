@@ -148,7 +148,7 @@ angular.module('linagora.esn.contact')
         contactUpdateDataService.contact = null;
         oldContact = JSON.stringify($scope.contact);
         $scope.loaded = true;
-      } else {
+      } else if ($scope.bookId && $scope.bookName && $scope.cardId) {
         contactService.getContact({ bookId: $scope.bookId, bookName: $scope.bookName }, $scope.cardId)
           .then(function(contact) {
             if (!contact.addressbook.canEditContact) {
