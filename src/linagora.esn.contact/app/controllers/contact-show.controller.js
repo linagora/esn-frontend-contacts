@@ -97,7 +97,7 @@ function ContactShowController(
   };
 
   $scope.shouldDisplayHome = function() {
-    return !!(isAddressFilled('home') || $scope.formattedBirthday || $scope.contact.nickname);
+    return !!isAddressFilled('home');
   };
 
   $scope.shouldDisplayOthers = function() {
