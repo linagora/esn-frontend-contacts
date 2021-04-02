@@ -163,6 +163,10 @@
 
   .modal-body.contact-form-modal-body {
     padding: 12px 24px;
+
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   @media (max-width: @screen-md-min) {
@@ -181,11 +185,13 @@
           top: unset;
           bottom: unset;
           height: calc(100% - 115px);
+          max-height: unset;
           overflow-y: auto;
           overflow-x: hidden;
         }
 
         .modal-footer {
+          border-top-color: #f7f7f7;
           padding: 8px 12px;
         }
       }
