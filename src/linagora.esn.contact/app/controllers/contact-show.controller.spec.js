@@ -400,18 +400,6 @@ describe('The ContactShowController', function() {
       initController();
       expect(scope.shouldDisplayHome()).to.be.true;
     });
-
-    it('should return true when birthday is filled', function() {
-      contactUpdateDataService.contact = { birthday: '15/12/1978' };
-      initController();
-      expect(scope.shouldDisplayHome()).to.be.true;
-    });
-
-    it('should return true when nickname is filled', function() {
-      contactUpdateDataService.contact = { nickname: 'yolo' };
-      initController();
-      expect(scope.shouldDisplayHome()).to.be.true;
-    });
   });
 
   describe('The $scope.shouldDisplayOthers function', function() {
