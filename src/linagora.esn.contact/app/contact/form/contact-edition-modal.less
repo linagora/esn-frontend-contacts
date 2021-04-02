@@ -57,7 +57,7 @@
         }
 
         .col-md-3 {
-          width: 20%;
+          width: unset;
         }
 
         .col-md-1 {
@@ -167,7 +167,11 @@
 
   @media (max-width: @screen-md-min) {
     .modal-dialog {
+      height: 100%;
+
       .modal-content {
+        height: 100%;
+
         .modal-header:not(.overflow-none).contact-form-modal-header {
           padding: 12px 20px;
         }
@@ -176,7 +180,13 @@
           position: unset;
           top: unset;
           bottom: unset;
-          max-height: calc(100vh - 109px);
+          height: calc(100% - 115px);
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        .modal-footer {
+          padding: 8px 12px;
         }
       }
     }
