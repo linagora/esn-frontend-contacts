@@ -18,7 +18,9 @@ form.contact-form(role="form", name="form", aria-hidden="true", ng-class="{ 'rea
                       ng-repeat='item in availableAddressbooks',
                       ng-selected='item.path === addressbookPath',
                       ng-value='item.path'
-                    ) {{ ::item.displayName }}
+                    )
+                      span {{ ::item.displayName }}
+                      span.ellipsis.addressbook-owner(ng-if='item.owner') - {{ ::item.owner.displayName }} 
           .col-xs-12
             .input-group
               .display-profile
