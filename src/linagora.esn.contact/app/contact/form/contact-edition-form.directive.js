@@ -6,7 +6,10 @@ angular.module('linagora.esn.contact')
 
 function contactEditionForm(
   $rootScope,
+  $q,
   session,
+  userAPI,
+  userUtils,
   contactAddressbookDisplayService,
   contactAddressbookService,
   CONTACT_ATTRIBUTES_ORDER,
@@ -33,18 +36,47 @@ function contactEditionForm(
       });
 
       function _fetchAvailableAddressBooks() {
-        contactAddressbookService.listAddressbooksUserCanCreateContact().then(function(addressbooks) {
-          return contactAddressbookDisplayService.convertShellsToDisplayShells(addressbooks, { includePriority: true });
-        })
-          .then(function(addressbookDisplayShells) {
-            $scope.availableAddressbooks = contactAddressbookDisplayService.sortAddressbookDisplayShells(addressbookDisplayShells)
-              .map(function(addressbookDisplayShell) {
-                return {
-                  path: addressbookDisplayShell.shell.href,
-                  displayName: addressbookDisplayShell.displayName
-                };
-              });
+        contactAddressbookService
+          .listAddressbooksUserCanCreateContact()
+          .then(_loadAdressbooksOwners)
+          .then(addressbooks => contactAddressbookDisplayService.convertShellsToDisplayShells(
+            addressbooks,
+            { includePriority: true }
+          ))
+          .then(addressbookDisplayShells => {
+            $scope.availableAddressbooks = contactAddressbookDisplayService
+              .sortAddressbookDisplayShells(addressbookDisplayShells)
+              .map(({ shell: { href, owner }, displayName }) => ({
+                path: href,
+                displayName,
+                owner
+              }));
+
+            console.log($scope.availableAddressbooks);
           });
+      }
+
+      function _loadAdressbooksOwners(addressbooks) {
+        const subscriptionOwnerIds = addressbooks
+          .map(({ isSubscription, group, source }) => (isSubscription && !group ? source.bookId : null))
+          .filter(Boolean) // remove null values
+          .reduce((uniqueUserIds, userId) => (uniqueUserIds.includes(userId) ? uniqueUserIds : [...uniqueUserIds, userId]), []); // remove duplicates
+
+        const ownerPromises = subscriptionOwnerIds.map(_fetchOwner);
+
+        return $q.all(ownerPromises).then(owners => addressbooks.map(addressbook => {
+          if (addressbook.isSubscription) {
+            const owner = owners.find(({ id }) => id === addressbook.source.bookId);
+
+            addressbook = Object.keys(owner) ? { ...addressbook, owner } : addressbook;
+          }
+
+          return addressbook;
+        }));
+      }
+
+      function _fetchOwner(id) {
+        return userAPI.user(id).then(({ data }) => ({ id, displayName: userUtils.displayNameOf(data) }));
       }
     }
   };
