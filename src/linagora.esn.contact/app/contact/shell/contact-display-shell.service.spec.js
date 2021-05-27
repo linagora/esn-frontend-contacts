@@ -26,7 +26,7 @@ describe('ContactDisplayShell', function() {
   function checkContactDisplayShell(displayShell, originalShell) {
     var displayName = originalShell.displayName;
 
-    expect(displayShell.getDefaultAvatar()).to.equal('/contact/images/default_avatar.png');
+    expect(displayShell.getDefaultAvatar()).to.equal('/images/default_avatar.png');
     expect(displayShell.getDisplayName()).to.equal(displayName);
     expect(displayShell.isWritable()).to.equal(false);
     expect(displayShell.getOverlayIcon()).to.deep.equal('ng-hide');
