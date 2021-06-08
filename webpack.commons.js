@@ -17,7 +17,6 @@ const pugLoaderOptions = {
 };
 
 const BASE_HREF = process.env.BASE_HREF || '/';
-const OPENPAAS_URL = process.env.OPENPAAS_URL || 'http://localhost:8080';
 
 module.exports = {
   mode: 'development',
@@ -83,6 +82,18 @@ module.exports = {
           to: 'images'
         },
         {
+          from: path.resolve(__dirname, 'src', 'linagora.esn.contact', 'images', 'contacts-icon.svg'),
+          to: 'images'
+        },
+        {
+          from: path.resolve(__dirname, 'src', 'linagora.esn.contact', 'images', 'logo-tiny.png'),
+          to: 'images'
+        },
+        {
+          from: path.resolve(__dirname, 'src', 'linagora.esn.contact', 'images', 'default_avatar.png'),
+          to: 'images'
+        },
+        {
           from: path.resolve(__dirname, 'node_modules', 'socket.io-client', 'dist', 'socket.io.js'),
           to: 'socket.io/socket.io.js'
         }
@@ -96,35 +107,7 @@ module.exports = {
     compress: true,
     host: '0.0.0.0',
     disableHostCheck: true,
-    port: 9900,
-    proxy: [{
-      context: [
-        '/auth',
-        '/api',
-        '/views',
-        '/account/api',
-        '/profile/app',
-        '/controlcenter/app',
-        '/images',
-        '/socket.io/',
-        '/user-status/app/bubble/',
-        '/user-status/api',
-        '/contact/app',
-        '/contact/images',
-        '/dav/api',
-        '/unifiedinbox/views',
-        '/unifiedinbox/app',
-        '/unifiedinbox/api',
-        '/calendar/app',
-        '/linagora.esn.resource/api',
-        '/linagora.esn.dav.import/api'
-      ],
-      target: OPENPAAS_URL,
-      disableHostCheck: true,
-      secure: false,
-      changeOrigin: true,
-      withCredentials: true
-    }]
+    port: 9900
   },
   module: {
     rules: [

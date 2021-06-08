@@ -17,7 +17,7 @@ describe('The contactPhoto directive', function() {
   beforeEach(angular.mock.inject(function(_$compile_, _$rootScope_) {
     $scope = _$rootScope_.$new();
     $compile = _$compile_;
-    DEFAULT_AVATAR = '/contact/images/default_avatar.png';
+    DEFAULT_AVATAR = '/images/default_avatar.png';
   }));
 
   beforeEach(function() {
