@@ -16,7 +16,7 @@ const pugLoaderOptions = {
   root: `${__dirname}/node_modules/esn-frontend-common-libs/src/frontend/views`
 };
 
-const BASE_HREF = process.env.BASE_HREF || '/';
+const BASE_HREF = process.env.BASE_HREF || '/contacts/';
 
 module.exports = {
   mode: 'development',
@@ -101,12 +101,14 @@ module.exports = {
     })
   ],
   devServer: {
-    contentBase: [path.join(__dirname, 'dist'), path.resolve(__dirname, 'node_modules', 'esn-frontend-login', 'dist')],
-    contentBasePublicPath: [BASE_HREF, '/login'],
-    publicPath: '/contacts/',
+    contentBase: [path.resolve(__dirname, 'node_modules', 'esn-frontend-login', 'dist')],
+    contentBasePublicPath: ['/login'],
     compress: true,
     host: '0.0.0.0',
     disableHostCheck: true,
+    historyApiFallback: {
+      index: BASE_HREF + 'index.html'
+    },
     port: 9900
   },
   module: {
