@@ -6,7 +6,7 @@ html.loading.full-height
     title Contacts - OpenPaas
     meta(name="viewport", content="width=device-width, initial-scale=1")
     meta(name="theme-color", content="#0C7CD5")
-    script(src="/socket.io/socket.io.js")
+    script(src=base + "socket.io/socket.io.js")
     style(type='text/css').
       html.loading, html.loading body, html.loading body > #wrap {
         padding: 0;
@@ -38,4 +38,4 @@ html.loading.full-height
   body.container-fluid(ng-app="esnApp", ng-controller="sessionInitESNController", device-detector, ng-class="{ 'grabbable': esnIsDragging }")
     #wrap(ng-include='session.template')
       include ../src/app/app-loading.pug
-    script(src="/contacts/env/openpaas.js")
+    script(src=base + "env/openpaas.js")
