@@ -40,7 +40,7 @@
       social: ['Skype', 'Twitter', 'Other']
     })
     .constant('CONTACT_FALLBACK_ATTRIBUTE_TYPE', 'Other')
-    .constant('CONTACT_DEFAULT_AVATAR', '/images/default_avatar.png')
+    .constant('CONTACT_DEFAULT_AVATAR', 'assets/images/default_avatar.png')
     .constant('CONTACT_LIST_DEFAULT_SORT', 'fn')
     .constant('CONTACT_LIST_PAGE_SIZE', 20)
     .constant('DAV_PATH', '/dav/api')
@@ -66,7 +66,7 @@
     .constant('CONTACT_MODULE_METADATA', {
       id: 'linagora.esn.contact',
       title: 'Contact',
-      icon: '/images/contacts-icon.svg',
+      icon: 'assets/images/contacts-icon.svg',
       homePage: 'contact',
       config: {
         template: 'contact-config-form',
