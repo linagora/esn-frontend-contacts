@@ -19,6 +19,7 @@ require('../app.constant.js');
     VcardBuilder,
     davClient,
     CONTACT_ACCEPT_HEADER,
+    CONTACT_ADDRESSBOOK_DAV_PROPERTIES,
     CONTACT_CONTENT_TYPE_HEADER,
     CONTACT_LIST_PAGE_SIZE,
     CONTACT_LIST_DEFAULT_SORT,
@@ -223,7 +224,11 @@ require('../app.constant.js');
     function getAddressbook(bookId, bookName) {
       var headers = { Accept: CONTACT_ACCEPT_HEADER };
 
-      return davClient('PROPFIND', getBookUrl(bookId, bookName), headers)
+      const body = {
+        properties: CONTACT_ADDRESSBOOK_DAV_PROPERTIES
+      };
+
+      return davClient('PROPFIND', getBookUrl(bookId, bookName), headers, body)
         .then(function(response) {
           return new AddressbookShell(response.data);
         });

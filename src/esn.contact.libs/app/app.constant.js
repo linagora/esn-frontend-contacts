@@ -15,6 +15,21 @@ angular.module('esn.contact.libs')
   .constant('CONTACT_FALLBACK_ATTRIBUTE_TYPE', 'Other')
   .constant('GRACE_DELAY', 8000)
 
+  .constant('CONTACT_ADDRESSBOOK_DAV_PROPERTIES', [
+    '{DAV:}displayname',
+    '{urn:ietf:params:xml:ns:carddav}addressbook-description',
+    '{DAV:}acl',
+    '{DAV:}invite',
+    '{DAV:}share-access',
+    '{DAV:}group',
+    '{http://open-paas.org/contacts}subscription-type',
+    '{http://open-paas.org/contacts}source',
+    '{http://open-paas.org/contacts}type',
+    '{http://open-paas.org/contacts}state',
+    '{http://open-paas.org/contacts}numberOfContacts',
+    'acl'
+  ])
+
   .constant('CONTACT_ATTRIBUTES_ORDER', {
     email: ['Work', 'Home', 'Other'],
     address: ['Work', 'Home', 'Other'],
