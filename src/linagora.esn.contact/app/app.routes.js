@@ -105,6 +105,13 @@ require('./services/contact-configuration.service.js');
               }
             }
           }
+        })
+        .state('home', {
+          onEnter: function($state, $timeout) {
+            $timeout(() => {
+              $state.go('contact');
+            });
+          }
         });
 
       function isModuleActive($location, contactConfiguration) {
