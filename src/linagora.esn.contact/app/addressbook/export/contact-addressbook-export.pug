@@ -8,5 +8,5 @@
       .modal-footer
         button.btn.btn-link(ng-click="$hide()")
           | {{ 'Cancel' | translate }}
-        a.btn.btn-primary(ng-click="$hide()", ng-href="{{::$ctrl.exportUrl}}")
+        a.btn.btn-primary(ng-click="$hide(); $ctrl.exportAddressBook()")
           | {{ 'Export' | translate }}

@@ -20,4 +20,20 @@ angular.module('esn.contact.libs')
     address: ['Work', 'Home', 'Other'],
     phone: ['Work', 'Mobile', 'Home', 'Other'],
     social: ['Skype', 'Twitter', 'Other']
+  })
+  .constant('CONTACT_EXPORT_HEADER', 'application/vcard')
+  .constant('CONTACT_EXPORT_FILE_TYPE', 'application/vcard;charset=utf-8')
+  .constant('CONTACT_ADDRESSBOOK_DAV_PROPERTIES', {
+    '{DAV:}displayname': 'dav:name',
+    '{urn:ietf:params:xml:ns:carddav}addressbook-description': 'carddav:description',
+    '{DAV:}acl': 'dav:acl',
+    '{DAV:}invite': 'dav:invite',
+    '{DAV:}share-access': 'dav:share-access',
+    '{DAV:}group': 'dav:group',
+    '{http://open-paas.org/contacts}subscription-type': 'openpaas:subscription-type',
+    '{http://open-paas.org/contacts}source': 'openpaas:source',
+    '{http://open-paas.org/contacts}type': 'type',
+    '{http://open-paas.org/contacts}state': 'state',
+    '{http://open-paas.org/contacts}numberOfContacts': 'numberOfContacts',
+    acl: 'acl'
   });

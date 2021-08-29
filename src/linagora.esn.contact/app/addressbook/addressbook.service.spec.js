@@ -8,29 +8,32 @@ var expect = chai.expect;
 describe('The contactAddressbookService service', function() {
   var $rootScope, $window;
   var contactAddressbookService, ContactAPIClient, session, contactAddressbookParser, esnUserConfigurationService, ContactVirtualAddressBookService;
-  var davProxyPrincipalService;
   var CONTACT_SHARING_INVITE_STATUS;
+  let fileSaverMock;
 
   beforeEach(function() {
     angular.mock.module('linagora.esn.contact');
 
     angular.mock.module(function($provide) {
-      ContactAPIClient = {};
+      ContactAPIClient = {
+        getGroupMembership: function() {
+          return $q.when([]);
+        }
+      };
       session = {
         user: {
           _id: '123'
         },
         ready: $q.when({})
       };
-      davProxyPrincipalService = {
-        getGroupMembership: function() {
-          return $q.when([]);
-        }
+
+      fileSaverMock = {
+        saveAs: sinon.spy()
       };
 
       $provide.value('ContactAPIClient', ContactAPIClient);
       $provide.value('session', session);
-      $provide.value('davProxyPrincipalService', davProxyPrincipalService);
+      $provide.value('FileSaver', fileSaverMock);
     });
     angular.mock.inject(function(
       _$rootScope_,
@@ -121,7 +124,7 @@ describe('The contactAddressbookService service', function() {
         };
       });
 
-      davProxyPrincipalService.getGroupMembership = sinon.stub().returns($q.when(groupMemberShip));
+      ContactAPIClient.getGroupMembership = sinon.stub().returns($q.when(groupMemberShip));
 
       contactAddressbookParser.parsePrincipalPath = sinon.spy(function(principal) {
         return { id: principal };
@@ -129,7 +132,7 @@ describe('The contactAddressbookService service', function() {
 
       contactAddressbookService.listAddressbooks()
         .then(function() {
-          expect(davProxyPrincipalService.getGroupMembership).to.have.been.calledWith('/principals/users/' + session.user._id);
+          expect(ContactAPIClient.getGroupMembership).to.have.been.calledWith('/principals/users/' + session.user._id);
 
           expect(contactAddressbookParser.parsePrincipalPath).to.have.been.calledTwice;
           expect(contactAddressbookParser.parsePrincipalPath).to.have.been.calledWith(groupMemberShip[0]);
@@ -825,6 +828,38 @@ describe('The contactAddressbookService service', function() {
         expect(_url).to.equal(url + '/addressbooks/' + bookId + '/' + bookName);
         done();
       }, done);
+
+      $rootScope.$digest();
+    });
+  });
+
+  describe('the exportAddressbook function', () => {
+    const addressbook = {
+      bookId: '1',
+      bookName: 'name'
+    };
+
+    it('should attempt to save a cvf file', done => {
+      const expectedBlob = new Blob(['data'], { type: 'application/vcard;charset=utf-8' });
+
+      ContactAPIClient.addressbookHome = function() {
+        return {
+          addressbook: function() {
+            return {
+              exportAddressbook: function() {
+                return $q.when({ data: 'data' });
+              }
+            };
+          }
+        };
+      };
+
+      contactAddressbookService.exportAddressbook(addressbook)
+        .then(() => {
+          expect(fileSaverMock.saveAs).to.have.been.calledWith(expectedBlob, 'name.vcf');
+          done();
+        })
+        .catch(done);
 
       $rootScope.$digest();
     });

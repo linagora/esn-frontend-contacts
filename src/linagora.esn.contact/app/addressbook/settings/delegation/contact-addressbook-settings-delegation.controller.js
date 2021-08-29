@@ -64,16 +64,20 @@ function contactAddressbookSettingsDelegationController(
   function _processSharees(sharees) {
     self.status = 'loading';
 
+    if (sharees) {
     // to load user information of all sharees
-    $q.all(sharees.map(function(sharee) {
-      return sharee.getUser();
-    }))
-      .then(function() {
-        self.status = 'loaded';
-      })
-      .catch(function() {
-        self.status = 'error';
-      });
+      $q.all((sharees).map(function(sharee) {
+        return sharee.getUser();
+      }))
+        .then(function() {
+          self.status = 'loaded';
+        })
+        .catch(function() {
+          self.status = 'error';
+        });
+    } else {
+      self.status = 'loaded';
+    }
   }
 
   function _isShareOwner(sharee) {
