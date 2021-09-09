@@ -4,16 +4,18 @@
 var expect = chai.expect;
 
 describe('ContactDisplayShell', function() {
-  var notificationFactory;
+  let notificationFactory, contactRestangularService;
   var ContactDisplayShell;
 
   beforeEach(function() {
 
     notificationFactory = {};
+    contactRestangularService = {};
     ContactDisplayShell = null;
 
     angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('notificationFactory', notificationFactory);
+      $provide.value('contactRestangularService', contactRestangularService);
     });
   });
 
@@ -26,7 +28,7 @@ describe('ContactDisplayShell', function() {
   function checkContactDisplayShell(displayShell, originalShell) {
     var displayName = originalShell.displayName;
 
-    expect(displayShell.getDefaultAvatar()).to.equal('assets/images/default_avatar.png');
+    expect(displayShell.getDefaultAvatar()).to.equal('/contacts/images/default_avatar.png');
     expect(displayShell.getDisplayName()).to.equal(displayName);
     expect(displayShell.isWritable()).to.equal(false);
     expect(displayShell.getOverlayIcon()).to.deep.equal('ng-hide');

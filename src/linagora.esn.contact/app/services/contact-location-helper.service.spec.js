@@ -17,7 +17,11 @@ describe('The ContactLocationHelper service', function() {
   });
 
   beforeEach(function() {
-    $location = { url: angular.noop };
+    $location = {
+      url: angular.noop,
+      path: angular.noop,
+      search: angular.noop
+    };
 
     angular.mock.module(function($provide) {
       $provide.value('$location', $location);

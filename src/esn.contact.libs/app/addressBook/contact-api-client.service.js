@@ -25,11 +25,15 @@ require('../app.constant.js');
     CONTACT_PREFER_HEADER,
     DEFAULT_ADDRESSBOOK_NAME,
     GRACE_DELAY,
-    ICAL
+    ICAL,
+    contactRestangularService
   ) {
     var ADDRESSBOOK_PATH = '/addressbooks';
 
-    return { addressbookHome: addressbookHome };
+    return {
+      addressbookHome,
+      getAvatar
+    };
 
     /**
      * The addressbook API
@@ -615,5 +619,39 @@ require('../app.constant.js');
         return response.headers('X-ESN-TASK-ID');
       });
     }
+
+    /**
+     * Get contact Avatar
+     * @param  {Object} payload   The contact Id
+     * @param  {Object} options   Includes:
+     *                               + addressBookId
+     *                               + addressbookName
+     *                               + contactId
+     * @return {Promise}          If success :  resolve avatar data
+     *                            If not reject error
+     */
+
+    function getAvatar(payload) {
+      return contactRestangularService
+        .one('contacts/' + payload.addressBookId + '/' + payload.addressbookName + '/' + payload.contactId)
+        .one('avatar')
+        .withHttpConfig({ responseType: 'blob' })
+        .get()
+        .then(({ data }) => readFile(data, e => e.target.result))
+        .catch(console.error);
+    }
+
+    function readFile(file) {
+      return new Promise((resolve, reject) => {
+        const fr = new FileReader();
+
+        fr.onload = () => {
+          resolve(fr.result);
+        };
+        fr.onerror = reject;
+        fr.readAsDataURL(file);
+      });
+    }
   }
+
 })(angular);
