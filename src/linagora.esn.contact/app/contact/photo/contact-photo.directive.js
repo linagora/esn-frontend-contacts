@@ -11,6 +11,7 @@ require('../../app.constant.js');
   function contactPhoto(
     ContactShellDisplayBuilder,
     contactService,
+    ContactAPIClient,
     CONTACT_DEFAULT_AVATAR
   ) {
     return {
@@ -27,6 +28,16 @@ require('../../app.constant.js');
         contactService.setContactMainEmail(scope.contact);
         scope.defaultAvatar = CONTACT_DEFAULT_AVATAR;
         scope.displayShell = ContactShellDisplayBuilder.build(scope.contact);
+
+        const payload = {
+          addressBookId: scope.contact.addressbook.bookId,
+          addressbookName: scope.contact.addressbook.bookName,
+          contactId: scope.contact.id
+        };
+
+        contactService.getContactAvatar(payload).then(contactAvatar => {
+          scope.contactUserAvatar = contactAvatar;
+        });
       }
     };
   }

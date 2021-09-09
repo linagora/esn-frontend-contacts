@@ -5,7 +5,7 @@
 const { inject, module } = angular.mock;
 const { expect } = chai;
 
-describe('The contactRestangularService service', function() {
+describe('The contactRestangularService', function() {
   let contactRestangularService;
   let httpConfigurerMock;
 

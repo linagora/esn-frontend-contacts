@@ -8,10 +8,17 @@ var expect = chai.expect;
 describe('The contactListItem directive', function() {
   var $compile, $rootScope, $scope, CONTACT_AVATAR_SIZE;
   var contactAddressbookDisplayService;
+  let contactService;
 
   beforeEach(function() {
+    contactService = {
+      setContactMainEmail: sinon.spy()
+    };
+
     angular.mock.module('esn.core');
-    angular.mock.module('linagora.esn.contact');
+    angular.mock.module('linagora.esn.contact', function($provide) {
+      $provide.value('contactService', contactService);
+    });
   });
 
   beforeEach(angular.mock.inject(function(_$compile_, _$rootScope_, _contactAddressbookDisplayService_, _CONTACT_AVATAR_SIZE_) {
@@ -24,8 +31,14 @@ describe('The contactListItem directive', function() {
       tel: [],
       addresses: [],
       social: [],
-      urls: []
+      urls: [],
+      id: '12',
+      addressbook: {
+        bookId: '123',
+        bookName: 'contacts'
+      }
     };
+    contactService.getContactAvatar = sinon.stub().returns($q.when({}));
     contactAddressbookDisplayService = _contactAddressbookDisplayService_;
     contactAddressbookDisplayService.convertShellToDisplayShell = angular.noop;
   }));
@@ -58,6 +71,15 @@ describe('The contactListItem directive', function() {
   });
 
   it('should display work phone if N phones are set', function() {
+    var phone = '+33333333';
+
+    $scope.contact.tel = [{ type: 'home', value: 'homephone' }, { type: 'work', value: phone }];
+    var element = initDirective();
+
+    expect(element[0].outerHTML).to.contain(phone);
+  });
+
+  it('should display avatar of contact', function() {
     var phone = '+33333333';
 
     $scope.contact.tel = [{ type: 'home', value: 'homephone' }, { type: 'work', value: phone }];
