@@ -79,19 +79,7 @@ module.exports = {
           to: 'env'
         },
         {
-          from: path.resolve(__dirname, 'src', 'linagora.esn.contact', 'images', 'white-logo.svg'),
-          to: 'images'
-        },
-        {
-          from: path.resolve(__dirname, 'src', 'linagora.esn.contact', 'images', 'contacts-icon.svg'),
-          to: 'images'
-        },
-        {
-          from: path.resolve(__dirname, 'src', 'linagora.esn.contact', 'images', 'logo-tiny.png'),
-          to: 'images'
-        },
-        {
-          from: path.resolve(__dirname, 'src', 'linagora.esn.contact', 'images', 'default_avatar.png'),
+          from: path.resolve(__dirname, 'src', 'linagora.esn.contact', 'images'),
           to: 'images'
         },
         {
