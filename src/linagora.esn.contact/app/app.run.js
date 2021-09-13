@@ -33,4 +33,5 @@ function addTemplateCache($templateCache) {
   $templateCache.put('/contact/app/contact/photo/contact-photo-child.html', require('./contact/photo/contact-photo-child.pug'));
   $templateCache.put('/contact/app/contact/list/contact-list-action-drop-menu.html', require('./contact/list/contact-list-action-drop-menu.pug'));
   $templateCache.put('/contact/app/contact/form/contact-avatar-modal.html', require('./contact/form/contact-avatar-modal.pug'));
+  $templateCache.put('/contact/app/addressbook/addressbook-shared-configuration/addressbook-shared-configuration-dialog.html', require('./addressbook/addressbook-shared-configuration/addressbook-shared-configuration-dialog.pug'));
 }
