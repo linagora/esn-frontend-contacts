@@ -10,18 +10,11 @@ describe('The ContactLocationHelper service', function() {
   var $location, ContactLocationHelper;
 
   beforeEach(function() {
-    angular.mock.module('esn.core');
-    angular.mock.module('esn.websocket');
-    angular.mock.module('esn.api-notification');
     angular.mock.module('linagora.esn.contact');
   });
 
   beforeEach(function() {
-    $location = {
-      url: angular.noop,
-      path: angular.noop,
-      search: angular.noop
-    };
+    $location = { url: angular.noop, path: angular.noop, search: angular.noop };
 
     angular.mock.module(function($provide) {
       $provide.value('$location', $location);

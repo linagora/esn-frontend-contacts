@@ -17,7 +17,7 @@ describe('The contactPhoto directive', function() {
     contactService = {
       setContactMainEmail: sinon.spy()
     };
-    angular.mock.module('linagora.esn.contact', function ($provide) {
+    angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('contactService', contactService);
     });
   });

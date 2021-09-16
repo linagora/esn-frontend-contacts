@@ -80,12 +80,17 @@ describe('The contactListItem directive', function() {
   });
 
   it('should display avatar of contact', function() {
-    var phone = '+33333333';
 
-    $scope.contact.tel = [{ type: 'home', value: 'homephone' }, { type: 'work', value: phone }];
+    const default_avatar = '/contacts/images/default_avatar.png';
+
+    $scope.contact.addressbook = {
+      bookId: '123',
+      bookName: '12'
+    };
+
     var element = initDirective();
 
-    expect(element[0].outerHTML).to.contain(phone);
+    expect(element[0].outerHTML).to.contain(default_avatar);
   });
 
   it('should display email', function() {

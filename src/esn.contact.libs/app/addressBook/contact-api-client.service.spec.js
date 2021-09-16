@@ -8,7 +8,6 @@ describe('The contact Angular module contactapis', function() {
   beforeEach(angular.mock.module('esn.contact.libs'));
   beforeEach(angular.mock.module('linagora.esn.contact'));
 
-
   describe('The ContactAPIClient service', function() {
     var ICAL, contact;
     var ADDRESSBOOK_PATH = 'addressbooks';
@@ -50,7 +49,7 @@ describe('The contact Angular module contactapis', function() {
 
       contact = { id: '00000000-0000-4000-a000-000000000000', lastName: 'Last' };
 
-      angular.mock.module(function ($provide) {
+      angular.mock.module(function($provide) {
         $provide.value('notificationFactory', self.notificationFactory);
         $provide.value('uuid4', self.uuid4);
         $provide.value('contactUpdateDataService', self.contactUpdateDataService);
@@ -59,11 +58,11 @@ describe('The contact Angular module contactapis', function() {
       });
     });
 
-    beforeEach(angular.mock.inject(function($rootScope, $httpBackend, ContactAPIClient,contactRestangularService, ContactShell, ContactsHelper, AddressbookShell, DAV_PATH, GRACE_DELAY, _ICAL_) {
+    beforeEach(angular.mock.inject(function($rootScope, $httpBackend, ContactAPIClient, contactRestangularService, ContactShell, ContactsHelper, AddressbookShell, DAV_PATH, GRACE_DELAY, _ICAL_) {
       this.$rootScope = $rootScope;
       this.$httpBackend = $httpBackend;
       this.ContactAPIClient = ContactAPIClient;
-      this.contactRestangularService=contactRestangularService;
+      this.contactRestangularService = contactRestangularService;
       this.ContactShell = ContactShell;
       this.AddressbookShell = AddressbookShell;
       this.DAV_PATH = DAV_PATH;
@@ -93,7 +92,7 @@ describe('The contact Angular module contactapis', function() {
 
           it('should return list of addressbooks', function(done) {
             var bookId = '123';
-           
+
             this.$httpBackend.expectGET(this.getBookHomeUrl(bookId)).respond({
               _links: {
                 self: {
@@ -1397,14 +1396,14 @@ describe('The contact Angular module contactapis', function() {
         });
       });
     });
-    describe('The get avatar function', function () {
+    describe('The get avatar function', function() {
       const payload = {
         addressBookId: '123',
         addressbookName: 'contacts',
         contactId: '12'
       };
 
-      it('should call sent HTTP request to backend with the right parameters in avatar function', function () {
+      it('should call sent HTTP request to backend with the right parameters in avatar function', function() {
 
         this.$httpBackend.expectGET('/contact/api/contacts/' + payload.addressBookId + '/' + payload.addressbookName + '/' + payload.contactId + '/avatar').respond(200, {});
 
