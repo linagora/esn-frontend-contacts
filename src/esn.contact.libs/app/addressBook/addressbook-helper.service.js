@@ -34,9 +34,9 @@ function contactAddressbookHelper($q, contactAddressbookParser, contactDavClient
       };
     }
 
-    Object.values(CONTACT_ADDRESSBOOK_DAV_PROPERTIES).forEach(key => {
+    Object.entries(CONTACT_ADDRESSBOOK_DAV_PROPERTIES).forEach(([key, value]) => {
       if (response[key]) {
-        formattedAddressBook[key] = response[key];
+        formattedAddressBook[value] = response[key];
       }
     });
 
