@@ -9,20 +9,20 @@ function contactAddressbookHelper($q, contactAddressbookParser, contactDavClient
   };
 
   function populateSubscriptionSource(addressbook) {
-    if (addressbook['openpaas:source']) {
-      const sourcePath = contactAddressbookParser.parseAddressbookPath(addressbook['openpaas:source']);
-      const url = `/addressbooks/${sourcePath.bookId}/${sourcePath.bookName}.json`;
-      const body = { properties: Object.keys(CONTACT_ADDRESSBOOK_DAV_PROPERTIES) };
-      const headers = { Accept: CONTACT_ACCEPT_HEADER };
-
-      return contactDavClientService('PROPFIND', url, headers, body)
-        .then(({ data }) => ({
-          ...addressbook,
-          'openpaas:source': formatAddressBookResponse(data, url)
-        }));
+    if (!addressbook['openpaas:source']) {
+      return $q.when(addressbook);
     }
 
-    return $q.when(addressbook);
+    const sourcePath = contactAddressbookParser.parseAddressbookPath(addressbook['openpaas:source']);
+    const url = `/addressbooks/${sourcePath.bookId}/${sourcePath.bookName}.json`;
+    const body = { properties: Object.keys(CONTACT_ADDRESSBOOK_DAV_PROPERTIES) };
+    const headers = { Accept: CONTACT_ACCEPT_HEADER };
+
+    return contactDavClientService('PROPFIND', url, headers, body)
+      .then(({ data }) => ({
+        ...addressbook,
+        'openpaas:source': formatAddressBookResponse(data, url)
+      }));
   }
 
   function formatAddressBookResponse(response, url) {

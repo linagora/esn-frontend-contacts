@@ -1182,7 +1182,7 @@ describe('The contact Angular module contactapis', function() {
               name: 'Modified name'
             };
 
-            this.$httpBackend.when('PUT', this.getBookUrl(bookId, bookName)).respond({});
+            this.$httpBackend.when('PROPPATCH', this.getBookUrl(bookId, bookName)).respond({});
 
             this.ContactAPIClient
               .addressbookHome(bookId)

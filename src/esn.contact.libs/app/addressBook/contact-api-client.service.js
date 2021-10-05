@@ -218,17 +218,20 @@ require('./contact-dav-client.service.js');
 
       return contactDavClientService('GET', getBookHomeUrl(bookId), headers, null, query)
         .then(({ data: { _embedded } }) => {
-          if (_embedded && _embedded['dav:addressbook']) {
-            const books = _embedded['dav:addressbook']
-              .map(book => {
-                const formatted = contactAddressbookHelper.formatAddressBookResponse(book, book['openpaas:source']);
-
-                return contactAddressbookHelper.populateSubscriptionSource(formatted);
-              });
-
-            return $q.all(books)
-              .then(books => books.map(book => new AddressbookShell(book)));
+          if (!_embedded || !_embedded['dav:addressbook']) {
+            return [];
           }
+
+          const books = _embedded['dav:addressbook']
+            .map(book => {
+              const formatted = contactAddressbookHelper.formatAddressBookResponse(book);
+
+              return contactAddressbookHelper.populateSubscriptionSource(formatted);
+            });
+
+          return $q.all(books)
+            .then(books => books.map(book => new AddressbookShell(book)));
+
         });
     }
 
@@ -307,10 +310,10 @@ require('./contact-dav-client.service.js');
       const modified = {
         'dav:name': name,
         'carddav:description': description,
-        state: state
+        state
       };
 
-      return contactDavClientService('PUT', getBookUrl(bookId, bookName), headers, modified);
+      return contactDavClientService('PROPPATCH', getBookUrl(bookId, bookName), headers, modified);
     }
 
     /**
