@@ -8,9 +8,18 @@ var expect = chai.expect;
 describe('The ContactAddressbookExportController controller', function() {
   var $rootScope, $controller;
   var contactAddressbookDisplayService;
+  let contactAddressbookServiceMock;
 
   beforeEach(function() {
     angular.mock.module('linagora.esn.contact');
+
+    contactAddressbookServiceMock = {
+      exportAddressbook: sinon.spy()
+    };
+
+    angular.mock.module(function($provide) {
+      $provide.value('contactAddressbookService', contactAddressbookServiceMock);
+    });
 
     angular.mock.inject(function(
       _$controller_,
@@ -53,32 +62,17 @@ describe('The ContactAddressbookExportController controller', function() {
     expect(controller.addressbookDisplayShell).to.deep.equal(displayShell);
   });
 
-  it('should build the export URL', function() {
+  it('should call the contactAddressbookService exportAddressbook function', function() {
     var addressbook = {
       bookId: '123',
-      bookName: '456'
+      bookName: 'name'
     };
+
     var controller = initController(addressbook);
 
     controller.$onInit();
+    controller.exportAddressBook();
 
-    expect(controller.exportUrl).to.deep.equal('/dav/api/addressbooks/' + addressbook.bookId + '/' + addressbook.bookName + '?export');
-  });
-
-  it('should build the export URL if there is a subscribed address book', function() {
-    var addressbook = {
-      bookId: '123',
-      bookName: '456',
-      isSubscription: true,
-      source: {
-        bookId: 'soureBookId',
-        bookName: 'sourceBookName'
-      }
-    };
-    var controller = initController(addressbook);
-
-    controller.$onInit();
-
-    expect(controller.exportUrl).to.deep.equal('/dav/api/addressbooks/' + addressbook.source.bookId + '/' + addressbook.source.bookName + '?export');
+    expect(contactAddressbookServiceMock.exportAddressbook).to.have.been.calledWith(addressbook);
   });
 });

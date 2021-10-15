@@ -6,7 +6,8 @@ angular.module('linagora.esn.contact')
 
 function ContactAddressbookExportController(
   addressbook,
-  contactAddressbookDisplayService
+  contactAddressbookDisplayService,
+  contactAddressbookService
 ) {
   var self = this;
 
@@ -14,13 +15,13 @@ function ContactAddressbookExportController(
 
   function $onInit() {
     self.addressbookDisplayShell = contactAddressbookDisplayService.convertShellToDisplayShell(addressbook);
-    self.exportUrl = _buildExportUrl(addressbook);
+    self.exportAddressBook = _exportAddressBook;
   }
 
-  function _buildExportUrl(addressbook) {
-    var bookId = addressbook.isSubscription ? addressbook.source.bookId : addressbook.bookId;
-    var bookName = addressbook.isSubscription ? addressbook.source.bookName : addressbook.bookName;
+  function _exportAddressBook() {
+    const bookId = addressbook.isSubscription ? addressbook.source.bookId : addressbook.bookId;
+    const bookName = addressbook.isSubscription ? addressbook.source.bookName : addressbook.bookName;
 
-    return '/dav/api/addressbooks/' + bookId + '/' + bookName + '?export';
+    contactAddressbookService.exportAddressbook({ bookId, bookName });
   }
 }

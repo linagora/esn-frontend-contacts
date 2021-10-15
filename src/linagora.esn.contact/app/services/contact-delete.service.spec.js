@@ -42,16 +42,14 @@ describe('The deleteContact service', function() {
     });
   });
 
-  beforeEach(angular.mock.inject(function($httpBackend, $rootScope, $q, _ICAL_, DAV_PATH, GRACE_DELAY, _CONTACT_EVENTS_, deleteContact, _contactService_) {
+  beforeEach(angular.mock.inject(function($httpBackend, $rootScope, $q, _ICAL_, GRACE_DELAY, _CONTACT_EVENTS_, deleteContact, _contactService_) {
     this.$httpBackend = $httpBackend;
     this.$rootScope = $rootScope;
     this.deleteContact = deleteContact;
-    this.DAV_PATH = DAV_PATH;
     this.GRACE_DELAY = GRACE_DELAY;
 
     this.getVCardUrl = function(bookId, bookName, cardId) {
       return [
-        this.DAV_PATH,
         'addressbooks',
         bookId,
         bookName,

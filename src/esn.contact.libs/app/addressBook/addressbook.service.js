@@ -1,10 +1,9 @@
-const _ = require('lodash');
-
 require('./addressbook-parser.service');
 require('./contact-api-client.service.js');
 require('./addressbook-display.service.js');
 require('./virtual-addressbook.service.js');
 require('./constants.js');
+require('./contact-dav-url.service.js');
 
 (function(angular) {
   'use strict';
@@ -17,20 +16,19 @@ require('./constants.js');
     $window,
     $log,
     session,
-    esnUserConfigurationService,
+    contactDavUrlService,
     contactAddressbookParser,
     ContactAPIClient,
     contactAddressbookDisplayService,
     ContactVirtualAddressBookService,
-    davProxyPrincipalService,
+    FileSaver,
     CONTACT_ADDRESSBOOK_TYPES,
     CONTACT_ADDRESSBOOK_STATES,
     CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS,
     CONTACT_SHARING_INVITE_STATUS,
-    CONTACT_SHARING_SUBSCRIPTION_TYPE
+    CONTACT_SHARING_SUBSCRIPTION_TYPE,
+    CONTACT_EXPORT_FILE_TYPE
   ) {
-    var DAVSERVER_CONFIGURATION = 'davserver';
-
     return {
       createAddressbook: createAddressbook,
       createGroupAddressbook: createGroupAddressbook,
@@ -46,7 +44,8 @@ require('./constants.js');
       subscribeAddressbooks: subscribeAddressbooks,
       shareAddressbook: shareAddressbook,
       updateAddressbookPublicRight: updateAddressbookPublicRight,
-      updateGroupAddressbookMembersRight: updateGroupAddressbookMembersRight
+      updateGroupAddressbookMembersRight: updateGroupAddressbookMembersRight,
+      exportAddressbook
     };
 
     function getAddressbookByBookName(bookName, bookId) {
@@ -94,7 +93,7 @@ require('./constants.js');
     }
 
     function _listGroupAddressbooks() {
-      return davProxyPrincipalService.getGroupMembership('/principals/users/' + session.user._id)
+      return ContactAPIClient.getGroupMembership('/principals/users/' + session.user._id)
         .then(function(groupPrincipals) {
           var promises = groupPrincipals.map(function(principal) {
             var parsedPrincipal = contactAddressbookParser.parsePrincipalPath(principal);
@@ -241,7 +240,7 @@ require('./constants.js');
     }
 
     function getAddressbookUrl(addressbook) {
-      return _getFrontendURL().then(function(url) {
+      return contactDavUrlService.getFrontendUrl().then(function(url) {
         return [url, _sanitizeAddressbookHref(addressbook)]
           .map(function(fragment) {
             return fragment.replace(/^\/|\/$/g, '');
@@ -250,39 +249,22 @@ require('./constants.js');
       });
     }
 
+    function exportAddressbook(addressbook) {
+      return ContactAPIClient
+        .addressbookHome(addressbook.bookId)
+        .addressbook(addressbook.bookName)
+        .exportAddressbook()
+        .then(({ data }) => {
+          const vcfBlob = new Blob([data], { type: CONTACT_EXPORT_FILE_TYPE });
+
+          FileSaver.saveAs(vcfBlob, `${addressbook.bookName}.vcf`);
+        });
+    }
+
     function _sanitizeAddressbookHref(addressbook) {
       var parsedPath = contactAddressbookParser.parseAddressbookPath(addressbook.href);
 
       return ['addressbooks', parsedPath.bookId, parsedPath.bookName].join('/');
-    }
-
-    function _getFrontendURL() {
-      return esnUserConfigurationService.get([DAVSERVER_CONFIGURATION], 'core')
-        .then(function(configurations) {
-          if (!configurations || !configurations.length) {
-            $log.debug('No valid configurations found for davserver');
-
-            return _getDefaultURL();
-          }
-
-          var davserver = _.find(configurations, { name: DAVSERVER_CONFIGURATION });
-
-          if (!davserver) {
-            $log.debug('davserver configuration is not set');
-
-            return _getDefaultURL();
-          }
-
-          return davserver.value && davserver.value.frontend && davserver.value.frontend.url ? davserver.value.frontend.url : _getDefaultURL();
-        }, function(err) {
-          $log.debug('Can not get davserver from configuration', err);
-
-          return _getDefaultURL();
-        });
-    }
-
-    function _getDefaultURL() {
-      return $window.location.origin;
     }
   }
 })(angular);
