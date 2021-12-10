@@ -7,6 +7,7 @@ angular.module('linagora.esn.contact')
 function contactEditionForm(
   contactAddressbookDisplayService,
   contactAddressbookService,
+  contactAddressbookHelper,
   CONTACT_ATTRIBUTES_ORDER,
   CONTACT_AVATAR_SIZE
 ) {
@@ -22,17 +23,16 @@ function contactEditionForm(
       $scope.CONTACT_ATTRIBUTES_ORDER = CONTACT_ATTRIBUTES_ORDER;
       $scope.avatarSize = CONTACT_AVATAR_SIZE.bigger;
 
-      contactAddressbookService.listAddressbooksUserCanCreateContact().then(function(addressbooks) {
-        return contactAddressbookDisplayService.convertShellsToDisplayShells(addressbooks, { includePriority: true });
-      })
-        .then(function(addressbookDisplayShells) {
-          $scope.availableAddressbooks = contactAddressbookDisplayService.sortAddressbookDisplayShells(addressbookDisplayShells)
-            .map(function(addressbookDisplayShell) {
-              return {
-                path: addressbookDisplayShell.shell.href,
-                displayName: addressbookDisplayShell.displayName
-              };
-            });
+      contactAddressbookService.listAddressbooksUserCanCreateContact()
+        .then(addressbooks => contactAddressbookDisplayService.convertShellsToDisplayShells(addressbooks, { includePriority: true }))
+        .then(displayShells => {
+          const uniqueAddressBookShells = contactAddressbookHelper.getUniqueAdressBookShells(displayShells);
+
+          $scope.availableAddressbooks = contactAddressbookDisplayService.sortAddressbookDisplayShells(uniqueAddressBookShells)
+            .map(displayShell => ({
+              path: displayShell.shell.href,
+              displayName: displayShell.displayName
+            }));
         });
     }
   };
