@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 require('../vcard/helper.service.js');
 require('../app.constant.js');
 
@@ -8,6 +10,7 @@ require('../app.constant.js');
     .factory('ContactShell', ContactShellFactory);
 
   function ContactShellFactory(
+    $log,
     contactVcardHelper,
     CONTACT_ATTRIBUTES_ORDER
   ) {
@@ -53,13 +56,22 @@ require('../app.constant.js');
       var bday = vcard.getFirstProperty('bday');
 
       if (bday) {
-        var type = bday.type,
-          value = bday.getFirstValue();
+        const bdayRawString = bday.toJSON()[3];
+        const bdayMoment = moment(new Date(bdayRawString));
 
-        if (type === 'text') {
-          this.birthday = value;
-        } else if (typeof value.toJSDate === 'function') {
-          this.birthday = value.toJSDate();
+        if (bdayMoment.isValid()) {
+          bday.setValue(bdayMoment.format('YYYY-MM-DD'));
+
+          var type = bday.type,
+            value = bday.getFirstValue();
+
+          if (type === 'text') {
+            this.birthday = value;
+          } else if (typeof value.toJSDate === 'function') {
+            this.birthday = value.toJSDate();
+          }
+        } else {
+          this.birthday = bdayRawString;
         }
       }
 

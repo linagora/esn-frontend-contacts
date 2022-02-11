@@ -269,7 +269,7 @@ describe('The ContactLiveUpdate service', function() {
           var data = { contactId: '1' };
 
           $rootScope.$on(CONTACT_EVENTS.DELETED, function(event, _data) {
-            expect(_data).to.deep.equal({ id: data.contactId });
+            expect(_data).to.deep.equal(data);
             done();
           });
 

@@ -25,15 +25,17 @@ function ContactShowController(
   contactDisplayError,
   gracePeriodService,
   contactService,
+  contactDeleteConfirmationDialogService,
   CONTACT_AVATAR_SIZE,
   CONTACT_EVENTS
 ) {
-  $scope.avatarSize = CONTACT_AVATAR_SIZE.bigger;
+  $scope.avatarSize = CONTACT_AVATAR_SIZE.list;
   $scope.bookId = $stateParams.bookId;
   $scope.bookName = $stateParams.bookName;
   $scope.cardId = $stateParams.cardId;
   $scope.contact = {};
   $scope.loaded = false;
+  $scope.previousState = $stateParams.previousState || 'contact.addressbooks';
 
   $scope.$on(CONTACT_EVENTS.UPDATED, function(e, data) {
     if (data.id === $scope.cardId && data.addressbook && data.addressbook.bookName !== $scope.bookName) {
@@ -47,10 +49,10 @@ function ContactShowController(
   });
 
   $scope.$on(CONTACT_EVENTS.DELETED, function(event, data) {
-    if (data.id === $scope.cardId) {
+    if (data.contactId === $scope.cardId) {
       $state.go('contact.addressbooks', {
         bookId: $scope.bookId,
-        bookName: data.addressbook.bookName
+        bookName: data.bookName
       }, { location: 'replace' });
     }
   });
@@ -85,9 +87,9 @@ function ContactShowController(
   };
 
   $scope.deleteContact = function() {
-    $timeout(function() {
+    contactDeleteConfirmationDialogService(() => {
       deleteContact($scope.bookId, $scope.bookName, $scope.contact);
-    }, 200);
+    });
   };
 
   $scope.shouldDisplayWork = function() {
@@ -95,7 +97,7 @@ function ContactShowController(
   };
 
   $scope.shouldDisplayHome = function() {
-    return !!(isAddressFilled('home') || $scope.formattedBirthday || $scope.contact.nickname);
+    return !!isAddressFilled('home');
   };
 
   $scope.shouldDisplayOthers = function() {

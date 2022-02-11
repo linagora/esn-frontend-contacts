@@ -1,5 +1,3 @@
-require('../action/addressbook-action-edit.service.js');
-require('../action/addressbook-action-delete.service.js');
 require('../action/addressbook-action-export.service.js');
 require('../action/addressbook-action-settings.service.js');
 require('./contact-user-addressbook.service.js');
@@ -10,8 +8,6 @@ require('../../services/contact-configuration.service.js');
 
 angular.module('linagora.esn.contact')
   .run(function(
-    contactAddressbookActionEdit,
-    contactAddressbookActionDelete,
     contactAddressbookActionExport,
     contactAddressbookActionSettings,
     contactAddressbookDisplayShellRegistry,
@@ -28,9 +24,7 @@ angular.module('linagora.esn.contact')
         priority: 100,
         actions: [
           contactAddressbookActionExport,
-          contactAddressbookActionSettings,
-          contactAddressbookActionEdit,
-          contactAddressbookActionDelete
+          contactAddressbookActionSettings
         ],
         displayShell: ContactUserAddressbookDisplayShell,
         matchingFunction: contactUserAddressbookService.isUserAddressbook

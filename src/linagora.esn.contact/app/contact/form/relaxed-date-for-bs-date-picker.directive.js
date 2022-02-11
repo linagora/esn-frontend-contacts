@@ -14,7 +14,7 @@ require('../../app.constant.js');
       restrict: 'A',
       require: 'ngModel',
       link: function(scope, element, attrs, controller) {
-        element.attr('placeholder', CONTACT_DATE_FORMAT);
+        element.attr('placeholder', attrs.relaxedDateForBsDatepicker && attrs.relaxedDateForBsDatepicker.length > 0 ? `${attrs.relaxedDateForBsDatepicker} (${CONTACT_DATE_FORMAT})` : CONTACT_DATE_FORMAT);
 
         // Change bs-datepick behavior and put the string birthday in input
         scope.$applyAsync(function() {

@@ -11,12 +11,13 @@
             br
             br
             h5 {{ 'Select destination address book:' | translate }}
-            .select
-              select.form-control.floating-label(
-                type='text',
-                ng-model='$ctrl.selectedAddressbook',
-                ng-options='addressbookDisplayShell.shell as addressbookDisplayShell.displayName for addressbookDisplayShell in $ctrl.availableAddressbookDisplayShells'
-              )
+            md-select(
+              ng-model='$ctrl.selectedAddressbook',
+              md-container-class="md-select-on-dialog",
+              md-menu-backdrop-fix
+            )
+              md-option(ng-repeat="addressbookDisplayShell in $ctrl.availableAddressbookDisplayShells", ng-value="addressbookDisplayShell.shell")
+                | {{ addressbookDisplayShell.displayName }}
         .modal-footer
-          button.btn.btn-default(type='button', ng-click='$hide()') {{ 'Cancel' | translate }}
+          button.btn.btn-link(type='button', ng-click='$hide()') {{ 'Cancel' | translate }}
           button.btn.btn-primary(type='submit') {{ 'Copy' | translate }}

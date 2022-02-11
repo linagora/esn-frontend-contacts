@@ -6,7 +6,7 @@
         h4.modal-title {{ 'Shared address book' | translate }}
       .modal-body
         .contact-addressbook-shared-configuration-content
-          users-autocomplete-input(
+          users-autocomplete-input.fg-line(
             auto-focus-ngtagsinput,
             mutable-users='$ctrl.selectedUsers',
             on-adding-user="$ctrl.onAddingUser",
@@ -27,5 +27,5 @@
                 span {{ 'Add' | translate }}
             contact-addressbook-shared-configuration-item(ng-repeat="addressbook in $ctrl.addressbooksPerUser", addressbook='addressbook')
       .modal-footer
-        button.btn.btn-default(type="button", ng-click="$hide()") {{ 'Cancel' | translate }}
+        button.btn.btn-link(type="button", ng-click="$hide()") {{ 'Cancel' | translate }}
         button.btn.btn-primary(type='button', ng-disabled='!$ctrl.getSelectedAddressbooks().length', ng-click='$ctrl.subscribe(); $hide()') {{ 'Save' | translate }}

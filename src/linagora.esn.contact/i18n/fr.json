@@ -1,4 +1,5 @@
 {
+  "Add delegated users": "Ajouter des utilisateurs délégués",
   "Contacts": "Contacts",
   "Contact information": "Information de contact",
   "Search in contacts": "Rechercher dans les contacts",
@@ -27,6 +28,7 @@
   "Phone numbers": "Numéros de téléphone",
   "Addresses": "Adresses",
   "Social Networks": "Réseaux sociaux",
+  "First name": "Prénom",
   "Last name": "Nom de famille",
   "Social Account": "Compte social",
   "Import contacts from social accounts": "Importer des contacts depuis des comptes sociaux",
@@ -133,5 +135,10 @@
   "Please fill at least a field": "Veuillez remplir au moins un champ",
   "Search results": "Résultats de recherche",
   "No contacts are matching your search": "Aucun contact ne correspond à votre recherche",
-  "Domain members": "Membres du domaine"
+  "Domain members": "Membres du domaine",
+  "Are you sure you want to delete this contact?": "Voulez-vous vraiment supprimer ce contact?",
+  "Delete contact": "Supprimer le contact",
+  "Delete contact?": "Supprimer le contact?",
+  "More options": "Plus d'options",
+  "Fewer options": "Moins d'options"
 }

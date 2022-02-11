@@ -1,0 +1,10 @@
+.modal.secret-address-confirmation
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        h4.modal-title {{ 'Delete contact?' | translate }}
+      .modal-body
+        span {{ 'Are you sure you want to delete this contact?' | translate }}
+      .modal-footer
+        button.btn.btn-link.color-default(type="button", ng-click="$hide()") {{ 'Cancel' | translate }}
+        button.btn.btn-primary(type="button", ng-click="ctrl.delete(); $hide()") {{ 'Delete' | translate }}

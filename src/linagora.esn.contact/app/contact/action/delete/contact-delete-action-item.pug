@@ -1,1 +1,3 @@
-a(ng-click="deleteContact()") {{ 'Delete' | translate }}
+button.btn.btn-link.waves-effect(type='button', ng-click="deleteContact()")
+  i.mdi.mdi-delete
+  | {{ 'Delete' | translate }}

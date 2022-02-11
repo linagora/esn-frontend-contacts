@@ -1,4 +1,5 @@
 {
+  "Add delegated users": "Thêm người dùng được ủy quyền",
   "Contacts": "Danh bạ",
   "Contact information": "Thông tin liên lạc",
   "Search in contacts": "Tìm kiếm trong danh bạ",
@@ -27,6 +28,7 @@
   "Phone numbers": "Số điện thoại",
   "Addresses": "Địa chỉ",
   "Social Networks": "Mạng xã hội",
+  "First name": "Tên",
   "Last name": "Họ",
   "Social Account": "Tài khoản mạng xã hội",
   "Import contacts from social accounts": "Nhập liên lạc từ tài khoản xã hội",
@@ -133,5 +135,10 @@
   "Please fill at least a field": "Vui lòng điền ít nhất một trường",
   "Search results": "Kết quả tìm kiếm",
   "No contacts are matching your search":"Không có liên lạc phù hợp với tìm kiếm của bạn",
-  "Domain members": "Sổ liên lạc thành viên miền"
+  "Domain members": "Sổ liên lạc thành viên miền",
+  "Are you sure you want to delete this contact?": "Bạn có chắc chắn muốn xóa địa chỉ liên hệ này không?",
+  "Delete contact": "Xóa liên lạc",
+  "Delete contact?": "Xóa liên lạc?",
+  "More options": "Thêm tùy chọn",
+  "Fewer options": "Ít tùy chọn hơn"
 }

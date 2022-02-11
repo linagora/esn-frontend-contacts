@@ -1,22 +1,29 @@
 ng-form(name="form")
-  .row.add-sharee
-    .col-xs-12.col-md-7
+  h2.title {{ 'Add delegated users' | translate }}
+
+  .add-sharee
+    .user-autocomplete.fg-line
       users-autocomplete-input(
         mutable-users='$ctrl.newUsers',
         on-adding-user='$ctrl.onAddingUser',
         ignored-users='$ctrl.ignoredUsers'
       )
-    .col-xs-12.col-md-4
-      .select
-        select.form-control.floating-label(
-          type='text',
-          ng-model='$ctrl.selectedAccess',
-          ng-options='access.value as access.longLabel | esnI18n for (key, access) in $ctrl.CONTACT_SHARING_SHARE_ACCESS_CHOICES'
+    .select-delegation
+      md-select(
+        ng-model='$ctrl.selectedAccess',
+        md-container-class="addressbook-settings-dropdown",
+        md-menu-backdrop-fix
+      )
+        md-option(
+          ng-repeat="access in $ctrl.CONTACT_SHARING_SHARE_ACCESS_CHOICES"
+          ng-value="access.value"
+          ng-selected="access.value === $ctrl.selectedAccess"
         )
-    .col-md-1.add-btn.pull-right
-      .btn.btn-primary.btn-sm(ng-click="$ctrl.onAddBtnClick()") {{ 'Add' | translate }}
+          | {{ access.longLabel | esnI18n }}
+    .delegation-actions
+      button.btn.btn-primary.btn-sm(ng-click="$ctrl.onAddBtnClick()", type="button") {{ 'Add' | translate }}
 
-  h5.title {{ 'Shared with' | translate }}
+  h2.title {{ 'Shared with' | translate }}
 
   .text-center(
     openpaas-logo-spinner,
@@ -32,19 +39,23 @@ ng-form(name="form")
   .no-sharee(ng-if='$ctrl.status === "loaded" && !$ctrl.hasVisibleSharee()')
     .text-center.text-muted {{ 'This address book is not shared with anyone' | translate }}
 
-  .row.sharee-list-item(ng-if='$ctrl.status === "loaded" && $ctrl.hasVisibleSharee()', ng-repeat='sharee in $ctrl.sharees track by sharee.userId', ng-show="$ctrl.isVisibbleSharee(sharee)")
-    .col-md-7.sharee-info
+  .sharee-list-item(ng-if='$ctrl.status === "loaded" && $ctrl.hasVisibleSharee() && $ctrl.isVisibbleSharee(sharee)', ng-repeat='sharee in $ctrl.sharees track by sharee.userId')
+    .sharee-info
       esn-avatar(user-id='sharee.userId')
       .user-info
-        span.ellipsis(title="{{::sharee.user.displayName}}") {{::sharee.user.displayName}}
-        a.ellipsis(ng-href="mailto:{{::sharee.user.email}}" op-inbox-compose, op-inbox-compose-users="[sharee]") {{::sharee.user.email}}
-    .col-md-4
-      .select
-        select.form-control.floating-label(
-          type='text',
-          ng-model='sharee.access',
-          ng-options='access.value as access.longLabel | esnI18n for (key, access) in $ctrl.CONTACT_SHARING_SHARE_ACCESS_CHOICES'
-        )
-    .col-md-1.share-actions
-      a(href='', ng-click='form.$setDirty(); $ctrl.onRemoveShareeClick(sharee)')
-        i.mdi.mdi-delete
+        a.ellipsis(ng-href="mailto:{{::sharee.user.email}}" op-inbox-compose, op-inbox-compose-users="[sharee]") {{::sharee.user.displayName}}
+    .select-delegation
+      md-select(
+        ng-model='sharee.access',
+        md-container-class="addressbook-settings-dropdown",
+        md-menu-backdrop-fix
+      )
+        md-option(
+            ng-repeat="access in $ctrl.CONTACT_SHARING_SHARE_ACCESS_CHOICES"
+            ng-value="access.value"
+            ng-selected="access.value === sharee.access"
+          )
+            | {{ access.longLabel | esnI18n }}
+    .share-actions
+      button.btn.btn-link.btn-icon.waves-effect.waves-light.waves-circle(ng-click='form.$setDirty(); $ctrl.onRemoveShareeClick(sharee)', type="button")
+        i.mdi.mdi-close

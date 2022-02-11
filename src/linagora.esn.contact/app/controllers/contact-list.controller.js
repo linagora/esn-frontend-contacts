@@ -219,7 +219,7 @@ function ContactListController(
   });
 
   $scope.$on(CONTACT_EVENTS.DELETED, function(e, contact) {
-    $scope.categories.removeItemWithId(contact.id);
+    $scope.categories.removeItemWithId(contact.contactId);
   });
 
   $scope.$on(CONTACT_EVENTS.CANCEL_DELETE, function(e, data) {

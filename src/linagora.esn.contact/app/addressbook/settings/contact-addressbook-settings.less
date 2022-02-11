@@ -1,25 +1,41 @@
 @import './main/contact-addressbook-settings-main';
 @import './delegation/contact-addressbook-settings-delegation';
 
-.addressbook-settings-page {
-  padding: 15px;
-  margin-top: 15px;
-  min-height: ~"calc(100vh - @{header-height} - @{sub-header-height} - 50px)";
+contact-addressbook-settings {
+  .modal {
+    .modal-header {
+      display: flex;
+      align-items: center;
+      padding: 14px 26px !important;
 
-  .settings-page-title {
-    margin-bottom: 25px;
-    margin-top: 15px;
+      .modal-title {
+        flex-grow: 1;
+      }
 
-    h2 {
-      color: @secondaryTextColor;
-      font-size: 15px;
-      font-weight: 400;
+      .btn.btn-icon {
+        .all-centered;
+
+        font-size: 20px;
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    .modal-body {
+      min-height: 400px;
+    }
+
+    .addressbook-settings-form {
+      padding: 0 14px 14px 14px;
+    }
+
+    md-select {
       margin: 0;
-      text-transform: uppercase;
+      height: 35px;
     }
   }
+}
 
-  .settings-page-body {
-    margin-top: 25px;
-  }
+.addressbook-settings-dropdown {
+  z-index: 2000;
 }

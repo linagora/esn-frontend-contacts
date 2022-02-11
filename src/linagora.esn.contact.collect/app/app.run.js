@@ -10,8 +10,6 @@ function registerAddressbookDisplayShell(
   contactAddressbookDisplayShellRegistry,
   contactCollectAddressbookService,
   ContactCollectAddressbookDisplayShell,
-  contactAddressbookActionEdit,
-  contactAddressbookActionDelete,
   contactAddressbookActionExport,
   contactAddressbookActionSettings
 ) {
@@ -20,9 +18,7 @@ function registerAddressbookDisplayShell(
     priority: 10,
     actions: [
       contactAddressbookActionExport,
-      contactAddressbookActionSettings,
-      contactAddressbookActionEdit,
-      contactAddressbookActionDelete
+      contactAddressbookActionSettings
     ],
     displayShell: ContactCollectAddressbookDisplayShell,
     matchingFunction: contactCollectAddressbookService.isCollectedAddressbook

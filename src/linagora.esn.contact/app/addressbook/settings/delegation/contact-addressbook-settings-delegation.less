@@ -3,7 +3,7 @@ contact-addressbook-settings-delegation {
 
   .add-sharee {
     & > * {
-      margin-top: 5px;
+      margin-bottom: 12px;
     }
 
     users-autocomplete-input .col-xs-12 {
@@ -11,8 +11,27 @@ contact-addressbook-settings-delegation {
       padding-right: 0;
     }
 
-    .add-btn {
-      text-align: center;
+    .btn {
+      width: 100%;
+    }
+
+    @media (min-width: @screen-md-min) {
+      display: flex;
+      align-items: center;
+
+      & > * {
+        margin-top: 0;
+      }
+
+      .user-autocomplete {
+        width: 50%;
+        margin-right: 12px;
+      }
+
+      .select-delegation {
+        flex-grow: 1;
+        margin-right: 12px;
+      }
     }
   }
 
@@ -24,34 +43,45 @@ contact-addressbook-settings-delegation {
     .sharee-info {
       .flex-row;
 
-      flex-grow: 1;
+      width: 50%;
 
       esn-avatar img {
-        height: 48px;
-        width: 48px;
+        height: 28px;
+        width: 28px;
       }
 
       .user-info {
         .flex-column;
+        justify-content: center;
 
         margin-left: 10px;
       }
+
+      margin-right: 12px;
+    }
+
+    .select-delegation {
+      flex-grow: 1;
+      margin-right: 12px;
     }
 
     .share-actions {
       text-align: center;
 
-      i.mdi {
-        font-size: 2em;
-        color: @m-red;
+      .btn.btn-icon {
+        .all-centered;
+        width: 36px;
+        height: 36px;
+
+        i.mdi {
+          font-size: 20px;
+        }
       }
     }
   }
 
   .title {
     color: @text-color;
-    margin-top: 20px;
-    margin-bottom: 20px;
     font-size: 1.2em;
   }
 
