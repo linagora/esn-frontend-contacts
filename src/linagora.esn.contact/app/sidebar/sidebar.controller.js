@@ -12,6 +12,7 @@ function ContactSidebarController(
   userUtils,
   contactAddressbookDisplayService,
   contactAddressbookService,
+  contactAddressbookHelper,
   CONTACT_ADDRESSBOOK_EVENTS
 ) {
   var self = this;
@@ -150,7 +151,7 @@ function ContactSidebarController(
     var categories = contactAddressbookDisplayService.categorizeDisplayShells(self.displayShells);
 
     self.userAddressbooks = categories.userAddressbooks;
-    self.sharedAddressbooks = categories.sharedAddressbooks;
+    self.sharedAddressbooks = contactAddressbookHelper.getUniqueAdressBookShells(categories.sharedAddressbooks);
     self.virtualAddressbooks = categories.virtualAddressbooks;
   }
 }

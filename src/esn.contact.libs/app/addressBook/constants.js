@@ -43,4 +43,5 @@ angular.module('esn.contact.libs')
     public: 'public'
   })
 
-  .constant('CONTACT_SHARING_SHARE_PRIVILEGE', '{DAV:}share');
+  .constant('CONTACT_SHARING_SHARE_PRIVILEGE', '{DAV:}share')
+  .constant('CONTACT_SHARING_WRITE_PRIVILEGE', '{DAV:}write');

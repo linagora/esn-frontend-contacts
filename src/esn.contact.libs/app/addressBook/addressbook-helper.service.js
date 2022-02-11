@@ -2,10 +2,11 @@
 angular.module('esn.contact.libs')
   .factory('contactAddressbookHelper', contactAddressbookHelper);
 
-function contactAddressbookHelper($q, contactAddressbookParser, contactDavClientService, CONTACT_ADDRESSBOOK_DAV_PROPERTIES, CONTACT_ACCEPT_HEADER) {
+function contactAddressbookHelper($q, contactAddressbookParser, contactDavClientService, CONTACT_ADDRESSBOOK_DAV_PROPERTIES, CONTACT_ACCEPT_HEADER, CONTACT_SHARING_SUBSCRIPTION_TYPE) {
   return {
     populateSubscriptionSource,
-    formatAddressBookResponse
+    formatAddressBookResponse,
+    getUniqueAdressBookShells
   };
 
   function populateSubscriptionSource(addressbook) {
@@ -41,5 +42,22 @@ function contactAddressbookHelper($q, contactAddressbookParser, contactDavClient
     });
 
     return { ...response, ...formattedAddressBook };
+  }
+
+  function getUniqueAdressBookShells(addressbooks) {
+    if (!addressbooks) return;
+
+    const uniqueAddressbookList = addressbooks.reduce((acc, current) => {
+      const { shell, shell: { subscriptionType } } = current;
+      const href = shell.source ? shell.source.href : shell.href;
+
+      if (!acc[href] || subscriptionType === CONTACT_SHARING_SUBSCRIPTION_TYPE.delegation) {
+        acc[href] = current;
+      }
+
+      return acc;
+    }, {});
+
+    return Object.values(uniqueAddressbookList);
   }
 }

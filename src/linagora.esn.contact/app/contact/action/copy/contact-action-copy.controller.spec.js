@@ -38,10 +38,12 @@ describe('The contactActionCopyController controller', function() {
   }
 
   var defaultAddressbookShell = {
-    bookName: 'contacts'
+    bookName: 'contacts',
+    href: '0'
   };
   var addressbookShell = {
-    bookName: 'collected'
+    bookName: 'collected',
+    href: '1'
   };
 
   describe('The listPossibleDestinations function', function() {
@@ -61,7 +63,8 @@ describe('The contactActionCopyController controller', function() {
       controller.contact = {
         id: '123',
         addressbook: {
-          bookName: 'contacts'
+          bookName: 'contacts',
+          href: '0'
         }
       };
       controller.listPossibleDestinations();
@@ -105,7 +108,8 @@ describe('The contactActionCopyController controller', function() {
       controller.contact = {
         id: '123',
         addressbook: {
-          bookName: 'contacts'
+          bookName: 'contacts',
+          href: '0'
         }
       };
       controller.selectedAddressbook = destAddressbook;

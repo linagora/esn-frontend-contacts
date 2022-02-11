@@ -13,7 +13,8 @@ function contactAddressbookSettingsMainController(
   CONTACT_SHARING_SHARE_ACCESS,
   CONTACT_SHARING_SUBSCRIPTION_TYPE,
   CONTACT_SHARING_SHARE_ACCESS_CHOICES,
-  CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS
+  CONTACT_ADDRESSBOOK_MEMBERS_RIGHTS,
+  CONTACT_SHARING_WRITE_PRIVILEGE
 ) {
   var self = this;
 
@@ -62,11 +63,22 @@ function contactAddressbookSettingsMainController(
   }
 
   function _initShareAccess() {
-    self.shareAccess = _.find(
-      CONTACT_SHARING_SHARE_ACCESS_CHOICES, {
-        value: self.addressbook.shareAccess
-      }
-    );
+    const { READWRITE } = CONTACT_SHARING_SHARE_ACCESS_CHOICES;
+
+    const access = Object.values(CONTACT_SHARING_SHARE_ACCESS_CHOICES)
+      .find(({ value }) => value === self.addressbook.shareAccess);
+
+    if (!access) return;
+
+    if (access.value >= READWRITE.value) {
+      self.shareAccess = access;
+
+      return;
+    }
+
+    self.shareAccess = self.addressbook.source.rights.public === CONTACT_SHARING_WRITE_PRIVILEGE ?
+      READWRITE :
+      access;
   }
 
   function _getShareOwner(sharees) {
