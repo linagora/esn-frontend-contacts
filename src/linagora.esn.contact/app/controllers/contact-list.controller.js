@@ -14,6 +14,7 @@ function ContactListController(
   $log,
   $scope,
   $state,
+  $rootScope,
   $stateParams,
   $window,
   session,
@@ -65,6 +66,7 @@ function ContactListController(
     } else {
       listAddressbooks = contactAddressbookService.listAggregatedAddressbooks();
     }
+    toggleSideMenuEvent();
 
     self.status = LOADING_STATUS.loading;
     listAddressbooks
@@ -87,6 +89,27 @@ function ContactListController(
       .catch(function() {
         self.status = LOADING_STATUS.error;
       });
+  }
+
+  function toggleMenu() {
+    const contactAsidClass = angular.element(document.querySelector('.contact-aside'));
+    const contactMainContentElem = angular.element(document.querySelector('.contact-main-content'));
+
+    if (document.querySelector('.contact-aside').style.display === 'block' || !(document.querySelector('.contact-aside').style.display)) {
+      contactMainContentElem.removeClass('col-xl-10 col-md-9');
+      contactMainContentElem.addClass('col-xl-12 col-md-12');
+    } else {
+      contactMainContentElem.removeClass('col-xl-12 col-md-12');
+      contactMainContentElem.addClass('col-xl-10 col-md-9');
+    }
+    contactAsidClass.toggle('hidden');
+  }
+
+  function toggleSideMenuEvent() {
+    $rootScope.$on('toggleSideMenu', function() {
+
+      toggleMenu();
+    });
   }
 
   $scope.$on(CONTACT_ADDRESSBOOK_EVENTS.DELETED, _onAddressbookDeleted);
