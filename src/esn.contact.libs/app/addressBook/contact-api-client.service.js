@@ -689,6 +689,7 @@ require('./contact-dav-client.service.js');
         fr.onerror = reject;
         fr.readAsDataURL(file);
       });
+    }
 
     /**
      * Exports an addressbook
