@@ -44,7 +44,7 @@ angular.module('esn.contact.libs', [
   'esn.user-configuration',
   'esn.settings-overlay',
   'esn.previous-page',
-  'linagora.esn.davproxy'
+  'ngFileSaver'
 ]);
 
 require('esn-frontend-common-libs/src/frontend/js/modules/core.js');
@@ -82,7 +82,6 @@ require('esn-frontend-common-libs/src/frontend/js/modules/user/user.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/user-configuration/user-configuration.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/settings-overlay.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/previous-page.js');
-require('../../linagora.esn.davproxy/js/app.js');
 
 require('./shell/contact-shell-helper.service.js');
 require('./shell/shell.service.js');
@@ -107,3 +106,6 @@ require('./contact/helper.service.js');
 require('./display-shell/addressbook-display-shell.service.js');
 require('./display-shell/addressbook-display-shell-registry.service.js');
 require('./group-addressbook/contact-group-addressbook-display-shell.service.js');
+require('./addressBook/addressbook-helper.service.js');
+require('./addressBook/contact-dav-client.service.js');
+require('./addressBook/contact-dav-url.service.js');

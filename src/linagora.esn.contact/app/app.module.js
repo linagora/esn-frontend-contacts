@@ -25,7 +25,6 @@ angular.module('linagora.esn.contact', [
   'mgcrea.ngStrap.helpers.dateParser',
   'mgcrea.ngStrap.helpers.dateFormatter',
   'linagora.esn.graceperiod',
-  'linagora.esn.davproxy',
   'esn.search',
   'esn.scroll',
   'esn.multi-input',
@@ -93,7 +92,6 @@ require('esn-frontend-common-libs/src/frontend/js/modules/clipboard/clipboard.mo
 require('esn-frontend-common-libs/src/frontend/js/modules/esn.api-client.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/widget-helper');
 require('esn-frontend-common-libs/src/frontend/components/openpaas-logo/openpaas-logo.js');
-require('../../linagora.esn.davproxy/js/app.js');
 
 require('./addressbook/acl/addressbook-acl-helper.servive.js');
 require('./addressbook/action/addressbook-action-delete.service.js');

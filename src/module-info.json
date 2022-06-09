@@ -50,22 +50,6 @@
         "constants.js",
         "services.js"
       ]
-    },
-    {
-      "name": "linagora.esn.davproxy",
-      "angularModuleName": "linagora.esn.davproxy",
-      "shortName": "dav",
-      "pugGlob": [
-        "**/*.pug"
-      ],
-      "pugOptions": {
-        "basedir": "./node_modules/esn-frontend-common-libs/src/frontend/views"
-      },
-      "fileRoot": "frontend/js",
-      "filesGlob": [
-        "**/*.module.js",
-        "**/!(*spec).js"
-      ]
     }
   ],
   "dependenceModules": []

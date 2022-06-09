@@ -10,8 +10,10 @@ describe('The contact Angular module contactapis', function() {
 
   describe('The ContactAPIClient service', function() {
     var ICAL, contact;
-    var ADDRESSBOOK_PATH = 'addressbooks';
+    var ADDRESSBOOK_PATH = '/addressbooks';
     let httpConfigurer;
+    let contactDavUrlServiceMock;
+    let tokenApiMock;
 
     beforeEach(function() {
       var self = this;
@@ -49,38 +51,49 @@ describe('The contact Angular module contactapis', function() {
 
       contact = { id: '00000000-0000-4000-a000-000000000000', lastName: 'Last' };
 
+      contactDavUrlServiceMock = {
+        getFrontendUrl: function() {
+          return $q.when('');
+        }
+      };
+
+      tokenApiMock = {
+        getWebToken: () => $q.when({ data: '123' })
+      };
+
       angular.mock.module(function($provide) {
         $provide.value('notificationFactory', self.notificationFactory);
         $provide.value('uuid4', self.uuid4);
         $provide.value('contactUpdateDataService', self.contactUpdateDataService);
         $provide.value('ContactShellBuilder', self.ContactShellBuilder);
         $provide.value('httpConfigurer', httpConfigurer);
+        $provide.value('contactDavUrlService', contactDavUrlServiceMock);
+        $provide.value('tokenAPI', tokenApiMock);
       });
     });
 
-    beforeEach(angular.mock.inject(function($rootScope, $httpBackend, ContactAPIClient, contactRestangularService, ContactShell, ContactsHelper, AddressbookShell, DAV_PATH, GRACE_DELAY, _ICAL_) {
+    beforeEach(angular.mock.inject(function($rootScope, $httpBackend, ContactAPIClient, contactRestangularService, ContactShell, ContactsHelper, AddressbookShell, GRACE_DELAY, _ICAL_) {
       this.$rootScope = $rootScope;
       this.$httpBackend = $httpBackend;
       this.ContactAPIClient = ContactAPIClient;
       this.contactRestangularService = contactRestangularService;
       this.ContactShell = ContactShell;
       this.AddressbookShell = AddressbookShell;
-      this.DAV_PATH = DAV_PATH;
       this.GRACE_DELAY = GRACE_DELAY;
       this.ContactsHelper = ContactsHelper;
 
       ICAL = _ICAL_;
 
       this.getBookHomeUrl = function(bookId) {
-        return [this.DAV_PATH, ADDRESSBOOK_PATH, bookId + '.json'].join('/');
+        return [ADDRESSBOOK_PATH, bookId + '.json'].join('/');
       };
 
       this.getBookUrl = function(bookId, bookName) {
-        return [this.DAV_PATH, ADDRESSBOOK_PATH, bookId, bookName + '.json'].join('/');
+        return [ADDRESSBOOK_PATH, bookId, bookName + '.json'].join('/');
       };
 
       this.getVCardUrl = function(bookId, bookName, cardId) {
-        return [this.DAV_PATH, ADDRESSBOOK_PATH, bookId, bookName, cardId + '.vcf'].join('/');
+        return [ADDRESSBOOK_PATH, bookId, bookName, cardId + '.vcf'].join('/');
       };
     }));
 
@@ -171,7 +184,8 @@ describe('The contact Angular module contactapis', function() {
                   description: 'AddressBook for Twitter contacts'
                 });
                 done();
-              }, done);
+              })
+              .catch(done);
 
             this.$rootScope.$apply();
             this.$httpBackend.flush();
@@ -811,6 +825,7 @@ describe('The contact Angular module contactapis', function() {
                 'Content-Type': 'application/vcard+json',
                 Prefer: 'return=representation',
                 'If-Match': 'etag',
+                Authorization: 'Bearer 123',
                 Accept: 'application/json, text/plain, */*'
               };
 
@@ -837,6 +852,7 @@ describe('The contact Angular module contactapis', function() {
                 'Content-Type': 'application/vcard+json',
                 Prefer: 'return=representation',
                 'If-Match': 'etag',
+                Authorization: 'Bearer 123',
                 Accept: 'application/json, text/plain, */*'
               };
 
@@ -863,6 +879,7 @@ describe('The contact Angular module contactapis', function() {
                 'Content-Type': 'application/vcard+json',
                 Prefer: 'return=representation',
                 'If-Match': 'etaW/g',
+                Authorization: 'Bearer 123',
                 Accept: 'application/json, text/plain, */*'
               };
 
@@ -964,6 +981,7 @@ describe('The contact Angular module contactapis', function() {
             it('should send etag as If-Match header', function(done) {
               var requestHeaders = {
                 'If-Match': 'etag',
+                Authorization: 'Bearer 123',
                 Accept: 'application/json, text/plain, */*'
               };
 
@@ -986,6 +1004,7 @@ describe('The contact Angular module contactapis', function() {
             it('should strip W/ from etag in If-Match header', function(done) {
               var requestHeaders = {
                 'If-Match': 'etag',
+                Authorization: 'Bearer 123',
                 Accept: 'application/json, text/plain, */*'
               };
 
@@ -1008,6 +1027,7 @@ describe('The contact Angular module contactapis', function() {
             it('should not strip W/ from etag in If-Match header when not at the beginning', function(done) {
               var requestHeaders = {
                 'If-Match': 'etaW/g',
+                Authorization: 'Bearer 123',
                 Accept: 'application/json, text/plain, */*'
               };
 
@@ -1073,6 +1093,7 @@ describe('The contact Angular module contactapis', function() {
               var vcardUrl = this.getVCardUrl(bookId, bookName, contact.id);
               var headers = {
                 Accept: 'application/json, text/plain, */*',
+                Authorization: 'Bearer 123',
                 Destination: '/addressbooks/' + destAddressbook.bookId + '/' + destAddressbook.bookName + '/' + contact.id + '.vcf'
               };
 
@@ -1163,7 +1184,7 @@ describe('The contact Angular module contactapis', function() {
               name: 'Modified name'
             };
 
-            this.$httpBackend.when('PUT', this.getBookUrl(bookId, bookName)).respond({});
+            this.$httpBackend.when('PROPPATCH', this.getBookUrl(bookId, bookName)).respond({});
 
             this.ContactAPIClient
               .addressbookHome(bookId)
@@ -1314,6 +1335,26 @@ describe('The contact Angular module contactapis', function() {
               .addressbook(bookName)
               .updateMembersRight(['{DAV:}read'])
               .then(function() {
+                done();
+              }, done);
+
+            this.$rootScope.$apply();
+            this.$httpBackend.flush();
+          });
+        });
+
+        describe('The exportAddressbook function', () => {
+          it('should call to right endpoint to export addressbook', function(done) {
+            var bookId = '123';
+            var bookName = 'test';
+
+            this.$httpBackend.when('GET', this.getBookUrl(bookId, bookName) + '?export=true').respond({});
+
+            this.ContactAPIClient
+              .addressbookHome(bookId)
+              .addressbook(bookName)
+              .exportAddressbook()
+              .then(() => {
                 done();
               }, done);
 

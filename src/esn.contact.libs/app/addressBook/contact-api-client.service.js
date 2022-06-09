@@ -2,6 +2,7 @@ require('../shell/shell.service.js');
 require('./contact-shell-builder.service.js');
 require('../vcard/vcard-builder.service.js');
 require('../app.constant.js');
+require('./contact-dav-client.service.js');
 
 (function(angular) {
   'use strict';
@@ -17,22 +18,26 @@ require('../app.constant.js');
     ContactShellBuilder,
     contactAvatarService,
     VcardBuilder,
-    davClient,
+    contactDavClientService,
+    contactAddressbookHelper,
     CONTACT_ACCEPT_HEADER,
     CONTACT_CONTENT_TYPE_HEADER,
+    CONTACT_EXPORT_HEADER,
     CONTACT_LIST_PAGE_SIZE,
     CONTACT_LIST_DEFAULT_SORT,
     CONTACT_PREFER_HEADER,
     DEFAULT_ADDRESSBOOK_NAME,
     GRACE_DELAY,
     ICAL,
-    contactRestangularService
+    contactRestangularService,
+    CONTACT_ADDRESSBOOK_DAV_PROPERTIES
   ) {
     var ADDRESSBOOK_PATH = '/addressbooks';
 
     return {
       addressbookHome,
       getAvatar
+      getGroupMembership
     };
 
     /**
@@ -69,7 +74,8 @@ require('../app.constant.js');
           update: update,
           updateMembersRight: updateMembersRight,
           updatePublicRight: updatePublicRight,
-          vcard: vcard
+          vcard: vcard,
+          exportAddressbook
         };
 
         function create(addressbook) {
@@ -110,6 +116,10 @@ require('../app.constant.js');
 
         function updateMembersRight(membersRight) {
           return setMembersRight(bookId, bookName, membersRight);
+        }
+
+        function exportAddressbook() {
+          return exportBook(bookId, bookName);
         }
 
         function vcard(cardId) {
@@ -208,13 +218,22 @@ require('../app.constant.js');
     function listAddressbook(bookId, query) {
       var headers = { Accept: CONTACT_ACCEPT_HEADER };
 
-      return davClient('GET', getBookHomeUrl(bookId), headers, null, query)
-        .then(function(response) {
-          if (response.data._embedded && response.data._embedded['dav:addressbook']) {
-            return response.data._embedded['dav:addressbook'].map(function(item) {
-              return new AddressbookShell(item);
-            });
+      return contactDavClientService('GET', getBookHomeUrl(bookId), headers, null, query)
+        .then(({ data: { _embedded } }) => {
+          if (!_embedded || !_embedded['dav:addressbook']) {
+            return [];
           }
+
+          const books = _embedded['dav:addressbook']
+            .map(book => {
+              const formatted = contactAddressbookHelper.formatAddressBookResponse(book);
+
+              return contactAddressbookHelper.populateSubscriptionSource(formatted);
+            });
+
+          return $q.all(books)
+            .then(books => books.map(book => new AddressbookShell(book)));
+
         });
     }
 
@@ -225,12 +244,14 @@ require('../app.constant.js');
      * @return {Promise}          Resolve AddressbookShell if success
      */
     function getAddressbook(bookId, bookName) {
-      var headers = { Accept: CONTACT_ACCEPT_HEADER };
+      const headers = { Accept: CONTACT_ACCEPT_HEADER };
+      const body = { properties: Object.keys(CONTACT_ADDRESSBOOK_DAV_PROPERTIES) };
+      const url = getBookUrl(bookId, bookName);
 
-      return davClient('PROPFIND', getBookUrl(bookId, bookName), headers)
-        .then(function(response) {
-          return new AddressbookShell(response.data);
-        });
+      return contactDavClientService('PROPFIND', url, headers, body)
+        .then(({ data }) => contactAddressbookHelper.formatAddressBookResponse(data, url))
+        .then(book => contactAddressbookHelper.populateSubscriptionSource(book))
+        .then(addressbook => new AddressbookShell(addressbook));
     }
 
     /**
@@ -248,13 +269,22 @@ require('../app.constant.js');
         addressbook.id = uuid4.generate();
       }
 
-      return davClient('POST', getBookHomeUrl(bookId), headers, addressbook)
-        .then(function() {
-          return davClient('PROPFIND', getBookUrl(bookId, addressbook.id), headers)
-            .then(function(response) {
-              return new AddressbookShell(response.data);
-            });
-        });
+      const {
+        id, name, description, type, state, acl = ['dav:read', 'dav:write'], 'openpaas:source': source
+      } = addressbook;
+
+      const payload = {
+        id,
+        'dav:name': name,
+        'carddav:description': description,
+        'dav:acl': acl,
+        type,
+        state,
+        'openpaas:source': source
+      };
+
+      return contactDavClientService('POST', getBookHomeUrl(bookId), headers, payload)
+        .then(() => getAddressbook(bookId, id));
     }
 
     /**
@@ -266,7 +296,7 @@ require('../app.constant.js');
     function removeAddressbook(bookId, bookName) {
       var headers = { Accept: CONTACT_ACCEPT_HEADER };
 
-      return davClient('DELETE', getBookUrl(bookId, bookName), headers);
+      return contactDavClientService('DELETE', getBookUrl(bookId, bookName), headers);
     }
 
     /**
@@ -277,9 +307,15 @@ require('../app.constant.js');
      * @return {Promise}           Resolve on success
      */
     function updateAddressbook(bookId, bookName, addressbook) {
-      var headers = { Accept: CONTACT_ACCEPT_HEADER };
+      const headers = { Accept: CONTACT_ACCEPT_HEADER };
+      const { name, description, state } = addressbook;
+      const modified = {
+        'dav:name': name,
+        'carddav:description': description,
+        state
+      };
 
-      return davClient('PUT', getBookUrl(bookId, bookName), headers, addressbook);
+      return contactDavClientService('PROPPATCH', getBookUrl(bookId, bookName), headers, modified);
     }
 
     /**
@@ -302,7 +338,7 @@ require('../app.constant.js');
         }
       };
 
-      return davClient('POST', getBookUrl(bookId, bookName), headers, data);
+      return contactDavClientService('POST', getBookUrl(bookId, bookName), headers, data);
     }
 
     function replyInvitation(bookId, bookName, accepted, options) {
@@ -317,7 +353,7 @@ require('../app.constant.js');
         data['dav:invite-reply']['dav:slug'] = options.displayname;
       }
 
-      return davClient('POST', getBookUrl(bookId, bookName), headers, data);
+      return contactDavClientService('POST', getBookUrl(bookId, bookName), headers, data);
     }
 
     /**
@@ -341,7 +377,7 @@ require('../app.constant.js');
         };
       }
 
-      return davClient('POST', getBookUrl(bookId, bookName), headers, data);
+      return contactDavClientService('POST', getBookUrl(bookId, bookName), headers, data);
     }
 
     /**
@@ -358,7 +394,7 @@ require('../app.constant.js');
         }
       };
 
-      return davClient('POST', getBookUrl(bookId, bookName), headers, data);
+      return contactDavClientService('POST', getBookUrl(bookId, bookName), headers, data);
     }
 
     /**
@@ -373,7 +409,7 @@ require('../app.constant.js');
 
       var href = getVCardUrl(bookId, bookName, cardId);
 
-      return davClient('GET', href, headers)
+      return contactDavClientService('GET', href, headers)
         .then(function(response) {
           var contact = new ContactShell(
             new ICAL.Component(response.data), response.headers('ETag')
@@ -416,7 +452,9 @@ require('../app.constant.js');
         query.offset = offset;
       }
 
-      return davClient('GET', getBookUrl(bookId, bookName), null, null, query)
+      const headers = { Accept: CONTACT_ACCEPT_HEADER };
+
+      return contactDavClientService('GET', getBookUrl(bookId, bookName), headers, null, query)
         .then(function(response) {
           return ContactShellBuilder.fromCardListResponse(response).then(function(shells) {
 
@@ -463,7 +501,7 @@ require('../app.constant.js');
         limit: options.limit || CONTACT_LIST_PAGE_SIZE
       };
 
-      return davClient(
+      return contactDavClientService(
         'GET',
         getBookHomeUrl(options.bookId) + '/contacts',
         null,
@@ -503,7 +541,7 @@ require('../app.constant.js');
         contact.id = uuid4.generate();
       }
 
-      return davClient(
+      return contactDavClientService(
         'PUT',
         getVCardUrl(bookId, bookName, contact.id),
         headers,
@@ -530,7 +568,7 @@ require('../app.constant.js');
         Destination: getVCardUrl(options.toBookId, options.toBookName, cardId)
       };
 
-      return davClient(
+      return contactDavClientService(
         'MOVE',
         getVCardUrl(bookId, bookName, cardId),
         headers
@@ -561,7 +599,7 @@ require('../app.constant.js');
 
       var params = { graceperiod: GRACE_DELAY };
 
-      return davClient('PUT',
+      return contactDavClientService('PUT',
         getVCardUrl(bookId, bookName, cardId),
         headers,
         VcardBuilder.toJSON(contact),
@@ -607,7 +645,7 @@ require('../app.constant.js');
         params.graceperiod = options.graceperiod;
       }
 
-      return davClient('DELETE',
+      return contactDavClientService('DELETE',
         getVCardUrl(bookId, bookName, cardId),
         headers,
         null,
@@ -651,6 +689,37 @@ require('../app.constant.js');
         fr.onerror = reject;
         fr.readAsDataURL(file);
       });
+
+    /**
+     * Exports an addressbook
+     *
+     * @param  {String} bookId   the addressbook home ID
+     * @param  {String} bookName the addressbook name
+     * @returns {Promise}          Resolve on success
+     */
+    function exportBook(bookId, bookName) {
+      const headers = { Accept: CONTACT_EXPORT_HEADER };
+
+      return contactDavClientService(
+        'GET',
+        getBookUrl(bookId, bookName),
+        headers,
+        null,
+        { export: true }
+      );
+    }
+
+    /**
+     * gets the group membership by principal id
+     *
+     * @param  {String} principalId the principal id
+     * @return {Promise}            Resolve on success
+     */
+    function getGroupMembership(principal) {
+      return contactDavClientService('PROPFIND', principal, { Accept: 'application/json' })
+        .then(function(response) {
+          return response.data && response.data['group-membership'];
+        });
     }
   }
 
