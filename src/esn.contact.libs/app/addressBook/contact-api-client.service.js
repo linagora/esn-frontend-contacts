@@ -36,7 +36,7 @@ require('./contact-dav-client.service.js');
 
     return {
       addressbookHome,
-      getAvatar
+      getAvatar,
       getGroupMembership
     };
 
