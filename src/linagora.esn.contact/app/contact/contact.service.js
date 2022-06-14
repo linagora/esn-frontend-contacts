@@ -22,7 +22,8 @@ function contactService(
     moveContact,
     removeContact,
     updateContact,
-    importContactsFromFile
+    importContactsFromFile,
+    getContactAvatar
   };
 
   function listContacts(addressbook, options) {
@@ -169,5 +170,9 @@ function contactService(
       .addressbookHome(addressbook.bookId)
       .addressbook(addressbook.bookName)
       .get();
+  }
+
+  function getContactAvatar(payload) {
+    return ContactAPIClient.getAvatar(payload);
   }
 }

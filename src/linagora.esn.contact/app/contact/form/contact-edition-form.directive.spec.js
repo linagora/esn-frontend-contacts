@@ -1,6 +1,6 @@
 'use strict';
 
-/* global chai: false */
+/* global chai: false ,sinon: false*/
 
 var expect = chai.expect;
 
@@ -8,8 +8,13 @@ describe('The contactEditionForm directive', function() {
   var $compile, $rootScope, $scope;
   var CONTACT_AVATAR_SIZE, DEFAULT_ADDRESSBOOK_NAME, CONTACT_COLLECTED_ADDRESSBOOK_NAME;
   var contactAddressbookService, esnConfigMock;
+  let contactService;
 
   beforeEach(function() {
+    contactService = {
+      setContactMainEmail: sinon.spy()
+    };
+
     angular.mock.module('esn.core');
     angular.mock.module('linagora.esn.contact');
     angular.mock.module(function($provide) {
@@ -18,6 +23,7 @@ describe('The contactEditionForm directive', function() {
       };
 
       $provide.value('esnConfig', esnConfigMock);
+      $provide.value('contactService', contactService);
     });
   });
 
@@ -41,8 +47,14 @@ describe('The contactEditionForm directive', function() {
       tel: [],
       addresses: [],
       social: [],
-      urls: []
+      urls: [],
+      id: 'contactId',
+      addressbook: {
+        bookId: '123',
+        bookName: 'addressBook'
+      }
     };
+    contactService.getContactAvatar = sinon.stub().returns($q.when({}));
     contactAddressbookService.listAddressbooksUserCanCreateContact = function() {
       return $q.when([{
         bookName: DEFAULT_ADDRESSBOOK_NAME,

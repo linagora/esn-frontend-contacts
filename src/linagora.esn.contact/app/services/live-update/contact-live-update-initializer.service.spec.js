@@ -7,7 +7,7 @@ var expect = chai.expect;
 
 describe('The ContactLiveUpdateInitializer service', function() {
 
-  var ContactLiveUpdateMock, session, $rootScope;
+  var ContactLiveUpdateMock, session, $rootScope, contactRestangularService;
 
   beforeEach(function() {
     angular.mock.module('esn.core');
@@ -28,7 +28,7 @@ describe('The ContactLiveUpdateInitializer service', function() {
       },
       ready: $q.when({})
     };
-
+    contactRestangularService = {};
     ContactLiveUpdateMock = {
       startListen: function() {},
       stopListen: function() {},
@@ -38,6 +38,7 @@ describe('The ContactLiveUpdateInitializer service', function() {
     angular.mock.module(function($provide) {
       $provide.value('ContactLiveUpdate', ContactLiveUpdateMock);
       $provide.value('session', session);
+      $provide.value('contactRestangularService', contactRestangularService);
     });
 
     angular.mock.inject(function(_$rootScope_) {

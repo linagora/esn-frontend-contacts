@@ -6,7 +6,7 @@ var expect = chai.expect;
 
 describe('The AddressbookCache service', function() {
 
-  var ContactAPIClientMock;
+  let ContactAPIClientMock;
   var BOOK_ID = '123456789';
   var BOOK_NAME = 'contacts';
 

@@ -6,6 +6,7 @@ var expect = chai.expect;
 
 describe('The contact Angular module contactapis', function() {
   beforeEach(angular.mock.module('esn.contact.libs'));
+  beforeEach(angular.mock.module('linagora.esn.contact'));
 
   describe('The ContactAPIClient service', function() {
     var ICAL, contact;
@@ -71,10 +72,11 @@ describe('The contact Angular module contactapis', function() {
       });
     });
 
-    beforeEach(angular.mock.inject(function($rootScope, $httpBackend, ContactAPIClient, ContactShell, ContactsHelper, AddressbookShell, GRACE_DELAY, _ICAL_) {
+    beforeEach(angular.mock.inject(function($rootScope, $httpBackend, ContactAPIClient, contactRestangularService, ContactShell, ContactsHelper, AddressbookShell, GRACE_DELAY, _ICAL_) {
       this.$rootScope = $rootScope;
       this.$httpBackend = $httpBackend;
       this.ContactAPIClient = ContactAPIClient;
+      this.contactRestangularService = contactRestangularService;
       this.ContactShell = ContactShell;
       this.AddressbookShell = AddressbookShell;
       this.GRACE_DELAY = GRACE_DELAY;
@@ -1435,6 +1437,26 @@ describe('The contact Angular module contactapis', function() {
         });
       });
     });
+    describe('The get avatar function', function() {
+      const payload = {
+        addressBookId: '123',
+        addressbookName: 'contacts',
+        contactId: '12'
+      };
 
+      it('should call sent HTTP request to backend with the right parameters in avatar function', function() {
+
+        this.$httpBackend.expectGET('/contact/api/contacts/' + payload.addressBookId + '/' + payload.addressbookName + '/' + payload.contactId + '/avatar').respond(200, {});
+
+        this.contactRestangularService
+          .one('contacts/' + payload.addressBookId + '/' + payload.addressbookName + '/' + payload.contactId)
+          .one('avatar')
+          .withHttpConfig({ responseType: 'blob' })
+          .get();
+
+        this.$rootScope.$apply();
+        this.$httpBackend.flush();
+      });
+    });
   });
 });

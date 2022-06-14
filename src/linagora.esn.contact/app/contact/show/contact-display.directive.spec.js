@@ -6,7 +6,7 @@
 var expect = chai.expect;
 
 describe('The contactDisplay directive', function() {
-  var $compile, $state, $rootScope, element, $scope, CONTACT_AVATAR_SIZE, ContactShellDisplayBuilder, esnI18nService, contactAddressbookDisplayService;
+  var $compile, $state, $rootScope, element, $scope, CONTACT_AVATAR_SIZE, ContactShellDisplayBuilder, esnI18nService, contactAddressbookDisplayService, contactService;
 
   beforeEach(function() {
     angular.mock.module('esn.core');
@@ -26,9 +26,14 @@ describe('The contactDisplay directive', function() {
       })
     };
 
+    contactService = {
+      getContactAvatar: sinon.stub().returns($q.when('data:image/png,base64;abcd='))
+    };
+
     angular.mock.module(function($provide) {
       $provide.value('ContactShellDisplayBuilder', ContactShellDisplayBuilder);
       $provide.value('esnI18nService', esnI18nService);
+      $provide.value('contactService', contactService);
     });
   });
 
@@ -40,12 +45,17 @@ describe('The contactDisplay directive', function() {
     CONTACT_AVATAR_SIZE = _CONTACT_AVATAR_SIZE_;
     $scope = $rootScope.$new();
     $scope.contact = {
+      id: 'contact1',
       emails: [],
       tel: [],
       addresses: [],
       social: [],
       urls: [],
-      addressbook: {}
+      addressbook:
+      {
+        bookId: 'book1',
+        bookName: 'bookName1'
+      }
     };
     contactAddressbookDisplayService.convertShellToDisplayShell = angular.noop;
   }));

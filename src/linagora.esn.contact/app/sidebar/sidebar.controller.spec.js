@@ -10,7 +10,7 @@ describe('The ContactSidebarController controller', function() {
   var contactAddressbookService, contactAddressbookDisplayService, esnConfigMock;
   var userAPI, userUtils;
   var CONTACT_ADDRESSBOOK_EVENTS;
-  let httpConfigurer;
+  let httpConfigurer, contactRestangularService;
 
   beforeEach(function() {
     httpConfigurer = {
@@ -18,6 +18,8 @@ describe('The ContactSidebarController controller', function() {
       getUrl: sinon.spy(),
       setBaseUrl: sinon.spy(),
       manageRestangular: sinon.spy()
+    };
+    contactRestangularService = {
     };
 
     angular.mock.module('linagora.esn.contact');
@@ -28,6 +30,7 @@ describe('The ContactSidebarController controller', function() {
 
       $provide.value('esnConfig', esnConfigMock);
       $provide.value('httpConfigurer', httpConfigurer);
+      $provide.value('contactRestangularService', contactRestangularService);
     });
 
     angular.mock.inject(function(

@@ -7,7 +7,7 @@ var expect = chai.expect;
 
 describe('The openContactForm service', function() {
 
-  var bookId, bookName, contact;
+  let bookId, bookName, contact, contactRestangularService;
 
   beforeEach(function() {
     angular.mock.module('linagora.esn.contact');
@@ -25,10 +25,12 @@ describe('The openContactForm service', function() {
         new: function() {}
       }
     };
+    contactRestangularService = {};
 
     angular.mock.module(function($provide) {
       $provide.value('sharedContactDataService', self.sharedContactDataService);
       $provide.value('ContactLocationHelper', self.ContactLocationHelper);
+      $provide.value('contactRestangularService', contactRestangularService);
     });
   });
 

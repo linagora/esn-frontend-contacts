@@ -5,7 +5,7 @@
     .flex-start
       .p-10.esn-flex-noshrink
         .card-image
-          img(ng-src='{{::displayShell.getAvatar(avatarSize)}}', alt="{{ 'Avatar' | translate }}", fallback-src="{{::displayShell.getDefaultAvatar()}}")
+          img(ng-src='{{contact.photo}}', alt="{{ 'Avatar' | translate }}", src="" fallback-src="{{displayShell.getDefaultAvatar()}}")
           i.mdi.i-contact-card(ng-class="displayShell.getOverlayIcon()")
       .p-t-10.p-r-10.contact-info
         .col-xs-11

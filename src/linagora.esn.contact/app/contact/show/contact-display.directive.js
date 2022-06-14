@@ -10,7 +10,8 @@ function contactDisplay(
   $state,
   ContactsHelper,
   ContactShellDisplayBuilder,
-  CONTACT_AVATAR_SIZE
+  CONTACT_AVATAR_SIZE,
+  contactService
 ) {
   return {
     restrict: 'E',
@@ -23,6 +24,16 @@ function contactDisplay(
       $scope.displayShell = ContactShellDisplayBuilder.build($scope.contact);
       $scope.avatarSize = CONTACT_AVATAR_SIZE.bigger;
       ContactsHelper.fillScopeContactData($scope, $scope.contact);
+
+      const payload = {
+        addressBookId: $scope.contact.addressbook.bookId,
+        addressbookName: $scope.contact.addressbook.bookName,
+        contactId: $scope.contact.id
+      };
+
+      contactService.getContactAvatar(payload).then(contactAvatar => {
+        $scope.contact.photo = contactAvatar;
+      });
 
       $scope.hasContactInformation = function() {
         return ($scope.contact.emails && $scope.contact.emails.length > 0) ||

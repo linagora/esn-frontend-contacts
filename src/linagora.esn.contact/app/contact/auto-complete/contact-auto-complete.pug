@@ -1,5 +1,5 @@
 .row.auto-complete-match
-  img.col-xs-1.col-sm-1(src='assets/images/user.png', fallback-src='assets/images/user.png', ng-src='{{data.avatarUrl}}', alt="{{ 'User Picture' | translate }}")
+  img.col-xs-1.col-sm-1(src='' fallback-src='{{displayShell.getDefaultAvatar()}}' ng-src='{{contact.photo}}' alt="{{ 'User Picture' | translate }}")
   .row
     .col-xs-10.col-sm-11(ng-if="data.displayName", ng-bind-html="$highlight(data.displayName)")
     .col-xs-10.col-sm-11(ng-if="data.email", ng-bind-html="$highlight(data.email)")

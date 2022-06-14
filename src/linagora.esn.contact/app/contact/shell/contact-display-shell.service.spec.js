@@ -4,16 +4,18 @@
 var expect = chai.expect;
 
 describe('ContactDisplayShell', function() {
-  var notificationFactory;
+  let notificationFactory, contactRestangularService;
   var ContactDisplayShell;
 
   beforeEach(function() {
 
     notificationFactory = {};
+    contactRestangularService = {};
     ContactDisplayShell = null;
 
     angular.mock.module('linagora.esn.contact', function($provide) {
       $provide.value('notificationFactory', notificationFactory);
+      $provide.value('contactRestangularService', contactRestangularService);
     });
   });
 

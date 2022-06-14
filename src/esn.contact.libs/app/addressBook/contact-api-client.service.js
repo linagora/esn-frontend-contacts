@@ -29,13 +29,15 @@ require('./contact-dav-client.service.js');
     DEFAULT_ADDRESSBOOK_NAME,
     GRACE_DELAY,
     ICAL,
-    CONTACT_ADDRESSBOOK_DAV_PROPERTIES
+    CONTACT_ADDRESSBOOK_DAV_PROPERTIES,
+    contactRestangularService
   ) {
     var ADDRESSBOOK_PATH = '/addressbooks';
 
     return {
       addressbookHome,
-      getGroupMembership
+      getGroupMembership,
+      getAvatar
     };
 
     /**
@@ -687,5 +689,39 @@ require('./contact-dav-client.service.js');
           return response.data && response.data['group-membership'];
         });
     }
+
+    /**
+     * Get contact Avatar
+     * @param  {Object} payload   The contact Id
+     * @param  {Object} options   Includes:
+     *                               + addressBookId
+     *                               + addressbookName
+     *                               + contactId
+     * @return {Promise}          If success :  resolve avatar data
+     *                            If not reject error
+     */
+
+    function getAvatar(payload) {
+      return contactRestangularService
+        .one('contacts/' + payload.addressBookId + '/' + payload.addressbookName + '/' + payload.contactId)
+        .one('avatar')
+        .withHttpConfig({ responseType: 'blob' })
+        .get()
+        .then(({ data }) => readFile(data, e => e.target.result))
+        .catch(console.error);
+    }
+
+    function readFile(file) {
+      return new Promise((resolve, reject) => {
+        const fr = new FileReader();
+
+        fr.onload = () => {
+          resolve(fr.result);
+        };
+        fr.onerror = reject;
+        fr.readAsDataURL(file);
+      });
+    }
   }
+
 })(angular);
