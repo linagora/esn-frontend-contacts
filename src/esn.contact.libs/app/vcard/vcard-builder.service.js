@@ -53,7 +53,7 @@ require('./helper.service.js');
       if (shell.emails) {
         shell.emails.forEach(function(data) {
           if (data.value) {
-            var prop = vcard.addPropertyWithValue('email', 'mailto:' + data.value);
+            var prop = vcard.addPropertyWithValue('email', data.value);
 
             prop.setParameter('type', data.type);
           }
