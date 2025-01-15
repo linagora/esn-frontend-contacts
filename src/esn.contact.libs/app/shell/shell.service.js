@@ -11,8 +11,15 @@ require('../app.constant.js');
     contactVcardHelper,
     CONTACT_ATTRIBUTES_ORDER
   ) {
-    function ContactShell(vcard, etag) {
-      this.id = vcard.getFirstPropertyValue('uid');
+    function ContactShell(vcard, etag, uid) {
+      const vcardId = vcard.getFirstPropertyValue('uid');
+
+      if (uid && uid.length && uid !== vcardId) {
+        this.id = uid;
+      } else {
+        this.id = vcardId;
+      }
+
       this.displayName = vcard.getFirstPropertyValue('fn');
 
       var name = vcard.getFirstPropertyValue('n');
