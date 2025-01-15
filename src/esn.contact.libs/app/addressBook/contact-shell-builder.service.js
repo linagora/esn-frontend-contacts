@@ -52,9 +52,8 @@ require('../app.constant.js');
         response.data._embedded['dav:item'] && response.data._embedded['dav:item'].length) {
         return $q.all(response.data._embedded['dav:item'].map(function(vcard) {
           var metadata = ContactShellHelper.getMetadata(vcard._links.self.href);
-          
           var bookHome, bookName, cardId;
-          
+
           if (metadata) {
             bookHome = metadata.bookId;
             bookName = metadata.bookName;
@@ -87,12 +86,12 @@ require('../app.constant.js');
           const metadata = ContactShellHelper.getMetadata(vcard._links.self.href);
           var openpaasAddressbook = vcard['openpaas:addressbook']; // This field only available on search contacts in subscribed address books
           var bookHome, bookName, cardId;
-          
+
           if (openpaasAddressbook) {
             bookHome = openpaasAddressbook.bookHome;
             bookName = openpaasAddressbook.bookName;
           } else {
-            
+
             if (metadata) {
               bookHome = metadata.bookId;
               bookName = metadata.bookName;
