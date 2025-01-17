@@ -194,7 +194,7 @@ angular.module('linagora.esn.contact')
             }).catch(function(err) {
               $rootScope.$broadcast(
                 CONTACT_EVENTS.CANCEL_UPDATE,
-                new ContactShell($scope.contact.vcard, $scope.contact.etag, $scope.contact.href)
+                new ContactShell($scope.contact.vcard, $scope.contact.etag, $scope.contact.id)
               );
 
               return $q.reject(err);

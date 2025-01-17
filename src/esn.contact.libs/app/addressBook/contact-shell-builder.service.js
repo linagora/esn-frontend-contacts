@@ -21,8 +21,8 @@ require('../app.constant.js');
       this.addressbookCache = cache;
     };
 
-    this.fromVcard = function(vcard) {
-      var contact = new ContactShell(new ICAL.Component(vcard));
+    this.fromVcard = function(vcard, cardId) {
+      var contact = new ContactShell(new ICAL.Component(vcard), undefined, cardId);
 
       if (contactUpdateDataService.contactUpdatedIds.indexOf(contact.id) > -1) {
         contactAvatarService.forceReloadDefaultAvatar(contact);
@@ -51,15 +51,16 @@ require('../app.constant.js');
       if (response && response.data && response.data._embedded &&
         response.data._embedded['dav:item'] && response.data._embedded['dav:item'].length) {
         return $q.all(response.data._embedded['dav:item'].map(function(vcard) {
-          var contactShell = self.fromVcard(vcard.data);
           var metadata = ContactShellHelper.getMetadata(vcard._links.self.href);
-
-          var bookHome, bookName;
+          var bookHome, bookName, cardId;
 
           if (metadata) {
             bookHome = metadata.bookId;
             bookName = metadata.bookName;
+            cardId = metadata.cardId;
           }
+
+          var contactShell = self.fromVcard(vcard.data, cardId);
 
           if (bookHome && bookName) {
             return self.populateAddressbook(contactShell, bookHome, bookName);
@@ -82,21 +83,26 @@ require('../app.constant.js');
             return;
           }
 
-          var contactShell = self.fromVcard(vcard.data);
+          const metadata = ContactShellHelper.getMetadata(vcard._links.self.href);
           var openpaasAddressbook = vcard['openpaas:addressbook']; // This field only available on search contacts in subscribed address books
-          var bookHome, bookName;
+          var bookHome, bookName, cardId;
 
           if (openpaasAddressbook) {
             bookHome = openpaasAddressbook.bookHome;
             bookName = openpaasAddressbook.bookName;
           } else {
-            var metadata = ContactShellHelper.getMetadata(vcard._links.self.href);
 
             if (metadata) {
               bookHome = metadata.bookId;
               bookName = metadata.bookName;
             }
           }
+
+          if (metadata) {
+            cardId = metadata.cardId;
+          }
+
+          var contactShell = self.fromVcard(vcard.data, cardId);
 
           if (bookHome && bookName) {
             return self.populateAddressbook(contactShell, bookHome, bookName);
