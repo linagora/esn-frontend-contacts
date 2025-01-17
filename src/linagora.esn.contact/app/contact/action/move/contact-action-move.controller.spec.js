@@ -29,10 +29,12 @@ describe('The contactActionMoveController controller', function() {
     });
 
     defaultAddressbookShell = {
-      bookName: 'contacts'
+      bookName: 'contacts',
+      href: '0'
     };
     addressbookShell = {
-      bookName: 'collected'
+      bookName: 'collected',
+      href: '1'
     };
   });
 
@@ -62,7 +64,8 @@ describe('The contactActionMoveController controller', function() {
       controller.contact = {
         id: '123',
         addressbook: {
-          bookName: defaultAddressbookShell.bookName
+          bookName: defaultAddressbookShell.bookName,
+          href: '0'
         }
       };
       controller.listPossbileDestinations();

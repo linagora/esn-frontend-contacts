@@ -1,7 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
-
 require('../../contact.service.js');
 
 angular.module('linagora.esn.contact')
@@ -11,7 +9,8 @@ function contactActionMoveController(
   asyncAction,
   contactAddressbookDisplayService,
   contactAddressbookService,
-  contactService
+  contactService,
+  contactAddressbookHelper
 ) {
   var self = this;
   var NOTIFICATION_MESSAGES = {
@@ -25,12 +24,12 @@ function contactActionMoveController(
 
   function listPossbileDestinations() {
     contactAddressbookService.listAddressbooksUserCanCreateContact()
-      .then(_excludeCurrentAddressbook)
       .then(contactAddressbookDisplayService.convertShellsToDisplayShells)
-      .then(function(availableAddressbookDisplayShells) {
-        self.availableAddressbookDisplayShells = availableAddressbookDisplayShells;
-        self.selectedAddressbook = self.availableAddressbookDisplayShells[0].shell;
+      .then(displayShells => {
+        const uniqueShells = contactAddressbookHelper.getUniqueAdressBookShells(displayShells);
 
+        self.availableAddressbookDisplayShells = _excludeCurrentAddressbookShell(uniqueShells);
+        self.selectedAddressbook = self.availableAddressbookDisplayShells[0].shell;
       });
   }
 
@@ -40,12 +39,10 @@ function contactActionMoveController(
     });
   }
 
-  function _excludeCurrentAddressbook(addressbooks) {
-    _.remove(addressbooks, function(addressbook) {
-      return self.contact.addressbook.bookName === addressbook.bookName;
-    });
+  function _excludeCurrentAddressbookShell(addressbookShells) {
+    const { addressbook: { href } } = self.contact;
 
-    return addressbooks;
+    return addressbookShells.filter(({ shell: { href: addressbookHref } }) => addressbookHref !== href);
   }
 }
 

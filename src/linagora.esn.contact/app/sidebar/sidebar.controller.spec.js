@@ -46,13 +46,11 @@ describe('The ContactSidebarController controller', function() {
       userAPI = _userAPI_;
       userUtils = _userUtils_;
       CONTACT_ADDRESSBOOK_EVENTS = _CONTACT_ADDRESSBOOK_EVENTS_;
-
-      contactAddressbookDisplayService.categorizeDisplayShells = function() {
-        return {
+      contactAddressbookDisplayService.categorizeDisplayShells = sinon.stub()
+        .returns({
           userAddressbooks: [],
           externalAddressbooks: []
-        };
-      };
+        });
     });
   });
 
@@ -258,6 +256,40 @@ describe('The ContactSidebarController controller', function() {
         }
       }
     ]);
+  });
+
+  it('should avoid listing duplicate entries when an adressbook is shared an delegated to the same user', () => {
+    contactAddressbookService.listAddressbooks = sinon.stub().returns($q.when([]));
+    contactAddressbookDisplayService.categorizeDisplayShells.returns({
+      userAddressbooks: [
+        {
+          name: 'bookA',
+          shell: {
+            source: { bookId: 'user0', href: '0' }
+          }
+        }
+      ],
+      sharedAddressbooks: [
+        {
+          name: 'bookB',
+          shell: {
+            source: { bookId: 'user1', href: '1' }
+          }
+        },
+        {
+          name: 'bookC',
+          shell: {
+            source: { bookId: 'user1', href: '1' }
+          }
+        }
+      ]
+    });
+
+    const controller = initController();
+
+    $rootScope.$digest();
+
+    expect(controller.sharedAddressbooks.length).to.equal(1);
   });
 
   describe('On updated address book event', function() {

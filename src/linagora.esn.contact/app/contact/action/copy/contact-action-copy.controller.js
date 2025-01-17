@@ -1,7 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
-
 require('../../contact.service.js');
 
 angular.module('linagora.esn.contact')
@@ -11,7 +9,8 @@ function contactCopyController(
   asyncAction,
   contactAddressbookDisplayService,
   contactAddressbookService,
-  contactService
+  contactService,
+  contactAddressbookHelper
 ) {
   var self = this;
   var NOTIFICATION_MESSAGES = {
@@ -25,10 +24,11 @@ function contactCopyController(
 
   function listPossibleDestinations() {
     contactAddressbookService.listAddressbooksUserCanCreateContact()
-      .then(_excludeCurrentAddressbook)
       .then(contactAddressbookDisplayService.convertShellsToDisplayShells)
-      .then(function(availableAddressbookDisplayShells) {
-        self.availableAddressbookDisplayShells = availableAddressbookDisplayShells;
+      .then(displayShells => {
+        const uniqueShells = contactAddressbookHelper.getUniqueAdressBookShells(displayShells);
+
+        self.availableAddressbookDisplayShells = _excludeCurrentAddressbookShell(uniqueShells);
         self.selectedAddressbook = self.availableAddressbookDisplayShells[0].shell;
       });
   }
@@ -40,13 +40,9 @@ function contactCopyController(
     });
   }
 
-  function _excludeCurrentAddressbook(addressbooks) {
+  function _excludeCurrentAddressbookShell(addressbookShells) {
+    const { addressbook: { href } } = self.contact;
 
-    _.remove(addressbooks, function(addressbook) {
-      return self.contact.addressbook.bookName === addressbook.bookName;
-    });
-
-    return addressbooks;
+    return addressbookShells.filter(({ shell: { href: addressbookHref } }) => addressbookHref !== href);
   }
 }
-
