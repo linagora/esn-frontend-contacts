@@ -17,17 +17,17 @@
                 | {{ 'New address book' | translate }}
             li(feature-flag="linagora.esn.contact.features.isSharingAddressbookEnabled")
               contact-addressbook-shared-configuration
-\\            li
-\\              a(
-\\                href='',
-\\                esn-modal-launcher="/contact/app/addressbook/import/contact-addressbook-import.html",
-\\                controller='ContactAddressbookImportController',
-\\                controller-as='$ctrl',
-\\                backdrop='static'
-\\              )
-\\                | {{ 'Import contacts from file' | translate }}
-\\            li
-\\              a(href='/#/controlcenter/accounts') {{ 'Import contacts from social accounts' | translate }}
+            //- li
+            //-   a(
+            //-     href='',
+            //-     esn-modal-launcher="/contact/app/addressbook/import/contact-addressbook-import.html",
+            //-     controller='ContactAddressbookImportController',
+            //-     controller-as='$ctrl',
+            //-     backdrop='static'
+            //-   )
+            //-     | {{ 'Import contacts from file' | translate }}
+            //- li
+            //-   a(href='/#/controlcenter/accounts') {{ 'Import contacts from social accounts' | translate }}
     .media-body
       .title
         .text {{ 'Contacts' | translate }}
