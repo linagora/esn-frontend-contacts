@@ -49,7 +49,8 @@ angular.module('linagora.esn.contact', [
   'esn.api-client',
   'openpaas-logo',
   'esn.widget.helper',
-  'esn.contact.libs'
+  'esn.contact.libs',
+  'esn.md-menu.backdrop'
 ]);
 
 require('../../esn.contact.libs/app/app.module.js');
@@ -72,6 +73,7 @@ require('esn-frontend-common-libs/src/modules/linagora.esn.graceperiod/frontend/
 require('esn-frontend-common-libs/src/frontend/js/modules/search/search.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/scroll.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/multi-input.js');
+require('esn-frontend-common-libs/src/frontend/js/modules/esn.md-menu.backdrop');
 require('esn-frontend-common-libs/src/frontend/js/modules/attendee/attendee.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/header/header.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/form-helper/form-helper.module.js');
@@ -94,8 +96,6 @@ require('esn-frontend-common-libs/src/frontend/js/modules/widget-helper');
 require('esn-frontend-common-libs/src/frontend/components/openpaas-logo/openpaas-logo.js');
 
 require('./addressbook/acl/addressbook-acl-helper.servive.js');
-require('./addressbook/action/addressbook-action-delete.service.js');
-require('./addressbook/action/addressbook-action-edit.service.js');
 require('./addressbook/action/addressbook-action-export.service.js');
 require('./addressbook/action/addressbook-action-settings.service.js');
 require('./addressbook/addressbook-shared-configuration/addressbook-shared-configuration.component.js');
@@ -109,7 +109,6 @@ require('./addressbook/default-addressbook/default-addressbook-display-shell.run
 require('./addressbook/default-addressbook/default-addressbook-display-shell.service.js');
 require('./addressbook/default-addressbook/default-addressbook-helper.service.js');
 require('./addressbook/delete/addressbook-delete.controller.js');
-require('./addressbook/edit/addressbook-edit.controller.js');
 require('./addressbook/export/contact-addressbook-export.controller.js');
 require('./addressbook/group-addressbook/contact-group-addressbook.run.js');
 require('./addressbook/import/contact-addressbook-import.controller.js');
@@ -119,7 +118,6 @@ require('./addressbook/settings/delegation/contact-addressbook-settings-delegati
 require('./addressbook/settings/delegation/contact-addressbook-settings-delegation.controller.js');
 require('./addressbook/settings/main/contact-addressbook-settings-main.component.js');
 require('./addressbook/settings/main/contact-addressbook-settings-main.controller.js');
-require('./addressbook/settings/subheader/contact-addressbook-settings-subheader.component.js');
 require('./addressbook/user-addressbook/contact-user-addressbook-display-shell.service.js');
 require('./addressbook/user-addressbook/contact-user-addressbook.run.js');
 require('./addressbook/user-addressbook/contact-user-addressbook.service.js');
@@ -144,8 +142,6 @@ require('./contact/action/move/contact-action-move.component.js');
 require('./contact/action/move/contact-action-move.controller.js');
 require('./contact/contact.constants.js');
 require('./contact/contact.service.js');
-require('./contact/create/contact-create-subheader.directive.js');
-require('./contact/edit/contact-edit-subheader.directive.js');
 require('./contact/form/contact-edition-form.directive.js');
 require('./contact/form/relaxed-date-for-bs-date-picker.directive.js');
 require('./contact/list/contact-list-card.directive.js');
@@ -161,7 +157,7 @@ require('./contact/shell/contact-shell-comparator.service.js');
 require('./contact/shell/contact-shell-display-builder.service.js');
 require('./contact/shell/display-shell-provider.service.js');
 require('./contact/show/contact-display.directive.js');
-require('./contact/show/contact-show-subheader.directive.js');
+require('./contact/show/contact-show.component.js');
 require('./controllers/contact-list.controller.js');
 require('./controllers/contact-show.controller.js');
 require('./directives/contact-category-letter.directive.js');
@@ -196,10 +192,10 @@ require('./services/live-update/initialize-contact-live-update.js');
 require('./services/open-contact-form.service.js');
 require('./services/send-data-to-backend.service.js');
 require('./services/shared-contact-data.service.js');
+require('./services/contact-delete-confirmation-dialog.service');
 require('./sharing/constants.js');
 require('./sidebar/addressbook-item/contact-sidebar-addressbook-item.component.js');
 require('./sidebar/addressbook-item/contact-sidebar-addressbook-item.controller.js');
 require('./sidebar/addressbooks-list/contact-sidebar-addressbooks-list.component.js');
 require('./sidebar/sidebar.component.js');
 require('./sidebar/sidebar.controller.js');
-

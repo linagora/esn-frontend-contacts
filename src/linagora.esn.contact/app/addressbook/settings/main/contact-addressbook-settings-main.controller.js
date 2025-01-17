@@ -20,6 +20,10 @@ function contactAddressbookSettingsMainController(
   self.$onInit = $onInit;
   self.canUpdatePublicRight = canUpdatePublicRight;
   self.canUpdateMembersRight = canUpdateMembersRight;
+  self.uneditableAddressbookNameMapping = {
+    contacts: 'My contacts',
+    collected: 'Collected contacts'
+  };
 
   function $onInit() {
     contactAddressbookService.getAddressbookUrl(self.addressbook).then(function(url) {
@@ -53,7 +57,7 @@ function contactAddressbookSettingsMainController(
   }
 
   function _initShareOwner() {
-    var shareOwner = _getShareOwner(self.addressbook.source.sharees);
+    var shareOwner = _getShareOwner(angular.copy(self.addressbook.source.sharees));
 
     shareOwner && shareOwner.getUser()
       .then(function(user) {

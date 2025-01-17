@@ -14,6 +14,7 @@ require('./services/contact-highlight-helpers.service.js');
 angular.module('linagora.esn.contact')
 
   .controller('newContactController', function(
+    $rootScope,
     $scope,
     $stateParams,
     $state,
@@ -30,10 +31,20 @@ angular.module('linagora.esn.contact')
     contactAddressbookParser,
     DEFAULT_ADDRESSBOOK_NAME
   ) {
-    $scope.bookId = $stateParams.bookId !== 'all' ? $stateParams.bookId : session.user._id;
-    $scope.bookName = $stateParams.bookName || DEFAULT_ADDRESSBOOK_NAME;
-    $scope.contact = sharedContactDataService.contact;
-    $scope.addressbookPath = '/addressbooks/' + $scope.bookId + '/' + $scope.bookName + '.json';
+    if (session.user._id) {
+      _initScopeValues();
+    } else {
+      $rootScope.$on('$stateChangeSuccess', () => {
+        _initScopeValues();
+      });
+    }
+
+    function _initScopeValues() {
+      $scope.bookId = $stateParams.bookId !== 'all' ? $stateParams.bookId : session.user._id;
+      $scope.bookName = $stateParams.bookName || DEFAULT_ADDRESSBOOK_NAME;
+      $scope.contact = sharedContactDataService.contact;
+      $scope.addressbookPath = '/addressbooks/' + $scope.bookId + '/' + $scope.bookName + '.json';
+    }
 
     $scope.accept = function() {
       var parsedAddressbookPath = contactAddressbookParser.parseAddressbookPath($scope.addressbookPath);
@@ -87,6 +98,10 @@ angular.module('linagora.esn.contact')
       });
     };
 
+    $scope.close = function() {
+      $state.go('contact.addressbooks', {}, { location: 'replace' });
+    };
+
     sharedContactDataService.contact = {};
   })
 
@@ -111,9 +126,51 @@ angular.module('linagora.esn.contact')
     REDIRECT_PAGE_TIMEOUT
   ) {
     $scope.loaded = false;
-    $scope.bookId = $stateParams.bookId;
-    $scope.bookName = $stateParams.bookName;
-    $scope.cardId = $stateParams.cardId;
+    var oldContact = '';
+
+    if ($stateParams && $stateParams.bookId && $stateParams.bookName && $stateParams.cardId) {
+      _init();
+    } else {
+      $rootScope.$on('$stateChangeSuccess', () => {
+        _init();
+      });
+    }
+
+    function _init() {
+      $scope.bookId = $stateParams.bookId;
+      $scope.bookName = $stateParams.bookName;
+      $scope.cardId = $stateParams.cardId;
+      $scope.previousState = $stateParams.previousState || 'contact.addressbooks';
+
+      if (contactUpdateDataService.contact) {
+        $scope.contact = contactUpdateDataService.contact;
+        $scope.contact.vcard = VcardBuilder.toVcard($scope.contact);
+        contactUpdateDataService.contact = null;
+        oldContact = JSON.stringify($scope.contact);
+        $scope.loaded = true;
+      } else if ($scope.bookId && $scope.bookName && $scope.cardId) {
+        contactService.getContact({ bookId: $scope.bookId, bookName: $scope.bookName }, $scope.cardId)
+          .then(function(contact) {
+            if (!contact.addressbook.canEditContact) {
+              $scope.close();
+            }
+            $scope.contact = contact;
+            oldContact = JSON.stringify(contact);
+          }, function() {
+            $scope.error = true;
+            contactDisplayError('Cannot get contact details. Redirecting to contact list display');
+            $timeout(function() {
+              $state.go('contact.addressbooks', {
+                bookId: $scope.bookId,
+                bookName: $scope.bookName
+              }, { location: 'replace' });
+            }, REDIRECT_PAGE_TIMEOUT);
+          })
+          .finally(function() {
+            $scope.loaded = true;
+          });
+      }
+    }
 
     $scope.$on(CONTACT_EVENTS.UPDATED, function(e, data) {
       if ($scope.contact.id === data.id && data.etag) {
@@ -121,47 +178,12 @@ angular.module('linagora.esn.contact')
       }
     });
 
-    var oldContact = '';
-
-    if (contactUpdateDataService.contact) {
-      $scope.contact = contactUpdateDataService.contact;
-      $scope.contact.vcard = VcardBuilder.toVcard($scope.contact);
-      contactUpdateDataService.contact = null;
-      oldContact = JSON.stringify($scope.contact);
-      $scope.loaded = true;
-    } else {
-      contactService.getContact({ bookId: $scope.bookId, bookName: $scope.bookName }, $scope.cardId)
-        .then(function(contact) {
-          if (!contact.addressbook.canEditContact) {
-            $scope.close();
-          }
-          $scope.contact = contact;
-          oldContact = JSON.stringify(contact);
-        }, function() {
-          $scope.error = true;
-          contactDisplayError('Cannot get contact details. Redirecting to contact list display');
-          $timeout(function() {
-            $state.go('contact.addressbooks', {
-              bookId: $scope.bookId,
-              bookName: $scope.bookName
-            }, { location: 'replace' });
-          }, REDIRECT_PAGE_TIMEOUT);
-        })
-        .finally(function() {
-          $scope.loaded = true;
-        });
-    }
-
     function isContactModified() {
       return oldContact !== JSON.stringify($scope.contact);
     }
 
     $scope.close = function() {
-      $state.go('contact.addressbooks.show', {
-        bookId: $scope.bookId,
-        bookName: $scope.bookName,
-        cardId: $scope.cardId
-      }, { location: 'replace' });
+      $state.go('contact.addressbooks', {}, { location: 'replace' });
     };
 
     $scope.save = function() {

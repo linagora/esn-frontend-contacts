@@ -9,7 +9,7 @@ describe('The Contacts controller module', function() {
 
   var $rootScope, $controller, $timeout, scope, ContactShell, AddressBookPaginationService,
     notificationFactory, $location, $state, $stateParams, selectionService, $alert, gracePeriodService,
-    contactUpdateDataService, CONTACT_EVENTS,
+    contactUpdateDataService, CONTACT_EVENTS, session,
     ContactAPIClient, VcardBuilder, ContactLocationHelper, openContactForm, openContactFormMock,
     ContactShellDisplayBuilder, esnI18nServiceMock, contactAddressbookDisplayService, contactService;
 
@@ -152,11 +152,12 @@ describe('The Contacts controller module', function() {
     });
   });
 
-  beforeEach(angular.mock.inject(function(_$rootScope_, _$controller_, _$timeout_, _$state_, _contactAddressbookDisplayService_, _CONTACT_EVENTS_, _contactService_) {
+  beforeEach(angular.mock.inject(function(_$rootScope_, _$controller_, _$timeout_, _$state_, _session_, _contactAddressbookDisplayService_, _CONTACT_EVENTS_, _contactService_) {
     $rootScope = _$rootScope_;
     $controller = _$controller_;
     $timeout = _$timeout_;
     $state = _$state_;
+    session = _session_;
     contactAddressbookDisplayService = _contactAddressbookDisplayService_;
     contactService = _contactService_;
 
@@ -190,6 +191,8 @@ describe('The Contacts controller module', function() {
   describe('the newContactController', function() {
 
     beforeEach(function() {
+      session.user = { _id: 'userId' };
+
       $controller('newContactController', {
         $scope: scope
       });
@@ -573,9 +576,15 @@ describe('The Contacts controller module', function() {
   });
 
   describe('The editContactController controller', function() {
-    var contactFromDAV;
+    var contactFromDAV, stateParams;
 
     beforeEach(function() {
+      stateParams = {
+        bookId,
+        bookName,
+        cardId
+      };
+
       contactFromDAV = {
         addressbook: { editable: true },
         id: 1,
@@ -593,7 +602,7 @@ describe('The Contacts controller module', function() {
           }
         };
       });
-      this.initController = $controller.bind(null, 'editContactController', { $scope: scope });
+      this.initController = $controller.bind(null, 'editContactController', { $scope: scope, $stateParams: stateParams });
     });
 
     it('should update the $scope.contact etag when the contact has been modified from a CONTACT_EVENTS.UPDATED event', function() {
@@ -867,14 +876,8 @@ describe('The Contacts controller module', function() {
 
       it('should show the contact without calling ContactAPIClient update fn when the contact is not modified', function() {
         var updateSpy = sinon.spy();
-        var state = 'contact.addressbooks.show';
+        var state = 'contact.addressbooks';
         var stateOption = { location: 'replace' };
-
-        $stateParams = {
-          bookId: bookId,
-          bookName: bookName,
-          cardId: cardId
-        };
 
         $state.go = sinon.spy();
 
@@ -886,21 +889,25 @@ describe('The Contacts controller module', function() {
 
         scope.contact = { id: 1, firstName: 'Foo', lastName: 'Bar' };
         contactUpdateDataService.contact = {};
-        $controller.bind(null, 'editContactController', { $scope: scope, $stateParams: $stateParams })();
+
+        this.initController();
 
         scope.save();
-        expect($state.go).to.have.been.calledWith(state, $stateParams, stateOption);
+        expect($state.go).to.have.been.calledOnce;
+        expect($state.go.getCall(0).args[0]).to.equal(state);
+        expect($state.go.getCall(0).args[1]).to.deep.equal({});
+        expect($state.go.getCall(0).args[2]).to.deep.equal(stateOption);
         expect(updateSpy).to.not.have.been.called;
       });
     });
 
     describe('The deleteContact function', function() {
-
       it('should call deleteContact service with the right bookId, bookName and cardId', function(done) {
         scope.bookName = 'bookName';
         scope.contact = { id: 1, firstName: 'Foo', lastName: 'Bar' };
         $controller.bind(null, 'editContactController', {
           $scope: scope,
+          $stateParams: stateParams,
           deleteContact: function(id, bookName, contact) {
             expect(id).to.deep.equal(bookId);
             expect(bookName).to.equal(scope.bookName);

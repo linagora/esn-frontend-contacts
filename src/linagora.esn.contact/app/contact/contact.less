@@ -1,5 +1,7 @@
 @import './show/contact-show';
 @import './show/contact-display';
+@import './form/contact-avatar-modal';
+@import './form/contact-edition-modal';
 
 .contact-dropdown-action-item {
   a {
@@ -25,5 +27,32 @@
   .modal-footer {
     padding-left: 25px;
     padding-right: 25px;
+  }
+}
+
+contact-action-copy, contact-action-move, .contact-dropdown-font {
+  padding: 0;
+
+  .btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-transform: none;
+    font-size: 13px;
+    padding: 8px 12px;
+    font-weight: normal;
+    color: @textColor;
+
+    i.mdi {
+      color: lighten(@secondaryTextColor, 10%);
+      font-size: 20px;
+      margin-right: 12px;
+    }
+  }
+}
+
+contact-list-item, contact-list-card {
+  .dropdown-menu.dropdown-menu-right {
+    min-width: unset;
   }
 }

@@ -6,9 +6,11 @@ angular.module('linagora.esn.contact')
   .controller('contactAddressbookSettingsController', contactAddressbookSettingsController);
 
 function contactAddressbookSettingsController(
+  $rootScope,
   $q,
   $state,
   $stateParams,
+  $modal,
   asyncAction,
   contactAddressbookService,
   contactAddressbookDisplayService,
@@ -25,19 +27,28 @@ function contactAddressbookSettingsController(
   self.$onInit = $onInit;
   self.onSave = onSave;
   self.onCancel = onCancel;
+  self.onDelete = onDelete;
 
   function $onInit() {
-    contactAddressbookService.getAddressbookByBookName($stateParams.bookName, $stateParams.bookId)
-      .then(function(addressbook) {
-        self.addressbook = addressbook;
-        self.addressbookDisplayName = contactAddressbookDisplayService.buildDisplayName(addressbook);
+    if ($stateParams && $stateParams.bookName && $stateParams.bookId) return _fetchAddresBook();
 
-        originalAddressbook = angular.copy(self.addressbook);
+    $rootScope.$on('$stateChangeSuccess', () => {
+      _fetchAddresBook();
+    });
 
-        self.publicRight = _getShareConcernedAddressbook(self.addressbook).rights.public;
-        self.sharees = _getShareConcernedAddressbook(self.addressbook).sharees;
-        self.membersRight = _getMembersRight(_getShareConcernedAddressbook(self.addressbook));
-      });
+    function _fetchAddresBook() {
+      contactAddressbookService.getAddressbookByBookName($stateParams.bookName, $stateParams.bookId)
+        .then(function(addressbook) {
+          self.addressbook = addressbook;
+          self.addressbookDisplayName = contactAddressbookDisplayService.buildDisplayName(addressbook);
+
+          originalAddressbook = angular.copy(self.addressbook);
+
+          self.publicRight = _getShareConcernedAddressbook(self.addressbook).rights.public;
+          self.sharees = _getShareConcernedAddressbook(self.addressbook).sharees;
+          self.membersRight = _getMembersRight(_getShareConcernedAddressbook(self.addressbook));
+        });
+    }
   }
 
   function onSave() {
@@ -62,6 +73,10 @@ function contactAddressbookSettingsController(
       updateActions.push(contactAddressbookService.updateGroupAddressbookMembersRight(shareConcernedAddressbook, membersRightToUpdate.value));
     }
 
+    if (self.addressbook.name !== originalAddressbook.name) {
+      updateActions.push(contactAddressbookService.updateAddressbook(self.addressbook));
+    }
+
     return asyncAction(NOTIFICATION_MESSAGES, function() {
       return $q.all(updateActions).then(function() {
         $state.go('contact.addressbooks', {
@@ -77,6 +92,19 @@ function contactAddressbookSettingsController(
       bookId: self.addressbook.bookId,
       bookName: self.addressbook.bookName
     }, { location: 'replace' });
+  }
+
+  function onDelete() {
+    $modal({
+      template: require('../delete/addressbook-delete.pug'),
+      backdrop: 'static',
+      placement: 'center',
+      controller: 'ContactAddressbookDeleteController',
+      controllerAs: '$ctrl',
+      locals: {
+        addressbook: self.addressbook
+      }
+    });
   }
 
   function _getShareConcernedAddressbook(addressbook) {
